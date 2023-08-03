@@ -1,18 +1,39 @@
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import Link from 'next/link';
+import { useDispatch } from 'react-redux';
+import { authRegister } from '@/redux/operations';
+import { useState } from 'react';
 import {
+  SignUpPage,
   SignUpContainer,
-  HeaderContainer,
+  CloseButton,
+  Title,
   AllInputContainer,
   InputContainer,
+  PasswordContainer,
+  EyeButton,
   ErrorText,
   Input,
   Label,
+  MainButton,
+  SLContainer,
+  SLText,
+  SocialLink,
+  RedirectText,
+  RedirectLink,
 } from '@/styles/sign-up.styled';
+import {
+  UserSvg,
+  Cross,
+  EyeClosed,
+  EyeOpened,
+  GoogleIcon,
+  FacebookIcon,
+} from '../components/svg';
 
 const schema = yup.object({
-  fullName: yup.string().required('Please Enter your name'),
+  name: yup.string().required('Please Enter your name'),
   email: yup.string().email().required('Please Enter your Email'),
   password: yup
     .string()
@@ -35,17 +56,37 @@ const schema = yup.object({
 });
 
 export default function SignUp() {
-  const onSubmit = (values, actions) => {
-    console.log(values);
-    actions.resetForm();
-    values.termsChecked = false;
-    values.notificationsChecked = false;
+  const [passwordShown, setPasswordShown] = useState(false);
+  const dispatch = useDispatch();
+
+  const togglePassword = () => {
+    setPasswordShown(!passwordShown);
   };
+
+  const onSubmit = (
+    { name, email, password, termsChecked, notificationsChecked },
+    actions
+  ) => {
+    dispatch(authRegister({ name, email, password }));
+    alert(
+      ` You’ve got mail to ${email}. Please enter the four digit code you received`
+    );
+    termsChecked = false;
+    notificationsChecked = false;
+    actions.resetForm();
+  };
+
+  // const onSubmit = (values, actions) => {
+  //   console.log(values);
+  //   actions.resetForm();
+  //   values.termsChecked = false;
+  //   values.notificationsChecked = false;
+  // };
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: {
-        fullName: '',
+        name: '',
         email: '',
         password: '',
         confirm: '',
@@ -57,114 +98,153 @@ export default function SignUp() {
     });
 
   return (
-    <SignUpContainer>
-      <HeaderContainer>
-        <Link href="/">Logo</Link>
-        <button type="button">Menu</button>
-      </HeaderContainer>
-
-      <h2>Sign Up</h2>
-      <form onSubmit={handleSubmit}>
-        <AllInputContainer>
-          <InputContainer>
-            {errors.fullName && touched.fullName ? (
-              <ErrorText>{errors.fullName}</ErrorText>
-            ) : (
-              <Label htmlFor="fullName">Full Name</Label>
-            )}
-            <Input
-              value={values.fullName}
+    <SignUpPage>
+      <SignUpContainer>
+        <CloseButton
+          type="button"
+          onClick={() => console.log('close button pressed')}
+        >
+          <Cross style={{ width: 24, height: 24 }} />
+        </CloseButton>
+        <Title>Sign Up</Title>
+        <form onSubmit={handleSubmit}>
+          <AllInputContainer>
+            <InputContainer>
+              {errors.name && touched.name ? (
+                <ErrorText>{errors.name}</ErrorText>
+              ) : (
+                <Label htmlFor="name">Full Name</Label>
+              )}
+              <Input
+                value={values.name}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                type="text"
+                name="name"
+                id="name"
+                placeholder="Enter your name"
+              />
+            </InputContainer>
+            <InputContainer>
+              {errors.email && touched.email ? (
+                <ErrorText>{errors.email}</ErrorText>
+              ) : (
+                <Label htmlFor="email">Email</Label>
+              )}
+              <Input
+                value={values.email}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                type="email"
+                name="email"
+                id="email"
+                placeholder="Enter your mail"
+              />
+            </InputContainer>
+            <InputContainer>
+              {errors.password && touched.password ? (
+                <ErrorText>{errors.password}</ErrorText>
+              ) : (
+                <Label htmlFor="password">Password</Label>
+              )}
+              <PasswordContainer>
+                <Input
+                  value={values.password}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  type={passwordShown ? 'text' : 'password'}
+                  name="password"
+                  id="password"
+                  placeholder="Password"
+                />
+                <EyeButton type="button" onClick={togglePassword}>
+                  {passwordShown ? (
+                    <EyeOpened style={{ width: 24, height: 24 }} />
+                  ) : (
+                    <EyeClosed style={{ width: 24, height: 24 }} />
+                  )}
+                </EyeButton>
+              </PasswordContainer>
+            </InputContainer>
+            <InputContainer>
+              {errors.confirm && touched.confirm ? (
+                <ErrorText>{errors.confirm}</ErrorText>
+              ) : (
+                <Label htmlFor="confirm">Confirm your Password</Label>
+              )}
+              <PasswordContainer>
+                <Input
+                  value={values.confirm}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  type={passwordShown ? 'text' : 'password'}
+                  name="confirm"
+                  id="confirm"
+                  placeholder="Confirm your Password"
+                />
+                <EyeButton type="button" onClick={togglePassword}>
+                  {passwordShown ? (
+                    <EyeOpened style={{ width: 24, height: 24 }} />
+                  ) : (
+                    <EyeClosed style={{ width: 24, height: 24 }} />
+                  )}
+                </EyeButton>
+              </PasswordContainer>
+            </InputContainer>
+          </AllInputContainer>
+          <div>
+            <input
+              type="checkbox"
+              id="terms"
+              value={values.termsChecked}
               onChange={handleChange}
               onBlur={handleBlur}
-              type="text"
-              name="fullName"
-              id="fullName"
-              placeholder="Enter your name"
+              name="termsChecked"
             />
-          </InputContainer>
-          <InputContainer>
-            {errors.email && touched.email ? (
-              <ErrorText>{errors.email}</ErrorText>
+            {errors.termsChecked && touched.termsChecked ? (
+              <ErrorText>{errors.termsChecked}</ErrorText>
             ) : (
-              <Label htmlFor="fullName">Email</Label>
+              <Label htmlFor="terms">
+                You accept our <Link href="">Terms and Conditions</Link>
+              </Label>
             )}
-            <Input
-              value={values.email}
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              id="notifications"
+              value={values.notificationsChecked}
               onChange={handleChange}
               onBlur={handleBlur}
-              type="email"
-              name="email"
-              id="email"
-              placeholder="Enter your mail"
+              name="notificationsChecked"
             />
-          </InputContainer>
-          <InputContainer>
-            {errors.password && touched.password ? (
-              <ErrorText>{errors.password}</ErrorText>
-            ) : (
-              <Label htmlFor="fullName">Password</Label>
-            )}
-            <Input
-              value={values.password}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              type="password"
-              name="password"
-              id="password"
-              placeholder="Password"
-            />
-          </InputContainer>
-          <InputContainer>
-            {errors.confirm && touched.confirm ? (
-              <ErrorText>{errors.confirm}</ErrorText>
-            ) : (
-              <Label htmlFor="confirm">Confirm your Password</Label>
-            )}
-
-            <Input
-              value={values.confirm}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              type="password"
-              name="confirm"
-              id="confirm"
-              placeholder="Confirm your Password"
-            />
-          </InputContainer>
-        </AllInputContainer>
-        <div>
-          <input
-            type="checkbox"
-            id="terms"
-            value={values.termsChecked}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            name="termsChecked"
-          />
-          {errors.termsChecked && touched.termsChecked ? (
-            <ErrorText>{errors.termsChecked}</ErrorText>
-          ) : (
-            <Label htmlFor="terms">
-              You accept our <Link href="">Terms and Conditions</Link>
-            </Label>
-          )}
-        </div>
-        <div>
-          <input
-            type="checkbox"
-            id="notifications"
-            value={values.notificationsChecked}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            name="notificationsChecked"
-          />
-          <Label htmlFor="notifications">Sign me up for notifications</Label>
-        </div>
-        <button type="submit">Sign in</button>
-      </form>
-      <p>
-        Have account? <Link href="/log-in"> Sign in</Link>
-      </p>
-    </SignUpContainer>
+            <Label htmlFor="notifications">Sign me up for notifications</Label>
+          </div>
+          <MainButton type="submit">Sign in</MainButton>
+        </form>
+        <SLText>Continue with</SLText>
+        <SLContainer>
+          <SocialLink
+            target="_blank"
+            rel="noreferrer noopener"
+            href="https://www.google.com/"
+          >
+            <GoogleIcon style={{ width: 20, height: 20, marginRight: 4 }} />
+            Google
+          </SocialLink>
+          <SocialLink
+            target="_blank"
+            rel="noreferrer noopener"
+            href="https://www.facebook.com/"
+          >
+            <FacebookIcon style={{ width: 20, height: 20, marginRight: 4 }} />
+            Facebook
+          </SocialLink>
+        </SLContainer>
+        <RedirectText>
+          Have account? <RedirectLink href="/log-in"> Sign in</RedirectLink>
+        </RedirectText>
+      </SignUpContainer>
+    </SignUpPage>
   );
 }
