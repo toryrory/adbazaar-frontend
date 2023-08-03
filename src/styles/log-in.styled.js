@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 import Link from 'next/link';
 
-export const SignUpPage = styled.div`
+export const LogInPage = styled.div`
   background-color: var(--main-background);
   width: 100vw;
   height: 100vh;
 `;
 
-export const SignUpContainer = styled.div`
+export const LogInContainer = styled.div`
   position: relative;
   padding: 12px 16px;
   max-width: 720px;
@@ -18,6 +18,20 @@ export const SignUpContainer = styled.div`
   //   @media screen and (min-width: 1440px) {
   //     background-color: #111111;
   //   }
+`;
+
+export const UserImgContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 60px;
+  height: 60px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--brand-color);
+  border-radius: 50%;
+  margin-bottom: 30px;
 `;
 
 export const CloseButton = styled.button`
@@ -34,7 +48,6 @@ export const CloseButton = styled.button`
 
 export const Title = styled.h2`
   color: var(--brand-color);
-  margin-top: 24px;
   margin-bottom: 56px;
   font-size: 32px;
   font-weight: 700;
@@ -45,7 +58,7 @@ export const AllInputContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
-  margin-bottom: 40px;
+  margin-bottom: 8px;
 `;
 export const InputContainer = styled.div`
   display: flex;
@@ -62,7 +75,7 @@ export const Label = styled.label`
 `;
 
 export const Input = styled.input`
-font-size: 16px;
+  font-size: 16px;
   line-height: 1.25;
   outline: none;
   background: none;
@@ -73,6 +86,7 @@ font-size: 16px;
 
   &::placeholder {
     color: var(--brand-color);
+  }
 `;
 
 export const PasswordContainer = styled.div`
@@ -96,6 +110,16 @@ export const ErrorText = styled.p`
   margin: 0;
 `;
 
+export const ForgotPasswordLink = styled(Link)`
+  display: block;
+  color: var(--light-text);
+  margin-bottom: 48px;
+  font-size: 14px;
+  line-height: 1.42;
+  text-align: right;
+  text-decoration: underline;
+`;
+
 export const MainButton = styled.button`
   font-size: 16px;
   line-height: 1.25;
@@ -103,8 +127,19 @@ export const MainButton = styled.button`
   border-radius: 10px;
   border: none;
   background: var(--gradient);
-  margin-top: 48px;
-  margin-bottom: 36px;
+  margin-bottom: 28px;
+`;
+
+export const RedirectText = styled.p`
+  font-size: 14px;
+  line-height: 1.14;
+  color: var(--light-text);
+  margin-bottom: 86px;
+`;
+
+export const RedirectLink = styled(Link)`
+  color: var(--light-text);
+  font-weight: 700;
 `;
 
 export const SLText = styled.p`
@@ -117,7 +152,6 @@ export const SLContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 32px;
 `;
 
 export const SocialLink = styled.a`
@@ -132,16 +166,4 @@ export const SocialLink = styled.a`
   border-image-source: var(--gradient);
   border-image-slice: 1;
   //   border-radius: 16px;
-`;
-
-export const RedirectText = styled.p`
-  font-size: 14px;
-  line-height: 1.14;
-  color: var(--light-text);
-  margin-bottom: 86px;
-`;
-
-export const RedirectLink = styled(Link)`
-  color: var(--light-text);
-  font-weight: 700;
 `;
