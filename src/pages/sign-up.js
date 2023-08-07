@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 import { authRegister } from '@/redux/operations';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import {
   SignUpPage,
   SignUpContainer,
@@ -61,6 +62,7 @@ const schema = yup.object({
 });
 
 export default function SignUp() {
+  const router = useRouter();
   const [passwordShown, setPasswordShown] = useState(false);
   const dispatch = useDispatch();
 
@@ -81,13 +83,6 @@ export default function SignUp() {
     actions.resetForm();
   };
 
-  // const onSubmit = (values, actions) => {
-  //   console.log(values);
-  //   actions.resetForm();
-  //   values.termsChecked = false;
-  //   values.notificationsChecked = false;
-  // };
-
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: {
@@ -105,10 +100,7 @@ export default function SignUp() {
   return (
     <SignUpPage>
       <SignUpContainer>
-        <CloseButton
-          type="button"
-          onClick={() => console.log('close button pressed')}
-        >
+        <CloseButton type="button" onClick={() => router.push('/')}>
           <Cross style={{ width: 24, height: 24 }} />
         </CloseButton>
         <Title>Sign Up</Title>
@@ -211,7 +203,7 @@ export default function SignUp() {
                 onBlur={handleBlur}
                 name="termsChecked"
               />
-              You accept{' '}
+              You accept
               <Link
                 style={{ color: '#a3e9ff', textDecoration: 'underline' }}
                 href=""
@@ -252,7 +244,7 @@ export default function SignUp() {
               rel="noreferrer noopener"
               href="https://www.google.com/"
             >
-              <GoogleIcon style={{ width: 20, height: 20, marginRight: 4 }} />
+              <GoogleIcon style={{ width: 20, height: 20 }} />
               Google
             </SocialLink>
           </SLItem>
@@ -262,7 +254,7 @@ export default function SignUp() {
               rel="noreferrer noopener"
               href="https://www.facebook.com/"
             >
-              <FacebookIcon style={{ width: 20, height: 20, marginRight: 4 }} />
+              <FacebookIcon style={{ width: 20, height: 20 }} />
               Facebook
             </SocialLink>
           </SLItem>

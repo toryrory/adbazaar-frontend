@@ -1,5 +1,6 @@
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { authLogin } from '@/redux/operations';
 import { selectAuthError } from '@/redux/selectors';
@@ -36,6 +37,7 @@ import {
 } from '../components/svg';
 
 export default function LogIn() {
+  const router = useRouter();
   const [passwordShown, setPasswordShown] = useState(false);
   const dispatch = useDispatch();
   let authError = useSelector(selectAuthError);
@@ -47,7 +49,7 @@ export default function LogIn() {
   const onSubmit = ({ email, password }, actions) => {
     console.log(email, password);
     dispatch(authLogin({ email, password }));
-    authError === useSelector(selectAuthError);
+    // authError === useSelector(selectAuthError);
     if (authError) {
       return;
     } else {
@@ -71,13 +73,9 @@ export default function LogIn() {
         <UserImgContainer>
           <UserSvg style={{ width: 24, height: 24 }} />
         </UserImgContainer>
-        <CloseButton
-          type="button"
-          onClick={() => console.log('close button pressed')}
-        >
+        <CloseButton type="button" onClick={() => router.push('/')}>
           <Cross style={{ width: 24, height: 24 }} />
         </CloseButton>
-
         <Title>Sign in</Title>
         <form onSubmit={handleSubmit}>
           <InputList>
@@ -139,7 +137,7 @@ export default function LogIn() {
               rel="noreferrer noopener"
               href="https://www.google.com/"
             >
-              <GoogleIcon style={{ width: 20, height: 20, marginRight: 4 }} />
+              <GoogleIcon style={{ width: 20, height: 20 }} />
               Google
             </SocialLink>
           </SLItem>
@@ -149,7 +147,7 @@ export default function LogIn() {
               rel="noreferrer noopener"
               href="https://www.facebook.com/"
             >
-              <FacebookIcon style={{ width: 20, height: 20, marginRight: 4 }} />
+              <FacebookIcon style={{ width: 20, height: 20 }} />
               Facebook
             </SocialLink>
           </SLItem>
