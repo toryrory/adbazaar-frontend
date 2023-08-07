@@ -54,13 +54,15 @@ export const Title = styled.h2`
   line-height: 0.625;
 `;
 
-export const AllInputContainer = styled.div`
+export const InputList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 24px;
+  padding: 0;
+  margin: 0;
   margin-bottom: 8px;
 `;
-export const InputContainer = styled.div`
+export const InputItem = styled.li`
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -104,9 +106,14 @@ export const EyeButton = styled.button`
   padding: 0;
 `;
 
+export const ErrorContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 export const ErrorText = styled.p`
   font-size: 14px;
-  color: red;
+  color: var(--error-color);
   margin: 0;
 `;
 
@@ -146,24 +153,36 @@ export const SLText = styled.p`
   font-size: 14px;
   line-height: 1.42;
   color: var(--light-text);
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 `;
-export const SLContainer = styled.div`
+
+export const SLList = styled.ul`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding: 0;
+  margin: 0;
+`;
+
+export const SLItem = styled.li`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gradient);
+  border-radius: 16px;
+  width: 156px;
+  height: 44px;
 `;
 
 export const SocialLink = styled.a`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 42px;
   color: var(--brand-color);
+  width: 154px;
+  height: 42px;
   font-size: 14px;
   line-height: 1.42;
-  border: 1px solid;
-  border-image-source: var(--gradient);
-  border-image-slice: 1;
-  //   border-radius: 16px;
+  background-color: var(--main-background);
+  border-radius: 16px;
 `;

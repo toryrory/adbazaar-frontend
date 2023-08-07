@@ -41,13 +41,15 @@ export const Title = styled.h2`
   line-height: 0.625;
 `;
 
-export const AllInputContainer = styled.div`
+export const InputList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 24px;
-  margin-bottom: 40px;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 20px;
 `;
-export const InputContainer = styled.div`
+export const InputItem = styled.li`
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -92,8 +94,31 @@ export const EyeButton = styled.button`
 
 export const ErrorText = styled.p`
   font-size: 14px;
-  color: red;
+  color: var(--error-color);
   margin: 0;
+  text-align: left;
+`;
+
+export const CheckboxContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 52px;
+`;
+export const CheckboxLabel = styled.label`
+  display: flex;
+  gap: 10px;
+  text-align: left;
+  align-items: center;
+  color: var(--brand-color);
+  font-size: 14px;
+`;
+
+export const CheckboxInput = styled.input`
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  position: absolute;
 `;
 
 export const MainButton = styled.button`
@@ -103,42 +128,52 @@ export const MainButton = styled.button`
   border-radius: 10px;
   border: none;
   background: var(--gradient);
-  margin-top: 48px;
-  margin-bottom: 36px;
+
+  margin-bottom: 32px;
 `;
 
 export const SLText = styled.p`
   font-size: 14px;
   line-height: 1.42;
   color: var(--light-text);
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 `;
-export const SLContainer = styled.div`
+export const SLList = styled.ul`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 32px;
+  margin-bottom: 16px;
+  padding: 0;
+`;
+
+export const SLItem = styled.li`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gradient);
+  border-radius: 16px;
+  width: 156px;
+  height: 44px;
 `;
 
 export const SocialLink = styled.a`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 42px;
   color: var(--brand-color);
+  width: 154px;
+  height: 42px;
   font-size: 14px;
   line-height: 1.42;
-  border: 1px solid;
-  border-image-source: var(--gradient);
-  border-image-slice: 1;
-  //   border-radius: 16px;
+  background-color: var(--main-background);
+  border-radius: 16px;
 `;
 
 export const RedirectText = styled.p`
   font-size: 14px;
   line-height: 1.14;
   color: var(--light-text);
-  margin-bottom: 86px;
+  margin-bottom: 44px;
 `;
 
 export const RedirectLink = styled(Link)`
