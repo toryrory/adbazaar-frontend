@@ -1,26 +1,29 @@
 import { useFormik } from 'formik';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { authLogin } from '@/redux/operations';
+import { selectAuthError } from '@/redux/selectors';
 import {
   LogInPage,
   LogInContainer,
   UserImgContainer,
   CloseButton,
   Title,
-  AllInputContainer,
-  InputContainer,
+  InputList,
+  InputItem,
   PasswordContainer,
   ForgotPasswordLink,
   Label,
   Input,
   EyeButton,
   MainButton,
+  ErrorContainer,
   ErrorText,
   RedirectText,
   RedirectLink,
   SLText,
-  SLContainer,
+  SLList,
+  SLItem,
   SocialLink,
 } from '@/styles/log-in.styled';
 import {
@@ -35,6 +38,7 @@ import {
 export default function LogIn() {
   const [passwordShown, setPasswordShown] = useState(false);
   const dispatch = useDispatch();
+  let authError = useSelector(selectAuthError);
 
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
@@ -43,8 +47,13 @@ export default function LogIn() {
   const onSubmit = ({ email, password }, actions) => {
     console.log(email, password);
     dispatch(authLogin({ email, password }));
-    alert('You have successfully logged into your account');
-    actions.resetForm();
+    authError === useSelector(selectAuthError);
+    if (authError) {
+      return;
+    } else {
+      alert('You have successfully logged into your account');
+      actions.resetForm();
+    }
   };
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
@@ -71,13 +80,9 @@ export default function LogIn() {
 
         <Title>Sign in</Title>
         <form onSubmit={handleSubmit}>
-          <AllInputContainer>
-            <InputContainer>
-              {errors.email && touched.email ? (
-                <ErrorText>{errors.email}</ErrorText>
-              ) : (
-                <Label htmlFor="fullName">Email</Label>
-              )}
+          <InputList>
+            <InputItem>
+              <Label htmlFor="fullName">Email</Label>
               <Input
                 value={values.email}
                 onChange={handleChange}
@@ -87,13 +92,10 @@ export default function LogIn() {
                 id="email"
                 placeholder="Enter your mail"
               />
-            </InputContainer>
-            <InputContainer>
-              {errors.password && touched.password ? (
-                <ErrorText>{errors.password}</ErrorText>
-              ) : (
-                <Label htmlFor="fullName">Password</Label>
-              )}
+            </InputItem>
+            <InputItem>
+              <Label htmlFor="fullName">Password</Label>
+
               <PasswordContainer>
                 <Input
                   value={values.password}
@@ -112,9 +114,16 @@ export default function LogIn() {
                   )}
                 </EyeButton>
               </PasswordContainer>
-            </InputContainer>
-          </AllInputContainer>
-          <ForgotPasswordLink href="">Forgot password?</ForgotPasswordLink>
+            </InputItem>
+          </InputList>
+          {authError ? (
+            <ErrorContainer>
+              <ErrorText>Incorrect password or email.</ErrorText>
+              <ForgotPasswordLink href="">Forgot password?</ForgotPasswordLink>
+            </ErrorContainer>
+          ) : (
+            <ForgotPasswordLink href="">Forgot password?</ForgotPasswordLink>
+          )}
 
           <MainButton type="submit">Sign in</MainButton>
         </form>
@@ -123,24 +132,28 @@ export default function LogIn() {
           <RedirectLink href="/sign-up"> Create now</RedirectLink>
         </RedirectText>
         <SLText>Continue with</SLText>
-        <SLContainer>
-          <SocialLink
-            target="_blank"
-            rel="noreferrer noopener"
-            href="https://www.google.com/"
-          >
-            <GoogleIcon style={{ width: 20, height: 20, marginRight: 4 }} />
-            Google
-          </SocialLink>
-          <SocialLink
-            target="_blank"
-            rel="noreferrer noopener"
-            href="https://www.facebook.com/"
-          >
-            <FacebookIcon style={{ width: 20, height: 20, marginRight: 4 }} />
-            Facebook
-          </SocialLink>
-        </SLContainer>
+        <SLList>
+          <SLItem>
+            <SocialLink
+              target="_blank"
+              rel="noreferrer noopener"
+              href="https://www.google.com/"
+            >
+              <GoogleIcon style={{ width: 20, height: 20, marginRight: 4 }} />
+              Google
+            </SocialLink>
+          </SLItem>
+          <SLItem>
+            <SocialLink
+              target="_blank"
+              rel="noreferrer noopener"
+              href="https://www.facebook.com/"
+            >
+              <FacebookIcon style={{ width: 20, height: 20, marginRight: 4 }} />
+              Facebook
+            </SocialLink>
+          </SLItem>
+        </SLList>
       </LogInContainer>
     </LogInPage>
   );

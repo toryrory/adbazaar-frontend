@@ -9,27 +9,32 @@ import {
   SignUpContainer,
   CloseButton,
   Title,
-  AllInputContainer,
-  InputContainer,
+  InputList,
+  InputItem,
   PasswordContainer,
   EyeButton,
   ErrorText,
   Input,
   Label,
+  CheckboxContainer,
+  CheckboxLabel,
+  CheckboxInput,
   MainButton,
-  SLContainer,
+  SLList,
+  SLItem,
   SLText,
   SocialLink,
   RedirectText,
   RedirectLink,
 } from '@/styles/sign-up.styled';
 import {
-  UserSvg,
   Cross,
   EyeClosed,
   EyeOpened,
   GoogleIcon,
   FacebookIcon,
+  CheckboxChecked,
+  CheckboxEmpty,
 } from '../components/svg';
 
 const schema = yup.object({
@@ -108,8 +113,8 @@ export default function SignUp() {
         </CloseButton>
         <Title>Sign Up</Title>
         <form onSubmit={handleSubmit}>
-          <AllInputContainer>
-            <InputContainer>
+          <InputList>
+            <InputItem>
               {errors.name && touched.name ? (
                 <ErrorText>{errors.name}</ErrorText>
               ) : (
@@ -124,8 +129,8 @@ export default function SignUp() {
                 id="name"
                 placeholder="Enter your name"
               />
-            </InputContainer>
-            <InputContainer>
+            </InputItem>
+            <InputItem>
               {errors.email && touched.email ? (
                 <ErrorText>{errors.email}</ErrorText>
               ) : (
@@ -140,8 +145,8 @@ export default function SignUp() {
                 id="email"
                 placeholder="Enter your mail"
               />
-            </InputContainer>
-            <InputContainer>
+            </InputItem>
+            <InputItem>
               {errors.password && touched.password ? (
                 <ErrorText>{errors.password}</ErrorText>
               ) : (
@@ -165,8 +170,8 @@ export default function SignUp() {
                   )}
                 </EyeButton>
               </PasswordContainer>
-            </InputContainer>
-            <InputContainer>
+            </InputItem>
+            <InputItem>
               {errors.confirm && touched.confirm ? (
                 <ErrorText>{errors.confirm}</ErrorText>
               ) : (
@@ -190,57 +195,78 @@ export default function SignUp() {
                   )}
                 </EyeButton>
               </PasswordContainer>
-            </InputContainer>
-          </AllInputContainer>
-          <div>
-            <input
-              type="checkbox"
-              id="terms"
-              value={values.termsChecked}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              name="termsChecked"
-            />
-            {errors.termsChecked && touched.termsChecked ? (
-              <ErrorText>{errors.termsChecked}</ErrorText>
-            ) : (
-              <Label htmlFor="terms">
-                You accept our <Link href="">Terms and Conditions</Link>
-              </Label>
+            </InputItem>
+          </InputList>
+          <CheckboxContainer>
+            <CheckboxLabel>
+              {values.termsChecked ? (
+                <CheckboxChecked style={{ width: 20, height: 20 }} />
+              ) : (
+                <CheckboxEmpty style={{ width: 20, height: 20 }} />
+              )}
+              <CheckboxInput
+                type="checkbox"
+                value={values.termsChecked}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                name="termsChecked"
+              />
+              You accept{' '}
+              <Link
+                style={{ color: '#a3e9ff', textDecoration: 'underline' }}
+                href=""
+              >
+                our Terms and Conditions
+              </Link>
+            </CheckboxLabel>
+
+            {errors.termsChecked && touched.termsChecked && (
+              <ErrorText style={{ marginTop: 4 }}>
+                {errors.termsChecked}
+              </ErrorText>
             )}
-          </div>
-          <div>
-            <input
-              type="checkbox"
-              id="notifications"
-              value={values.notificationsChecked}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              name="notificationsChecked"
-            />
-            <Label htmlFor="notifications">Sign me up for notifications</Label>
-          </div>
+            <CheckboxLabel>
+              {values.notificationsChecked ? (
+                <CheckboxChecked style={{ width: 20, height: 20 }} />
+              ) : (
+                <CheckboxEmpty style={{ width: 20, height: 20 }} />
+              )}
+              <CheckboxInput
+                type="checkbox"
+                value={values.notificationsChecked}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                name="notificationsChecked"
+              />
+              Sign me up for notifications
+            </CheckboxLabel>
+          </CheckboxContainer>
+
           <MainButton type="submit">Sign in</MainButton>
         </form>
         <SLText>Continue with</SLText>
-        <SLContainer>
-          <SocialLink
-            target="_blank"
-            rel="noreferrer noopener"
-            href="https://www.google.com/"
-          >
-            <GoogleIcon style={{ width: 20, height: 20, marginRight: 4 }} />
-            Google
-          </SocialLink>
-          <SocialLink
-            target="_blank"
-            rel="noreferrer noopener"
-            href="https://www.facebook.com/"
-          >
-            <FacebookIcon style={{ width: 20, height: 20, marginRight: 4 }} />
-            Facebook
-          </SocialLink>
-        </SLContainer>
+        <SLList>
+          <SLItem>
+            <SocialLink
+              target="_blank"
+              rel="noreferrer noopener"
+              href="https://www.google.com/"
+            >
+              <GoogleIcon style={{ width: 20, height: 20, marginRight: 4 }} />
+              Google
+            </SocialLink>
+          </SLItem>
+          <SLItem>
+            <SocialLink
+              target="_blank"
+              rel="noreferrer noopener"
+              href="https://www.facebook.com/"
+            >
+              <FacebookIcon style={{ width: 20, height: 20, marginRight: 4 }} />
+              Facebook
+            </SocialLink>
+          </SLItem>
+        </SLList>
         <RedirectText>
           Have account? <RedirectLink href="/log-in"> Sign in</RedirectLink>
         </RedirectText>
