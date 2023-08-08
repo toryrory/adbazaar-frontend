@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { Tick, Cross } from '../svg';
 import {
   Overlay,
@@ -10,15 +11,15 @@ import {
 } from './Modal.styled';
 
 export default function Modal({ onClose, message, showTick, showButton }) {
+  const router = useRouter();
+
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.code === 'Escape') {
         onClose();
       }
     };
-
     window.addEventListener('keydown', handleKeyDown);
-
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
@@ -28,6 +29,10 @@ export default function Modal({ onClose, message, showTick, showButton }) {
     if (event.currentTarget === event.target) {
       onClose();
     }
+  };
+
+  const onPress = () => {
+    router.push('/account');
   };
 
   return (
@@ -45,7 +50,9 @@ export default function Modal({ onClose, message, showTick, showButton }) {
 
         <Message>{message}</Message>
         {showButton && (
-          <MainButton type="button">Go to personal account</MainButton>
+          <MainButton type="button" onClick={onPress}>
+            Go to personal account
+          </MainButton>
         )}
       </ModalWindow>
     </Overlay>
