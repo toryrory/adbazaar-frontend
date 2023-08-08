@@ -84,7 +84,6 @@ export default function LogIn() {
         <CloseButton type="button" onClick={() => router.push('/')}>
           <Cross style={{ width: 24, height: 24 }} />
         </CloseButton>
-
         <Title>Sign in</Title>
         <form onSubmit={handleSubmit}>
           <InputList>
@@ -149,7 +148,7 @@ export default function LogIn() {
               rel="noreferrer noopener"
               href="https://www.google.com/"
             >
-              <GoogleIcon style={{ width: 20, height: 20, marginRight: 4 }} />
+              <GoogleIcon style={{ width: 20, height: 20 }} />
               Google
             </SocialLink>
           </SLItem>
@@ -159,7 +158,7 @@ export default function LogIn() {
               rel="noreferrer noopener"
               href="https://www.facebook.com/"
             >
-              <FacebookIcon style={{ width: 20, height: 20, marginRight: 4 }} />
+              <FacebookIcon style={{ width: 20, height: 20 }} />
               Facebook
             </SocialLink>
           </SLItem>

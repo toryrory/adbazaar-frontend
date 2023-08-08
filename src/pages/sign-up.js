@@ -194,7 +194,7 @@ export default function SignUp() {
                 onBlur={handleBlur}
                 name="termsChecked"
               />
-              You accept{' '}
+              You accept
               <Link
                 style={{ color: '#a3e9ff', textDecoration: 'underline' }}
                 href=""
@@ -235,7 +235,7 @@ export default function SignUp() {
               rel="noreferrer noopener"
               href="https://www.google.com/"
             >
-              <GoogleIcon style={{ width: 20, height: 20, marginRight: 4 }} />
+              <GoogleIcon style={{ width: 20, height: 20 }} />
               Google
             </SocialLink>
           </SLItem>
@@ -245,7 +245,7 @@ export default function SignUp() {
               rel="noreferrer noopener"
               href="https://www.facebook.com/"
             >
-              <FacebookIcon style={{ width: 20, height: 20, marginRight: 4 }} />
+              <FacebookIcon style={{ width: 20, height: 20 }} />
               Facebook
             </SocialLink>
           </SLItem>

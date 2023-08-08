@@ -138,12 +138,14 @@ export const SLText = styled.p`
   color: var(--light-text);
   margin-bottom: 10px;
 `;
+
 export const SLList = styled.ul`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 16px;
   padding: 0;
+  margin: 0;
+  margin-bottom: 16px;
 `;
 
 export const SLItem = styled.li`
@@ -160,6 +162,7 @@ export const SocialLink = styled.a`
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 4px;
   color: var(--brand-color);
   width: 154px;
   height: 42px;

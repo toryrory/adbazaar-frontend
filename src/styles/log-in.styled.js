@@ -178,6 +178,7 @@ export const SocialLink = styled.a`
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 4px;
   color: var(--brand-color);
   width: 154px;
   height: 42px;
