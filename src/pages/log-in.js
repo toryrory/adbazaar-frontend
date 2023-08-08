@@ -1,9 +1,10 @@
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { authLogin } from '@/redux/operations';
 import { selectAuthError } from '@/redux/selectors';
+import Modal from '@/components/modal/Modal';
 import {
   LogInPage,
   LogInContainer,
@@ -39,23 +40,30 @@ import {
 export default function LogIn() {
   const router = useRouter();
   const [passwordShown, setPasswordShown] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
   let authError = useSelector(selectAuthError);
+
+  useEffect(() => {
+    if (authError) {
+      setShowModal(false);
+    }
+  }, [authError]);
 
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
   };
 
+  const onCloseModal = () => {
+    setShowModal(false);
+    router.push('/');
+  };
+
   const onSubmit = ({ email, password }, actions) => {
     console.log(email, password);
     dispatch(authLogin({ email, password }));
-    // authError === useSelector(selectAuthError);
-    if (authError) {
-      return;
-    } else {
-      alert('You have successfully logged into your account');
-      actions.resetForm();
-    }
+    setShowModal(true);
+    actions.resetForm();
   };
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
@@ -80,7 +88,7 @@ export default function LogIn() {
         <form onSubmit={handleSubmit}>
           <InputList>
             <InputItem>
-              <Label htmlFor="fullName">Email</Label>
+              <Label htmlFor="email">Email</Label>
               <Input
                 value={values.email}
                 onChange={handleChange}
@@ -92,8 +100,7 @@ export default function LogIn() {
               />
             </InputItem>
             <InputItem>
-              <Label htmlFor="fullName">Password</Label>
-
+              <Label htmlFor="password">Password</Label>
               <PasswordContainer>
                 <Input
                   value={values.password}
@@ -117,10 +124,14 @@ export default function LogIn() {
           {authError ? (
             <ErrorContainer>
               <ErrorText>Incorrect password or email.</ErrorText>
-              <ForgotPasswordLink href="">Forgot password?</ForgotPasswordLink>
+              <ForgotPasswordLink href="/reset-password">
+                Forgot password?
+              </ForgotPasswordLink>
             </ErrorContainer>
           ) : (
-            <ForgotPasswordLink href="">Forgot password?</ForgotPasswordLink>
+            <ForgotPasswordLink href="/reset-password">
+              Forgot password?
+            </ForgotPasswordLink>
           )}
 
           <MainButton type="submit">Sign in</MainButton>
@@ -153,6 +164,14 @@ export default function LogIn() {
           </SLItem>
         </SLList>
       </LogInContainer>
+      {!authError && showModal && (
+        <Modal
+          onClose={onCloseModal}
+          message="You have successfully logged into your account"
+          showTick={true}
+          showButton={true}
+        />
+      )}
     </LogInPage>
   );
 }

@@ -1,10 +1,12 @@
 import { useFormik } from 'formik';
-import * as yup from 'yup';
 import Link from 'next/link';
-import { useDispatch } from 'react-redux';
-import { authRegister } from '@/redux/operations';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useDispatch, useSelector } from 'react-redux';
+import { authRegister } from '@/redux/operations';
+import { selectAuthError } from '@/redux/selectors';
+import { schema } from '@/services/shema';
+import Modal from '@/components/modal/Modal';
 import {
   SignUpPage,
   SignUpContainer,
@@ -38,36 +40,27 @@ import {
   CheckboxEmpty,
 } from '../components/svg';
 
-const schema = yup.object({
-  name: yup.string().required('Please Enter your name'),
-  email: yup.string().email().required('Please Enter your Email'),
-  password: yup
-    .string()
-    .min(6, 'Password is too short - should be 6 symbols minimum')
-    .max(16, 'Password is too long - should be 16 symbols maximum')
-    .required('Please Enter your Password'),
-  confirm: yup
-    .string()
-    .oneOf([yup.ref('password'), null], 'Password doesn`t match')
-    .required('Please Confirm your Password'),
-  termsChecked: yup
-    .bool()
-    .oneOf([true], 'You need to accept the terms and conditions'),
-  // .required()
-  // .default(false),
-  // .matches(
-  //   '^(?=.*[A-Za-z])(?=.*d)(?=.*[@$!%*#?&])[A-Za-zd@$!%*#?&]{8,}$',
-  //   'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character'
-  // )
-});
-
 export default function SignUp() {
   const router = useRouter();
   const [passwordShown, setPasswordShown] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
+  const authError = useSelector(selectAuthError);
+
+  useEffect(() => {
+    if (authError) {
+      console.log('email is already taken');
+      setShowModal(false);
+    }
+  }, [authError]);
 
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
+  };
+
+  const onCloseModal = () => {
+    setShowModal(false);
+    router.push('/');
   };
 
   const onSubmit = (
@@ -75,9 +68,7 @@ export default function SignUp() {
     actions
   ) => {
     dispatch(authRegister({ name, email, password }));
-    alert(
-      ` You’ve got mail to ${email}. Please enter the four digit code you received`
-    );
+    setShowModal(true);
     termsChecked = false;
     notificationsChecked = false;
     actions.resetForm();
@@ -263,6 +254,14 @@ export default function SignUp() {
           Have account? <RedirectLink href="/log-in"> Sign in</RedirectLink>
         </RedirectText>
       </SignUpContainer>
+      {!authError && showModal && (
+        <Modal
+          onClose={onCloseModal}
+          message="You have successfully created your account"
+          showTick={true}
+          showButton={true}
+        />
+      )}
     </SignUpPage>
   );
 }
