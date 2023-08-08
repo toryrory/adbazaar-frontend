@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { authRegister } from '@/redux/operations';
-import { selectAuthError } from '@/redux/selectors';
+import { selectAuthError, selectUserEmail } from '@/redux/selectors';
 import { schema } from '@/services/shema';
 import Modal from '@/components/modal/Modal';
 import {
@@ -42,15 +42,23 @@ import {
 
 export default function SignUp() {
   const router = useRouter();
-  const [passwordShown, setPasswordShown] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-  const dispatch = useDispatch();
   const authError = useSelector(selectAuthError);
+  const isUser = useSelector(selectUserEmail);
+  const [passwordShown, setPasswordShown] = useState(false);
+  const [showModalError, setShowModalError] = useState(false);
+  const dispatch = useDispatch();
+
+  const onCloseModalError = () => {
+    setShowModalError(false);
+    router.push('/sign-up');
+  };
 
   useEffect(() => {
     if (authError) {
       console.log('email is already taken');
-      setShowModal(false);
+      setShowModalError(true);
+    } else if (!authError && isUser) {
+      router.push('/confirmation');
     }
   }, [authError]);
 
@@ -58,17 +66,11 @@ export default function SignUp() {
     setPasswordShown(!passwordShown);
   };
 
-  const onCloseModal = () => {
-    setShowModal(false);
-    router.push('/');
-  };
-
   const onSubmit = (
     { name, email, password, termsChecked, notificationsChecked },
     actions
   ) => {
     dispatch(authRegister({ name, email, password }));
-    setShowModal(true);
     termsChecked = false;
     notificationsChecked = false;
     actions.resetForm();
@@ -254,12 +256,10 @@ export default function SignUp() {
           Have account? <RedirectLink href="/log-in"> Sign in</RedirectLink>
         </RedirectText>
       </SignUpContainer>
-      {!authError && showModal && (
+      {showModalError && (
         <Modal
-          onClose={onCloseModal}
-          message="You have successfully created your account"
-          showTick={true}
-          showButton={true}
+          onClose={onCloseModalError}
+          message="Email is already taken. Please enter valid email"
         />
       )}
     </SignUpPage>
