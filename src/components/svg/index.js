@@ -7,3 +7,4 @@ export { default as FacebookIcon } from './facebook.svg';
 export { default as CheckboxChecked } from './checkbox-checked.svg';
 export { default as CheckboxEmpty } from './checkbox-empty.svg';
 export { default as Tick } from './tick.svg';
+export { default as LogOut } from './log-out.svg';
