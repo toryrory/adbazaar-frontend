@@ -60,34 +60,6 @@ export const Email = styled.span`
   color: var(--light-text);
 `;
 
-export const InputList = styled.ul`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-  padding: 0;
-  margin: 0;
-  margin-bottom: 44px;
-`;
-export const InputItem = styled.li`
-  border-bottom: 1.5px solid var(--brand-color);
-`;
-
-export const Input = styled.input`
-font-size: 40px;
-  line-height: 0.6;
-  outline: none;
-  background: none;
-  border: none;
-    max-width: 56px;
-  padding: 16px;
-  color: var(--white-text);
-
-  &::placeholder {
-    color: var(--brand-color);
-`;
-
 export const ResendLink = styled(Link)`
   display: block;
   font-size: 14px;

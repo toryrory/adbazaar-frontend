@@ -60,7 +60,7 @@ export default function SignUp() {
     } else if (!authError && isUser) {
       router.push('/confirmation');
     }
-  }, [authError]);
+  }, [authError, isUser]);
 
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
@@ -103,7 +103,17 @@ export default function SignUp() {
               {errors.name && touched.name ? (
                 <ErrorText>{errors.name}</ErrorText>
               ) : (
-                <Label htmlFor="name">Full Name</Label>
+                <Label htmlFor="name">
+                  Full Name
+                  <span
+                    style={{
+                      marginLeft: 2,
+                      color: 'var(--error-color)',
+                    }}
+                  >
+                    *
+                  </span>
+                </Label>
               )}
               <Input
                 value={values.name}
@@ -119,7 +129,17 @@ export default function SignUp() {
               {errors.email && touched.email ? (
                 <ErrorText>{errors.email}</ErrorText>
               ) : (
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">
+                  Email
+                  <span
+                    style={{
+                      marginLeft: 2,
+                      color: 'var(--error-color)',
+                    }}
+                  >
+                    *
+                  </span>
+                </Label>
               )}
               <Input
                 value={values.email}
@@ -135,7 +155,17 @@ export default function SignUp() {
               {errors.password && touched.password ? (
                 <ErrorText>{errors.password}</ErrorText>
               ) : (
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password">
+                  Password
+                  <span
+                    style={{
+                      marginLeft: 2,
+                      color: 'var(--error-color)',
+                    }}
+                  >
+                    *
+                  </span>
+                </Label>
               )}
               <PasswordContainer>
                 <Input
@@ -160,7 +190,17 @@ export default function SignUp() {
               {errors.confirm && touched.confirm ? (
                 <ErrorText>{errors.confirm}</ErrorText>
               ) : (
-                <Label htmlFor="confirm">Confirm your Password</Label>
+                <Label htmlFor="confirm">
+                  Confirm your Password
+                  <span
+                    style={{
+                      marginLeft: 2,
+                      color: 'var(--error-color)',
+                    }}
+                  >
+                    *
+                  </span>
+                </Label>
               )}
               <PasswordContainer>
                 <Input

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { authLogin } from '@/redux/operations';
-import { selectAuthError } from '@/redux/selectors';
+import { selectAuthError, selectUserEmail } from '@/redux/selectors';
 import Modal from '@/components/modal/Modal';
 import {
   LogInPage,
@@ -39,16 +39,19 @@ import {
 
 export default function LogIn() {
   const router = useRouter();
+  const isUser = useSelector(selectUserEmail);
+  const authError = useSelector(selectAuthError);
   const [passwordShown, setPasswordShown] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
-  let authError = useSelector(selectAuthError);
 
   useEffect(() => {
     if (authError) {
       setShowModal(false);
+    } else if (!authError && isUser) {
+      setShowModal(true);
     }
-  }, [authError]);
+  }, [authError, isUser]);
 
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
@@ -62,7 +65,6 @@ export default function LogIn() {
   const onSubmit = ({ email, password }, actions) => {
     console.log(email, password);
     dispatch(authLogin({ email, password }));
-    setShowModal(true);
     actions.resetForm();
   };
 
