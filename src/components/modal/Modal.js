@@ -1,14 +1,9 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { Tick, Cross } from '../svg';
-import {
-  Overlay,
-  ModalWindow,
-  CloseButton,
-  WhooText,
-  Message,
-  MainButton,
-} from './Modal.styled';
+import CloseButton from '../closeButton/CloseButton';
+import { Tick } from '../svg';
+import { Overlay, ModalWindow, WhooText, Message } from './Modal.styled';
+import SecondaryButton from '../secondaryButton/SecondaryButton';
 
 export default function Modal({ onClose, message, showTick, showButton }) {
   const router = useRouter();
@@ -44,15 +39,15 @@ export default function Modal({ onClose, message, showTick, showButton }) {
             <WhooText>Whoo!</WhooText>
           </>
         )}
-        <CloseButton type="button" onClick={onClose}>
-          <Cross style={{ width: 24, height: 24 }} />
-        </CloseButton>
-
+        <CloseButton onClick={onClose} />
         <Message>{message}</Message>
         {showButton && (
-          <MainButton type="button" onClick={onPress}>
-            Go to personal account
-          </MainButton>
+          <SecondaryButton
+            type="button"
+            onClick={onPress}
+            text="Go to personal account"
+            style={{ marginTop: 40 }}
+          />
         )}
       </ModalWindow>
     </Overlay>

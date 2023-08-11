@@ -1,12 +1,19 @@
 import styled from 'styled-components';
 import Link from 'next/link';
 
-export const InputItem = styled.div`
+export const InputList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 8px;
+`;
+export const InputItem = styled.li`
   display: flex;
   flex-direction: column;
   gap: 8px;
   border-bottom: 1.5px solid var(--brand-color);
-  margin-bottom: 8px;
 `;
 
 export const Label = styled.label`
@@ -31,11 +38,33 @@ export const Input = styled.input`
   }
 `;
 
-export const Text = styled.p`
-  text-align: left;
-  font-size: 14px;
+export const PasswordContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+export const EyeButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  padding: 0;
+`;
+
+export const ErrorContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const ForgotPasswordLink = styled(Link)`
+  display: inline-block;
   color: var(--light-text);
-  margin-bottom: 60px;
+  margin-bottom: 48px;
+  font-size: 14px;
+  line-height: 1.42;
+  text-decoration: underline;
 `;
 
 export const RedirectText = styled.p`

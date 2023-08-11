@@ -5,12 +5,13 @@ import { useState, useEffect } from 'react';
 import { authLogin } from '@/redux/operations';
 import { selectAuthError, selectUserEmail } from '@/redux/selectors';
 import Modal from '@/components/modal/Modal';
+import AuthorizationContainer from '@/components/authorizationContainer/AuthorizationContainer';
+import CloseButton from '@/components/closeButton/CloseButton';
+import LoginHeader from '@/components/loginHeader/LoginHeader';
+import GoogleRegistration from '@/components/googleRegistration/GoogleRegistration';
+import ErrorMessage from '@/components/errorMessage/ErrorMessage';
+import SecondaryButton from '@/components/secondaryButton/SecondaryButton';
 import {
-  LogInPage,
-  LogInContainer,
-  UserImgContainer,
-  CloseButton,
-  Title,
   InputList,
   InputItem,
   PasswordContainer,
@@ -18,24 +19,11 @@ import {
   Label,
   Input,
   EyeButton,
-  MainButton,
   ErrorContainer,
-  ErrorText,
   RedirectText,
   RedirectLink,
-  SLText,
-  SLList,
-  SLItem,
-  SocialLink,
-} from '@/styles/log-in.styled';
-import {
-  UserSvg,
-  Cross,
-  EyeClosed,
-  EyeOpened,
-  GoogleIcon,
-  FacebookIcon,
-} from '../components/svg';
+} from '@/styles/login.styled';
+import { EyeClosed, EyeOpened } from '../../components/svg';
 
 export default function LogIn() {
   const router = useRouter();
@@ -68,26 +56,20 @@ export default function LogIn() {
     actions.resetForm();
   };
 
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    useFormik({
-      initialValues: {
-        email: '',
-        password: '',
-      },
-      onSubmit,
-    });
+  const { values, handleBlur, handleChange, handleSubmit } = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    onSubmit,
+  });
 
   return (
-    <LogInPage>
-      <LogInContainer>
-        <UserImgContainer>
-          <UserSvg style={{ width: 24, height: 24 }} />
-        </UserImgContainer>
-        <CloseButton type="button" onClick={() => router.push('/')}>
-          <Cross style={{ width: 24, height: 24 }} />
-        </CloseButton>
-        <Title>Sign in</Title>
-        <form onSubmit={handleSubmit}>
+    <>
+      <AuthorizationContainer>
+        <CloseButton onClick={() => router.push('/')} />
+        <LoginHeader />
+        <form onSubmit={handleSubmit} style={{ marginBottom: 32 }}>
           <InputList>
             <InputItem>
               <Label htmlFor="email">Email</Label>
@@ -125,47 +107,27 @@ export default function LogIn() {
           </InputList>
           {authError ? (
             <ErrorContainer>
-              <ErrorText>Incorrect password or email.</ErrorText>
-              <ForgotPasswordLink href="/reset-password">
+              <ErrorMessage text="Incorrect password or email." />
+              <ForgotPasswordLink href="/login/reset-password">
                 Forgot password?
               </ForgotPasswordLink>
             </ErrorContainer>
           ) : (
-            <ForgotPasswordLink href="/reset-password">
-              Forgot password?
-            </ForgotPasswordLink>
+            <div style={{ textAlign: 'right' }}>
+              <ForgotPasswordLink href="/login/reset-password">
+                Forgot password?
+              </ForgotPasswordLink>
+            </div>
           )}
-
-          <MainButton type="submit">Sign in</MainButton>
+          <SecondaryButton text="Sign in" type="submit" />
         </form>
         <RedirectText>
           Don’t have account?{' '}
-          <RedirectLink href="/sign-up"> Create now</RedirectLink>
+          <RedirectLink href="/register"> Create now</RedirectLink>
         </RedirectText>
-        <SLText>Continue with</SLText>
-        <SLList>
-          <SLItem>
-            <SocialLink
-              target="_blank"
-              rel="noreferrer noopener"
-              href="https://www.google.com/"
-            >
-              <GoogleIcon style={{ width: 20, height: 20 }} />
-              Google
-            </SocialLink>
-          </SLItem>
-          <SLItem>
-            <SocialLink
-              target="_blank"
-              rel="noreferrer noopener"
-              href="https://www.facebook.com/"
-            >
-              <FacebookIcon style={{ width: 20, height: 20 }} />
-              Facebook
-            </SocialLink>
-          </SLItem>
-        </SLList>
-      </LogInContainer>
+        <GoogleRegistration />
+      </AuthorizationContainer>
+
       {!authError && showModal && (
         <Modal
           onClose={onCloseModal}
@@ -174,6 +136,6 @@ export default function LogIn() {
           showButton={true}
         />
       )}
-    </LogInPage>
+    </>
   );
 }

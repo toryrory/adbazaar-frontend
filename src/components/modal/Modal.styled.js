@@ -54,14 +54,3 @@ export const Message = styled.p`
   color: var(--white-text);
   margin-top: 8px;
 `;
-
-export const MainButton = styled.button`
-  font-size: 16px;
-  line-height: 1.25;
-  padding: 12px 32px;
-  border-radius: 10px;
-  border: none;
-  background: var(--gradient);
-
-  margin-top: 40px;
-`;

@@ -21,8 +21,8 @@ export default function Home() {
           alignItems: 'center',
         }}
       >
-        <Link href="/log-in">Sign in</Link>
-        <Link href="/sign-up">Sing up</Link>
+        <Link href="/login">Sign in</Link>
+        <Link href="/register">Sing up</Link>
       </main>
     </>
   );
