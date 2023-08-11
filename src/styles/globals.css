@@ -5,11 +5,13 @@
   --main-background: #131b2c;
   --gradient: linear-gradient(89.44deg, #51c5ea 4.39%, #f18ff3 118.29%);
   --error-color: #f97484;
+  --light-grey: #d8e9fe;
 }
 
 body {
   margin: 0;
-  font-family: 'Helvetica Neue', sans-serif;
+  font-family: 'Helvetica', sans-serif;
+  background-color: var(--main-background);
 }
 
 h1,

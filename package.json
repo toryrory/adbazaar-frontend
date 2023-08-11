@@ -9,6 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.14.3",
+    "@mui/material": "^5.14.4",
     "@reduxjs/toolkit": "^1.9.5",
     "axios": "^1.4.0",
     "eslint": "8.46.0",
@@ -24,7 +28,7 @@
     "react-redux": "^8.1.2",
     "redux": "^4.2.1",
     "redux-persist": "^6.0.0",
-    "styled-components": "^6.0.5",
+    "styled-components": "^6.0.7",
     "yup": "^1.2.0"
   },
   "devDependencies": {
