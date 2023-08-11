@@ -7,38 +7,31 @@ import { authRegister } from '@/redux/operations';
 import { selectAuthError, selectUserEmail } from '@/redux/selectors';
 import { schema } from '@/services/shema';
 import Modal from '@/components/modal/Modal';
+import AuthorizationContainer from '@/components/authorizationContainer/AuthorizationContainer';
+import CloseButton from '@/components/closeButton/CloseButton';
+import RegisterHeader from '@/components/registerHeader/RegisterHeader';
+import GoogleRegistration from '@/components/googleRegistration/GoogleRegistration';
+import ErrorMessage from '@/components/errorMessage/ErrorMessage';
+import SecondaryButton from '@/components/secondaryButton/SecondaryButton';
 import {
-  SignUpPage,
-  SignUpContainer,
-  CloseButton,
-  Title,
   InputList,
   InputItem,
   PasswordContainer,
   EyeButton,
-  ErrorText,
   Input,
   Label,
   CheckboxContainer,
   CheckboxLabel,
   CheckboxInput,
-  MainButton,
-  SLList,
-  SLItem,
-  SLText,
-  SocialLink,
   RedirectText,
   RedirectLink,
-} from '@/styles/sign-up.styled';
+} from '@/styles/register.styled';
 import {
-  Cross,
   EyeClosed,
   EyeOpened,
-  GoogleIcon,
-  FacebookIcon,
   CheckboxChecked,
   CheckboxEmpty,
-} from '../components/svg';
+} from '../../components/svg';
 
 export default function SignUp() {
   const router = useRouter();
@@ -50,7 +43,7 @@ export default function SignUp() {
 
   const onCloseModalError = () => {
     setShowModalError(false);
-    router.push('/sign-up');
+    router.push('/register');
   };
 
   useEffect(() => {
@@ -58,7 +51,7 @@ export default function SignUp() {
       console.log('email is already taken');
       setShowModalError(true);
     } else if (!authError && isUser) {
-      router.push('/confirmation');
+      router.push('/register/confirmation');
     }
   }, [authError, isUser]);
 
@@ -91,17 +84,15 @@ export default function SignUp() {
     });
 
   return (
-    <SignUpPage>
-      <SignUpContainer>
-        <CloseButton type="button" onClick={() => router.push('/')}>
-          <Cross style={{ width: 24, height: 24 }} />
-        </CloseButton>
-        <Title>Sign Up</Title>
-        <form onSubmit={handleSubmit}>
+    <>
+      <AuthorizationContainer>
+        <CloseButton onClick={() => router.push('/')} />
+        <RegisterHeader />
+        <form onSubmit={handleSubmit} style={{ marginBottom: 32 }}>
           <InputList>
             <InputItem>
               {errors.name && touched.name ? (
-                <ErrorText>{errors.name}</ErrorText>
+                <ErrorMessage text={errors.name} />
               ) : (
                 <Label htmlFor="name">
                   Full Name
@@ -127,7 +118,7 @@ export default function SignUp() {
             </InputItem>
             <InputItem>
               {errors.email && touched.email ? (
-                <ErrorText>{errors.email}</ErrorText>
+                <ErrorMessage text={errors.email} />
               ) : (
                 <Label htmlFor="email">
                   Email
@@ -153,7 +144,7 @@ export default function SignUp() {
             </InputItem>
             <InputItem>
               {errors.password && touched.password ? (
-                <ErrorText>{errors.password}</ErrorText>
+                <ErrorMessage text={errors.password} />
               ) : (
                 <Label htmlFor="password">
                   Password
@@ -188,7 +179,7 @@ export default function SignUp() {
             </InputItem>
             <InputItem>
               {errors.confirm && touched.confirm ? (
-                <ErrorText>{errors.confirm}</ErrorText>
+                <ErrorMessage text={errors.confirm} />
               ) : (
                 <Label htmlFor="confirm">
                   Confirm your Password
@@ -246,9 +237,10 @@ export default function SignUp() {
             </CheckboxLabel>
 
             {errors.termsChecked && touched.termsChecked && (
-              <ErrorText style={{ marginTop: 4 }}>
-                {errors.termsChecked}
-              </ErrorText>
+              <ErrorMessage
+                text={errors.termsChecked}
+                style={{ marginTop: 4 }}
+              />
             )}
             <CheckboxLabel>
               {values.notificationsChecked ? (
@@ -266,42 +258,19 @@ export default function SignUp() {
               Sign me up for notifications
             </CheckboxLabel>
           </CheckboxContainer>
-
-          <MainButton type="submit">Sign in</MainButton>
+          <SecondaryButton text="Sign up" type="submit" />
         </form>
-        <SLText>Continue with</SLText>
-        <SLList>
-          <SLItem>
-            <SocialLink
-              target="_blank"
-              rel="noreferrer noopener"
-              href="https://www.google.com/"
-            >
-              <GoogleIcon style={{ width: 20, height: 20 }} />
-              Google
-            </SocialLink>
-          </SLItem>
-          <SLItem>
-            <SocialLink
-              target="_blank"
-              rel="noreferrer noopener"
-              href="https://www.facebook.com/"
-            >
-              <FacebookIcon style={{ width: 20, height: 20 }} />
-              Facebook
-            </SocialLink>
-          </SLItem>
-        </SLList>
+        <GoogleRegistration />
         <RedirectText>
-          Have account? <RedirectLink href="/log-in"> Sign in</RedirectLink>
+          Have account? <RedirectLink href="/login"> Sign in</RedirectLink>
         </RedirectText>
-      </SignUpContainer>
+      </AuthorizationContainer>
       {showModalError && (
         <Modal
           onClose={onCloseModalError}
           message="Email is already taken. Please enter valid email"
         />
       )}
-    </SignUpPage>
+    </>
   );
 }

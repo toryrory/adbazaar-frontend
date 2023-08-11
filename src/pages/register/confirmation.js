@@ -5,19 +5,17 @@ import { selectUserEmail } from '@/redux/selectors';
 import { selectAuthError } from '@/redux/selectors';
 import PinInput from 'react-pin-input';
 import Modal from '@/components/modal/Modal';
+import AuthorizationContainer from '@/components/authorizationContainer/AuthorizationContainer';
+import CloseButton from '@/components/closeButton/CloseButton';
+import RegisterHeader from '@/components/registerHeader/RegisterHeader';
+import SecondaryButton from '@/components/secondaryButton/SecondaryButton';
 import {
-  ConfirmationPage,
-  ConfirmationContainer,
-  CloseButton,
-  Title,
   Text,
   Email,
   ResendLink,
-  MainButton,
   ErrorText,
   AdditionalText,
 } from '@/styles/confirmation.styled';
-import { Cross } from '../components/svg';
 
 export default function Confirmation() {
   const initialCode = '1111';
@@ -50,12 +48,10 @@ export default function Confirmation() {
   };
 
   return (
-    <ConfirmationPage>
-      <ConfirmationContainer>
-        <CloseButton type="button" onClick={() => router.push('/')}>
-          <Cross style={{ width: 24, height: 24 }} />
-        </CloseButton>
-        <Title>Sign Up</Title>
+    <>
+      <AuthorizationContainer>
+        <CloseButton onClick={() => router.push('/')} />
+        <RegisterHeader />
         <Text>
           You’ve got mail to <Email>{email}. </Email>
         </Text>
@@ -95,9 +91,9 @@ export default function Confirmation() {
             onChange={onChange}
           />
           <ResendLink href="">Resend code?</ResendLink>
-          <MainButton type="submit">Continue</MainButton>
+          <SecondaryButton type="submit" text="Continue" />
         </form>
-      </ConfirmationContainer>
+      </AuthorizationContainer>
       {!authError && showModal && (
         <Modal
           onClose={onCloseModal}
@@ -106,6 +102,6 @@ export default function Confirmation() {
           showButton={true}
         />
       )}
-    </ConfirmationPage>
+    </>
   );
 }
