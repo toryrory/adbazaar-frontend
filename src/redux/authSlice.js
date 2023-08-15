@@ -48,6 +48,14 @@ const authSlice = createSlice({
       state.error = null;
     },
     [authLogout.rejected]: handleRejected,
+    // [googleLogin.pending]: handlePending,
+    // [googleLogin.fulfilled](state, action) {
+    //   state.user = action.payload;
+    //   state.isLoggedIn = true;
+    //   state.isLoading = false;
+    //   state.error = null;
+    // },
+    // [googleLogin.rejected]: handleRejected,
   },
 });
 
