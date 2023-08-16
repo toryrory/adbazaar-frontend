@@ -48,7 +48,7 @@ export default function SignUp() {
 
   useEffect(() => {
     if (authError) {
-      console.log('email is already taken');
+      console.log(authError);
       setShowModalError(true);
     } else if (!authError && isUser) {
       router.push('/register/confirmation');
@@ -261,6 +261,7 @@ export default function SignUp() {
           <SecondaryButton text="Sign up" type="submit" />
         </form>
         <GoogleRegistration />
+
         <RedirectText>
           Have account? <RedirectLink href="/login"> Sign in</RedirectLink>
         </RedirectText>

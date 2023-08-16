@@ -26,10 +26,11 @@ export const Item = styled.li`
   height: 44px;
 `;
 
-export const SocialLink = styled.a`
+export const SocialLink = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  border: none;
   gap: 4px;
   color: var(--brand-color);
   width: 154px;

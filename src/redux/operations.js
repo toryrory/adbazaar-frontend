@@ -52,5 +52,25 @@ export const authLogout = createAsyncThunk(
   }
 );
 
-
-
+=======
+// export const googleLogin = createAsyncThunk(
+//   'auth/googleLogin',
+//   async (token, thunkAPI) => {
+//     try {
+//       const response = axios.get(
+//         `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${token}`,
+//         {
+//           headers: {
+//             Authorization: `Bearer ${token}`,
+//             Accept: 'application/json',
+//           },
+//         }
+//       );
+//       console.log(response.data);
+//       // token.set(response.data.token);
+//       return response.data;
+//     } catch (e) {
+//       return thunkAPI.rejectWithValue(e.message);
+//     }
+//   }
+// );
