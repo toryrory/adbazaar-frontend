@@ -17,9 +17,15 @@ const handleRejected = (state, action) => {
 };
 
 const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState: {
-    user: { name: null, email: null },
+    user: {
+      name: null,
+      email: null,
+      phone: "",
+      birthday: "00/00/0000",
+      socials: { first: "@example", second: "@example" },
+    },
     token: null,
     isLoggedIn: false,
     isLoading: false,
@@ -34,7 +40,7 @@ const authSlice = createSlice({
       state.isLoggedIn = true;
       state.isLoading = false;
       state.error = null;
-      state.type = 'email';
+      state.type = "email";
     },
     [authRegister.rejected]: handleRejected,
     [authLogin.pending]: handlePending,
@@ -44,7 +50,7 @@ const authSlice = createSlice({
       state.isLoggedIn = true;
       state.isLoading = false;
       state.error = null;
-      state.type = 'email';
+      state.type = "email";
     },
     [authLogin.rejected]: handleRejected,
     [authLogout.pending]: handlePending,
@@ -64,7 +70,7 @@ const authSlice = createSlice({
       state.isLoggedIn = true;
       state.isLoading = false;
       state.error = null;
-      state.type = 'google';
+      state.type = "google";
     },
     [googleLogin.rejected]: handleRejected,
     [googleLogOut.pending]: handlePending,
