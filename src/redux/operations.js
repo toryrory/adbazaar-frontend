@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { googleLogout } from '@react-oauth/google';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
@@ -52,25 +53,38 @@ export const authLogout = createAsyncThunk(
   }
 );
 
-=======
-// export const googleLogin = createAsyncThunk(
-//   'auth/googleLogin',
-//   async (token, thunkAPI) => {
-//     try {
-//       const response = axios.get(
-//         `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${token}`,
-//         {
-//           headers: {
-//             Authorization: `Bearer ${token}`,
-//             Accept: 'application/json',
-//           },
-//         }
-//       );
-//       console.log(response.data);
-//       // token.set(response.data.token);
-//       return response.data;
-//     } catch (e) {
-//       return thunkAPI.rejectWithValue(e.message);
-//     }
-//   }
-// );
+export const googleLogin = createAsyncThunk(
+  'auth/googleLogin',
+  async (googleToken, thunkAPI) => {
+    try {
+      const response = await axios.get(
+        `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${googleToken}`,
+        {
+          headers: {
+            Authorization: `Bearer ${googleToken}`,
+            Accept: 'application/json',
+          },
+        }
+      );
+      console.log(response.data);
+      // token.set(googleToken);
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
+export const googleLogOut = createAsyncThunk(
+  'auth/googleLogOut',
+  async (_, thunkAPI) => {
+    try {
+      const response = await googleLogout();
+      // token.unset();
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
