@@ -3,7 +3,7 @@ import { authLogout } from "@/redux/operations";
 import { LogOut } from "@/components/svg";
 import { Title, Container } from "@/styles/account.styled";
 import { useSelector } from "react-redux";
-import { selectName } from "@/redux/selectors";
+import { selectUserData } from "@/redux/selectors";
 import AccountAccordion from "@/components/Accordion/Accordion";
 import { Payments, AddBook, Messages, Favorites, OrderHistory, Settings, Support, PersonalInfo } from "@/components/Accordion";
 import { PersonSvg, MessagesSvg, FavoritesSvg, SettingsSvg, OrderHistorySvg, AddBookSvg, PaymentsSvg } from "../../../public/svg-account";
@@ -12,7 +12,8 @@ import Link from "next/link";
 
 export default function Account() {
   const dispatch = useDispatch();
-  const userName = useSelector(selectName);
+  const userName = useSelector(selectUserData);
+  
 
   const onLogOut = () => {
     dispatch(authLogout());
@@ -21,7 +22,7 @@ export default function Account() {
 
   return (
     <Container>
-      <Title>Hello, {userName}</Title>
+      <Title>Hello, {userName.name}</Title> 
       <AccountAccordion //сделать покрасивее без повторов
         text='Personal Information'
         icon={<PersonSvg style={{ width: 24, height: 24, marginRight: 16 }} />}
@@ -82,11 +83,12 @@ export default function Account() {
       >
         <AddBook />
       </AccountAccordion>
-      <Link href='/'><LogOutBtn type='button' onClick={onLogOut}>
-        
-        <LogOut style={{ width: 24, height: 24 }} />
-        Log out
-      </LogOutBtn></Link>
+      <Link href='/'>
+        <LogOutBtn type='button' onClick={onLogOut}>
+          <LogOut style={{ width: 24, height: 24 }} />
+          Log out
+        </LogOutBtn>
+      </Link>
     </Container>
   );
 }

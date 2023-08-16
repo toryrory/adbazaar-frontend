@@ -6,3 +6,4 @@ export const selectAuthError = (state) => state.auth.error;
 export const selectAuthType = (state) => state.auth.type;
 //account selectors
 export const selectName = (state) => state.account.name;
+export const selectUserData = state => state.account.userData;
