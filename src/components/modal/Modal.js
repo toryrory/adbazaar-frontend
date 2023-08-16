@@ -5,7 +5,13 @@ import { Tick } from '../svg';
 import { Overlay, ModalWindow, WhooText, Message } from './Modal.styled';
 import SecondaryButton from '../secondaryButton/SecondaryButton';
 
-export default function Modal({ onClose, message, showTick, showButton }) {
+export default function Modal({
+  onClose,
+  message,
+  showTick,
+  showButton,
+  showOkButton,
+}) {
   const router = useRouter();
 
   useEffect(() => {
@@ -30,6 +36,10 @@ export default function Modal({ onClose, message, showTick, showButton }) {
     router.push('/account');
   };
 
+  const onPressOk = () => {
+    router.push('/');
+  };
+
   return (
     <Overlay onClick={handleOverlayClick}>
       <ModalWindow>
@@ -46,6 +56,14 @@ export default function Modal({ onClose, message, showTick, showButton }) {
             type="button"
             onClick={onPress}
             text="Go to personal account"
+            style={{ marginTop: 40 }}
+          />
+        )}
+        {showOkButton && (
+          <SecondaryButton
+            type="button"
+            onClick={onPressOk}
+            text="OK"
             style={{ marginTop: 40 }}
           />
         )}

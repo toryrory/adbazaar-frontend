@@ -1,20 +1,12 @@
 import { GoogleIcon, FacebookIcon } from '../svg';
 import { Text, List, Item, SocialLink } from './GoogleRegistration.styled';
-//////////
-import { googleLogout, useGoogleLogin } from '@react-oauth/google';
+import { useGoogleLogin } from '@react-oauth/google';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { googleLogin } from '@/redux/operations';
 
-// import jwtDecode from 'jwt-decode';
-// import { GoogleLogin } from '@react-oauth/google';
-// import FacebookLogin from 'react-facebook-login';
-
 export default function GoogleRegistration() {
-  ///////////////////////////////
   const [user, setUser] = useState(null);
-  const [profile, setProfile] = useState(null);
   const dispatch = useDispatch();
 
   const login = useGoogleLogin({
@@ -22,36 +14,12 @@ export default function GoogleRegistration() {
     onError: (error) => console.log('Login Failed:', error),
   });
 
-  const logOut = () => {
-    googleLogout();
-    setProfile(null);
-  };
-
   useEffect(() => {
     if (user) {
       console.log(user.access_token);
       dispatch(googleLogin(user.access_token));
-      // axios
-      //   .get(
-      //     `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
-      //     {
-      //       headers: {
-      //         Authorization: `Bearer ${user.access_token}`,
-      //         Accept: 'application/json',
-      //       },
-      //     }
-      //   )
-      //   .then((response) => {
-      //     setProfile(response.data);
-      //     console.log(response.data);
-      //   })
-      //   .catch((err) => console.log(err));
     }
   }, [user]);
-
-  // const responseFacebook = (response) => {
-  //   console.log(response);
-  // };
 
   return (
     <>
@@ -74,22 +42,6 @@ export default function GoogleRegistration() {
           </SocialLink>
         </Item>
       </List>
-      {/* <FacebookLogin
-        appId="2055924498093129"
-        autoLoad={true}
-        fields="name,email,picture"
-        scope="public_profile"
-        // onClick={componentClicked}
-        callback={responseFacebook}
-      /> */}
-      {/* <GoogleLogin
-        buttonText="login"
-        type="icon"
-        shape="circle"
-        size="small"
-        onSuccess={onSuccess}
-        onFailure={onFailure}
-      /> */}
     </>
   );
 }
