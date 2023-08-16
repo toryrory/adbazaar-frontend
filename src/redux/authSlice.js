@@ -82,13 +82,3 @@ const authSlice = createSlice({
 });
 
 export const authReducer = authSlice.reducer;
-
-// const onLogOut = () => {
-//   console.log(authType);
-//   if (authType === 'google') {
-//     dispatch(googleLogOut());
-//   } else if (authType === 'email') {
-//     dispatch(authLogout());
-//   }
-//   console.log('logged out');
-// };
