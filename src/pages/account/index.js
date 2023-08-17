@@ -32,6 +32,8 @@ import {
   PaymentsSvg,
 } from '../../../public/svg-account';
 import { LogOutBtn } from '@/styles/account.styled';
+import { useEffect } from "react";
+import { ToastContainer } from 'react-toastify';
 
 export default function Account() {
   const dispatch = useDispatch();
@@ -40,6 +42,12 @@ export default function Account() {
   const authType = useSelector(selectAuthType);
   const authError = useSelector(selectAuthError);
   const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+   //dispatch(authGetUserInfo())
+  
+  }, [])
+  
 
   const onLogOut = () => {
     console.log(authError);
@@ -63,13 +71,13 @@ export default function Account() {
     <Container>
       <Title>Hello, {userName.name}</Title>
       <AccountAccordion //сделать покрасивее без повторов
-        text="Personal Information"
+        text='Personal Information'
         icon={<PersonSvg style={{ width: 24, height: 24, marginRight: 16 }} />}
       >
         <PersonalInfo />
       </AccountAccordion>
       <AccountAccordion
-        text="Order History"
+        text='Order History'
         icon={
           <OrderHistorySvg style={{ width: 24, height: 24, marginRight: 16 }} />
         }
@@ -77,7 +85,7 @@ export default function Account() {
         <OrderHistory />
       </AccountAccordion>
       <AccountAccordion
-        text="Payment Methods"
+        text='Payment Methods'
         icon={
           <PaymentsSvg style={{ width: 24, height: 24, marginRight: 16 }} />
         }
@@ -85,7 +93,7 @@ export default function Account() {
         <Payments />
       </AccountAccordion>
       <AccountAccordion
-        text="Favorites"
+        text='Favorites'
         icon={
           <FavoritesSvg style={{ width: 24, height: 24, marginRight: 16 }} />
         }
@@ -93,7 +101,7 @@ export default function Account() {
         <Favorites />
       </AccountAccordion>
       <AccountAccordion
-        text="Messages & Reviews"
+        text='Messages & Reviews'
         icon={
           <MessagesSvg style={{ width: 24, height: 24, marginRight: 16 }} />
         }
@@ -101,7 +109,7 @@ export default function Account() {
         <Messages />
       </AccountAccordion>
       <AccountAccordion
-        text="Setting"
+        text='Setting'
         icon={
           <SettingsSvg style={{ width: 24, height: 24, marginRight: 16 }} />
         }
@@ -109,7 +117,7 @@ export default function Account() {
         <Settings />
       </AccountAccordion>
       <AccountAccordion
-        text="Support"
+        text='Support'
         icon={
           <SettingsSvg style={{ width: 24, height: 24, marginRight: 16 }} />
         }
@@ -117,22 +125,23 @@ export default function Account() {
         <Support />
       </AccountAccordion>
       <AccountAccordion
-        text="Books | sell / Add Book"
+        text='Books | sell / Add Book'
         icon={<AddBookSvg style={{ width: 24, height: 24, marginRight: 16 }} />}
       >
         <AddBook />
       </AccountAccordion>
-      <LogOutBtn type="button" onClick={onLogOut}>
+      <LogOutBtn type='button' onClick={onLogOut}>
         <LogOut style={{ width: 24, height: 24 }} />
         Log out
       </LogOutBtn>
       {showModal && (
         <Modal
           onClose={onCloseModal}
-          message="You have logged out of your personal account"
+          message='You have logged out of your personal account'
           showOkButton={true}
         />
       )}
+      <ToastContainer/>
     </Container>
   );
 }

@@ -18,5 +18,5 @@ export const Details = styled(AccordionDetails)`
   border-top: 0.5px solid var(--brand-color);
   border-bottom: 0.5px solid var(--brand-color);
   background-color: #20252f;
-
+  padding: 24px 16px 48px;
 `;
