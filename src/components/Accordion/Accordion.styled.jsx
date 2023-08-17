@@ -1,5 +1,10 @@
 import styled from 'styled-components';
-import { Typography, AccordionSummary, Accordion, AccordionDetails} from '@mui/material';
+import {
+  Typography,
+  AccordionSummary,
+  Accordion,
+  AccordionDetails,
+} from '@mui/material';
 
 export const PanelText = styled(Typography)`
   color: var(--white-text);
@@ -11,7 +16,7 @@ export const Summary = styled(AccordionSummary)`
 `;
 
 export const AccordionBox = styled(Accordion)`
-  background-color: transparent;
+  // background-color: transparent;
 `;
 
 export const Details = styled(AccordionDetails)`
