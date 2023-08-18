@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { selectUserEmail } from '@/redux/selectors';
 import { selectAuthError } from '@/redux/selectors';
 import PinInput from 'react-pin-input';
@@ -9,6 +9,8 @@ import AuthorizationContainer from '@/components/authorizationContainer/Authoriz
 import CloseButton from '@/components/closeButton/CloseButton';
 import RegisterHeader from '@/components/registerHeader/RegisterHeader';
 import SecondaryButton from '@/components/secondaryButton/SecondaryButton';
+import { verification } from '@/redux/operations';
+import { selectIsVerified } from '@/redux/selectors';
 import {
   Text,
   Email,
@@ -23,8 +25,12 @@ export default function Confirmation() {
   const email = useSelector(selectUserEmail);
   const router = useRouter();
   const [showModal, setShowModal] = useState(false);
+  const [showModalError, setShowModalError] = useState(false);
   const [isCodeRight, setIsCodeRight] = useState(true);
   const [value, setValue] = useState('');
+
+  const dispatch = useDispatch;
+  const isVerified = useSelector(selectIsVerified);
 
   const onChange = (currentValue) => {
     setValue(currentValue);
@@ -35,11 +41,27 @@ export default function Confirmation() {
     router.push('/');
   };
 
+  const onCloseConfirmation = () => {
+    setShowModalError(true);
+  };
+
+  // useEffect(() => {
+  //   if (isVerified) {
+  //     setShowModal(true);
+  //     setShowModalError(false);
+  //   } else {
+  //     setValue('');
+  //   }
+  // }, [isVerified]);
+
   const onSubmit = (e) => {
     e.preventDefault();
+    // console.log(value);
+    // dispatch(verification(value));
     if (JSON.stringify(initialCode) === JSON.stringify(value)) {
       setIsCodeRight(true);
       setShowModal(true);
+      setShowModalError(false);
     } else {
       setIsCodeRight(false);
       setValue('');
@@ -50,7 +72,7 @@ export default function Confirmation() {
   return (
     <>
       <AuthorizationContainer>
-        <CloseButton onClick={() => router.push('/')} />
+        <CloseButton onClick={onCloseConfirmation} />
         <RegisterHeader />
         <Text>
           You’ve got mail to <Email>{email}. </Email>
@@ -100,6 +122,12 @@ export default function Confirmation() {
           message="You have successfully created your account"
           showTick={true}
           showButton={true}
+        />
+      )}
+      {showModalError && (
+        <Modal
+          onClose={() => setShowModalError(false)}
+          errorMessage=" Vertification failed! Try entering the code again."
         />
       )}
     </>

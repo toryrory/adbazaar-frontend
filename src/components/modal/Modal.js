@@ -2,7 +2,13 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import CloseButton from '../closeButton/CloseButton';
 import { Tick } from '../svg';
-import { Overlay, ModalWindow, WhooText, Message } from './Modal.styled';
+import {
+  Overlay,
+  ModalWindow,
+  WhooText,
+  Message,
+  ErrorMessage,
+} from './Modal.styled';
 import SecondaryButton from '../secondaryButton/SecondaryButton';
 
 export default function Modal({
@@ -11,6 +17,7 @@ export default function Modal({
   showTick,
   showButton,
   showOkButton,
+  errorMessage,
 }) {
   const router = useRouter();
 
@@ -50,7 +57,8 @@ export default function Modal({
           </>
         )}
         <CloseButton onClick={onClose} />
-        <Message>{message}</Message>
+        {message && <Message>{message}</Message>}
+        {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
         {showButton && (
           <SecondaryButton
             type="button"

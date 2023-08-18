@@ -5,6 +5,7 @@ import {
   authLogout,
   googleLogin,
   googleLogOut,
+  verification,
 } from './operations';
 
 const handlePending = (state) => {
@@ -31,7 +32,7 @@ const authSlice = createSlice({
     isLoading: false,
     error: null,
     type: null,
-    // isVerified: false,
+    isVerified: false,
   },
   extraReducers: {
     [authRegister.pending]: handlePending,
@@ -72,6 +73,7 @@ const authSlice = createSlice({
       state.isLoading = false;
       state.error = null;
       state.type = 'google';
+      state.isVerified = true;
     },
     [googleLogin.rejected]: handleRejected,
     [googleLogOut.pending]: handlePending,
@@ -85,6 +87,11 @@ const authSlice = createSlice({
       state.type = null;
     },
     [googleLogOut.rejected]: handleRejected,
+    // [verification.pending]: handlePending,
+    // [verification.fulfilled](state, action) {
+    //   state.isVerified = action.payload;
+    // },
+    // [verification.rejected]: handleRejected,
   },
 });
 

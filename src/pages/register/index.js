@@ -4,7 +4,12 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
 import { authRegister } from '@/redux/operations';
-import { selectAuthError, selectUserEmail } from '@/redux/selectors';
+import {
+  selectAuthError,
+  selectUserEmail,
+  selectAuthType,
+  selectIsVerified,
+} from '@/redux/selectors';
 import { schema } from '@/services/shema';
 import Modal from '@/components/modal/Modal';
 import AuthorizationContainer from '@/components/authorizationContainer/AuthorizationContainer';
@@ -37,8 +42,11 @@ export default function SignUp() {
   const router = useRouter();
   const authError = useSelector(selectAuthError);
   const isUser = useSelector(selectUserEmail);
+  const authType = useSelector(selectAuthType);
   const [passwordShown, setPasswordShown] = useState(false);
   const [showModalError, setShowModalError] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const isVerified = useSelector(selectIsVerified);
   const dispatch = useDispatch();
 
   const onCloseModalError = () => {
@@ -46,12 +54,19 @@ export default function SignUp() {
     router.push('/register');
   };
 
+  const onCloseModal = () => {
+    setShowModal(false);
+    router.push('/');
+  };
+
   useEffect(() => {
     if (authError) {
       console.log(authError);
       setShowModalError(true);
-    } else if (!authError && isUser) {
+    } else if (!authError && isUser && !isVerified && authType === 'email') {
       router.push('/register/confirmation');
+    } else if (!authError && isUser && authType === 'google' && isVerified) {
+      setShowModal(true);
     }
   }, [authError, isUser]);
 
@@ -270,6 +285,14 @@ export default function SignUp() {
         <Modal
           onClose={onCloseModalError}
           message="Email is already taken. Please enter valid email"
+        />
+      )}
+      {!authError && showModal && (
+        <Modal
+          onClose={onCloseModal}
+          message="You have successfully created your account"
+          showTick={true}
+          showButton={true}
         />
       )}
     </>
