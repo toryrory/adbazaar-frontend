@@ -23,6 +23,7 @@ export default function Home() {
       >
         <Link href="/login">Sign in</Link>
         <Link href="/register">Sing up</Link>
+        <Link href="/account">Personal account</Link>
       </main>
     </>
   );

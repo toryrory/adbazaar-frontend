@@ -2,6 +2,8 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { googleLogout } from '@react-oauth/google';
 
+const initialCode = '1111';
+
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
 const token = {
@@ -47,7 +49,7 @@ export const authLogout = createAsyncThunk(
       const response = await axios.post(`/users/logout`);
       token.unset();
       return response.data;
-    } catch (e) { 
+    } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
   }
@@ -88,3 +90,20 @@ export const googleLogOut = createAsyncThunk(
   }
 );
 
+export const verification = createAsyncThunk(
+  'auth/verification',
+  async (value, thunkApi) => {
+    // if (JSON.stringify(initialCode) === JSON.stringify(value)) {
+    //   return true;
+    // } else {
+    //   return false;
+    // }
+    // try {
+    // const response = JSON.stringify(initialCode) === JSON.stringify(value);
+    // console.log(response);
+    // return response;
+    // } catch (e) {
+    //   return thunkAPI.rejectWithValue(e.message);
+    // }
+  }
+);

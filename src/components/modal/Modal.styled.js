@@ -54,3 +54,10 @@ export const Message = styled.p`
   color: var(--white-text);
   margin-top: 8px;
 `;
+
+export const ErrorMessage = styled.p`
+  font-size: 18px;
+  line-height: 1.16;
+  color: var(--error-color);
+  margin-top: 8px;
+`;

@@ -10,11 +10,10 @@ export const Container = styled.div`
 `;
 export const Title = styled.h2`
   color: var(--brand-color);
-  padding: 0 16px;
+  margin-left: 16px;
   font-weight: 400;
   font-size: 24px;
   line-height: 0.87;
-  margin-bottom: 52px;
 `;
 export const LogOutBtn = styled.button`
   margin-top: 80px;
@@ -30,4 +29,30 @@ export const LogOutBtn = styled.button`
   cursor: pointer;
   color: var(--brand-color);
   line-height: 1.5;
+`;
+
+export const ErrorContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 16px 16px;
+`;
+
+export const ErrorMessage = styled.p`
+  font-size: 12px;
+  color: var(--error-color);
+  width: 156px;
+  line-height: 1.15;
+`;
+
+export const SendCodeButton = styled.button`
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: var(--brand-color);
+  border: 0.5px solid var(--brand-color);
+  font-size: 12px;
+  background-color: transparent;
+  border-radius: 9px;
+  padding: 3px 5px;
 `;
