@@ -87,11 +87,13 @@ const authSlice = createSlice({
       state.type = null;
     },
     [googleLogOut.rejected]: handleRejected,
-    // [verification.pending]: handlePending,
-    // [verification.fulfilled](state, action) {
-    //   state.isVerified = action.payload;
-    // },
-    // [verification.rejected]: handleRejected,
+    [verification.pending]: handlePending,
+    [verification.fulfilled](state, action) {
+      state.isVerified = true;
+    },
+    [verification.rejected](state) {
+      state.isVerified = false;
+    },
   },
 });
 

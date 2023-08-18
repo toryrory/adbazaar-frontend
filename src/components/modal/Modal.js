@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import CloseButton from '../closeButton/CloseButton';
-import { Tick } from '../svg';
+import { Tick, SadSmile } from '../svg';
 import {
   Overlay,
   ModalWindow,
@@ -18,6 +18,7 @@ export default function Modal({
   showButton,
   showOkButton,
   errorMessage,
+  showSadSmile,
 }) {
   const router = useRouter();
 
@@ -54,6 +55,12 @@ export default function Modal({
           <>
             <Tick style={{ width: 40, height: 40 }} />
             <WhooText>Whoo!</WhooText>
+          </>
+        )}
+        {showSadSmile && (
+          <>
+            <SadSmile style={{ width: 40, height: 40 }} />
+            <WhooText>Sorry!</WhooText>
           </>
         )}
         <CloseButton onClick={onClose} />

@@ -14,13 +14,12 @@ import { selectIsVerified } from '@/redux/selectors';
 import {
   Text,
   Email,
-  ResendLink,
   ErrorText,
   AdditionalText,
+  ResendButton,
 } from '@/styles/confirmation.styled';
 
 export default function Confirmation() {
-  const initialCode = '1111';
   const authError = useSelector(selectAuthError);
   const email = useSelector(selectUserEmail);
   const router = useRouter();
@@ -29,7 +28,7 @@ export default function Confirmation() {
   const [isCodeRight, setIsCodeRight] = useState(true);
   const [value, setValue] = useState('');
 
-  const dispatch = useDispatch;
+  const dispatch = useDispatch();
   const isVerified = useSelector(selectIsVerified);
 
   const onChange = (currentValue) => {
@@ -45,28 +44,25 @@ export default function Confirmation() {
     setShowModalError(true);
   };
 
-  // useEffect(() => {
-  //   if (isVerified) {
-  //     setShowModal(true);
-  //     setShowModalError(false);
-  //   } else {
-  //     setValue('');
-  //   }
-  // }, [isVerified]);
+  const onResendCode = () => {
+    //dispatch(sendVerificationCode)
+    console.log('resend code');
+  };
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-    // console.log(value);
-    // dispatch(verification(value));
-    if (JSON.stringify(initialCode) === JSON.stringify(value)) {
-      setIsCodeRight(true);
+  useEffect(() => {
+    if (isVerified) {
       setShowModal(true);
       setShowModalError(false);
     } else {
-      setIsCodeRight(false);
       setValue('');
     }
+  }, [isVerified]);
+
+  const onSubmit = (e) => {
+    e.preventDefault();
     console.log(value);
+    dispatch(verification(value));
+    setIsCodeRight(false);
   };
 
   return (
@@ -77,7 +73,7 @@ export default function Confirmation() {
         <Text>
           You’ve got mail to <Email>{email}. </Email>
         </Text>
-        {isCodeRight ? (
+        {isCodeRight || isVerified ? (
           <AdditionalText>
             Please enter the four digit code you received
           </AdditionalText>
@@ -112,7 +108,9 @@ export default function Confirmation() {
             type="numeric"
             onChange={onChange}
           />
-          <ResendLink href="">Resend code?</ResendLink>
+          <ResendButton type="button" onClick={onResendCode}>
+            Resend code?
+          </ResendButton>
           <SecondaryButton type="submit" text="Continue" />
         </form>
       </AuthorizationContainer>
@@ -128,6 +126,7 @@ export default function Confirmation() {
         <Modal
           onClose={() => setShowModalError(false)}
           errorMessage=" Vertification failed! Try entering the code again."
+          showSadSmile={true}
         />
       )}
     </>

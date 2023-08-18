@@ -93,17 +93,10 @@ export const googleLogOut = createAsyncThunk(
 export const verification = createAsyncThunk(
   'auth/verification',
   async (value, thunkApi) => {
-    // if (JSON.stringify(initialCode) === JSON.stringify(value)) {
-    //   return true;
-    // } else {
-    //   return false;
-    // }
-    // try {
-    // const response = JSON.stringify(initialCode) === JSON.stringify(value);
-    // console.log(response);
-    // return response;
-    // } catch (e) {
-    //   return thunkAPI.rejectWithValue(e.message);
-    // }
+    if (JSON.stringify(initialCode) === JSON.stringify(value)) {
+      return true;
+    } else {
+      return thunkApi.rejectWithValue('code wrong');
+    }
   }
 );

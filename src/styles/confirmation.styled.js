@@ -25,13 +25,15 @@ export const Email = styled.span`
   color: var(--light-text);
 `;
 
-export const ResendLink = styled(Link)`
-  display: block;
+export const ResendButton = styled.button`
   font-size: 14px;
   line-height: 1.14;
   color: var(--light-text);
+  background-color: transparent;
+  border: none;
   text-decoration: underline;
   margin-bottom: 110px;
+  padding: 0;
 `;
 
 export const ErrorText = styled.p`

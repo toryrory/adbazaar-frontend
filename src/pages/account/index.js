@@ -76,6 +76,7 @@ export default function Account() {
 
   const onSendCode = () => {
     console.log('resend code');
+    //dispatch(sendVerificationCode)
     router.push('/register/confirmation');
   };
 

@@ -9,3 +9,4 @@ export { default as CheckboxEmpty } from './checkbox-empty.svg';
 export { default as Tick } from './tick.svg';
 export { default as LogOut } from './log-out.svg';
 export { default as ButtonArrow } from './button-arrow.svg';
+export { default as SadSmile } from './sad-smile.svg';
