@@ -1,5 +1,5 @@
 import { useFormik } from 'formik';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { changePasswordSchema } from '@/services/shema';
 import { Clip, Trash, Save } from '../../../../public/svg-account';
@@ -24,27 +24,42 @@ import {
   ErrorMessage,
   SaveButton,
   SavePhotoButton,
-} from './Settings.styled';
+  InputHidden,
+  StyledImg,
+  Circle,
+  PhotoBox,
+  DarkBox,
+  Container,
+} from "./Settings.styled";
+import { selectSettings } from '@/redux/selectors';
+import { Img32Girl } from '../../../../public/png';
 
 export default function Settings() {
   const dispatch = useDispatch();
+  const settings = useSelector(selectSettings);
   const [passwordShown, setPasswordShown] = useState(false);
-  const [photo, setPhoto] = useState('');
+  const [photo, setPhoto] = useState(null);
+  const [state, setState] = useState(settings);
 
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
   };
 
   const handleChangePhoto = (event) => {
-    setPhoto(event.currentTarget.value);
+    setState({avatar: null})
+    setPhoto(window.URL.createObjectURL(event.target.files[0]));
   };
 
   const handleSubmitPhoto = (event) => {
+
+    const formFile = new FormData();
+    formFile.append("avatar", photo); // "avatar" это свойство картинки в БД на бекенде, нужно узнать как будет называться это поле.
+
     event.preventDefault();
-    // dispatch(changePhoto(photo));
+    // dispatch(changePhoto(photo)); //диспачить нужно будет formFile
     console.log(photo);
-    toast.success('You updated your photo');
-    setPhoto('');
+    toast.success("You updated your photo");
+    setPhoto("");
   };
 
   const onSubmit = ({ password, newPassword }, actions) => {
@@ -70,7 +85,7 @@ export default function Settings() {
     });
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+    <Container>
       <FormPhoto onSubmit={handleSubmitPhoto}>
         <Title>Change Photo</Title>
         <PhotoContainer>
@@ -91,48 +106,48 @@ export default function Settings() {
               style={{ marginRight: 24 }}
             />
           )} */}
-          <Image
-            src="/png/user-girl-png.png"
+          <PhotoBox><Circle>
+          <StyledImg
+            src={state.avatar ? state.avatar : photo || Img32Girl} 
             width={40}
             height={40}
-            alt="user avatar"
-            style={{ marginRight: 24 }}
-          />
+            alt='user avatar'
+          /></Circle></PhotoBox>
+          
           <PhotoLabel>
             <Clip style={{ width: 20, height: 20 }} />
             Upload a photo
-            <input
-              value={photo}
+            <InputHidden
               onChange={handleChangePhoto}
-              type="file"
-              name="photo"
-              placeholder="Upload a photo"
-              accept="image/*,.png,.jpeg,.web,"
-              style={{ display: 'none' }}
+              type='file'
+              name='photo'
+              placeholder='Upload a photo'
+              accept='image/png, image/jpeg'
             />
           </PhotoLabel>
-          <TrashButton type="button" onClick={onCLearInput}>
+          <TrashButton type='button' onClick={onCLearInput}>
             <Trash style={{ width: 24, height: 24 }} />
           </TrashButton>
         </PhotoContainer>
         {photo && (
           <div
             style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
               marginTop: 8,
               gap: 24,
             }}
           >
             <PhotoPath>{photo}</PhotoPath>
-            <SavePhotoButton type="submit">
+            <SavePhotoButton type='submit'>
               Save
               <Save style={{ width: 24, height: 24 }} />
             </SavePhotoButton>
           </div>
         )}
       </FormPhoto>
+      <DarkBox></DarkBox>
       <Form onSubmit={handleSubmit}>
         <Title>Change Password</Title>
         <InputList>
@@ -140,12 +155,12 @@ export default function Settings() {
             {errors.password && touched.password ? (
               <ErrorMessage>{errors.password}</ErrorMessage>
             ) : (
-              <Label htmlFor="password">
+              <Label htmlFor='password'>
                 Enter your current password
                 <span
                   style={{
                     marginLeft: 8,
-                    color: 'var(--error-color)',
+                    color: "var(--error-color)",
                   }}
                 >
                   *
@@ -157,12 +172,12 @@ export default function Settings() {
                 value={values.password}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                type={passwordShown ? 'text' : 'password'}
-                name="password"
-                id="password"
-                placeholder="Password"
+                type={passwordShown ? "text" : "password"}
+                name='password'
+                id='password'
+                placeholder='Password'
               />
-              <EyeButton type="button" onClick={togglePassword}>
+              <EyeButton type='button' onClick={togglePassword}>
                 {passwordShown ? (
                   <EyeOpened style={{ width: 24, height: 24 }} />
                 ) : (
@@ -175,12 +190,12 @@ export default function Settings() {
             {errors.newPassword && touched.newPassword ? (
               <ErrorMessage>{errors.newPassword}</ErrorMessage>
             ) : (
-              <Label htmlFor="newPassword">
+              <Label htmlFor='newPassword'>
                 Enter new password
                 <span
                   style={{
                     marginLeft: 8,
-                    color: 'var(--error-color)',
+                    color: "var(--error-color)",
                   }}
                 >
                   *
@@ -192,12 +207,12 @@ export default function Settings() {
                 value={values.newPassword}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                type={passwordShown ? 'text' : 'password'}
-                name="newPassword"
-                id="newPassword"
-                placeholder="New password"
+                type={passwordShown ? "text" : "password"}
+                name='newPassword'
+                id='newPassword'
+                placeholder='New password'
               />
-              <EyeButton type="button" onClick={togglePassword}>
+              <EyeButton type='button' onClick={togglePassword}>
                 {passwordShown ? (
                   <EyeOpened style={{ width: 24, height: 24 }} />
                 ) : (
@@ -210,12 +225,12 @@ export default function Settings() {
             {errors.confirm && touched.confirm ? (
               <ErrorMessage>{errors.confirm}</ErrorMessage>
             ) : (
-              <Label htmlFor="confirm">
+              <Label htmlFor='confirm'>
                 Repeat new password
                 <span
                   style={{
                     marginLeft: 8,
-                    color: 'var(--error-color)',
+                    color: "var(--error-color)",
                   }}
                 >
                   *
@@ -227,12 +242,12 @@ export default function Settings() {
                 value={values.confirm}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                type={passwordShown ? 'text' : 'password'}
-                name="confirm"
-                id="confirm"
-                placeholder="Confirm your Password"
+                type={passwordShown ? "text" : "password"}
+                name='confirm'
+                id='confirm'
+                placeholder='Confirm your Password'
               />
-              <EyeButton type="button" onClick={togglePassword}>
+              <EyeButton type='button' onClick={togglePassword}>
                 {passwordShown ? (
                   <EyeOpened style={{ width: 24, height: 24 }} />
                 ) : (
@@ -242,11 +257,11 @@ export default function Settings() {
             </PasswordContainer>
           </InputItem>
         </InputList>
-        <SaveButton type="submit">
+        <SaveButton type='submit'>
           Save
           <Save style={{ width: 24, height: 24 }} />
         </SaveButton>
       </Form>
-    </div>
+    </Container>
   );
 }

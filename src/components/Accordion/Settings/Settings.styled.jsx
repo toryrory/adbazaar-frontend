@@ -1,15 +1,28 @@
 import styled from 'styled-components';
+import Image from "next/image";
 
+export const Container = styled.div`
+display: flex;
+flex-direction: column;
+padding: 24px 24px 0;
+`
 export const Form = styled.form`
-  padding-top: 16px;
-  border-top: 0.5px solid var(--brand-color);
+  padding-top: 18px;
+  padding-bottom: 16px;
+  /* border-top: 0.5px solid var(--brand-color); */
 `;
 
 export const FormPhoto = styled.form`
-  padding-bottom: 8px;
-  border-bottom: 0.5px solid var(--brand-color);
+  /* border-bottom: 0.5px solid var(--brand-color); */
 `;
-
+export const DarkBox = styled.div`
+  border-top: 0.5px solid var(--brand-color);
+  border-bottom: 0.5px solid var(--brand-color);
+  height: 16px;
+  background-color: var(--main-background);
+  margin-left: -24px;
+  margin-right: -24px;
+`;
 export const Title = styled.h3`
   color: var(--white-text);
   font-size: 16px;
@@ -21,6 +34,7 @@ export const Title = styled.h3`
 export const PhotoContainer = styled.div`
   display: flex;
   align-items: center;
+  padding: 8px 0;
 `;
 
 export const PhotoLabel = styled.label`
@@ -29,6 +43,8 @@ export const PhotoLabel = styled.label`
   display: flex;
   gap: 8px;
   align-items: center;
+  border-left: 0.1px solid var(--light-grey);
+  padding-left: 16px;
 `;
 
 export const TrashButton = styled.button`
@@ -77,6 +93,7 @@ font-size: 16px;
 
   &::placeholder {
     color: var(--brand-color);
+  }
 `;
 
 export const PasswordContainer = styled.div`
@@ -126,3 +143,48 @@ export const SavePhotoButton = styled.button`
   color: var(--brand-color);
   font-size: 13px;
 `;
+
+export const InputHidden = styled.input`
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+`;
+export const StyledImg = styled(Image)`
+max-width: 40px;
+max-height: 40px;
+border-radius: 50%;
+`
+export const Circle = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid transparent;
+  background: linear-gradient(var(--dark-grey), var(--dark-grey)) padding-box,
+    linear-gradient(to right, #51c5ea 3.43%, #f18ff3 100%) border-box;
+  border-radius: 50%;
+  width: 43px;
+  height: 43px;
+  /* linear-gradient(82deg, #51c5ea 3.43%, #f18ff3 100%); */
+`;
+export const PhotoBox = styled.div`
+  padding-right: 8px;
+`;
+// export const StyledImg = styled(Image)`
+//   width: 40px;
+//   height: 40px;
+//   border-radius: 50%;
+// `;
+// export const Circle = styled.div`
+//   display: flex;
+//   align-items: center;
+//   border: 3px solid transparent;
+//   background: linear-gradient(var(--dark-grey), var(--dark-grey)) padding-box,
+//     linear-gradient(to right, #51c5ea 3.43%, #f18ff3 100%) border-box;
+//   border-radius: 50%;
+//   width: 43px;
+//   height: 43px;
+//   /* linear-gradient(82deg, #51c5ea 3.43%, #f18ff3 100%); */
+// `;

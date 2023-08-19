@@ -32,6 +32,7 @@ import {
   AddBookSvg,
   PaymentsSvg,
   Load,
+  PhonePlus
 } from '../../../public/svg-account';
 import {
   LogOutBtn,
@@ -89,7 +90,7 @@ export default function Account() {
             <ErrorMessage>
               Vertification failed! Try entering the code again.
             </ErrorMessage>
-            <SendCodeButton type="button" onClick={onSendCode}>
+            <SendCodeButton type='button' onClick={onSendCode}>
               <Load style={{ width: 24, height: 24 }} />
               Send a new code
             </SendCodeButton>
@@ -99,13 +100,13 @@ export default function Account() {
         <Title style={{ marginBottom: 52 }}>Hello, {userName.name}</Title>
       )}
       <AccountAccordion //сделать покрасивее без повторов
-        text="Personal Information"
+        text='Personal Information'
         icon={<PersonSvg style={{ width: 24, height: 24, marginRight: 16 }} />}
       >
         <PersonalInfo />
       </AccountAccordion>
       <AccountAccordion
-        text="Order History"
+        text='Order History'
         icon={
           <OrderHistorySvg style={{ width: 24, height: 24, marginRight: 16 }} />
         }
@@ -113,7 +114,7 @@ export default function Account() {
         <OrderHistory />
       </AccountAccordion>
       <AccountAccordion
-        text="Payment Methods"
+        text='Payment Methods'
         icon={
           <PaymentsSvg style={{ width: 24, height: 24, marginRight: 16 }} />
         }
@@ -121,7 +122,7 @@ export default function Account() {
         <Payments />
       </AccountAccordion>
       <AccountAccordion
-        text="Favorites"
+        text='Favorites'
         icon={
           <FavoritesSvg style={{ width: 24, height: 24, marginRight: 16 }} />
         }
@@ -129,7 +130,7 @@ export default function Account() {
         <Favorites />
       </AccountAccordion>
       <AccountAccordion
-        text="Messages & Reviews"
+        text='Messages & Reviews'
         icon={
           <MessagesSvg style={{ width: 24, height: 24, marginRight: 16 }} />
         }
@@ -137,7 +138,7 @@ export default function Account() {
         <Messages />
       </AccountAccordion>
       <AccountAccordion
-        text="Setting"
+        text='Setting'
         icon={
           <SettingsSvg style={{ width: 24, height: 24, marginRight: 16 }} />
         }
@@ -145,27 +146,25 @@ export default function Account() {
         <Settings />
       </AccountAccordion>
       <AccountAccordion
-        text="Support"
-        icon={
-          <SettingsSvg style={{ width: 24, height: 24, marginRight: 16 }} />
-        }
+        text='Support'
+        icon={<PhonePlus style={{ width: 24, height: 24, marginRight: 16 }} />}
       >
         <Support />
       </AccountAccordion>
       <AccountAccordion
-        text="Books | sell / Add Book"
+        text='Books | sell / Add Book'
         icon={<AddBookSvg style={{ width: 24, height: 24, marginRight: 16 }} />}
       >
         <AddBook />
       </AccountAccordion>
-      <LogOutBtn type="button" onClick={onLogOut}>
+      <LogOutBtn type='button' onClick={onLogOut}>
         <LogOut style={{ width: 24, height: 24 }} />
         Log out
       </LogOutBtn>
       {showModal && (
         <Modal
           onClose={onCloseModal}
-          message="You have logged out of your personal account"
+          message='You have logged out of your personal account'
           showOkButton={true}
         />
       )}

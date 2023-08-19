@@ -3,9 +3,10 @@ import { InputMask } from "primereact/inputmask";
         
 
 export const Form = styled.form`
-    display: flex;
-    flex-direction: column;
-`
+  display: flex;
+  flex-direction: column;
+  padding: 24px 16px 48px;
+`;
 export const Label = styled.label`
   display: flex;
   flex-direction: column;
@@ -13,13 +14,30 @@ export const Label = styled.label`
   padding: 0px 8px;
   color: var(--brand-color);
   font-size: 11px;
- 
 `;
+export const SocialsLabel = styled.label`
+  margin-bottom: 8px;
+  padding: 0px 8px;
+  color: var(--brand-color);
+  font-size: 11px;
+`;
+
 
 export const InputBox = styled.div`
   margin-bottom: 8px;
   border-bottom: 1px solid var(--brand-color);
-  
+`;
+
+export const InputFlexBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 8px;
+  padding: 0px 8px;
+  border-bottom: 1px solid var(--brand-color);
+  input {
+    padding-left: 8px;
+  }
 `;
 
 export const Input = styled.input`
@@ -57,15 +75,6 @@ export const HiddenBtn = styled.button`
   cursor: pointer;
 `;
 
-export const PhoneBox = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  input {
-    padding-left: 8px;
-  }
-`;
-
 export const CountryCode = styled.span`
 padding-left: 7px;
   color: var(--white-text);
@@ -73,13 +82,8 @@ padding-left: 7px;
   font-weight: 400;
 `;
 
-export const Underline = styled.div`
-width: 300px; 
-  border-bottom: 1px solid var(--brand-color);
-`;
-
 export const BtnBox = styled.div`
-  margin-top: 56px;
+  margin-top: 48px;
   display: flex;
   justify-content: space-between;
 `;
