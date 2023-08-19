@@ -1,4 +1,4 @@
-import { Cross } from '../../components/svg';
+import { Cross } from '../../../public/svg-authorization';
 
 export default function CloseButton({ onClick }) {
   return (

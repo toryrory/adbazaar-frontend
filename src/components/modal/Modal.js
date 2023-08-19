@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import CloseButton from '../closeButton/CloseButton';
-import { Tick, SadSmile } from '../svg';
+import { Tick, SadSmile } from '../../../public/svg-authorization';
 import {
   Overlay,
   ModalWindow,

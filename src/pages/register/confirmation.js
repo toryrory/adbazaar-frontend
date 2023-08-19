@@ -11,6 +11,8 @@ import RegisterHeader from '@/components/registerHeader/RegisterHeader';
 import SecondaryButton from '@/components/secondaryButton/SecondaryButton';
 import { verification } from '@/redux/operations';
 import { selectIsVerified } from '@/redux/selectors';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   Text,
   Email,
@@ -46,7 +48,7 @@ export default function Confirmation() {
 
   const onResendCode = () => {
     //dispatch(sendVerificationCode)
-    console.log('resend code');
+    toast.success('code has been sent to your email');
   };
 
   useEffect(() => {
@@ -127,8 +129,10 @@ export default function Confirmation() {
           onClose={() => setShowModalError(false)}
           errorMessage=" Vertification failed! Try entering the code again."
           showSadSmile={true}
+          showButton={true}
         />
       )}
+      <ToastContainer />
     </>
   );
 }
