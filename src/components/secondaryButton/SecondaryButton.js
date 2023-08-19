@@ -1,4 +1,4 @@
-import { ButtonArrow } from '../svg';
+import { ButtonArrow } from '../../../public/svg-authorization';
 import { Button } from './SecondaryButton.styled';
 
 export default function SecondaryButton({ type, text, onClick, style }) {

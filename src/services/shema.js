@@ -30,3 +30,34 @@ export const schema = yup.object({
     .bool()
     .oneOf([true], 'You need to accept the terms and conditions'),
 });
+
+export const changePasswordSchema = yup.object({
+  password: yup
+    .string()
+    .matches(
+      '^(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).*$',
+      'must include at least 1 uppercase and lowercase symbols'
+    )
+    .matches(
+      '^(?=.*\\d)(?=.*[~`!@#$%^&()_=+{}\\[\\]/|:;,"<>?]).*$',
+      'must include 1 number and special symbol'
+    )
+    .matches('^[^А-Яа-яЇїІіЄєҐґЁё]+$', 'must include only latin letters')
+    .required('Please Enter your Password'),
+  newPassword: yup
+    .string()
+    .matches(
+      '^(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).*$',
+      'must include at least 1 uppercase and lowercase symbols'
+    )
+    .matches(
+      '^(?=.*\\d)(?=.*[~`!@#$%^&()_=+{}\\[\\]/|:;,"<>?]).*$',
+      'must include 1 number and special symbol'
+    )
+    .matches('^[^А-Яа-яЇїІіЄєҐґЁё]+$', 'must include only latin letters')
+    .required('Please Enter your new Password'),
+  confirm: yup
+    .string()
+    .oneOf([yup.ref('newPassword'), null], 'Password doesn`t match')
+    .required('Please Confirm your new Password'),
+});

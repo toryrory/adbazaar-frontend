@@ -23,7 +23,7 @@ import {
   RedirectText,
   RedirectLink,
 } from '@/styles/login.styled';
-import { EyeClosed, EyeOpened } from '../../components/svg';
+import { EyeClosed, EyeOpened } from '../../../public/svg-authorization';
 
 export default function LogIn() {
   const router = useRouter();

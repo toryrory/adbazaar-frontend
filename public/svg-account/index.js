@@ -12,3 +12,6 @@ export { default as Facebook } from './facebook.svg';
 export { default as Edit } from './edit.svg';
 export { default as Save } from './save.svg';
 export { default as Load } from './load.svg';
+export { default as UserGirl } from './user-girl.svg';
+export { default as Clip } from './clip.svg';
+export { default as Trash } from './trash.svg';

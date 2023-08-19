@@ -36,7 +36,7 @@ import {
   EyeOpened,
   CheckboxChecked,
   CheckboxEmpty,
-} from '../../components/svg';
+} from '../../../public/svg-authorization';
 
 export default function SignUp() {
   const router = useRouter();

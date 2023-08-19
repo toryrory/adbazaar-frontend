@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { authLogout, googleLogOut } from '@/redux/operations';
-import { LogOut } from '@/components/svg';
+import { LogOut } from '../../../public/svg-authorization';
 import { Title, Container } from '@/styles/account.styled';
 import { useSelector } from 'react-redux';
 import {
