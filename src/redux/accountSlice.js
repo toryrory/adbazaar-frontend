@@ -1,17 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { TestAvatar } from "../../public/png";
 
 const accountSlice = createSlice({
-    name: 'account',
-    initialState:{
-    // userData: {
-    //     name: 'Stephania',
-    //     phone: '+380000000000',
-    //     email: 'example@gmail',
-    //     birthday: '00/00/0000',
-    //     socials: {first: '@example', second: '@example'}
-        // }
+  name: "account",
+  initialState: {
+    settings: {
+      avatar: null, //проверить подставив вместо null -> TestAvatar
     },
-
-})
+  },
+});
 
 export const accountReducer = accountSlice.reducer;
