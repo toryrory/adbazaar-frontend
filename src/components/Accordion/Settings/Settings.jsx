@@ -48,6 +48,8 @@ export default function Settings() {
   const handleChangePhoto = (event) => {
     setState({avatar: null})
     setPhoto(window.URL.createObjectURL(event.target.files[0]));
+    console.log(event.target.files[0]);
+    console.log(window.URL.createObjectURL(event.target.files[0]));
   };
 
   const handleSubmitPhoto = (event) => {

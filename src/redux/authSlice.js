@@ -37,7 +37,7 @@ const authSlice = createSlice({
   extraReducers: {
     [authRegister.pending]: handlePending,
     [authRegister.fulfilled](state, action) {
-      state.user = action.payload.user;
+      state.user = {...state.user, ...action.payload.user};
       state.token = action.payload.token;
       state.isLoggedIn = true;
       state.isLoading = false;
