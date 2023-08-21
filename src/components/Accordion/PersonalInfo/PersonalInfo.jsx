@@ -94,7 +94,7 @@ export default function PersonalInfo() {
           <InputLib
             name='birthday'
             type='text'
-            value={values.birthday}
+            value={values.birthday || ''}
             onChange={handleChange}
             readOnly={readOnly}
             mask='99/99/9999'
@@ -112,7 +112,7 @@ export default function PersonalInfo() {
           id='socials'
           name='socials.first'
           type='text'
-          value={values.socials.first}
+          value={values.socials.first || ''}
           onChange={handleChange}
           readOnly={readOnly}
         />
@@ -126,7 +126,7 @@ export default function PersonalInfo() {
           id='socials'
           name='socials.second'
           type='text'
-          value={values.socials.second}
+          value={values.socials.second || ''}
           onChange={handleChange}
           readOnly={readOnly}
         />
