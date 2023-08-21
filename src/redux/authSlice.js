@@ -37,7 +37,7 @@ const authSlice = createSlice({
   extraReducers: {
     [authRegister.pending]: handlePending,
     [authRegister.fulfilled](state, action) {
-      state.user = {...state.user, ...action.payload.user};
+      state.user = { ...state.user, ...action.payload.user };
       state.token = action.payload.token;
       state.isLoggedIn = true;
       state.isLoading = false;
@@ -47,7 +47,7 @@ const authSlice = createSlice({
     [authRegister.rejected]: handleRejected,
     [authLogin.pending]: handlePending,
     [authLogin.fulfilled](state, action) {
-      state.user = action.payload.user;
+      state.user = { ...state.user, ...action.payload.user };
       state.token = action.payload.token;
       state.isLoggedIn = true;
       state.isLoading = false;
@@ -68,7 +68,7 @@ const authSlice = createSlice({
     [authLogout.rejected]: handleRejected,
     [googleLogin.pending]: handlePending,
     [googleLogin.fulfilled](state, action) {
-      state.user = action.payload;
+      state.user = { ...state.user, ...action.payload };
       state.isLoggedIn = true;
       state.isLoading = false;
       state.error = null;

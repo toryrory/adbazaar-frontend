@@ -83,7 +83,7 @@ export const googleLogOut = createAsyncThunk(
     try {
       const response = await googleLogout();
       // token.unset();
-      return response.data;
+      return response;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
