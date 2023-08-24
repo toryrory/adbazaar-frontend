@@ -33,7 +33,7 @@ Install [Git](https://git-scm.com/downloads)
 7. Run command to pull latest changes from github repository
 
    ```bash
-       git pull
+    git pull
    ```
 
 8. Start dev server
