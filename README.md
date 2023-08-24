@@ -6,8 +6,10 @@ Install [Node Lts](https://nodejs.org/)
 
 Install [Git](https://git-scm.com/downloads)
 
+Install [VS Code](https://code.visualstudio.com/download)
+
 1. Clone repo (tap button 'Code', and copy link in repository)
-   ![tap button 'Code', and copy link in repository](image.png)
+   ![tap button 'Code', and copy link in repository](image-1.png)
 
 2. Open file storage in PC, create a folder with project
 
