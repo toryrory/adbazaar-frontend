@@ -246,6 +246,8 @@ export default function SignUp() {
               <Link
                 style={{ color: '#a3e9ff', textDecoration: 'underline' }}
                 href=""
+                // target="_blank"
+                // rel="noreferrer noopener"
               >
                 our Terms and Conditions
               </Link>

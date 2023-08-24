@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import { Inter } from 'next/font/google';
 import Link from 'next/link';
+import Layout from '@/components/Layout/Layout';
 import SearchBar from '@/components/SearchBar/SearchBar';
 import SecondaryButton from '@/components/secondaryButton/SecondaryButton';
 import SwiperBtns from '@/components/SwiperBtns/SwiperBtns';
@@ -23,6 +24,7 @@ export default function Home() {
           alignItems: "center",
         }}
       >
+        <Layout>
         <SearchBar />
         <SwiperBtns />
         <SecondaryButton
@@ -33,6 +35,7 @@ export default function Home() {
         <Link href='/login'>Sign in</Link>
         <Link href='/register'>Sing up</Link>
         <Link href='/account'>Personal account</Link>
+</Layout>
       </main>
     </>
   );
