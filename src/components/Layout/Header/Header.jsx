@@ -68,18 +68,19 @@ export default function Header() {
         </ButtonContainer>
       ) : (
         <ButtonContainer>
-          <Button type="button" onClick={() => router.push('/account')}>
+          <Button type="button" onClick={() => router.push('/login')}>
             <User style={{ width: 24, height: 24 }} />
           </Button>
-          <Button
-            type="button"
-            onClick={() => console.log('open shopping cart')}
-          >
+          <Button type="button" onClick={() => router.push('/login')}>
             <ShoppingCart style={{ width: 24, height: 24 }} />
           </Button>
         </ButtonContainer>
       )}
-      {showMenu && <MobileMenu onClose={onCLoseMenu} />}
+      {showMenu ? (
+        <MobileMenu onClose={onCLoseMenu} />
+      ) : (
+        <MobileMenu isClosed={true} />
+      )}
     </HeaderContainer>
   );
 }
