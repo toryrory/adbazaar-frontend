@@ -14,17 +14,9 @@ import {
   SubLink,
 } from '@/styles/categories.styled';
 import { ArrowMore } from '../../../public/svg-layout';
-
-const genres = [
-  { name: 'Arts & Architecture', id: 1 },
-  { name: 'Biography & Memoir', id: 2 },
-  { name: 'Body, Mind, Spirit', id: 3 },
-  { name: 'Business', id: 4 },
-  { name: 'Children`s', id: 5 },
-  { name: 'Computer & Technology', id: 6 },
-  { name: 'Education', id: 7 },
-  { name: 'Fiction', id: 8 },
-];
+import { genres } from '@/data/genres';
+import { books } from '@/data/books';
+import Image from 'next/image';
 
 export default function Categories() {
   const router = useRouter();
@@ -46,6 +38,9 @@ export default function Categories() {
           <Cross style={{ width: 24, height: 24 }} />
         </Button>
       </Header>
+      {/* {books.map((book) => {
+        return <Image src={book.photo} width={120} height={120} />;
+      })} */}
       <List>
         <Item>
           <CategoryButton type="button" onClick={toggleGenres}>
@@ -58,7 +53,7 @@ export default function Categories() {
             {genres.map((genre) => {
               return (
                 <SubItem key={genre.id}>
-                  <SubLink href={`/categories/${genre.id}`}>
+                  <SubLink href={`/categories/${genre.link}`}>
                     {genre.name}
                   </SubLink>
                 </SubItem>
