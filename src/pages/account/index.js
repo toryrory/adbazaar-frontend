@@ -32,7 +32,7 @@ import {
   AddBookSvg,
   PaymentsSvg,
   Load,
-  PhonePlus
+  PhonePlus,
 } from '../../../public/svg-account';
 import {
   LogOutBtn,
@@ -42,6 +42,7 @@ import {
 } from '@/styles/account.styled';
 import { useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
+import Header from '@/components/Layout/Header/Header';
 
 export default function Account() {
   const dispatch = useDispatch();
@@ -82,93 +83,104 @@ export default function Account() {
   };
 
   return (
-    <Container>
-      {!isVerified ? (
-        <>
-          <Title style={{ marginBottom: 8 }}>Hello, {userName.name}</Title>
-          <ErrorContainer>
-            <ErrorMessage>
-              Vertification failed! Try entering the code again.
-            </ErrorMessage>
-            <SendCodeButton type='button' onClick={onSendCode}>
-              <Load style={{ width: 24, height: 24 }} />
-              Send a new code
-            </SendCodeButton>
-          </ErrorContainer>
-        </>
-      ) : (
-        <Title style={{ marginBottom: 52 }}>Hello, {userName.name}</Title>
-      )}
-      <AccountAccordion //сделать покрасивее без повторов
-        text='Personal Information'
-        icon={<PersonSvg style={{ width: 24, height: 24, marginRight: 16 }} />}
-      >
-        <PersonalInfo />
-      </AccountAccordion>
-      <AccountAccordion
-        text='Order History'
-        icon={
-          <OrderHistorySvg style={{ width: 24, height: 24, marginRight: 16 }} />
-        }
-      >
-        <OrderHistory />
-      </AccountAccordion>
-      <AccountAccordion
-        text='Payment Methods'
-        icon={
-          <PaymentsSvg style={{ width: 24, height: 24, marginRight: 16 }} />
-        }
-      >
-        <Payments />
-      </AccountAccordion>
-      <AccountAccordion
-        text='Favorites'
-        icon={
-          <FavoritesSvg style={{ width: 24, height: 24, marginRight: 16 }} />
-        }
-      >
-        <Favorites />
-      </AccountAccordion>
-      <AccountAccordion
-        text='Messages & Reviews'
-        icon={
-          <MessagesSvg style={{ width: 24, height: 24, marginRight: 16 }} />
-        }
-      >
-        <Messages />
-      </AccountAccordion>
-      <AccountAccordion
-        text='Setting'
-        icon={
-          <SettingsSvg style={{ width: 24, height: 24, marginRight: 16 }} />
-        }
-      >
-        <Settings />
-      </AccountAccordion>
-      <AccountAccordion
-        text='Support'
-        icon={<PhonePlus style={{ width: 24, height: 24, marginRight: 16 }} />}
-      >
-        <Support />
-      </AccountAccordion>
-      <AccountAccordion
-        text='Books | sell / Add Book'
-        icon={<AddBookSvg style={{ width: 24, height: 24, marginRight: 16 }} />}
-      >
-        <AddBook />
-      </AccountAccordion>
-      <LogOutBtn type='button' onClick={onLogOut}>
-        <LogOut style={{ width: 24, height: 24 }} />
-        Log out
-      </LogOutBtn>
-      {showModal && (
-        <Modal
-          onClose={onCloseModal}
-          message='You have logged out of your personal account'
-          showOkButton={true}
-        />
-      )}
-      <ToastContainer />
-    </Container>
+    <>
+      <Header />
+      <Container>
+        {!isVerified ? (
+          <>
+            <Title style={{ marginBottom: 8 }}>Hello, {userName.name}</Title>
+            <ErrorContainer>
+              <ErrorMessage>
+                Vertification failed! Try entering the code again.
+              </ErrorMessage>
+              <SendCodeButton type="button" onClick={onSendCode}>
+                <Load style={{ width: 24, height: 24 }} />
+                Send a new code
+              </SendCodeButton>
+            </ErrorContainer>
+          </>
+        ) : (
+          <Title style={{ marginBottom: 52 }}>Hello, {userName.name}</Title>
+        )}
+        <AccountAccordion //сделать покрасивее без повторов
+          text="Personal Information"
+          icon={
+            <PersonSvg style={{ width: 24, height: 24, marginRight: 16 }} />
+          }
+        >
+          <PersonalInfo />
+        </AccountAccordion>
+        <AccountAccordion
+          text="Order History"
+          icon={
+            <OrderHistorySvg
+              style={{ width: 24, height: 24, marginRight: 16 }}
+            />
+          }
+        >
+          <OrderHistory />
+        </AccountAccordion>
+        <AccountAccordion
+          text="Payment Methods"
+          icon={
+            <PaymentsSvg style={{ width: 24, height: 24, marginRight: 16 }} />
+          }
+        >
+          <Payments />
+        </AccountAccordion>
+        <AccountAccordion
+          text="Favorites"
+          icon={
+            <FavoritesSvg style={{ width: 24, height: 24, marginRight: 16 }} />
+          }
+        >
+          <Favorites />
+        </AccountAccordion>
+        <AccountAccordion
+          text="Messages & Reviews"
+          icon={
+            <MessagesSvg style={{ width: 24, height: 24, marginRight: 16 }} />
+          }
+        >
+          <Messages />
+        </AccountAccordion>
+        <AccountAccordion
+          text="Setting"
+          icon={
+            <SettingsSvg style={{ width: 24, height: 24, marginRight: 16 }} />
+          }
+        >
+          <Settings />
+        </AccountAccordion>
+        <AccountAccordion
+          text="Support"
+          icon={
+            <PhonePlus style={{ width: 24, height: 24, marginRight: 16 }} />
+          }
+        >
+          <Support />
+        </AccountAccordion>
+        <AccountAccordion
+          text="Books | sell / Add Book"
+          icon={
+            <AddBookSvg style={{ width: 24, height: 24, marginRight: 16 }} />
+          }
+        >
+          <AddBook />
+        </AccountAccordion>
+        <LogOutBtn type="button" onClick={onLogOut}>
+          <LogOut style={{ width: 24, height: 24 }} />
+          Log out
+        </LogOutBtn>
+        {showModal && (
+          <Modal
+            onClose={onCloseModal}
+            message="You have logged out of your personal account"
+            showOkButton={true}
+          />
+        )}
+        <ToastContainer />
+      </Container>
+    </>
   );
 }
