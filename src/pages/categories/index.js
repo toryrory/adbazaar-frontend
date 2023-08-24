@@ -1,6 +1,6 @@
+import { useRouter } from 'next/router';
 import { Button } from '@/styles/categories.styled';
 import { Cross } from '../../../public/svg-authorization';
-import Link from 'next/link';
 import { useState } from 'react';
 import {
   Header,
@@ -27,6 +27,7 @@ const genres = [
 ];
 
 export default function Categories() {
+  const router = useRouter();
   const [showGenres, setShowGenres] = useState(false);
   const [showBargain, setShowBargain] = useState(false);
 
@@ -41,7 +42,7 @@ export default function Categories() {
     <>
       <Header>
         <Title>Category</Title>
-        <Button type="button">
+        <Button type="button" onClick={() => router.push('/')}>
           <Cross style={{ width: 24, height: 24 }} />
         </Button>
       </Header>
