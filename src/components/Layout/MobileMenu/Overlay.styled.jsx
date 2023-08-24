@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import Link from 'next/link';
 import Image from 'next/image';
 
-export const Overlay = styled.div`
+export const OverlayContainer = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -135,6 +135,7 @@ export const Item = styled.li`
   line-height: 1.5;
   color: var(--white-text);
   border-bottom: 0.3px solid #e6e6e6;
+  padding: 6px 0;
 `;
 
 export const SLList = styled.ul`

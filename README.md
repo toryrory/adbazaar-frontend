@@ -1,3 +1,52 @@
+## ADBAZAAR FRONTEND
+
+## Quick setup
+
+Install [Node Lts](https://nodejs.org/)
+
+Install [Git bush](https://git-scm.com/downloads)
+
+1. Clone repo (tap button 'Code', and copy link in repository)
+   ![tap button 'Code', and copy link in repository](image.png)
+
+2. Open file storage in PC, create a folder with project
+
+3. Open git bash terminal in project folder (click right mouse button)
+   ![Open git bash terminal in project folder (click right mouse button)](image-2.png)
+
+4. In git bash terminal run command "git clone <repository link>"
+
+5. After project files have loaded open project folder in vscode
+   Press "ctrl+shift+ `" to open terminal or open it like on screenshot:
+   ![Open terminal](image-3.png)
+
+6. Run command to install dependencies
+
+   ```bash
+   npm install
+   ```
+
+7. Run command to pull latest changes from github repository
+
+```bash
+    git pull
+```
+
+7. Start dev server
+
+   ```bash
+   npm run dev
+   ```
+
+   Runs the app in the development mode.
+
+8. Open http://localhost:3000 to view it in your browser.
+
+The page will reload when you make changes.
+You may also see any lint errors in the console.
+
+## Next.js
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
