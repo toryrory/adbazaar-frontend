@@ -8,6 +8,8 @@
   --light-grey: #d8e9fe;
   --dark-grey: #3f5870;
   --grey: #20252f;
+  --product-background: #212837;
+  --dark-gradient: linear-gradient(180deg, #1f293e 0%, #131b2c 29.17%);
 }
 
 body {
