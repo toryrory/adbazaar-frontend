@@ -15,8 +15,6 @@ import {
 } from '@/styles/categories.styled';
 import { ArrowMore } from '../../../public/svg-layout';
 import { genres } from '@/data/genres';
-import { books } from '@/data/books';
-import Image from 'next/image';
 
 export default function Categories() {
   const router = useRouter();
@@ -38,9 +36,6 @@ export default function Categories() {
           <Cross style={{ width: 24, height: 24 }} />
         </Button>
       </Header>
-      {/* {books.map((book) => {
-        return <Image src={book.photo} width={120} height={120} />;
-      })} */}
       <List>
         <Item>
           <CategoryButton type="button" onClick={toggleGenres}>
@@ -53,7 +48,7 @@ export default function Categories() {
             {genres.map((genre) => {
               return (
                 <SubItem key={genre.id}>
-                  <SubLink href={`/categories/${genre.link}`}>
+                  <SubLink href={`/categories/genres/${genre.link}`}>
                     {genre.name}
                   </SubLink>
                 </SubItem>
@@ -62,10 +57,10 @@ export default function Categories() {
           </SubList>
         )}
         <Item>
-          <CategoryLink href="/categories">Used Books</CategoryLink>
+          <CategoryLink href="/categories/used">Used Books</CategoryLink>
         </Item>
         <Item>
-          <CategoryLink href="/categories">New Books</CategoryLink>
+          <CategoryLink href="/categories/new">New Books</CategoryLink>
         </Item>
         <Item>
           <CategoryButton type="button" onClick={toggleBargain}>
@@ -87,28 +82,32 @@ export default function Categories() {
           </SubList>
         )}
         <Item>
-          <CategoryLink href="/categories">Gift Edition</CategoryLink>
+          <CategoryLink href="/categories/gift">Gift Edition</CategoryLink>
         </Item>
         <Item>
-          <CategoryLink href="/categories">Printed books</CategoryLink>
+          <CategoryLink href="/categories/paper">Printed books</CategoryLink>
         </Item>
         <Item>
-          <CategoryLink href="/categories">E-books</CategoryLink>
+          <CategoryLink href="/categories/e-book">E-books</CategoryLink>
         </Item>
         <Item>
-          <CategoryLink href="/categories">Audio books</CategoryLink>
+          <CategoryLink href="/categories/audio">Audio books</CategoryLink>
         </Item>
         <Item>
-          <CategoryLink href="/categories">Bestsellers</CategoryLink>
+          <CategoryLink href="/categories/bestsellers">
+            Bestsellers
+          </CategoryLink>
         </Item>
         <Item>
-          <CategoryLink href="/categories">Big Sale</CategoryLink>
+          <CategoryLink href="/categories/sale">Big Sale</CategoryLink>
         </Item>
         <Item>
-          <CategoryLink href="/categories">Authors</CategoryLink>
+          <CategoryLink href="/categories/authors">Authors</CategoryLink>
         </Item>
         <Item>
-          <CategoryLink href="/categories">Publishing Houses</CategoryLink>
+          <CategoryLink href="/categories/publisher">
+            Publishing Houses
+          </CategoryLink>
         </Item>
       </List>
     </>
