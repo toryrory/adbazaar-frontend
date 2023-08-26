@@ -1,36 +1,34 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Layout from '@/components/Layout/Layout';
-import CategoryPage from '@/components/CategoryPage/CategoryPage';
+import GenrePage from '@/components/GenrePage/GenrePage';
 import { Container, BooksCount } from '@/styles/categoriesLink.styled';
-import { categories } from '@/data/categories';
+import { genres } from '@/data/genres';
 import { books } from '@/data/books';
 import CategoryBooks from '@/components/CategoryBooks/CategoryBooks';
 
-export default function CategoriesLink() {
+export default function GenresLink() {
   const router = useRouter();
   const { link } = router.query;
-  const [currentCategory, setCurrentCategory] = useState(null);
+  const [currentGenre, setCurrentGenre] = useState(null);
   const [foundedBooks, setFoundedBooks] = useState(null);
   const [booksCount, setBooksCount] = useState(null);
 
   useEffect(() => {
-    const newCategory = categories.find((category) => category.link === link);
-    setCurrentCategory(newCategory);
+    const newGenre = genres.find((genre) => genre.link === link);
+    setCurrentGenre(newGenre);
 
-    if (link === 'paper' || 'e-book' || 'audio') {
-      const newBooks = books.filter((book) => book.type === link);
-      setFoundedBooks(newBooks);
+    const newBooks = books.filter((book) => book.genre === link);
+    setFoundedBooks(newBooks);
 
-      const newBooksCount = newBooks.length;
-      setBooksCount(newBooksCount);
-    }
+    const newBooksCount = newBooks.length;
+    setBooksCount(newBooksCount);
   }, [link]);
 
   return (
     <Layout>
       <Container>
-        {currentCategory && <CategoryPage currentCategory={currentCategory} />}
+        {currentGenre && <GenrePage currentGenre={currentGenre} />}
         {booksCount > 1 && <BooksCount>{booksCount} products</BooksCount>}
         {booksCount === 1 && <BooksCount>{booksCount} product</BooksCount>}
       </Container>

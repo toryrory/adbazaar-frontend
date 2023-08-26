@@ -14,7 +14,7 @@ export default function GenrePage({ currentGenre }) {
             return (
               <GenresItem key={genre.id}>
                 <Link
-                  href={`/categories/${genre.link}`}
+                  href={`/categories/genres/${genre.link}`}
                   style={{ color: 'inherit' }}
                 >
                   {genre.name}
