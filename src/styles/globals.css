@@ -10,11 +10,20 @@
   --grey: #20252f;
   --product-background: #212837;
   --dark-gradient: linear-gradient(180deg, #1f293e 0%, #131b2c 29.17%);
+  --rose-color: #F38FF5;
+}
+@font-face {
+  font-family: 'TrueHelvetica';
+  src: url(/fonts/Helvetica.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'TrueHelvetica-light';
+  src: url(/fonts/helvetica-light.ttf) format('truetype');
 }
 
 body {
   margin: 0;
-  font-family: 'Helvetica', sans-serif;
+  font-family: 'TrueHelvetica', sans-serif;
   background-color: var(--main-background);
 }
 
