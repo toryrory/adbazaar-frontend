@@ -5,6 +5,7 @@ export const Button = styled.button`
   cursor: pointer;
   background-color: transparent;
   display: flex;
+  justify-content: center;
   padding: 6px 16px;
   align-items: center;
   gap: 6px;

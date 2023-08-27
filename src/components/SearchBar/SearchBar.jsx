@@ -4,8 +4,8 @@ import {
   Input,
   BtnSearch,
   SearchResults,
-    BtnsWrapper,
-  BtnDelete
+  BtnsWrapper,
+  BtnDelete,
 } from "./SearchBar.styled";
 import { useState } from "react";
 import { Cross } from "../../../public/svg-authorization";
@@ -17,7 +17,7 @@ export default function SearchBar() {
         setInput(e.target.value)
     }
   return (
-    <div>
+    <>
       <InputWrapper>
         <Input
           value={input}
@@ -34,6 +34,6 @@ export default function SearchBar() {
               </BtnsWrapper>
       </InputWrapper>
       <SearchResults>SearchBar Results in progress</SearchResults>
-    </div>
+    </>
   );
 }

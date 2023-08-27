@@ -32,7 +32,9 @@ export default function CategoriesLink() {
         {booksCount > 1 && <BooksCount>{booksCount} products</BooksCount>}
         {booksCount === 1 && <BooksCount>{booksCount} product</BooksCount>}
       </Container>
-      {foundedBooks && <CategoryBooks books={foundedBooks} />}
+      {foundedBooks && (
+        <CategoryBooks books={foundedBooks} variant={'category'} />
+      )}
     </Layout>
   );
 }

@@ -1,0 +1,9 @@
+export { default as UsedImg } from "./icon-Used.png";
+export { default as NewImg } from "./icon-new.png";
+export { default as TopImg } from "./icon-top-best.png";
+export { default as ExchangeImg } from "./icon-Exchange.png";
+export { default as ForGiftImg } from "./icon-Gift.png";
+export { default as TextbookImg } from "./icon-texbook.png";
+export { default as BigSaleImg } from "./icon-big-sale.png";
+export { default as AudioBookImg } from "./icon-audio-book.png";
+export { default as EBookImg } from "./icon-e-book.png";
