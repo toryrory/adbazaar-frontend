@@ -1,1 +1,10 @@
 export { default as HeartPlus } from './heart-plus.svg';
+export { default as Share } from './share.svg';
+export { default as User } from './user.svg';
+export { default as Mail } from './mail.svg';
+export { default as Chat } from './chat.svg';
+export { default as ArrowUp } from './arrow-up.svg';
+export { default as ArrowDown } from './arrow-down.svg';
+export { default as ArrowRight } from './arrow-right.svg';
+export { default as Puzzle } from './puzzle.svg';
+export { default as OverviewImg } from './overview.svg';

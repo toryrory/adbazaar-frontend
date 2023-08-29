@@ -12,7 +12,7 @@ import {
   StyledImg,
   RatingBox,
   Reviews,
-} from "./Book.styled";
+} from './Book.styled';
 import Link from 'next/link';
 import { HeartPlus } from '../../../public/svg-book';
 import { ShoppingCart } from '../../../public/svg-layout';
@@ -24,7 +24,7 @@ export default function Book({ book, variant }) {
       <Label variant={variant}>label</Label>
       <ButtonFavorites
         variant={variant}
-        onClick={() => console.log("add to favorites")}
+        onClick={() => console.log('add to favorites')}
       >
         <HeartPlus style={{ width: 24, height: 24 }} />
       </ButtonFavorites>
@@ -35,10 +35,15 @@ export default function Book({ book, variant }) {
         variant={variant}
       />
       <RatingBox>
-        <Rating readOnly defaultValue={5} sx={{ color: "var(--rose-color)", width: '78px' }} size='small' />
+        <Rating
+          readOnly
+          defaultValue={5}
+          sx={{ color: 'var(--rose-color)', width: '78px' }}
+          size="small"
+        />
         <Reviews>(12)</Reviews>
       </RatingBox>
-      <Link href='/'>
+      <Link href={`/books/${book.id}`}>
         <Title variant={variant}>{book.name}</Title>
         <Author variant={variant}>{book.author}</Author>
       </Link>
@@ -50,8 +55,8 @@ export default function Book({ book, variant }) {
 
         <ButtonShopping
           variant={variant}
-          type='button'
-          onClick={() => console.log("add to cart")}
+          type="button"
+          onClick={() => console.log('add to cart')}
         >
           <ShoppingCart style={{ width: 24, height: 24 }} />
         </ButtonShopping>
