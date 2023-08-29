@@ -13,7 +13,7 @@ import {
   SubItem,
   SubLink,
 } from '@/styles/categories.styled';
-import { ArrowMore } from '../../../public/svg-layout';
+import { ArrowRight, ArrowDown } from '../../../public/svg-book';
 import { genres } from '@/data/genres';
 
 export default function Categories() {
@@ -40,7 +40,11 @@ export default function Categories() {
         <Item>
           <CategoryButton type="button" onClick={toggleGenres}>
             <p>Genres</p>
-            <ArrowMore style={{ width: 16, height: 16 }} />
+            {showGenres ? (
+              <ArrowDown style={{ width: 16, height: 16 }} />
+            ) : (
+              <ArrowRight style={{ width: 16, height: 16 }} />
+            )}
           </CategoryButton>
         </Item>
         {showGenres && (
@@ -65,7 +69,11 @@ export default function Categories() {
         <Item>
           <CategoryButton type="button" onClick={toggleBargain}>
             <p>Bargain</p>
-            <ArrowMore style={{ width: 16, height: 16 }} />
+            {showBargain ? (
+              <ArrowDown style={{ width: 16, height: 16 }} />
+            ) : (
+              <ArrowRight style={{ width: 16, height: 16 }} />
+            )}
           </CategoryButton>
         </Item>
         {showBargain && (

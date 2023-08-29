@@ -281,7 +281,7 @@ export const books = [
     genre: 'biography',
     language: 'en',
     publisher: 'HMH Adult Audio',
-    photo: Rememberings,
+    photo: RememberingsAudio,
     description:
       'Blessed with a singular voice and a fiery temperament, Sinéad O’Connor rose to massive fame in the late 1980s and 1990s with a string of gold records. By the time she was 20, she was world famous - living a rock-star life out loud. From her trademark shaved head to her 1992 appearance on Saturday Night Live when she tore up Pope John Paul II’s photograph, Sinéad has fascinated and outraged millions. ',
   },
@@ -294,7 +294,7 @@ export const books = [
     genre: 'biography',
     language: 'en',
     publisher: 'Dey Street Books',
-    photo: RememberingsAudio,
+    photo: Rememberings,
     description:
       'Blessed with a singular voice and a fiery temperament, Sinéad O’Connor rose to massive fame in the late 1980s and 1990s with a string of gold records. By the time she was 20, she was world famous - living a rock-star life out loud. From her trademark shaved head to her 1992 appearance on Saturday Night Live when she tore up Pope John Paul II’s photograph, Sinéad has fascinated and outraged millions. ',
   },
@@ -612,7 +612,7 @@ export const books = [
   },
   {
     id: 44,
-    name: 'Agatha Christie:Little People BIG DREAMS',
+    name: 'Agatha Christie: Little People BIG DREAMS',
     author: 'Maria Isabel Sanchez Vegara',
     price: '8.24',
     type: 'paper',

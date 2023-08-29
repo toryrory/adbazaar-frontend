@@ -79,9 +79,9 @@ export default function SignUp() {
     actions
   ) => {
     dispatch(authRegister({ name, email, password }));
-    termsChecked = false;
-    notificationsChecked = false;
-    actions.resetForm();
+    //   termsChecked = false;
+    //   notificationsChecked = false;
+    //   actions.resetForm();
   };
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =

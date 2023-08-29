@@ -10,6 +10,8 @@ import { genres } from '@/data/genres';
 import { books } from '@/data/books';
 import { categories } from '@/data/categories';
 
+import FastSearchBtn from '../FastSearchBtn/FastSearchBtn';
+
 export default function CategoryPage({ currentCategory }) {
   return (
     <>

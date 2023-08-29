@@ -12,4 +12,3 @@ export { default as CategoriesCircle } from './categories-circle.svg';
 export { default as ShoppingCircle } from './shopping-circle.svg';
 export { default as LogoutCircle } from './logout-circle.svg';
 export { default as UserBlue } from './user-blue.svg';
-export { default as ArrowMore } from './arrow-more.svg';
