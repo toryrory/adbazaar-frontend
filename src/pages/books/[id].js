@@ -3,6 +3,9 @@ import { useEffect, useState } from 'react';
 import { books } from '@/data/books';
 import SearchBar from '@/components/SearchBar/SearchBar';
 import Layout from '@/components/Layout/Layout';
+import BookDetails from '@/components/BookID/BookDetails/BookDetails';
+import BookOverview from '@/components/BookID/BookOverview/BookOverview';
+import BookReviews from '@/components/BookID/BookReviews/BookReviews';
 import {
   Container,
   HeadContainer,
@@ -50,7 +53,6 @@ export default function BooksId() {
   useEffect(() => {
     const newBook = books.find((book) => book.id === currentId);
     setCurrentBook(newBook);
-    console.log(newBook);
   }, [id]);
 
   const toggleDetails = () => {
@@ -155,7 +157,7 @@ export default function BooksId() {
                 />
               )}
             </AccordionButton>
-            {showDetails && <div>Details</div>}
+            {showDetails && <BookDetails book={currentBook} />}
             <AccordionButton type="button" onClick={toggleOverview}>
               <OverviewImg style={{ width: 24, height: 24, marginRight: 8 }} />
               Overview
@@ -169,9 +171,10 @@ export default function BooksId() {
                 />
               )}
             </AccordionButton>
-            {showOverview && <div>Overview</div>}
+            {showOverview && <BookOverview book={currentBook} />}
           </>
         )}
+        <BookReviews book={currentBook} />
       </Container>
     </Layout>
   );

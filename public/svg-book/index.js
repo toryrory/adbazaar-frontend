@@ -8,3 +8,16 @@ export { default as ArrowDown } from './arrow-down.svg';
 export { default as ArrowRight } from './arrow-right.svg';
 export { default as Puzzle } from './puzzle.svg';
 export { default as OverviewImg } from './overview.svg';
+export { default as AudioType } from './audioType.svg';
+export { default as Calendar } from './calendar.svg';
+export { default as Cover } from './cover.svg';
+export { default as Dimensions } from './dimensions.svg';
+export { default as EBookType } from './e-bookType.svg';
+export { default as ISBN } from './ISBN.svg';
+export { default as Language } from './language.svg';
+export { default as Pages } from './pages.svg';
+export { default as PaperType } from './paperType.svg';
+export { default as Publisher } from './publisher.svg';
+export { default as State } from './state.svg';
+export { default as Weight } from './weight.svg';
+export {default as Review} from './review.svg'
