@@ -1,5 +1,5 @@
 import { UserImgContainer, Title } from './loginHeader.styled';
-import { UserSvg } from '../../../public/svg-authorization';
+import { UserSvg } from '../../../../public/svg-authorization';
 
 export default function LoginHeader() {
   return (

@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Layout from '@/components/Layout/Layout';
-import CategoryPage from '@/components/CategoryPage/CategoryPage';
+import CategoryPage from '@/components/Categories/CategoryPage/CategoryPage';
 import { Container, BooksCount } from '@/styles/categoriesLink.styled';
 import { categories } from '@/data/categories';
 import { books } from '@/data/books';
-import CategoryBooks from '@/components/CategoryBooks/CategoryBooks';
+import CategoryBooks from '@/components/Categories/CategoryBooks/CategoryBooks';
 
 export default function CategoriesLink() {
   const router = useRouter();

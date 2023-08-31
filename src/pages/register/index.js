@@ -12,11 +12,11 @@ import {
 } from '@/redux/selectors';
 import { schema } from '@/services/shema';
 import Modal from '@/components/modal/Modal';
-import AuthorizationContainer from '@/components/authorizationContainer/AuthorizationContainer';
+import AuthorizationContainer from '@/components/Authorization/authorizationContainer/AuthorizationContainer';
 import CloseButton from '@/components/closeButton/CloseButton';
-import RegisterHeader from '@/components/registerHeader/RegisterHeader';
-import GoogleRegistration from '@/components/googleRegistration/GoogleRegistration';
-import ErrorMessage from '@/components/errorMessage/ErrorMessage';
+import RegisterHeader from '@/components/Authorization/registerHeader/RegisterHeader';
+import GoogleRegistration from '@/components/Authorization/googleRegistration/GoogleRegistration';
+import ErrorMessage from '@/components/Authorization/errorMessage/ErrorMessage';
 import SecondaryButton from '@/components/secondaryButton/SecondaryButton';
 import {
   InputList,

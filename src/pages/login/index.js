@@ -5,11 +5,11 @@ import { useState, useEffect } from 'react';
 import { authLogin } from '@/redux/operations';
 import { selectAuthError, selectUserEmail } from '@/redux/selectors';
 import Modal from '@/components/modal/Modal';
-import AuthorizationContainer from '@/components/authorizationContainer/AuthorizationContainer';
+import AuthorizationContainer from '@/components/Authorization/authorizationContainer/AuthorizationContainer';
 import CloseButton from '@/components/closeButton/CloseButton';
-import LoginHeader from '@/components/loginHeader/LoginHeader';
-import GoogleRegistration from '@/components/googleRegistration/GoogleRegistration';
-import ErrorMessage from '@/components/errorMessage/ErrorMessage';
+import LoginHeader from '@/components/Authorization/loginHeader/LoginHeader';
+import GoogleRegistration from '@/components/Authorization/googleRegistration/GoogleRegistration';
+import ErrorMessage from '@/components/Authorization/errorMessage/ErrorMessage';
 import SecondaryButton from '@/components/secondaryButton/SecondaryButton';
 import {
   InputList,
