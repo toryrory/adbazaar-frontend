@@ -1,4 +1,4 @@
-import { GoogleIcon, FacebookIcon } from '../../../public/svg-authorization';
+import { GoogleIcon, FacebookIcon } from '../../../../public/svg-authorization';
 import { Text, List, Item, SocialLink } from './GoogleRegistration.styled';
 import { useGoogleLogin } from '@react-oauth/google';
 import { useEffect, useState } from 'react';

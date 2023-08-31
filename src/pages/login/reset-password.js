@@ -3,11 +3,11 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Modal from '@/components/modal/Modal';
-import AuthorizationContainer from '@/components/authorizationContainer/AuthorizationContainer';
+import AuthorizationContainer from '@/components/Authorization/authorizationContainer/AuthorizationContainer';
 import CloseButton from '@/components/closeButton/CloseButton';
-import LoginHeader from '@/components/loginHeader/LoginHeader';
+import LoginHeader from '@/components/Authorization/loginHeader/LoginHeader';
 import SecondaryButton from '@/components/secondaryButton/SecondaryButton';
-import GoogleRegistration from '@/components/googleRegistration/GoogleRegistration';
+import GoogleRegistration from '@/components/Authorization/googleRegistration/GoogleRegistration';
 import {
   InputItem,
   Label,

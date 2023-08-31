@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import SearchBar from '../SearchBar/SearchBar';
+import SearchBar from '../../SearchBar/SearchBar';
 import {
   GenresList,
   GenresItem,
@@ -10,7 +10,7 @@ import { genres } from '@/data/genres';
 import { books } from '@/data/books';
 import { categories } from '@/data/categories';
 
-import FastSearchBtn from '../FastSearchBtn/FastSearchBtn';
+import FastSearchBtn from '../../FastSearchBtn/FastSearchBtn';
 
 export default function CategoryPage({ currentCategory }) {
   return (

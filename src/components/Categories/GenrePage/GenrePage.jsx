@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import SearchBar from '../SearchBar/SearchBar';
+import SearchBar from '../../SearchBar/SearchBar';
 import { GenresList, GenresItem, Title, Description } from './GenrePage.styled';
 import { genres } from '@/data/genres';
 import { books } from '@/data/books';
