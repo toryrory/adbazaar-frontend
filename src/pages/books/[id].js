@@ -8,19 +8,23 @@ import BookDetails from '@/components/BookID/BookDetails/BookDetails';
 import BookOverview from '@/components/BookID/BookOverview/BookOverview';
 import BookReviews from '@/components/BookID/BookReviews/BookReviews';
 import SimilarBooks from '@/components/BookID/SimilarBooks/SimilarBooks';
+import GenreList from '@/components/BookID/GenreList/GenreList';
 import {
   Container,
   AccordionButton,
   Ornament,
   OrnamentImg,
+  BackButton,
 } from '@/styles/bookId.styled';
 import {
   ArrowDown,
   ArrowUp,
+  ArrowBack,
   Puzzle,
   OverviewImg,
 } from '../../../public/svg-book';
 import { BgOrnament } from '../../../public/backgrounds';
+import { ToastContainer } from 'react-toastify';
 
 export default function BooksId() {
   const router = useRouter();
@@ -46,8 +50,13 @@ export default function BooksId() {
     <Layout>
       <Container>
         <SearchBar />
+        <BackButton type="button" onClick={() => router.back()}>
+          <ArrowBack style={{ width: 21, height: 24 }} />
+          Go back
+        </BackButton>
         {currentBook && (
           <>
+            <GenreList currentGenre={currentBook.genre} />
             <BookHeader book={currentBook} />
             <AccordionButton type="button" onClick={toggleDetails}>
               <Puzzle style={{ width: 24, height: 24, marginRight: 8 }} />
@@ -79,11 +88,12 @@ export default function BooksId() {
             {showOverview && <BookOverview book={currentBook} />}
             <BookReviews book={currentBook} />
             <Ornament>
-              <OrnamentImg src={BgOrnament} />
+              <OrnamentImg src={BgOrnament} alt="ornament" />
             </Ornament>
             <SimilarBooks book={currentBook} />
           </>
         )}
+        <ToastContainer theme="dark" />
       </Container>
     </Layout>
   );

@@ -20,4 +20,5 @@ export { default as PaperType } from './paperType.svg';
 export { default as Publisher } from './publisher.svg';
 export { default as State } from './state.svg';
 export { default as Weight } from './weight.svg';
-export {default as Review} from './review.svg'
+export { default as Review } from './review.svg';
+export { default as ArrowBack } from './arrow-back.svg';

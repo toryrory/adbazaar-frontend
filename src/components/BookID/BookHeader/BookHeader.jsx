@@ -1,3 +1,5 @@
+// import { Simplesharer } from 'simple-sharer';
+import { copy } from 'simple-sharer';
 import {
   HeadContainer,
   TitleContainer,
@@ -27,6 +29,8 @@ import {
   Chat,
 } from '../../../../public/svg-book';
 import { ShoppingCart } from '../../../../public/svg-layout';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function BookHeader({ book }) {
   return (
@@ -48,7 +52,13 @@ export default function BookHeader({ book }) {
               <Reviews>(12 reviews)</Reviews>
             </div>
 
-            <ShareButton type="button" onClick={() => console.log('share')}>
+            <ShareButton
+              type="button"
+              onClick={() => {
+                copy();
+                toast.success('link copied');
+              }}
+            >
               <Share style={{ width: 24, height: 24 }} />
             </ShareButton>
           </RatingBox>
