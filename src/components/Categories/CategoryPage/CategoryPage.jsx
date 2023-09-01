@@ -6,31 +6,30 @@ import {
   Title,
   Description,
 } from '../GenrePage/GenrePage.styled';
-import { genres } from '@/data/genres';
-import { books } from '@/data/books';
 import { categories } from '@/data/categories';
-
-import FastSearchBtn from '../../FastSearchBtn/FastSearchBtn';
 
 export default function CategoryPage({ currentCategory }) {
   return (
     <>
       <SearchBar />
       <GenresList>
-        {categories.map((category) => {
-          if (category.link !== currentCategory.link) {
-            return (
-              <GenresItem key={category.id}>
-                <Link
-                  href={`/categories/${category.link}`}
-                  style={{ color: 'inherit' }}
-                >
-                  {category.name}
-                </Link>
-              </GenresItem>
-            );
-          }
-        })}
+        {categories
+          .map((category) => {
+            console.log(category.link);
+            if (category.link !== currentCategory.link) {
+              return (
+                <GenresItem key={category.id}>
+                  <Link
+                    href={`/categories/${category.link}`}
+                    style={{ color: 'inherit' }}
+                  >
+                    {category.name}
+                  </Link>
+                </GenresItem>
+              );
+            }
+          })
+          .slice(5, 9)}
       </GenresList>
       <Title>{currentCategory.name}</Title>
       <Description>{currentCategory.description}</Description>

@@ -30,3 +30,13 @@ export const Ornament = styled.div`
 export const OrnamentImg = styled(Image)`
   width: 100%;
 `;
+
+export const BackButton = styled.button`
+  display: flex;
+  align-items: center;
+  padding: 5.5px 0;
+  color: var(--light-text);
+  background: transparent;
+  border: none;
+  margin-bottom: 8px;
+`;

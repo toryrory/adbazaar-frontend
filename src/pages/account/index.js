@@ -179,7 +179,7 @@ export default function Account() {
             showOkButton={true}
           />
         )}
-        <ToastContainer />
+        <ToastContainer theme="dark" />
       </Container>
     </>
   );
