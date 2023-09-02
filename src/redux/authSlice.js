@@ -34,66 +34,68 @@ const authSlice = createSlice({
     type: null,
     isVerified: false,
   },
-  extraReducers: {
-    [authRegister.pending]: handlePending,
-    [authRegister.fulfilled](state, action) {
-      state.user = { ...state.user, ...action.payload.user };
-      state.token = action.payload.token;
-      state.isLoggedIn = true;
-      state.isLoading = false;
-      state.error = null;
-      state.type = 'email';
-    },
-    [authRegister.rejected]: handleRejected,
-    [authLogin.pending]: handlePending,
-    [authLogin.fulfilled](state, action) {
-      state.user = { ...state.user, ...action.payload.user };
-      state.token = action.payload.token;
-      state.isLoggedIn = true;
-      state.isLoading = false;
-      state.error = null;
-      state.type = 'email';
-    },
-    [authLogin.rejected]: handleRejected,
-    [authLogout.pending]: handlePending,
-    [authLogout.fulfilled](state) {
-      state.isLoggedIn = false;
-      state.user.name = null;
-      state.user.email = null;
-      state.token = null;
-      state.isLoading = false;
-      state.error = null;
-      state.type = null;
-    },
-    [authLogout.rejected]: handleRejected,
-    [googleLogin.pending]: handlePending,
-    [googleLogin.fulfilled](state, action) {
-      state.user = { ...state.user, ...action.payload };
-      state.isLoggedIn = true;
-      state.isLoading = false;
-      state.error = null;
-      state.type = 'google';
-      state.isVerified = true;
-    },
-    [googleLogin.rejected]: handleRejected,
-    [googleLogOut.pending]: handlePending,
-    [googleLogOut.fulfilled](state) {
-      state.isLoggedIn = false;
-      state.user.name = null;
-      state.user.email = null;
-      state.token = null;
-      state.isLoading = false;
-      state.error = null;
-      state.type = null;
-    },
-    [googleLogOut.rejected]: handleRejected,
-    [verification.pending]: handlePending,
-    [verification.fulfilled](state, action) {
-      state.isVerified = true;
-    },
-    [verification.rejected](state) {
-      state.isVerified = false;
-    },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(authRegister.pending, handlePending)
+      .addCase(authRegister.fulfilled, (state, action) => {
+        state.user = { ...state.user, ...action.payload.user };
+        state.token = action.payload.token;
+        state.isLoggedIn = true;
+        state.isLoading = false;
+        state.error = null;
+        state.type = 'email';
+      })
+      .addCase(authRegister.rejected, handleRejected)
+      .addCase(authLogin.pending, handlePending)
+      .addCase(authLogin.fulfilled, (state, action) => {
+        state.user = { ...state.user, ...action.payload.user };
+        state.token = action.payload.token;
+        state.isLoggedIn = true;
+        state.isLoading = false;
+        state.error = null;
+        state.type = 'email';
+      })
+      .addCase(authLogin.rejected, handleRejected)
+      .addCase(authLogout.pending, handlePending)
+      .addCase(authLogout.fulfilled, (state) => {
+        state.isLoggedIn = false;
+        state.user.name = null;
+        state.user.email = null;
+        state.token = null;
+        state.isLoading = false;
+        state.error = null;
+        state.type = null;
+      })
+      .addCase(authLogout.rejected, handleRejected)
+      .addCase(googleLogin.pending, handlePending)
+      .addCase(googleLogin.fulfilled, (state, action) => {
+        state.user = { ...state.user, ...action.payload };
+        state.isLoggedIn = true;
+        state.isLoading = false;
+        state.error = null;
+        state.type = 'google';
+        state.isVerified = true;
+      })
+      .addCase(googleLogin.rejected, handleRejected)
+      .addCase(googleLogOut.pending, handlePending)
+      .addCase(googleLogOut.fulfilled, (state) => {
+        state.isLoggedIn = false;
+        state.user.name = null;
+        state.user.email = null;
+        state.token = null;
+        state.isLoading = false;
+        state.error = null;
+        state.type = null;
+      })
+      .addCase(googleLogOut.rejected, handleRejected)
+      .addCase(verification.pending, handlePending)
+      .addCase(verification.fulfilled, (state) => {
+        state.isVerified = true;
+      })
+      .addCase(verification.rejected, (state) => {
+        state.isVerified = false;
+      });
   },
 });
 
