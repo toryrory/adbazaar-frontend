@@ -10,3 +10,4 @@ export { default as BgHalfChildren } from './bg-children.png';
 export { default as BgHalfNewest } from './bg-newest.png';
 export { default as BgOrnament } from './bg-ornament.png';
 export { default as BgOrnamentStripe } from './bg-ornament-stripe.png';
+export { default as BgAdbazaar } from './AdBazaar.png';

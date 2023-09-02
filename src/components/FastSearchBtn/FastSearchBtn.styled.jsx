@@ -15,4 +15,9 @@ export const Button = styled.button`
   font-size: 14px;
   text-align: center;
   line-height: 1.3;
+  transition: border-color 1000ms;
+  &:hover {
+    border-color: var(--rose-color);
+    
+  }
 `;

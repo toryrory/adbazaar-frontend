@@ -1,14 +1,10 @@
 import { ArrowRight } from "../../../public/svg-index";
-import Book from "../Book/Book";
-import { books } from "@/data/books";
 import {
-  List,
   Container,
   BtnSeeMore,
   Title,
   Text,
 } from "./BookSectionLayout.styled";
-import Image from "next/image";
 import BooksSwiper from "../BooksSwiper/BooksSwiper";
 
 

@@ -11,6 +11,8 @@
   --product-background: #212837;
   --dark-gradient: linear-gradient(180deg, #1f293e 0%, #131b2c 29.17%);
   --rose-color: #F38FF5;
+  --hero-rose: #fdacff;
+  --dark-text: #23314f;
 }
 @font-face {
   font-family: 'TrueHelvetica';
@@ -18,8 +20,9 @@
 }
 @font-face {
   font-family: 'TrueHelvetica-light';
-  src: url(/fonts/helvetica-light.ttf) format('truetype');
-}
+  src: url(/fonts/light-hel.otf) format('opentype');
+} 
+/* helvetica-light otf, ttf format not work */
 
 body {
   margin: 0;

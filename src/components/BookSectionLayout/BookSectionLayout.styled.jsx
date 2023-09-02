@@ -6,22 +6,6 @@ export const Container = styled.section`
   padding: 40px 0px 48px 16px;
   background: ${(props) =>
     props.id === "bestsellers" ? "var(--dark-gradient)" : "transparent"};
-  background-image: ${(props) =>
-    props.id === "bestsellers" && `url(${BgHalfBottom.src})`};
-  background-position: ${(props) =>
-    props.id === "bestsellers" && "top 0 right 0"};
-  background-image: ${(props) =>
-    props.id === "newest" && `url(${BgHalfNewest.src})`};
-  background-position: ${(props) =>
-    props.id === "newest" && "top 27px right 0"};
-  background-image: ${(props) =>
-    props.id === "children" && `url(${BgHalfChildren.src})`};
-  background-position: ${(props) =>
-    props.id === "children" && "top 101px right 16px"};
-  background-image: ${(props) =>
-    props.id === "used" && `url(${BgHalfUsed.src})`};
-  background-position: ${(props) =>
-    props.id === "used" && "bottom 0 right 16px"};
   background-repeat: no-repeat;
 `;
 export const Title = styled.h2`
