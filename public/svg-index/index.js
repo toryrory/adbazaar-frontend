@@ -1,2 +1,5 @@
 export {default as Search} from './search.svg'
 export {default as ArrowRight} from './arrow-right.svg'
+export {default as TextBookSvg} from './text-format.svg'
+export {default as EBookSvg} from './ebook-format.svg'
+export {default as AudioBookSvg} from './audio-format.svg'

@@ -49,7 +49,7 @@ export default function BooksId() {
   return (
     <Layout>
       <Container>
-        <SearchBar />
+        <SearchBar queryId={id} />
         <BackButton type="button" onClick={() => router.back()}>
           <ArrowBack style={{ width: 21, height: 24 }} />
           Go back

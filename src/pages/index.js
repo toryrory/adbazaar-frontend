@@ -1,18 +1,36 @@
 import Head from "next/head";
-import Link from "next/link";
+import { useRouter } from "next/router";
+import { useState } from "react";
 import Layout from "@/components/Layout/Layout";
 import SearchBar from "@/components/SearchBar/SearchBar";
 import SecondaryButton from "@/components/secondaryButton/SecondaryButton";
 import SwiperBtns from "@/components/SwiperBtns/SwiperBtns";
-import { SectionHero} from "@/styles/index.styled";
+import {
+  SectionHero,
+  TextHero,
+  HeroStar,
+  HalfStarDark,
+  NewestStar,
+  DarkBg,
+  DarkBgChil,
+  ChildrenStar,
+  DarkBgUsed,
+ UsedStar,
+} from "@/styles/index.styled";
 import BookSectionLayout from "@/components/BookSectionLayout/BookSectionLayout";
 import { sectionTexts } from "@/data/section-text";
 import { BannerBestsellers, BannerChildren, BannerNewest, BannerSeller, BannerUsed } from "../../public/png/banners";
 import BecomeSeller from "@/components/BecomeSeller/BecomeSeller";
 import Subscription from "@/components/Subscribtion/Subscription";
 import { ToastContainer } from "react-toastify";
+import { BgFull } from "../../public/backgrounds";
+import { selectShowStars } from "@/redux/selectors";
+import { useSelector } from "react-redux";
 
 export default function Home() {
+  const router = useRouter();
+  const starVisibility = useSelector(selectShowStars);
+
   return (
     <>
       <Head>
@@ -26,12 +44,17 @@ export default function Home() {
       <main>
         <Layout>
           <SectionHero>
+            <TextHero>find your favorite book</TextHero>
+            <HeroStar src={BgFull} alt='star' />
+            {starVisibility && <HalfStarDark src={BgFull} alt='star' />}
+            {starVisibility && <DarkBg></DarkBg>}
             <SearchBar />
             <SwiperBtns />
             <SecondaryButton
+              onClick={() => router.push("/categories")}
               text={"Shop by Category"}
               type={"button"}
-              style={{ width: "358px" }}
+              style={{ width: "358px", position: "absolute", zIndex: 3 }}
             />
           </SectionHero>
           <BookSectionLayout
@@ -40,25 +63,30 @@ export default function Home() {
             banner={BannerBestsellers}
             id={"bestsellers"}
           />
+          <NewestStar src={BgFull} alt='star' />
           <BookSectionLayout
             title={sectionTexts[1].title}
             text={sectionTexts[1].text}
             banner={BannerNewest}
             id={"newest"}
           />
+          {starVisibility && <ChildrenStar src={BgFull} alt='star' />}
+          {starVisibility && <DarkBgChil></DarkBgChil>}
           <BookSectionLayout
             title={sectionTexts[2].title}
             text={sectionTexts[2].text}
             banner={BannerChildren}
             id={"children"}
           />
-          <Subscription/>
+          <Subscription />
           <BookSectionLayout
             title={sectionTexts[3].title}
             text={sectionTexts[3].text}
             banner={BannerUsed}
             id={"used"}
           />
+          {starVisibility && <UsedStar src={BgFull} alt='star' />}
+          {starVisibility && <DarkBgUsed></DarkBgUsed>}
           <BecomeSeller />
           <BookSectionLayout
             title={sectionTexts[4].title}
@@ -66,7 +94,7 @@ export default function Home() {
             banner={BannerSeller}
             id={"seller"}
           />
-          <ToastContainer/>
+          <ToastContainer />
         </Layout>
       </main>
     </>
