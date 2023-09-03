@@ -22,3 +22,7 @@ export { default as State } from './state.svg';
 export { default as Weight } from './weight.svg';
 export { default as Review } from './review.svg';
 export { default as ArrowBack } from './arrow-back.svg';
+export { default as Like } from './like.svg';
+export { default as Dislike } from './dislike.svg';
+export { default as Phone } from './phone.svg';
+export { default as MailSeller } from './mail-seller.svg';
