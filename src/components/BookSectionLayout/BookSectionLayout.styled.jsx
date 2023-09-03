@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { BgHalfBottom, BgHalfNewest, BgHalfUsed, BgHalfChildren } from "../../../public/backgrounds";
 
 export const Container = styled.section`
   //сделать красивее используя свитчкейс

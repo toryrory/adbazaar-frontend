@@ -5,9 +5,9 @@ import Image from 'next/image';
 
 export const Container = styled.div`
   padding: 16px 16px 40px;
-  background-image: url(${bgTop.src}), url(${bgBottom.src});
+  /* background-image: url(${bgTop.src}), url(${bgBottom.src});
   background-repeat: no-repeat;
-  background-position: top 0px left 0px, top 608px right 0px;
+  background-position: top 0px left 0px, top 608px right 0px; */
 `;
 
 export const AccordionButton = styled.button`

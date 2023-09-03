@@ -1,13 +1,11 @@
 import styled, {keyframes} from "styled-components";
 import {
-  BgTop,
   BgFrames,
-  BgHalfTop,
   BgAdbazaar,
 } from "../../public/backgrounds";
 import Image from "next/image";
 
-const rotation = keyframes`
+export const rotation = keyframes`
   from {
     transform: rotate(0deg)
   }
@@ -24,15 +22,7 @@ export const SectionHero = styled.section`
   background-position: top 170px left 16px, top -12px right 0;
   padding: 338px 16px 80px;
 `;
-// export const SectionHero = styled.section`
-//   background-image: url(${BgAdbazaar.src}),
-//     url(${BgFrames.src}), url(${BgHalfTop.src});
-//   background-repeat: no-repeat;
-//   background-size: 340px 48px, 356px 378px, 100px, cover;
-//   background-position: top 170px left 16px, top -12px right 0,
-//     bottom 0 right 0;
-//   padding: 338px 16px 36px;
-// `;
+
 export const TextHero = styled.h3`
 position: absolute;
 top: 259px;

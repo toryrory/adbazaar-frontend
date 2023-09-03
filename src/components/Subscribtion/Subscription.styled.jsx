@@ -1,11 +1,18 @@
 import styled from "styled-components";
-// import Image from "next/image";
+import Image from "next/image";
 
-// export const Stripe = styled(Image)`
-//   display: inline-flex;
-//   transform: rotate(-10deg);
-//   align-items: center;
-// `;
+export const Section = styled.section`
+position:relative;
+`
+export const OrnamentBox = styled.div`
+width: 1020px;
+height: 105px;
+`
+
+export const FullOrnamentImg = styled(Image)`
+  position: absolute;
+  top: 0;
+`;
 
 export const Text = styled.p`
   color: var(--brand-color);
@@ -42,5 +49,5 @@ export const Form = styled.form`
   height: 35px;
 `;
 export const Container = styled.div`
-  padding: 54px 16px 48px;
+  padding: 158px 16px 48px;
 `;

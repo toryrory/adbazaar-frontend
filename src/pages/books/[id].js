@@ -12,10 +12,10 @@ import GenreList from '@/components/BookID/GenreList/GenreList';
 import {
   Container,
   AccordionButton,
-  Ornament,
-  OrnamentImg,
   BackButton,
 } from '@/styles/bookId.styled';
+import { HeroStar } from '@/styles/index.styled';
+import { BgFull } from '../../../public/backgrounds';
 import {
   ArrowDown,
   ArrowUp,
@@ -23,8 +23,9 @@ import {
   Puzzle,
   OverviewImg,
 } from '../../../public/svg-book';
-import { BgOrnament } from '../../../public/backgrounds';
 import { ToastContainer } from 'react-toastify';
+import { OrnamentImg } from '@/components/Categories/CategoryBooks/CategoryBooks.styled';
+import { FullOrnamentClipped } from '../../../public/backgrounds';
 
 export default function BooksId() {
   const router = useRouter();
@@ -49,8 +50,9 @@ export default function BooksId() {
   return (
     <Layout>
       <Container>
+        <HeroStar src={BgFull} alt='star' style={{zIndex: -1}}/>
         <SearchBar queryId={id} />
-        <BackButton type="button" onClick={() => router.back()}>
+        <BackButton type='button' onClick={() => router.back()}>
           <ArrowBack style={{ width: 21, height: 24 }} />
           Go back
         </BackButton>
@@ -58,42 +60,40 @@ export default function BooksId() {
           <>
             <GenreList currentGenre={currentBook.genre} />
             <BookHeader book={currentBook} />
-            <AccordionButton type="button" onClick={toggleDetails}>
+            <AccordionButton type='button' onClick={toggleDetails}>
               <Puzzle style={{ width: 24, height: 24, marginRight: 8 }} />
               Detailed Information
               {showDetails ? (
                 <ArrowUp
-                  style={{ width: 15, height: 15, marginLeft: 'auto' }}
+                  style={{ width: 15, height: 15, marginLeft: "auto" }}
                 />
               ) : (
                 <ArrowDown
-                  style={{ width: 15, height: 15, marginLeft: 'auto' }}
+                  style={{ width: 15, height: 15, marginLeft: "auto" }}
                 />
               )}
             </AccordionButton>
             {showDetails && <BookDetails book={currentBook} />}
-            <AccordionButton type="button" onClick={toggleOverview}>
+            <AccordionButton type='button' onClick={toggleOverview}>
               <OverviewImg style={{ width: 24, height: 24, marginRight: 8 }} />
               Overview
               {showOverview ? (
                 <ArrowUp
-                  style={{ width: 15, height: 15, marginLeft: 'auto' }}
+                  style={{ width: 15, height: 15, marginLeft: "auto" }}
                 />
               ) : (
                 <ArrowDown
-                  style={{ width: 15, height: 15, marginLeft: 'auto' }}
+                  style={{ width: 15, height: 15, marginLeft: "auto" }}
                 />
               )}
             </AccordionButton>
             {showOverview && <BookOverview book={currentBook} />}
             <BookReviews book={currentBook} />
-            <Ornament>
-              <OrnamentImg src={BgOrnament} alt="ornament" />
-            </Ornament>
+            <OrnamentImg src={FullOrnamentClipped} alt='ornament' distance='pdp'/>
             <SimilarBooks book={currentBook} />
           </>
         )}
-        <ToastContainer theme="dark" />
+        <ToastContainer theme='dark' />
       </Container>
     </Layout>
   );

@@ -1,24 +1,28 @@
 import {
   Container,
   List,
-  Ornament,
   OrnamentImg,
   NewestContainer,
   NewestList,
   Title,
   Description,
   BtnSeeMore,
-} from './CategoryBooks.styled';
+  NewestStar,
+  DarkBgNewest,
+} from "./CategoryBooks.styled";
+import { Section} from "@/components/Subscribtion/Subscription.styled";
+import { FullOrnamentClipped } from "../../../../public/backgrounds";
 import Book from '../../Book/Book';
-import { BgOrnament } from '../../../../public/backgrounds';
 import { ArrowRight } from '../../../../public/svg-book';
 import { books as allBooks } from '@/data/books';
+import { BgFull } from '../../../../public/backgrounds';
+
 
 export default function CategoryBooks({ books, variant }) {
   const fiveBooks = allBooks.slice(0, 5);
 
   return (
-    <>
+    <Section>
       <Container>
         <List>
           {books.map((book) => {
@@ -26,10 +30,10 @@ export default function CategoryBooks({ books, variant }) {
           })}
         </List>
       </Container>
-      <Ornament>
-        <OrnamentImg src={BgOrnament} alt="ornament" />
-      </Ornament>
+      <OrnamentImg src={FullOrnamentClipped} alt='ornament' distance='category'/>
       <NewestContainer>
+        <NewestStar src={BgFull} alt='star' />
+        <DarkBgNewest />
         <Title>Newest</Title>
         <Description>
           AdBazaar help you always stay up-to-date with the newest book
@@ -38,15 +42,15 @@ export default function CategoryBooks({ books, variant }) {
           {fiveBooks.map((item) => {
             return (
               <li key={item.id}>
-                <Book book={item} variant={'main'} />
+                <Book book={item} variant={"main"} />
               </li>
             );
           })}
         </NewestList>
         <BtnSeeMore
-          type="button"
+          type='button'
           onClick={() => {
-            console.log('see more');
+            console.log("see more");
           }}
         >
           See more
@@ -58,6 +62,6 @@ export default function CategoryBooks({ books, variant }) {
           />
         </BtnSeeMore>
       </NewestContainer>
-    </>
+    </Section>
   );
 }

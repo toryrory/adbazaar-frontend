@@ -1,6 +1,5 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import Layout from "@/components/Layout/Layout";
 import SearchBar from "@/components/SearchBar/SearchBar";
 import SecondaryButton from "@/components/secondaryButton/SecondaryButton";
@@ -68,7 +67,7 @@ export default function Home() {
             title={sectionTexts[1].title}
             text={sectionTexts[1].text}
             banner={BannerNewest}
-            id={"newest"}
+            id={"new"}
           />
           {starVisibility && <ChildrenStar src={BgFull} alt='star' />}
           {starVisibility && <DarkBgChil></DarkBgChil>}
@@ -87,13 +86,19 @@ export default function Home() {
           />
           {starVisibility && <UsedStar src={BgFull} alt='star' />}
           {starVisibility && <DarkBgUsed></DarkBgUsed>}
+          <div style={{ color: "white", fontSize: "26px", height: "447px" }}>
+            Top BookSellers in progress
+          </div>
           <BecomeSeller />
           <BookSectionLayout
             title={sectionTexts[4].title}
             text={sectionTexts[4].text}
             banner={BannerSeller}
-            id={"seller"}
+            id={"sale"}
           />
+          <div style={{ color: "white", fontSize: "26px", height: "447px" }}>
+            Popular authors & series in progress
+          </div>
           <ToastContainer />
         </Layout>
       </main>

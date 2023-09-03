@@ -9,7 +9,7 @@ export const GenresList = styled.ul`
 `;
 
 export const GenresItem = styled.li`
-  background: var(--product-background);
+  background-color: var(--product-background);
   color: var(--white-text);
   font-size: 12px;
   line-height: 1.3;
