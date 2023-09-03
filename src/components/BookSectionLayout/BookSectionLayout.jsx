@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { ArrowRight } from "../../../public/svg-index";
 import {
   Container,
@@ -9,13 +10,20 @@ import BooksSwiper from "../BooksSwiper/BooksSwiper";
 
 
 export default function BookSectionLayout({ title, text, banner, id }) {
+  const router = useRouter();
 
+  const handleRouting = (categoryName) => {
+    if (categoryName === 'children') {
+      router.push(`/categories/genres/${categoryName}`);
+    }
+  router.push(`/categories/${categoryName}`)
+}
   return (
     <Container id={id}>
       <Title>{title}</Title>
       <Text>{text}</Text>
-      <BooksSwiper id={id} banner={banner}/>
-      <BtnSeeMore type='button'>
+      <BooksSwiper id={id} banner={banner} />
+      <BtnSeeMore type='button' onClick={() => handleRouting(id)}>
         See more
         <ArrowRight
           style={{

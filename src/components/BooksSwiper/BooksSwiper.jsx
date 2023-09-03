@@ -10,7 +10,7 @@ export default function BooksSwiper({ id, banner}) {
         case "bestsellers":
               fourBooks.splice(2, 0, banner);
               break
-        case "newest":
+        case "new":
               fourBooks.splice(0, 0, banner);
               break
         case "children":
@@ -19,7 +19,7 @@ export default function BooksSwiper({ id, banner}) {
         case "used":
               fourBooks.splice(1, 0, banner);
               break
-        case "seller":
+        case "sale":
               fourBooks.splice(0, 0, banner);
               break
 

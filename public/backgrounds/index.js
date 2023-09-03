@@ -11,3 +11,5 @@ export { default as BgHalfNewest } from './bg-newest.png';
 export { default as BgOrnament } from './bg-ornament.png';
 export { default as BgOrnamentStripe } from './bg-ornament-stripe.png';
 export { default as BgAdbazaar } from './AdBazaar.png';
+export { default as FullOrnament } from './full-ornament.png';
+export { default as FullOrnamentClipped } from './ornament-cliped-390х105.png'; //use this 

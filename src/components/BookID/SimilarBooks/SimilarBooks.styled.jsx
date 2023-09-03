@@ -1,7 +1,27 @@
 import styled from 'styled-components';
+import Image from 'next/image';
+import { rotation } from '@/styles/index.styled';
 
 export const Container = styled.div`
+position: relative;
   padding: 40px 0;
+`;
+
+export const StarSimilar = styled(Image)`
+  animation: ${rotation} 10s linear infinite;
+  position: absolute;
+  width: 100px;
+  top: 444px;
+  left: -43px;
+  opacity: 0.8;
+`;
+export const DarkBgSimilar = styled.div`
+  background-color: #131b2c91;
+  position: absolute;
+  width: 80px;
+  height: 40px;
+  top: 504px;
+  left: -20px;
 `;
 
 export const Title = styled.h3`

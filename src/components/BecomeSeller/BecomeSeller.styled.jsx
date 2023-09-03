@@ -9,7 +9,7 @@ export const Text = styled.p`
   font-weight: 400;
 `;
 export const Container = styled.div`
-    padding: 40px 28px 56px 4px;
+    padding: 145px 28px 56px 4px;
 `
 export const Button = styled.button`
   display: flex;
@@ -26,4 +26,7 @@ export const Button = styled.button`
 export const BtnContainer = styled.div`
     display: flex;
     justify-content: space-between;
+`
+export const Section = styled.div`
+  position: relative;
 `

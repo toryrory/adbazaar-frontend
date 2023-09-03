@@ -5,11 +5,14 @@ import {
   Description,
   List,
   BtnSeeMore,
+  StarSimilar, DarkBgSimilar
 } from './SimilarBooks.styled';
 import { books } from '@/data/books';
 import { genres } from '@/data/genres';
 import Book from '@/components/Book/Book';
 import { ArrowRight } from '../../../../public/svg-book';
+import { BgFull } from '../../../../public/backgrounds';
+
 
 export default function SimilarBooks({ book }) {
   const router = useRouter();
@@ -22,7 +25,9 @@ export default function SimilarBooks({ book }) {
 
   return (
     <Container>
-      <Title>Similar in genre "{currentGenre.name}"</Title>
+      <StarSimilar src={BgFull} alt='star' />
+      <DarkBgSimilar />
+      <Title>Similar in genre &#34;{currentGenre.name}&#34;</Title>
       <Description>
         AdBazaar help you always stay up-to-date with the newest book
       </Description>
@@ -31,13 +36,13 @@ export default function SimilarBooks({ book }) {
           if (item.id !== book.id) {
             return (
               <li key={item.id}>
-                <Book book={item} variant={'main'} />
+                <Book book={item} variant={"main"} />
               </li>
             );
           }
         })}
       </List>
-      <BtnSeeMore type="button" onClick={handleSeeMore}>
+      <BtnSeeMore type='button' onClick={handleSeeMore}>
         See more
         <ArrowRight
           style={{
