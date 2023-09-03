@@ -138,10 +138,9 @@ export const ButtonShopping = styled.button`
   line-height: 1;
 `;
 
-export const ContactContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 10px;
+export const SellerContainer = styled.div`
+  position: relative;
+  width: 100%;
   background: var(--product-background);
   border: 1px solid rgba(184, 205, 225, 0.25);
   border-radius: 10px;
@@ -149,7 +148,17 @@ export const ContactContainer = styled.div`
   margin-bottom: 24px;
 `;
 
-export const SellerButton = styled.button`
+export const ContactButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: transparent;
+  border: none;
+  width: 100%;
+`;
+
+export const SellerBtnContainer = styled.div`
   padding: 7px 59px;
   background: #2b364a;
   border: 1px solid var(--dark-grey);
@@ -161,7 +170,7 @@ export const SellerButton = styled.button`
   letter-spacing: -1.1%;
 `;
 
-export const ContactButton = styled.button`
+export const ContactContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;

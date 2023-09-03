@@ -17,8 +17,9 @@ import {
   Dollar,
   ButtonShopping,
   ContactContainer,
-  SellerButton,
   ContactButton,
+  SellerContainer,
+  SellerBtnContainer,
 } from './BookHeader.styled';
 import { Rating } from '@mui/material';
 import {
@@ -31,8 +32,16 @@ import {
 import { ShoppingCart } from '../../../../public/svg-layout';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useState } from 'react';
+import Seller from '../Seller/Seller';
 
 export default function BookHeader({ book }) {
+  const [showSeller, setShowSeller] = useState(false);
+
+  const toggleSeller = () => {
+    setShowSeller(!showSeller);
+  };
+
   return (
     <>
       <HeadContainer>
@@ -84,20 +93,21 @@ export default function BookHeader({ book }) {
           </ButtonShopping>
         </PriceContainer>
       </BookContainer>
-      <ContactContainer>
-        <SellerButton type="button" onClick={() => console.log('clicked')}>
-          Seller
-        </SellerButton>
-        <ContactButton type="button" onClick={() => console.log('clicked')}>
-          <User style={{ width: 24, height: 24 }} />
+      <SellerContainer>
+        <ContactButton type="button" onClick={toggleSeller}>
+          <SellerBtnContainer>Seller</SellerBtnContainer>
+          <ContactContainer>
+            <User style={{ width: 24, height: 24 }} />
+          </ContactContainer>
+          <ContactContainer>
+            <Mail style={{ width: 24, height: 24 }} />
+          </ContactContainer>
+          <ContactContainer>
+            <Chat style={{ width: 24, height: 24 }} />
+          </ContactContainer>
         </ContactButton>
-        <ContactButton type="button" onClick={() => console.log('clicked')}>
-          <Mail style={{ width: 24, height: 24 }} />
-        </ContactButton>
-        <ContactButton type="button" onClick={() => console.log('clicked')}>
-          <Chat style={{ width: 24, height: 24 }} />
-        </ContactButton>
-      </ContactContainer>
+        {showSeller && <Seller />}
+      </SellerContainer>
     </>
   );
 }
