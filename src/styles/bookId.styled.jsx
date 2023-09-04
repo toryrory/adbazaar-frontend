@@ -39,4 +39,6 @@ export const BackButton = styled.button`
   background: transparent;
   border: none;
   margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 1.43;
 `;
