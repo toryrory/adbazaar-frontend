@@ -245,9 +245,7 @@ export default function SignUp() {
               You accept
               <Link
                 style={{ color: '#a3e9ff', textDecoration: 'underline' }}
-                href=""
-                // target="_blank"
-                // rel="noreferrer noopener"
+                href="/terms"
               >
                 our Terms and Conditions
               </Link>

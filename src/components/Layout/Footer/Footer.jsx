@@ -36,10 +36,10 @@ export default function Footer() {
               <MenuLink href="/">Home</MenuLink>
             </li>
             <li>
-              <MenuLink href="/">Categories</MenuLink>
+              <MenuLink href="/categories">Categories</MenuLink>
             </li>
             <li>
-              <MenuLink href="/">About</MenuLink>
+              <MenuLink href="/about">About</MenuLink>
             </li>
             <li>
               <MenuLink href="/">Promotions</MenuLink>
@@ -113,10 +113,10 @@ export default function Footer() {
                 <MenuLink href="/">Contacts</MenuLink>
               </li>
               <li>
-                <MenuLink href="/">Payment & Shipping</MenuLink>
+                <MenuLink href="/payments">Payment & Shipping</MenuLink>
               </li>
               <li>
-                <MenuLink href="/">Terms & Conditions</MenuLink>
+                <MenuLink href="/terms">Terms & Conditions</MenuLink>
               </li>
               <li>
                 <MenuLink href="/">Order Status</MenuLink>

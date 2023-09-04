@@ -1,23 +1,23 @@
-import { useRouter } from "next/router";
-import { Search } from "../../../public/svg-index";
+import { useRouter } from 'next/router';
+import { Search } from '../../../public/svg-index';
 import {
   InputWrapper,
   Input,
   BtnSearch,
   BtnsWrapper,
   BtnDelete,
-} from "./SearchBar.styled";
-import { useState, useEffect } from "react";
-import { Cross } from "../../../public/svg-authorization";
-import SearchResultList from "./SearchResultList/SearchResultList";
-import { books } from "@/data/books";
-import { useDispatch } from "react-redux";
-import {changeStarVisibility} from "../../redux/mainPageSlice"
+} from './SearchBar.styled';
+import { useState, useEffect } from 'react';
+import { Cross } from '../../../public/svg-authorization';
+import SearchResultList from './SearchResultList/SearchResultList';
+import { books } from '@/data/books';
+import { useDispatch } from 'react-redux';
+import { changeStarVisibility } from '../../redux/mainPageSlice';
 
-export default function SearchBar({queryId}) {
+export default function SearchBar({ queryId, style }) {
   const router = useRouter();
   const dispatch = useDispatch();
-  const [inputText, setInputText] = useState("");
+  const [inputText, setInputText] = useState('');
   const [searchResult, setSearchResult] = useState(null);
 
   useEffect(() => {
@@ -29,8 +29,7 @@ export default function SearchBar({queryId}) {
       ? dispatch(changeStarVisibility(false))
       : dispatch(changeStarVisibility(true));
   }, [searchResult, dispatch]);
-  
-  
+
   const searchFilter = (inputText, books) => {
     const filtredBooks = books.filter(
       ({ name, author, genre, publisher }) =>
@@ -39,27 +38,29 @@ export default function SearchBar({queryId}) {
         genre.toLowerCase().includes(inputText.toLowerCase()) ||
         publisher.toLowerCase().includes(inputText.toLowerCase())
     );
-    filtredBooks.length === 0 ?setSearchResult(null) : setSearchResult(filtredBooks);
+    filtredBooks.length === 0
+      ? setSearchResult(null)
+      : setSearchResult(filtredBooks);
   };
   const handleChange = (e) => {
     //dispatch(getSearchBooks(e.target.value))
     setInputText(e.target.value);
     searchFilter(inputText, books);
   };
-  
+
   const handleRedirect = (searchResult) => {
     if (searchResult.length === 1) {
-        router.push(`/books/${searchResult[0].id}`);
-      setSearchResult(null)
+      router.push(`/books/${searchResult[0].id}`);
+      setSearchResult(null);
     }
-  }
+  };
   return (
     <>
-      <InputWrapper>
+      <InputWrapper style={style}>
         <Input
-          type='text'
+          type="text"
           value={inputText}
-          placeholder='Enter title or author name  |'
+          placeholder="Enter title or author name  |"
           onChange={handleChange}
         />
         <BtnsWrapper>
@@ -68,9 +69,9 @@ export default function SearchBar({queryId}) {
           </BtnSearch>
           {inputText && (
             <BtnDelete
-              type='button'
+              type="button"
               onClick={() => {
-                setInputText("");
+                setInputText('');
                 setSearchResult(null);
               }}
             >
