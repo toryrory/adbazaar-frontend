@@ -14,3 +14,4 @@ export const selectAvatarImg = state => state.account.settings.avatar
 
 //main selectors 
 export const selectShowStars = state => state.main.showStars
+export const selectSubscription = state => state.main.subscription

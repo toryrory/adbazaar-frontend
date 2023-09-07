@@ -4,14 +4,14 @@ import { rotation } from '@/styles/index.styled';
 
 export const Container = styled.div`
 position: relative;
-  padding: 40px 0;
+  padding: 228px 0 40px;
 `;
 
 export const StarSimilar = styled(Image)`
   animation: ${rotation} 10s linear infinite;
   position: absolute;
   width: 100px;
-  top: 444px;
+  top: 630px;
   left: -43px;
   opacity: 0.8;
 `;
@@ -20,7 +20,7 @@ export const DarkBgSimilar = styled.div`
   position: absolute;
   width: 80px;
   height: 40px;
-  top: 504px;
+  top: 690px;
   left: -20px;
 `;
 

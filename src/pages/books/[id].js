@@ -89,7 +89,7 @@ export default function BooksId() {
             </AccordionButton>
             {showOverview && <BookOverview book={currentBook} />}
             <BookReviews book={currentBook} />
-            <OrnamentImg src={FullOrnamentClipped} alt='ornament' distance='pdp'/>
+            <OrnamentImg src={FullOrnamentClipped} alt='ornament' distance='pdp' style={{position: 'absolute', left: '0px'}}/>
             <SimilarBooks book={currentBook} />
           </>
         )}

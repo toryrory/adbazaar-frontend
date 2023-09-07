@@ -161,7 +161,7 @@ export default function Account() {
           <Support />
         </AccountAccordion>
         <AccountAccordion
-          text="Books | sell / Add Book"
+          text="Books I sell / Add Book"
           icon={
             <AddBookSvg style={{ width: 24, height: 24, marginRight: 16 }} />
           }

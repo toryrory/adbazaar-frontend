@@ -21,6 +21,7 @@ import { sectionTexts } from "@/data/section-text";
 import { BannerBestsellers, BannerChildren, BannerNewest, BannerSeller, BannerUsed } from "../../public/png/banners";
 import BecomeSeller from "@/components/BecomeSeller/BecomeSeller";
 import Subscription from "@/components/Subscribtion/Subscription";
+import TopBookSellersSection from "@/components/TopBooksellersSection/TopBookSellersSection";
 import { ToastContainer } from "react-toastify";
 import { BgFull } from "../../public/backgrounds";
 import { selectShowStars } from "@/redux/selectors";
@@ -86,13 +87,11 @@ export default function Home() {
           />
           {starVisibility && <UsedStar src={BgFull} alt='star' />}
           {starVisibility && <DarkBgUsed></DarkBgUsed>}
-          <div style={{ color: "white", fontSize: "26px", height: "447px" }}>
-            Top BookSellers in progress
-          </div>
+          <TopBookSellersSection />
           <BecomeSeller />
           <BookSectionLayout
-            title={sectionTexts[4].title}
-            text={sectionTexts[4].text}
+            title={sectionTexts[5].title}
+            text={sectionTexts[5].text}
             banner={BannerSeller}
             id={"sale"}
           />
