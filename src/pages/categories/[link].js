@@ -4,10 +4,12 @@ import Layout from '@/components/Layout/Layout';
 import CategoryPage from '@/components/Categories/CategoryPage/CategoryPage';
 import { Container, BooksCount } from '@/styles/categoriesLink.styled';
 import { categories } from '@/data/categories';
-import { books } from '@/data/books';
+import { useSelector } from 'react-redux';
+import { selectBooks } from '@/redux/selectors';
 import CategoryBooks from '@/components/Categories/CategoryBooks/CategoryBooks';
 
 export default function CategoriesLink() {
+  const books = useSelector(selectBooks);
   const router = useRouter();
   const { link } = router.query;
   const [currentCategory, setCurrentCategory] = useState(null);

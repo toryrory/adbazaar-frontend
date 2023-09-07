@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { deleteFavorites } from '@/redux/accountSlice';
 import { useDispatch } from 'react-redux';
 import { ShoppingCart } from '../../../public/svg-layout';
-import { HeartActive } from '../../../public/svg-book';
 import { Cross } from '../../../public/svg-layout';
 import {
   Item,
