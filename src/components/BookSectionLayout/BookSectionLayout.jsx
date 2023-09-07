@@ -7,6 +7,7 @@ import {
   Text,
 } from "./BookSectionLayout.styled";
 import BooksSwiper from "../BooksSwiper/BooksSwiper";
+import MainTexts from "../MainTexts/MainTexts";
 
 
 export default function BookSectionLayout({ title, text, banner, id }) {
@@ -20,8 +21,7 @@ export default function BookSectionLayout({ title, text, banner, id }) {
 }
   return (
     <Container id={id}>
-      <Title>{title}</Title>
-      <Text>{text}</Text>
+      <MainTexts title={title} text={text} />
       <BooksSwiper id={id} banner={banner} />
       <BtnSeeMore type='button' onClick={() => handleRouting(id)}>
         See more

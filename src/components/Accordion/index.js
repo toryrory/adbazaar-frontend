@@ -1,4 +1,4 @@
-export { default as AddBook } from './AddBook/AddBook';
+export { default as AddBook } from './AddBook/AddBookTab';
 export { default as Payments } from './Payments/Payments';
 export { default as Settings } from './Settings/Settings';
 export { default as Support } from './Support/Support';

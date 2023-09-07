@@ -2,6 +2,7 @@
   --brand-color: #a3e9ff;
   --light-text: #b8cde1;
   --white-text: #f1f1f1;
+  --white-text-06: #f1f1f1bc;
   --main-background: #131b2c;
   --gradient: linear-gradient(89.44deg, #51c5ea 4.39%, #f18ff3 118.29%);
   --error-color: #f97484;
@@ -13,6 +14,7 @@
   --rose-color: #F38FF5;
   --hero-rose: #fdacff;
   --dark-text: #23314f;
+  --required-color: #E83B50;
 }
 @font-face {
   font-family: 'TrueHelvetica';

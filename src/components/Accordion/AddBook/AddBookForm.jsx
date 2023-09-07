@@ -1,33 +1,60 @@
-import { useFormik } from 'formik';
+import { useFormik } from "formik";
+import { useState } from "react";
+import InputAddBookForm from "./InputAddBookForm";
+import { LanguageBox, LanguageInput } from "./AddBookForm.styled";
 
 export default function AddBookForm() {
+  // const [focused, setFocused] = useState({
+  //   En: true,
+  //   Uk: false, //test, delete this
+  //   Ua: false,
+  // });
+  const [focusedEn, setFocusedEn] = useState(true);
+  const [focusedUk, setFocusedUk] = useState(false);
+  const [focusedUa, setFocusedUa] = useState(false);
+
+  const toggleFocused = (value) => {
+    if (value === "En") {
+      setFocusedEn(prevState => !prevState)
+    }
+    // console.dir(e.target.value);
+    // const { value } = e.target;
+    // console.log(focused.En);
+    // setFocused(prevState => !prevState[value]);
+    // console.log(focused.En);
+    //   setFocused(!focused);
+    //   let currentValue = e.target.attributes.focused.nodeValue;
+    //   currentValue = 'true';
+    //   console.dir(e.target.attributes.focused.nodeValue);
+  };
+
   const onSubmit = (values, actions) => {
-    console.log(values);
+    alert(JSON.stringify(values, null, 2));
     actions.resetForm();
   };
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: {
-        title: '',
-        performed: '',
-        state: '',
-        confirm: '',
-        author: '',
-        language: '',
-        ISBN: '',
-        format: '',
-        genre: '',
-        publisher: '',
-        year: '',
-        cover: '',
-        length: '',
-        weight: '',
-        dimensions: '',
-        price: '',
+        title: "",
+        // performed: '',
+        // state: '',
+        // confirm: '',
+        author: "",
+        language: "",
+        // ISBN: '',
+        format: "",
+        genre: "",
+        publisher: "",
+        // year: '',
+        // cover: '',
+        // length: '',
+        // weight: '',
+        // dimensions: '',
+        price: "",
         isBargainAproppriate: false,
-        description: '',
-        additional: '',
+        description: "",
+        // additional: '',
       },
       // validationSchema: schema,
       onSubmit,
@@ -35,9 +62,51 @@ export default function AddBookForm() {
 
   return (
     <>
-      <h3>AddBookForm</h3>
       <form onSubmit={handleSubmit}>
-        <ul>
+        <InputAddBookForm
+          name={"title"}
+          label={"Book Title"}
+          placeholder={"Provide the accurate book title |"}
+          onChange={handleChange}
+        />
+        <InputAddBookForm label={"Choose book language"}>
+          <LanguageBox>
+            <LanguageInput
+              name='language'
+              defaultValue={"En"}
+              onClick={handleChange}
+              focused={`${focusedEn}`}
+            />
+            <LanguageInput
+              name='language'
+              defaultValue={"Uk"}
+              onClick={handleChange}
+              focused={`${focusedUk}`}
+            />
+            <LanguageInput
+              name='language'
+              defaultValue={"Ua"}
+              onClick={handleChange}
+              focused={`${focusedUa}`}
+            />
+            <input />
+          </LanguageBox>
+        </InputAddBookForm>
+        <InputAddBookForm
+          name={"author"}
+          label={"Author(s) name(s)"}
+          placeholder={"Provide the accurate author(s) name(s) |"}
+          onChange={handleChange}
+        />
+
+        <InputAddBookForm
+          name={"publisher"}
+          label={"Publisher"}
+          placeholder={"Provide publisher house name |"}
+          onChange={handleChange}
+        />
+        <button type='submit'>submit</button>
+        {/* <ul>
           <li>
             <label htmlFor="title">
               Book Title
@@ -233,7 +302,7 @@ export default function AddBookForm() {
               placeholder="0000.00"
             />
           </li>
-        </ul>
+        </ul> */}
       </form>
     </>
   );
