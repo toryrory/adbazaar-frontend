@@ -13,6 +13,7 @@
     "@emotion/styled": "^11.11.0",
     "@headlessui/react": "^1.7.16",
     "@mui/icons-material": "^5.14.3",
+    "@mui/lab": "^5.0.0-alpha.143",
     "@mui/material": "^5.14.4",
     "@react-oauth/google": "^0.11.1",
     "@reduxjs/toolkit": "^1.9.5",
