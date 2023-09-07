@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import CloseButton from '../closeButton/CloseButton';
+import SecondaryButton from '../secondaryButton/SecondaryButton';
+import Link from 'next/link';
 import { Tick, SadSmile } from '../../../public/svg-authorization';
 import {
   Overlay,
@@ -8,8 +10,8 @@ import {
   WhooText,
   Message,
   ErrorMessage,
+  LinkText,
 } from './Modal.styled';
-import SecondaryButton from '../secondaryButton/SecondaryButton';
 
 export default function Modal({
   onClose,
@@ -19,6 +21,9 @@ export default function Modal({
   showOkButton,
   errorMessage,
   showSadSmile,
+  showLoginButton,
+  showLink,
+  messageStyles,
 }) {
   const router = useRouter();
 
@@ -48,6 +53,10 @@ export default function Modal({
     router.push('/');
   };
 
+  const onPressLogin = () => {
+    router.push('/login');
+  };
+
   return (
     <Overlay onClick={handleOverlayClick}>
       <ModalWindow>
@@ -64,7 +73,7 @@ export default function Modal({
           </>
         )}
         <CloseButton onClick={onClose} />
-        {message && <Message>{message}</Message>}
+        {message && <Message style={messageStyles}>{message}</Message>}
         {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
         {showButton && (
           <SecondaryButton
@@ -81,6 +90,25 @@ export default function Modal({
             text="OK"
             style={{ marginTop: 40 }}
           />
+        )}
+        {showLoginButton && (
+          <SecondaryButton
+            type="button"
+            onClick={onPressLogin}
+            text="Sign in"
+            style={{ marginTop: 32, marginBottom: 24 }}
+          />
+        )}
+        {showLink && (
+          <LinkText>
+            Don’t have account?{' '}
+            <Link
+              href="/register"
+              style={{ color: 'inherit', fontWeight: 700 }}
+            >
+              Create now
+            </Link>
+          </LinkText>
         )}
       </ModalWindow>
     </Overlay>

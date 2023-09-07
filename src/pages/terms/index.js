@@ -1,12 +1,5 @@
 import InfoPage from '@/components/InfoPage/InfoPage';
-import {
-  Container,
-  Title,
-  Subtitle,
-  Text,
-  NewPost,
-  SmallStar,
-} from '@/styles/payments.styled';
+import { Container, Title, Text, SmallStar } from '@/styles/payments.styled';
 import { BgFull } from '../../../public/backgrounds';
 
 export default function Terms() {

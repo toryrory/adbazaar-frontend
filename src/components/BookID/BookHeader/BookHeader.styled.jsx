@@ -92,17 +92,6 @@ export const Label = styled.p`
   left: 0;
 `;
 
-export const ButtonFavorites = styled.button`
-  display: flex;
-  background-color: #355896;
-  border: none;
-  border-radius: 5px 0px 0px 5px;
-  padding: 4px;
-  position: absolute;
-  top: 24px;
-  right: 0;
-`;
-
 export const PriceContainer = styled.div`
   display: flex;
   align-items: center;

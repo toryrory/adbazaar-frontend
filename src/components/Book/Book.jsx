@@ -1,4 +1,12 @@
-import Image from 'next/image';
+import { addFavorites, deleteFavorites } from '@/redux/accountSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectFavorites, selectIsLoggedIn } from '@/redux/selectors';
+import { useEffect, useState } from 'react';
+import Modal from '../modal/Modal';
+import Link from 'next/link';
+import { HeartPlus, HeartMinus } from '../../../public/svg-book';
+import { ShoppingCart } from '../../../public/svg-layout';
+import { Rating } from '@mui/material';
 import {
   Item,
   Title,
@@ -13,21 +21,60 @@ import {
   RatingBox,
   Reviews,
 } from './Book.styled';
-import Link from 'next/link';
-import { HeartPlus } from '../../../public/svg-book';
-import { ShoppingCart } from '../../../public/svg-layout';
-import { Rating } from '@mui/material';
 
 export default function Book({ book, variant }) {
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const favoriteBooks = useSelector(selectFavorites);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const isCurrentFavorite = favoriteBooks.find(
+      (favorite) => favorite.id === book.id
+    );
+    if (isCurrentFavorite) {
+      setIsFavorite(true);
+    } else {
+      setIsFavorite(false);
+    }
+  });
+
+  const addToFavorites = () => {
+    if (!isLoggedIn) {
+      setShowModal(true);
+      return;
+    }
+    dispatch(addFavorites(book));
+    setIsFavorite(true);
+  };
+
+  const removeFromFavorites = () => {
+    dispatch(deleteFavorites(book.id));
+    setIsFavorite(false);
+  };
+
+  const onCloseModal = () => {
+    setShowModal(false);
+  };
+
   return (
     <Item variant={variant} key={book.id}>
       <Label variant={variant}>label</Label>
-      <ButtonFavorites
-        variant={variant}
-        onClick={() => console.log('add to favorites')}
-      >
-        <HeartPlus style={{ width: 24, height: 24 }} />
-      </ButtonFavorites>
+      {isFavorite ? (
+        <ButtonFavorites
+          variant={variant}
+          onClick={removeFromFavorites}
+          style={{ backgroundColor: '#F38FF5' }}
+        >
+          <HeartMinus style={{ width: 24, height: 24 }} />
+        </ButtonFavorites>
+      ) : (
+        <ButtonFavorites variant={variant} onClick={addToFavorites}>
+          <HeartPlus style={{ width: 24, height: 24 }} />
+        </ButtonFavorites>
+      )}
       <StyledImg
         src={book.photo}
         alt={book.name}
@@ -61,6 +108,15 @@ export default function Book({ book, variant }) {
           <ShoppingCart style={{ width: 24, height: 24 }} />
         </ButtonShopping>
       </Bottom>
+      {showModal && (
+        <Modal
+          onClose={onCloseModal}
+          message="This service is exclusively available for authorized site visitors"
+          messageStyles={{ marginTop: 40, fontSize: 16 }}
+          showLoginButton={true}
+          showLink={true}
+        />
+      )}
     </Item>
   );
 }

@@ -2,13 +2,7 @@ import { useRouter } from 'next/navigation';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import { selectSettings, selectIsLoggedIn } from '@/redux/selectors';
-import {
-  HeaderContainer,
-  ButtonContainer,
-  Button,
-  Circle,
-  StyledImg,
-} from './Header.styled';
+import MobileMenu from '../MobileMenu/MobileMenu';
 import {
   User,
   Logo,
@@ -17,7 +11,13 @@ import {
   Heart,
 } from '../../../../public/svg-layout';
 import { Img32Girl } from '../../../../public/png';
-import MobileMenu from '../MobileMenu/MobileMenu';
+import {
+  HeaderContainer,
+  ButtonContainer,
+  Button,
+  Circle,
+  StyledImg,
+} from './Header.styled';
 
 export default function Header() {
   const router = useRouter();
@@ -56,7 +56,7 @@ export default function Header() {
               />
             </Circle>
           </Button>
-          <Button type="button" onClick={() => console.log('open favorites')}>
+          <Button type="button" onClick={() => router.push('/favorites')}>
             <Heart style={{ width: 24, height: 24 }} />
           </Button>
           <Button
