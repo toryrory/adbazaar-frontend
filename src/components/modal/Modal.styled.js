@@ -9,7 +9,12 @@ export const Overlay = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.8);
+  background: linear-gradient(
+    180deg,
+    rgba(19, 27, 44, 0.67) 0%,
+    rgba(29, 33, 37, 0.9) 100%
+  );
+
   z-index: 1200;
 `;
 
@@ -23,6 +28,7 @@ export const ModalWindow = styled.div`
   height: 42vh;
   overflow: hidden;
   border-radius: 10px;
+  // border: 0.5px solid rgba(184, 205, 225, 0.5);
   background-color: var(--main-background);
   text-align: center;
   padding: 22px 30px;
@@ -60,4 +66,10 @@ export const ErrorMessage = styled.p`
   line-height: 1.16;
   color: var(--error-color);
   margin-top: 8px;
+`;
+
+export const LinkText = styled.p`
+  font-size: 14px;
+  line-height: 1.16;
+  color: var(--light-text);
 `;

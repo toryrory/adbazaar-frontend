@@ -1,5 +1,17 @@
-// import { Simplesharer } from 'simple-sharer';
 import { copy } from 'simple-sharer';
+import { Rating } from '@mui/material';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useEffect, useState } from 'react';
+import { addFavorites, deleteFavorites } from '@/redux/accountSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectFavorites, selectIsLoggedIn } from '@/redux/selectors';
+import Seller from '../Seller/Seller';
+import AddFavoriteBtn from '../FavoriteBtn/AddFavoriteBtn';
+import DeleteFavoriteBtn from '../FavoriteBtn/DeleteFavoriteBtn';
+import Modal from '@/components/modal/Modal';
+import { Share, User, Mail, Chat } from '../../../../public/svg-book';
+import { ShoppingCart } from '../../../../public/svg-layout';
 import {
   HeadContainer,
   TitleContainer,
@@ -11,7 +23,6 @@ import {
   BookContainer,
   StyledImg,
   Label,
-  ButtonFavorites,
   PriceContainer,
   Price,
   Dollar,
@@ -21,25 +32,46 @@ import {
   SellerContainer,
   SellerBtnContainer,
 } from './BookHeader.styled';
-import { Rating } from '@mui/material';
-import {
-  Share,
-  HeartPlus,
-  User,
-  Mail,
-  Chat,
-} from '../../../../public/svg-book';
-import { ShoppingCart } from '../../../../public/svg-layout';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { useState } from 'react';
-import Seller from '../Seller/Seller';
 
 export default function BookHeader({ book }) {
   const [showSeller, setShowSeller] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const favoriteBooks = useSelector(selectFavorites);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const isCurrentFavorite = favoriteBooks.find(
+      (favorite) => favorite.id === book.id
+    );
+    if (isCurrentFavorite) {
+      setIsFavorite(true);
+    } else {
+      setIsFavorite(false);
+    }
+  });
 
   const toggleSeller = () => {
     setShowSeller(!showSeller);
+  };
+
+  const addToFavorites = () => {
+    if (!isLoggedIn) {
+      setShowModal(true);
+      return;
+    }
+    dispatch(addFavorites(book));
+    setIsFavorite(true);
+  };
+
+  const removeFromFavorites = () => {
+    dispatch(deleteFavorites(book.id));
+    setIsFavorite(false);
+  };
+
+  const onCloseModal = () => {
+    setShowModal(false);
   };
 
   return (
@@ -75,9 +107,12 @@ export default function BookHeader({ book }) {
       </HeadContainer>
       <BookContainer>
         <Label>label</Label>
-        <ButtonFavorites onClick={() => console.log('add to favorites')}>
-          <HeartPlus style={{ width: 36, height: 36 }} />
-        </ButtonFavorites>
+        {isFavorite ? (
+          <DeleteFavoriteBtn onClick={removeFromFavorites} />
+        ) : (
+          <AddFavoriteBtn onClick={addToFavorites} />
+        )}
+
         <StyledImg src={book.photo} alt={book.name} priority={true} />
         <PriceContainer>
           <Price>
@@ -108,6 +143,15 @@ export default function BookHeader({ book }) {
         </ContactButton>
         {showSeller && <Seller />}
       </SellerContainer>
+      {showModal && (
+        <Modal
+          onClose={onCloseModal}
+          message="This service is exclusively available for authorized site visitors"
+          messageStyles={{ marginTop: 40, fontSize: 16 }}
+          showLoginButton={true}
+          showLink={true}
+        />
+      )}
     </>
   );
 }

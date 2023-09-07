@@ -1,4 +1,5 @@
 export { default as HeartPlus } from './heart-plus.svg';
+export { default as HeartMinus } from './heart-minus.svg';
 export { default as Share } from './share.svg';
 export { default as User } from './user.svg';
 export { default as Mail } from './mail.svg';
