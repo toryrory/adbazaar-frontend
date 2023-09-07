@@ -26,13 +26,12 @@ const booksSlice = createSlice({
         const index = state.findIndex(
           (book) => book.id === action.payload.bookId
         );
-        if (state[index].rating === 0) {
-          const newRating = state[index].rating + action.payload.rating;
-          state[index].rating = newRating;
-        } else {
-          const newRating = (state[index].rating + action.payload.rating) / 2;
-          state[index].rating = newRating;
-        }
+        const book = state[index];
+        book.grades.push(action.payload.rating);
+        const newRating =
+          book.grades.reduce((acc, number) => acc + number, 0) /
+          book.grades.length;
+        book.rating = newRating;
       },
       prepare(bookId, rating) {
         return {
