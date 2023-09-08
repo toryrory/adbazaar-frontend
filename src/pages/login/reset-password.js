@@ -2,6 +2,7 @@ import { useFormik } from 'formik';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { resetPassword } from '@/redux/operations';
 import Modal from '@/components/modal/Modal';
 import AuthorizationContainer from '@/components/Authorization/authorizationContainer/AuthorizationContainer';
 import CloseButton from '@/components/closeButton/CloseButton';
@@ -29,7 +30,7 @@ export default function ResetPassword() {
 
   const onSubmit = ({ email }, actions) => {
     console.log(email);
-    // dispatch(resetPassword(email));
+    dispatch(resetPassword(email));
     setShowModal(true);
     actions.resetForm();
   };

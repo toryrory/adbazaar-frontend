@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { authLogin } from '@/redux/operations';
-import { selectAuthError, selectUserEmail } from '@/redux/selectors';
+import { selectAuthError, selectIsLoggedIn } from '@/redux/selectors';
 import Modal from '@/components/modal/Modal';
 import AuthorizationContainer from '@/components/Authorization/authorizationContainer/AuthorizationContainer';
 import CloseButton from '@/components/closeButton/CloseButton';
@@ -27,7 +27,7 @@ import { EyeClosed, EyeOpened } from '../../../public/svg-authorization';
 
 export default function LogIn() {
   const router = useRouter();
-  const isUser = useSelector(selectUserEmail);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const authError = useSelector(selectAuthError);
   const [passwordShown, setPasswordShown] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -36,10 +36,10 @@ export default function LogIn() {
   useEffect(() => {
     if (authError) {
       setShowModal(false);
-    } else if (!authError && isUser) {
+    } else if (!authError && isLoggedIn) {
       setShowModal(true);
     }
-  }, [authError, isUser]);
+  }, [authError, isLoggedIn]);
 
   const togglePassword = () => {
     setPasswordShown(!passwordShown);

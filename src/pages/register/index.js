@@ -51,7 +51,7 @@ export default function SignUp() {
 
   const onCloseModalError = () => {
     setShowModalError(false);
-    router.push('/register');
+    // router.push('/register');
   };
 
   const onCloseModal = () => {
@@ -78,7 +78,7 @@ export default function SignUp() {
     { name, email, password, termsChecked, notificationsChecked },
     actions
   ) => {
-    dispatch(authRegister({ name, email, password }));
+    dispatch(authRegister({ full_name: name, email, password }));
     //   termsChecked = false;
     //   notificationsChecked = false;
     //   actions.resetForm();
@@ -284,7 +284,7 @@ export default function SignUp() {
       {showModalError && (
         <Modal
           onClose={onCloseModalError}
-          message="Email is already taken. Please enter valid email"
+          message="Email is already taken or something went wrong. Please try again"
         />
       )}
       {!authError && showModal && (
