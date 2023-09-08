@@ -6,6 +6,7 @@ import {
   googleLogin,
   googleLogOut,
   verification,
+  resetPassword,
 } from './operations';
 
 const handlePending = (state) => {
@@ -39,9 +40,11 @@ const authSlice = createSlice({
     builder
       .addCase(authRegister.pending, handlePending)
       .addCase(authRegister.fulfilled, (state, action) => {
-        state.user = { ...state.user, ...action.payload.user };
-        state.token = action.payload.token;
-        state.isLoggedIn = true;
+        // state.user = { ...state.user, ...action.payload.user };
+        // state.token = action.payload.token;
+        // state.isLoggedIn = true;
+        state.user = { ...state.user, email: action.payload.email };
+        state.isLoggedIn = false;
         state.isLoading = false;
         state.error = null;
         state.type = 'email';
@@ -49,8 +52,13 @@ const authSlice = createSlice({
       .addCase(authRegister.rejected, handleRejected)
       .addCase(authLogin.pending, handlePending)
       .addCase(authLogin.fulfilled, (state, action) => {
-        state.user = { ...state.user, ...action.payload.user };
-        state.token = action.payload.token;
+        // state.user = { ...state.user, ...action.payload.user };
+        state.user = {
+          ...state.user,
+          name: action.payload.full_name,
+          email: action.payload.email,
+        };
+        state.token = action.payload.access_token;
         state.isLoggedIn = true;
         state.isLoading = false;
         state.error = null;
@@ -95,7 +103,10 @@ const authSlice = createSlice({
       })
       .addCase(verification.rejected, (state) => {
         state.isVerified = false;
-      });
+      })
+      .addCase(resetPassword.rejected, handleRejected)
+      .addCase(resetPassword.pending, handlePending)
+      .addCase(resetPassword.fulfilled);
   },
 });
 

@@ -62,8 +62,7 @@ export default function Confirmation() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(value);
-    dispatch(verification(value));
+    dispatch(verification({ verification_code: value, email }));
     setIsCodeRight(false);
   };
 
@@ -119,9 +118,9 @@ export default function Confirmation() {
       {!authError && showModal && (
         <Modal
           onClose={onCloseModal}
-          message="You have successfully created your account"
+          message="You have successfully verify your account"
           showTick={true}
-          showButton={true}
+          showLoginButton={true}
         />
       )}
       {showModalError && (
@@ -129,7 +128,7 @@ export default function Confirmation() {
           onClose={() => setShowModalError(false)}
           errorMessage=" Vertification failed! Try entering the code again."
           showSadSmile={true}
-          showButton={true}
+          showHomeButton={true}
         />
       )}
       <ToastContainer />
