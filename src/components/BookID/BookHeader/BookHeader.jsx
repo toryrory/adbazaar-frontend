@@ -100,7 +100,11 @@ export default function BookHeader({ book }) {
                 size="small"
                 emptyIcon={<EmptyStar />}
               />
-              <Comments>({book.comments.length} comments)</Comments>
+              {book.comments.length === 1 ? (
+                <Comments>({book.comments.length} comment)</Comments>
+              ) : (
+                <Comments>({book.comments.length} comments)</Comments>
+              )}
             </div>
 
             <ShareButton

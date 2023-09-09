@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsLoggedIn, selectUserName } from '@/redux/selectors';
 import { addComment, updateRating } from '@/redux/bookSlice';
+import { addComments } from '@/redux/accountSlice';
 import SecondaryButton from '@/components/secondaryButton/SecondaryButton';
 import Modal from '@/components/modal/Modal';
 import CloseButton from '@/components/closeButton/CloseButton';
@@ -46,6 +47,16 @@ export default function BookComments({ book }) {
   const [showCommentField, setShowCommentField] = useState(false);
   const [commentText, setCommentText] = useState(null);
   const [value, setValue] = useState(0);
+  const [comments, setComments] = useState(book.comments);
+
+  useEffect(() => {
+    const cloneComments = comments.slice(0);
+    const sortedComments = cloneComments.sort(
+      (firstComment, secondComment) =>
+        Date.parse(secondComment.date) - Date.parse(firstComment.date)
+    );
+    setComments(sortedComments);
+  }, [book]);
 
   const openCommentField = () => {
     if (!isLoggedIn) {
@@ -77,7 +88,8 @@ export default function BookComments({ book }) {
       const rating = value;
       dispatch(updateRating(book.id, rating));
     }
-    toast.success(`Thank you for a comment`);
+    dispatch(addComments(commentText, now, book));
+    toast.success(`Your comment will appear soon`);
     reset();
   };
 
@@ -110,12 +122,16 @@ export default function BookComments({ book }) {
             size="small"
             emptyIcon={<EmptyStar />}
           />
-          <Reviews>({book.comments.length} comments)</Reviews>
+          {book.comments.length === 1 ? (
+            <Reviews>({book.comments.length} comment)</Reviews>
+          ) : (
+            <Reviews>({book.comments.length} comments)</Reviews>
+          )}
         </RatingBox>
       </HeadContainer>
       <List>
-        {book.comments &&
-          book.comments.map((comment) => {
+        {comments &&
+          comments.map((comment) => {
             return (
               <Item>
                 <CommentHeader>
