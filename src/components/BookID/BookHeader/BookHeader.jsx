@@ -155,7 +155,9 @@ export default function BookHeader({ book }) {
             <Chat style={{ width: 24, height: 24 }} />
           </ContactContainer>
         </ContactButton>
-        {showSeller && <Seller />}
+        {showSeller && (
+          <Seller seller={book.seller} publicationDate={book.publicationDate} />
+        )}
       </SellerContainer>
       {showModal && (
         <Modal

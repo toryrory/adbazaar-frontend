@@ -17,13 +17,13 @@ import {
 import { MailSeller, Phone, Like, Dislike } from '../../../../public/svg-book';
 import { Img32Girl } from '../../../../public/png';
 
-export default function Seller({ seller }) {
+export default function Seller({ seller, publicationDate }) {
   return (
     <Container>
       <SellerContainer>
         <Circle>
           <StyledImg
-            src={Img32Girl}
+            src={seller.avatar}
             width={72}
             height={72}
             alt="seller avatar"
@@ -32,26 +32,26 @@ export default function Seller({ seller }) {
         <SellerInfo>
           <div>
             <Subtitle>Seller name</Subtitle>
-            <Name>Coraline Maneskin</Name>
+            <Name>{seller.name}</Name>
           </div>
           <ContactContainer>
-            <ContactLink href="mailto:blablabla@gogle.com">
+            <ContactLink href={`mailto:${seller.email}`}>
               <MailSeller style={{ width: 20, height: 20 }} />
-              adbazaar@gmail.com
+              {seller.email}
             </ContactLink>
-            <ContactLink href="tel:+380665554433">
+            <ContactLink href={`tel:${seller.phone}`}>
               <Phone style={{ width: 20, height: 20 }} />
-              +38 (066) 555 44 33
+              {seller.phone}
             </ContactLink>
           </ContactContainer>
           <List>
             <Item>
               <Subtitle>Publication date</Subtitle>
-              <Description>22/12/13 15:30</Description>
+              <Description>{publicationDate}</Description>
             </Item>
             <Item>
               <Subtitle>On Adbazaar from</Subtitle>
-              <Description>22/12/13 15:30</Description>
+              <Description>{seller.registrationDate}</Description>
             </Item>
             <Item>
               <Subtitle>Seller rate</Subtitle>
@@ -63,7 +63,7 @@ export default function Seller({ seller }) {
                   }}
                 >
                   <Like style={{ width: 20, height: 20 }} />
-                  26
+                  {seller.likes}
                 </LikeBtn>
                 <LikeBtn
                   type="button"
@@ -71,17 +71,18 @@ export default function Seller({ seller }) {
                     console.log('dislike');
                   }}
                 >
-                  <Dislike style={{ width: 20, height: 20 }} />0
+                  <Dislike style={{ width: 20, height: 20 }} />
+                  {seller.dislikes}
                 </LikeBtn>
               </LikeBtnContainer>
             </Item>
             <Item>
               <Subtitle>Successful sales</Subtitle>
-              <Description>10+</Description>
+              <Description>{seller.sales}</Description>
             </Item>
             <Item>
               <Subtitle>Location</Subtitle>
-              <Description>06200 Nice, France</Description>
+              <Description>{seller.location}</Description>
             </Item>
           </List>
         </SellerInfo>
