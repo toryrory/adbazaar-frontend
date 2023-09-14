@@ -1,11 +1,19 @@
 import styled from 'styled-components';
 
 export const InputBox = styled.div`
-margin: 16px 0;
-display: flex;
-flex-direction: column;
-gap: 8px;
-`
+  margin: 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  &:last-of-type {
+    padding-bottom: 8px;
+    border-bottom: 0.3px solid var(--light-grey-05);
+  }
+  &:nth-of-type(n + 3) {
+    padding-bottom: 8px;
+    border-bottom: 0.3px solid var(--light-grey-05);
+  }
+`;
 export const Label = styled.label`
   color: var(--brand-color);
   font-size: 12px;

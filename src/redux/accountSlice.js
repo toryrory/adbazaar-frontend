@@ -9,7 +9,20 @@ const accountSlice = createSlice({
       avatar: null, //проверить подставив вместо null -> TestAvatar
     },
     favorites: [],
+
+    addBook: {
+      title: '',
+      author: '',
+      language: '',
+      format: '',
+      genre: '',
+      publisher: '',
+      price: '',
+      photos: [],
+      description: '',
+    },
     comments: [],
+
   },
   reducers: {
     addFavorites: {
@@ -62,6 +75,7 @@ const accountSlice = createSlice({
     },
   },
 });
+// сделать екстраредюсер на получение данных с формы
 
 export const { addFavorites, deleteFavorites, addComments } =
   accountSlice.actions;
