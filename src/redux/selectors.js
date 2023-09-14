@@ -12,8 +12,11 @@ export const selectUserData = (state) => state.auth.user;
 export const selectSettings = (state) => state.account.settings;
 export const selectAvatarImg = (state) => state.account.settings.avatar;
 export const selectFavorites = (state) => state.account.favorites;
+export const selectUserComments = (state) => state.account.comments;
 
+//main selectors
+export const selectShowStars = (state) => state.main.showStars;
+export const selectSubscription = (state) => state.main.subscription;
 
-//main selectors 
-export const selectShowStars = state => state.main.showStars
-export const selectSubscription = state => state.main.subscription
+//books selectors
+export const selectBooks = (state) => state.books;

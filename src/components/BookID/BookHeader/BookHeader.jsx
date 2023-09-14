@@ -10,7 +10,13 @@ import Seller from '../Seller/Seller';
 import AddFavoriteBtn from '../FavoriteBtn/AddFavoriteBtn';
 import DeleteFavoriteBtn from '../FavoriteBtn/DeleteFavoriteBtn';
 import Modal from '@/components/modal/Modal';
-import { Share, User, Mail, Chat } from '../../../../public/svg-book';
+import {
+  Share,
+  User,
+  Mail,
+  Chat,
+  EmptyStar,
+} from '../../../../public/svg-book';
 import { ShoppingCart } from '../../../../public/svg-layout';
 import {
   HeadContainer,
@@ -18,7 +24,7 @@ import {
   Title,
   Author,
   RatingBox,
-  Reviews,
+  Comments,
   ShareButton,
   BookContainer,
   StyledImg,
@@ -86,11 +92,19 @@ export default function BookHeader({ book }) {
             <div>
               <Rating
                 readOnly
-                defaultValue={5}
-                sx={{ color: 'var(--rose-color)' }}
+                precision={0.5}
+                defaultValue={book.rating}
+                sx={{
+                  color: 'var(--rose-color)',
+                }}
                 size="small"
+                emptyIcon={<EmptyStar />}
               />
-              <Reviews>(12 reviews)</Reviews>
+              {book.comments.length === 1 ? (
+                <Comments>({book.comments.length} comment)</Comments>
+              ) : (
+                <Comments>({book.comments.length} comments)</Comments>
+              )}
             </div>
 
             <ShareButton
@@ -106,7 +120,7 @@ export default function BookHeader({ book }) {
         </div>
       </HeadContainer>
       <BookContainer>
-        <Label>label</Label>
+        <Label>{book.type}</Label>
         {isFavorite ? (
           <DeleteFavoriteBtn onClick={removeFromFavorites} />
         ) : (
@@ -141,7 +155,9 @@ export default function BookHeader({ book }) {
             <Chat style={{ width: 24, height: 24 }} />
           </ContactContainer>
         </ContactButton>
-        {showSeller && <Seller />}
+        {showSeller && (
+          <Seller seller={book.seller} publicationDate={book.publicationDate} />
+        )}
       </SellerContainer>
       {showModal && (
         <Modal

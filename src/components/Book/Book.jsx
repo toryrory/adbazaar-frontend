@@ -4,7 +4,7 @@ import { selectFavorites, selectIsLoggedIn } from '@/redux/selectors';
 import { useEffect, useState } from 'react';
 import Modal from '../modal/Modal';
 import Link from 'next/link';
-import { HeartPlus, HeartMinus } from '../../../public/svg-book';
+import { HeartPlus, HeartMinus, EmptyStar } from '../../../public/svg-book';
 import { ShoppingCart } from '../../../public/svg-layout';
 import { Rating } from '@mui/material';
 import {
@@ -61,7 +61,7 @@ export default function Book({ book, variant }) {
 
   return (
     <Item variant={variant} key={book.id}>
-      <Label variant={variant}>label</Label>
+      <Label variant={variant}>{book.type}</Label>
       {isFavorite ? (
         <ButtonFavorites
           variant={variant}
@@ -84,11 +84,15 @@ export default function Book({ book, variant }) {
       <RatingBox>
         <Rating
           readOnly
-          defaultValue={5}
-          sx={{ color: 'var(--rose-color)', width: '78px' }}
+          precision={0.5}
+          defaultValue={book.rating}
+          sx={{
+            color: 'var(--rose-color)',
+          }}
           size="small"
+          emptyIcon={<EmptyStar />}
         />
-        <Reviews>(12)</Reviews>
+        <Reviews>({book.comments.length})</Reviews>
       </RatingBox>
       <Link href={`/books/${book.id}`}>
         <Title variant={variant}>{book.name}</Title>

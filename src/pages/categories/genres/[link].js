@@ -4,7 +4,8 @@ import Layout from '@/components/Layout/Layout';
 import GenrePage from '@/components/Categories/GenrePage/GenrePage';
 import { Container, BooksCount } from '@/styles/categoriesLink.styled';
 import { genres } from '@/data/genres';
-import { books } from '@/data/books';
+import { useSelector } from 'react-redux';
+import { selectBooks } from '@/redux/selectors';
 import CategoryBooks from '@/components/Categories/CategoryBooks/CategoryBooks';
 
 export default function GenresLink() {
@@ -13,6 +14,7 @@ export default function GenresLink() {
   const [currentGenre, setCurrentGenre] = useState(null);
   const [foundedBooks, setFoundedBooks] = useState(null);
   const [booksCount, setBooksCount] = useState(null);
+  const books = useSelector(selectBooks);
 
   useEffect(() => {
     const newGenre = genres.find((genre) => genre.link === link);

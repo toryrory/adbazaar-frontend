@@ -44,7 +44,7 @@ export const RatingBox = styled.div`
   gap: 8px;
 `;
 
-export const Reviews = styled.p`
+export const Comments = styled.p`
   color: var(--light-text);
   font-size: 14px;
   line-height: 1.15;

@@ -19,6 +19,7 @@ export default function Modal({
   showTick,
   showButton,
   showOkButton,
+  showHomeButton,
   errorMessage,
   showSadSmile,
   showLoginButton,
@@ -97,6 +98,14 @@ export default function Modal({
             onClick={onPressLogin}
             text="Sign in"
             style={{ marginTop: 32, marginBottom: 24 }}
+          />
+        )}
+        {showHomeButton && (
+          <SecondaryButton
+            type="button"
+            onClick={onPressOk}
+            text="Home page"
+            style={{ marginTop: 40 }}
           />
         )}
         {showLink && (

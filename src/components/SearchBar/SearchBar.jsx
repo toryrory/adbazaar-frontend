@@ -10,7 +10,8 @@ import {
 import { useState, useEffect } from 'react';
 import { Cross } from '../../../public/svg-authorization';
 import SearchResultList from './SearchResultList/SearchResultList';
-import { books } from '@/data/books';
+import { useSelector } from 'react-redux';
+import { selectBooks } from '@/redux/selectors';
 import { useDispatch } from 'react-redux';
 import { changeStarVisibility } from '../../redux/mainPageSlice';
 
@@ -19,6 +20,7 @@ export default function SearchBar({ queryId, style }) {
   const dispatch = useDispatch();
   const [inputText, setInputText] = useState('');
   const [searchResult, setSearchResult] = useState(null);
+  const books = useSelector(selectBooks);
 
   useEffect(() => {
     setSearchResult(null);

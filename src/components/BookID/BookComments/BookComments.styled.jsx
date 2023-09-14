@@ -116,3 +116,44 @@ export const LikeBtn = styled.button`
   border: none;
   padding: 0;
 `;
+
+export const CommentForm = styled.form`
+  position: relative;
+  border: 0.5px solid rgba(184, 205, 225, 0.5);
+  border-radius: 15px;
+  padding: 46px 8px 16px;
+`;
+
+export const CommentFieldTitle = styled.p`
+  font-size: 14px;
+  line-height: 1.23;
+  color: var(--brand-color);
+  margin-bottom: 12px;
+`;
+
+export const CommentInput = styled.textarea`
+  display: block;
+  margin-top: 24px;
+  margin-bottom: 16px;
+  width: 100%;
+  min-height: 85px;
+  background: none;
+  outline: none;
+  border: none;
+  padding: 8px;
+  font-size: 14px;
+  line-height: 1.23;
+  color: var(--light-text);
+`;
+
+export const PostCommentBtn = styled.button`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  font-size: 13px;
+  line-height: 1.23;
+  color: var(--brand-color);
+  margin-left: auto;
+`;

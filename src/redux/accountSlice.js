@@ -9,6 +9,7 @@ const accountSlice = createSlice({
       avatar: null, //проверить подставив вместо null -> TestAvatar
     },
     favorites: [],
+
     addBook: {
       title: '',
       author: '',
@@ -19,7 +20,9 @@ const accountSlice = createSlice({
       price: '',
       photos: [],
       description: '',
-    }
+    },
+    comments: [],
+
   },
   reducers: {
     addFavorites: {
@@ -52,9 +55,28 @@ const accountSlice = createSlice({
       );
       state.favorites.splice(index, 1);
     },
+    addComments: {
+      reducer(state, action) {
+        state.comments.push(action.payload);
+      },
+      prepare(commentText, date, book) {
+        return {
+          payload: {
+            id: nanoid(),
+            text: commentText,
+            date: date,
+            bookId: book.id,
+            bookName: book.name,
+            bookAuthor: book.author,
+            bookPhoto: book.photo,
+          },
+        };
+      },
+    },
   },
 });
 // сделать екстраредюсер на получение данных с формы
 
-export const { addFavorites, deleteFavorites } = accountSlice.actions;
+export const { addFavorites, deleteFavorites, addComments } =
+  accountSlice.actions;
 export const accountReducer = accountSlice.reducer;

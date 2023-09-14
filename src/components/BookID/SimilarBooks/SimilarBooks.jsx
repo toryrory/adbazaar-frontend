@@ -1,21 +1,24 @@
 import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
+import { selectBooks } from '@/redux/selectors';
 import {
   Container,
   Title,
   Description,
   List,
   BtnSeeMore,
-  StarSimilar, DarkBgSimilar
+  StarSimilar,
+  DarkBgSimilar,
 } from './SimilarBooks.styled';
-import { books } from '@/data/books';
+// import { books } from '@/data/books';
 import { genres } from '@/data/genres';
 import Book from '@/components/Book/Book';
 import { ArrowRight } from '../../../../public/svg-book';
 import { BgFull } from '../../../../public/backgrounds';
 
-
 export default function SimilarBooks({ book }) {
   const router = useRouter();
+  const books = useSelector(selectBooks);
   const currentGenre = genres.find((genre) => genre.link === book.genre);
   const foundedBooks = books.filter((book) => book.genre === currentGenre.link);
 
@@ -25,7 +28,7 @@ export default function SimilarBooks({ book }) {
 
   return (
     <Container>
-      <StarSimilar src={BgFull} alt='star' />
+      <StarSimilar src={BgFull} alt="star" />
       <DarkBgSimilar />
       <Title>Similar in genre &#34;{currentGenre.name}&#34;</Title>
       <Description>
@@ -36,13 +39,13 @@ export default function SimilarBooks({ book }) {
           if (item.id !== book.id) {
             return (
               <li key={item.id}>
-                <Book book={item} variant={"main"} />
+                <Book book={item} variant={'main'} />
               </li>
             );
           }
         })}
       </List>
-      <BtnSeeMore type='button' onClick={handleSeeMore}>
+      <BtnSeeMore type="button" onClick={handleSeeMore}>
         See more
         <ArrowRight
           style={{

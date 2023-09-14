@@ -16,7 +16,7 @@ import { useRouter } from 'next/navigation';
 import {
   Payments,
   AddBook,
-  Messages,
+  Comments,
   Favorites,
   OrderHistory,
   Settings,
@@ -137,12 +137,12 @@ export default function Account() {
           <Favorites />
         </AccountAccordion>
         <AccountAccordion
-          text="Messages & Reviews"
+          text="My Comments"
           icon={
             <MessagesSvg style={{ width: 24, height: 24, marginRight: 16 }} />
           }
         >
-          <Messages />
+          <Comments />
         </AccountAccordion>
         <AccountAccordion
           text="Setting"

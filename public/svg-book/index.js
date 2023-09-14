@@ -27,3 +27,5 @@ export { default as Like } from './like.svg';
 export { default as Dislike } from './dislike.svg';
 export { default as Phone } from './phone.svg';
 export { default as MailSeller } from './mail-seller.svg';
+export { default as EmptyStar } from './empty-star.svg';
+export { default as Send } from './send.svg';

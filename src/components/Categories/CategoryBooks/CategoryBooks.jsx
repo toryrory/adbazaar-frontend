@@ -9,16 +9,17 @@ import {
   BtnSeeMore,
   NewestStar,
   DarkBgNewest,
-} from "./CategoryBooks.styled";
-import { Section} from "@/components/Subscribtion/Subscription.styled";
-import { FullOrnamentClipped } from "../../../../public/backgrounds";
+} from './CategoryBooks.styled';
+import { Section } from '@/components/Subscribtion/Subscription.styled';
+import { FullOrnamentClipped } from '../../../../public/backgrounds';
 import Book from '../../Book/Book';
 import { ArrowRight } from '../../../../public/svg-book';
-import { books as allBooks } from '@/data/books';
+import { useSelector } from 'react-redux';
+import { selectBooks } from '@/redux/selectors';
 import { BgFull } from '../../../../public/backgrounds';
 
-
 export default function CategoryBooks({ books, variant }) {
+  const allBooks = useSelector(selectBooks);
   const fiveBooks = allBooks.slice(0, 5);
 
   return (
@@ -30,9 +31,13 @@ export default function CategoryBooks({ books, variant }) {
           })}
         </List>
       </Container>
-      <OrnamentImg src={FullOrnamentClipped} alt='ornament' distance='category'/>
+      <OrnamentImg
+        src={FullOrnamentClipped}
+        alt="ornament"
+        distance="category"
+      />
       <NewestContainer>
-        <NewestStar src={BgFull} alt='star' />
+        <NewestStar src={BgFull} alt="star" />
         <DarkBgNewest />
         <Title>Newest</Title>
         <Description>
@@ -42,15 +47,15 @@ export default function CategoryBooks({ books, variant }) {
           {fiveBooks.map((item) => {
             return (
               <li key={item.id}>
-                <Book book={item} variant={"main"} />
+                <Book book={item} variant={'main'} />
               </li>
             );
           })}
         </NewestList>
         <BtnSeeMore
-          type='button'
+          type="button"
           onClick={() => {
-            console.log("see more");
+            console.log('see more');
           }}
         >
           See more
