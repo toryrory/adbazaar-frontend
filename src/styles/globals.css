@@ -7,9 +7,11 @@
   --gradient: linear-gradient(89.44deg, #51c5ea 4.39%, #f18ff3 118.29%);
   --error-color: #f97484;
   --light-grey: #d8e9fe;
+  --light-grey-05: #d8e9fe92;
   --dark-grey: #3f5870;
   --grey: #20252f;
   --product-background: #212837;
+  --product-background-06: #2128379c;
   --dark-gradient: linear-gradient(180deg, #1f293e 0%, #131b2c 29.17%);
   --rose-color: #F38FF5;
   --hero-rose: #fdacff;

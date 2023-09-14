@@ -34,11 +34,13 @@ export default function SearchResultItem({id, name, author, type, price, photo }
         <Text>{author}</Text>
         <FormatBox>
           {type === "paper" && (
-            <TextBookSvg style={{ width: 20, height: 20 }} />
+            <TextBookSvg style={{ width: 20, height: 20, fill: "white" }} />
           )}
-          {type === "e-book" && <EBookSvg style={{ width: 20, height: 20 }} />}
+          {type === "e-book" && (
+            <EBookSvg style={{ width: 20, height: 20, fill: "white" }} />
+          )}
           {type === "audio" && (
-            <AudioBookSvg style={{ width: 20, height: 20 }} />
+            <AudioBookSvg style={{ width: 20, height: 20, fill: "white" }} />
           )}
           <FormatText>{editedType}</FormatText>
         </FormatBox>
