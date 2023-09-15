@@ -1,8 +1,13 @@
 import { useRouter } from 'next/navigation';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
-import { selectSettings, selectIsLoggedIn } from '@/redux/selectors';
+import {
+  selectSettings,
+  selectIsLoggedIn,
+  selectFavorites,
+} from '@/redux/selectors';
 import MobileMenu from '../MobileMenu/MobileMenu';
+import CounterButton from '../CounterButton/CounterButton';
 import {
   User,
   Logo,
@@ -25,6 +30,7 @@ export default function Header() {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const [state, setState] = useState(settings);
   const [showMenu, setShowMenu] = useState(false);
+  const favorites = useSelector(selectFavorites);
 
   const onOpenMenu = () => {
     setShowMenu(true);
@@ -56,20 +62,26 @@ export default function Header() {
               />
             </Circle>
           </Button>
-          <Button type="button" onClick={() => router.push('/favorites')}>
+          <CounterButton
+            onClick={() => router.push('/favorites')}
+            count={favorites.length}
+          >
             <Heart style={{ width: 24, height: 24 }} />
-          </Button>
-          <Button
-            type="button"
+          </CounterButton>
+          <CounterButton
             onClick={() => console.log('open shopping cart')}
+            count={0}
           >
             <ShoppingCart style={{ width: 24, height: 24 }} />
-          </Button>
+          </CounterButton>
         </ButtonContainer>
       ) : (
         <ButtonContainer>
           <Button type="button" onClick={() => router.push('/login')}>
             <User style={{ width: 24, height: 24 }} />
+          </Button>
+          <Button type="button" onClick={() => router.push('/login')}>
+            <Heart style={{ width: 24, height: 24 }} />
           </Button>
           <Button type="button" onClick={() => router.push('/login')}>
             <ShoppingCart style={{ width: 24, height: 24 }} />

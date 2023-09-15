@@ -22,7 +22,6 @@ const accountSlice = createSlice({
       description: '',
     },
     comments: [],
-
   },
   reducers: {
     addFavorites: {
@@ -39,12 +38,9 @@ const accountSlice = createSlice({
             name: book.name,
             author: book.author,
             price: book.price,
-            type: book.type,
-            genre: book.genre,
-            language: book.language,
-            publisher: book.publisher,
+            rating: book.rating,
+            comments: book.comments,
             photo: book.photo,
-            description: book.description,
           },
         };
       },

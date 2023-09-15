@@ -14,8 +14,9 @@ export const HeaderContainer = styled.div`
 export const ButtonContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
 `;
+
 export const Button = styled.button`
   display: flex;
   align-items: center;

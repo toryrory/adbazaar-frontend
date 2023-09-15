@@ -4,6 +4,7 @@ import { deleteFavorites } from '@/redux/accountSlice';
 import { useDispatch } from 'react-redux';
 import { ShoppingCart } from '../../../public/svg-layout';
 import { Cross } from '../../../public/svg-layout';
+import { EmptyStar } from '../../../public/svg-book';
 import {
   Item,
   StyledImg,
@@ -32,11 +33,15 @@ export default function FavoriteBook({ book }) {
         <RatingBox>
           <Rating
             readOnly
-            defaultValue={5}
-            sx={{ color: 'var(--rose-color)', width: '78px' }}
+            precision={0.5}
+            defaultValue={book.rating}
+            sx={{
+              color: 'var(--rose-color)',
+            }}
             size="small"
+            emptyIcon={<EmptyStar />}
           />
-          <Reviews>(12)</Reviews>
+          <Reviews>({book.comments.length})</Reviews>
         </RatingBox>
         <Link href={`/books/${book.id}`}>
           <Title>{book.name}</Title>
