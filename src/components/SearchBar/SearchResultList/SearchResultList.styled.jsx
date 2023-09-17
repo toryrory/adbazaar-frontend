@@ -11,3 +11,9 @@ export const Title = styled.p`
 export const SearchBox = styled.div`
 /* background-color: var(--main-background); */
 margin: 40px 0;`
+
+export const ManyBooksText = styled.p`
+  color:var(--brand-color);
+  font-size: 16px;
+  margin: 10px 0;
+`;

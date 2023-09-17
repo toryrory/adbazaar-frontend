@@ -20,6 +20,7 @@ export default function SearchBar({ queryId, style }) {
   const dispatch = useDispatch();
   const [inputText, setInputText] = useState('');
   const [searchResult, setSearchResult] = useState(null);
+  const [searchResultText, setSearchResultText] = useState(null);
   const books = useSelector(selectBooks);
 
   useEffect(() => {
@@ -51,9 +52,14 @@ export default function SearchBar({ queryId, style }) {
   };
 
   const handleRedirect = (searchResult) => {
-    if (searchResult.length === 1) {
+    if (!searchResult) {
+      return
+    } else if (searchResult.length === 1) {
       router.push(`/books/${searchResult[0].id}`);
+      setSearchResultText(null);
       setSearchResult(null);
+    } else if (searchResult.length > 1) {
+      setSearchResultText({ text: "Too many books, please choose one book" });
     }
   };
   return (
@@ -82,7 +88,7 @@ export default function SearchBar({ queryId, style }) {
           )}
         </BtnsWrapper>
       </InputWrapper>
-      {searchResult && inputText && <SearchResultList books={searchResult} />}
+      {searchResult && inputText && <SearchResultList searchText={searchResultText} books={searchResult} />}
     </>
   );
 }

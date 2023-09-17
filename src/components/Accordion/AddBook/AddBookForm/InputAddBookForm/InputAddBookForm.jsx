@@ -5,7 +5,9 @@ export default function InputAddBookForm({
   label,
   placeholder,
   onChange,
+  value,
   children,
+  
 }) {
   return (
     <InputBox>
@@ -18,7 +20,8 @@ export default function InputAddBookForm({
           name={name}
           type='text'
           placeholder={placeholder}
-          onChange={onChange}
+            onChange={onChange}
+            value={value}
         />
       )}
     </InputBox>
