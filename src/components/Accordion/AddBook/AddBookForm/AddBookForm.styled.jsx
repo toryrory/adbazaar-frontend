@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Image from "next/image";
 import { TextBookSvg, EBookSvg, AudioBookSvg } from '../../../../../public/svg-index';
 import {
   Select,
@@ -7,6 +8,7 @@ import {
   ListSubheader,
   Popover,
 } from "@mui/material";
+
 
 export const LanguageBox = styled.div`
 display: flex;
@@ -90,42 +92,6 @@ export const FormBox = styled.div`
   border-bottom: 1px solid var(--white-text);
   opacity: ${({ selectedlang }) => (selectedlang === "true" ? 1 : 0.5)}; */
 `;
-// export const SelectBox = styled(Select)`
-//   font-size: 14px;
-//   width: 234px;
-//   height: 30px;
-//   color: var(--white-text);
-//   border: none;
-//   background-color: transparent;
-//   border-bottom: 1px solid var(--white-text);
-//   opacity: ${({ selectedlang }) => (selectedlang === "true" ? 1 : 0.5)};
-
-//   #mui-component-select-language {
-//     padding: 6px 4px 4px;
-//     font-family: "TrueHelvetica", sans-serif;
-//     background-color: transparent;
-//   }
-//   &:focus {
-//     outline: none;
-//     box-shadow: -8px 8px 8px 0px rgba(0, 0, 0, 0.15);
-//   }
-// `;
-
-// export const SelectItem = styled(MenuItem)`
-//   /* border: 0.5px solid var(--Light-grey, #d8e9fe); */
-//   background: #212837;
-//   font-weight: 300;
-//   line-height: 1.5;
-//   border-left: 0.5px solid var(--light-grey);
-//   border-right: 0.5px solid var(--light-grey);
-//   border-color: var(--light-grey);
-//   &:focus {
-//     background-color: #131b2c;
-//   }
-
-//   font-size: 16px;
-//   color: var(--white-text);
-// `;
 
 export const SelectLangInput = styled.input`
   border: none;
@@ -231,4 +197,105 @@ export const Textarea = styled.textarea`
   }
 `;
 
+export const PriceBox = styled.div`
+padding: 8px 8px 0 8px;
+display: flex;
+gap: 16px;
+`
+export const PriceInputBox = styled.div`
+  display: flex;
+  width: 106px;
+  padding: 6px 8px;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--white-text);
+`;
+export const PriceInput = styled.input`
+  background-color: transparent;
+  border: none;
+  color: var(--white-text);
+  font-size: 20px;
+  
+  &::placeholder {
+    color: var(--white-text-06);
+  }
+  &:focus {
+    outline: none;
+  }
+`;
+export const PriceDollar = styled.span`
+  font-size: 14px;
+  color: var(--white-text);
+`;
+export const BargainBox = styled.div`
+  display: flex;
+  padding: 2px 2px;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1 0 0;
+  border-bottom: 0.5px solid var(--light-grey);
+`;
+export const BargainText = styled.p`
+  padding: 6px 0px;
+  font-size: 14px;
+  color: var(--white-text);
+`;
 
+export const CancelBtn = styled.button`
+  margin: 48px 0;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  border: none;
+  background-color: transparent;
+  color: var(--brand-color);
+  /* font-family: Helvetica Light; */
+  font-size: 13px;
+
+  &:focus {
+    outline: none;
+  }
+`;
+
+export const PhotosBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+`;
+export const PhotoItemBox = styled.div`
+  width: 78px;
+  height: 90px;
+  flex-shrink: 0;
+  border-radius: 16px;
+  border: 0.5px solid var(--brand-color);
+  background-color: var(--product-background);
+  background-size: cover;
+`;
+
+export const PhotoInputBox = styled.label`
+  margin: 15px 7px 18px;
+  width: 64px;
+  height: 57px;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  color: var(--brand-color);
+  text-align: center;
+  font-size: 12px;
+`;
+
+export const RemovePhotosBtn = styled.button`
+padding: 10px 10px 0;
+  background-color: transparent;
+  border: none;
+  color: var(--brand-color);
+  font-size: 13px;
+`;
+// export const StyledImg = styled(Image)`
+//   border-radius: 16px;
+//   max-width: 78px;
+//   max-height: 90px;
+// `;

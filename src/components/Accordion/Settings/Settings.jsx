@@ -48,18 +48,18 @@ export default function Settings() {
   const handleChangePhoto = (event) => {
     setState({avatar: null})
     setPhoto(window.URL.createObjectURL(event.target.files[0]));
-    console.log(event.target.files[0]);
-    console.log(window.URL.createObjectURL(event.target.files[0]));
+    // console.log(event.target.files[0]);
+    // console.log(window.URL.createObjectURL(event.target.files[0]));
+    
   };
-
   const handleSubmitPhoto = (event) => {
 
     const formFile = new FormData();
     formFile.append("avatar", photo); // "avatar" это свойство картинки в БД на бекенде, нужно узнать как будет называться это поле.
-
+console.log(photo);
     event.preventDefault();
     // dispatch(changePhoto(photo)); //диспачить нужно будет formFile
-    console.log(photo);
+    // console.log(formFile);
     toast.success("You updated your photo");
     setPhoto("");
   };

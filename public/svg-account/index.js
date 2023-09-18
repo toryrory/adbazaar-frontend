@@ -23,3 +23,5 @@ export { default as TgWhite } from './telegram.svg';
 export { default as FbWhite } from './fb-white.svg';
 export { default as InstWhite } from './inst-white.svg';
 export { default as PhonePlus } from './phone-plus.svg';
+export { default as CancelTrash } from './cancel-trash.svg';
+export { default as PlusCircle } from './plus-circle.svg';

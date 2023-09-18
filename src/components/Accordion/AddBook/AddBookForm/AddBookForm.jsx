@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Image from "next/image";
 import InputAddBookForm from "./InputAddBookForm/InputAddBookForm";
 import {
   LanguageBox,
@@ -18,25 +19,48 @@ import {
   GenreList,
   GenreItem,
   Textarea,
+  PriceBox,
+  PriceDollar,
+  PriceInput,
+  PriceInputBox,
+  BargainBox,
+  BargainText,
+  CancelBtn,
+  PhotosBox,
+  PhotoItemBox,
+  PhotoInputBox,
+  RemovePhotosBtn,
 } from "./AddBookForm.styled";
 import { Search } from "../../../../../public/svg-index";
 import { ArrowDown } from "../../../../../public/svg-account";
-import { Popover } from "@mui/material";
+import { Popover, Checkbox } from "@mui/material";
 import SecondaryButton from "@/components/secondaryButton/SecondaryButton";
+import {
+  CheckboxEmpty,
+  CheckboxChecked,
+} from "../../../../../public/svg-authorization";
+import {
+  CancelTrash,
+  Clip,
+  PlusCircle,
+} from "../../../../../public/svg-account";
+import { InputHidden } from "../../Settings/Settings.styled";
+import { BannerBestsellers } from "../../../../../public/png/banners"; // for test
 
+const FormDataInitValues = {
+  title: "",
+  author: "",
+  language: "En",
+  format: "Paper",
+  genre: "Fiction",
+  publisher: "",
+  price: "",
+  bargain: true,
+  photos: [],
+  description: "",
+};
 export default function AddBookForm() {
-  const [formData, setFormData] = useState({
-    title: "",
-    author: "",
-    language: "En",
-    format: "Paper",
-    genre: "Fiction",
-    publisher: "",
-    price: "",
-    bargain: true,
-    photos: [],
-    description: "",
-  });
+  const [formData, setFormData] = useState(FormDataInitValues);
   const [selectedLang, setSelectedLang] = useState({
     en: true,
     ua: false,
@@ -47,7 +71,8 @@ export default function AddBookForm() {
     eBook: false,
     audio: false,
   });
-  const [anchorEl, setAnchorEl] = useState({language: null, genre: null});
+  const [anchorEl, setAnchorEl] = useState({ language: null, genre: null });
+  // const [photos, setPhotos] = useState();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -90,19 +115,18 @@ export default function AddBookForm() {
   const openPopover = (e) => {
     if (e.currentTarget.id) {
       setSelectedLang({ en: false, ua: false, other: true });
-      setAnchorEl({...anchorEl, language: e.target});
+      setAnchorEl({ ...anchorEl, language: e.target });
     } else {
       setAnchorEl({ ...anchorEl, genre: e.target });
     }
-    
   };
   const closePopover = () => {
-    setAnchorEl({genre: null, language: null})
+    setAnchorEl({ genre: null, language: null });
   };
 
   const openLang = Boolean(anchorEl.language);
   const openGenre = Boolean(anchorEl.genre);
-  const id = (openGenre || openLang) ? "simple-popover" : undefined;
+  const id = openGenre || openLang ? "simple-popover" : undefined;
 
   const AddSelectInputText = (e) => {
     const { id } = e.currentTarget;
@@ -117,10 +141,53 @@ export default function AddBookForm() {
       closePopover();
     }, 150);
   };
+
+  const handlePrice = (e) => {
+    const { value } = e.target;
+    if (value.length > 7) {
+      return;
+    }
+
+    setFormData({ ...formData, price: value });
+  };
+
+  const handleChangePhoto = (e) => {
+    const { name, files, id } = e.target;
+    // setPhotos([ ...photos, { [name]: window.URL.createObjectURL(files[0]) }])
+    setFormData({
+      ...formData,
+      photos: [
+        ...formData.photos,
+        {id, [name]: window.URL.createObjectURL(files[0])},
+      ],
+    });
+  };
+  const removePhotos = (e) => {
+    // console.dir(e.target.id);
+
+    setFormData({
+      ...formData,
+      photos: [],
+    });
+
+    // setFormData({
+    //   ...formData,
+    //   photos: 
+    //     formData.photos.splice(e.target.id, 1)
+    //   ,
+    // });
+  }
+
+  const resetForm = () => {
+    setFormData(FormDataInitValues);
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     alert(JSON.stringify(formData, null, 2));
-    //dispatch(addBookData(formData))
+    // const formFile = new FormData();
+    // formFile.append("avatar", photo); // "avatar" это свойство картинки в БД на бекенде, нужно узнать как будет называться это поле.
+
+    //dispatch(addBookData(formData)) photos:FormFile
   };
   // const onSubmit = (values, actions) => {
   //   alert(JSON.stringify(values, null, 2));
@@ -161,12 +228,14 @@ export default function AddBookForm() {
           name={"title"}
           label={"Book Title"}
           placeholder={"Provide the accurate book title |"}
+          value={formData.title}
           onChange={handleChange}
         />
         <InputAddBookForm
           name={"author"}
           label={"Author(s) name(s)"}
           placeholder={"Provide the accurate author(s) name(s) |"}
+          value={formData.author}
           onChange={handleChange}
         />
         <InputAddBookForm label={"Choose book language"}>
@@ -315,16 +384,187 @@ export default function AddBookForm() {
           name={"publisher"}
           label={"Publisher"}
           placeholder={"Provide publisher house name |"}
+          value={formData.publisher}
           onChange={handleChange}
         />
-        <InputAddBookForm
-          name='price'
-          label='Enter your selling price'
-        ></InputAddBookForm>
+        <InputAddBookForm name='price' label='Enter your selling price'>
+          <PriceBox>
+            <PriceInputBox>
+              <PriceDollar>$</PriceDollar>
+              <PriceInput
+                name='price'
+                type='number'
+                value={formData.price}
+                placeholder='0000.00'
+                onChange={handlePrice}
+              />
+            </PriceInputBox>
+            <BargainBox>
+              <BargainText>bargaining is appropriate</BargainText>
+              <Checkbox
+                icon={
+                  <CheckboxEmpty style={{ width: "24px", height: "24px" }} />
+                }
+                checkedIcon={
+                  <CheckboxChecked style={{ width: "24px", height: "24px" }} />
+                }
+                checked={formData.bargain}
+                onChange={() =>
+                  setFormData({ ...formData, bargain: !formData.bargain })
+                }
+              />
+            </BargainBox>
+          </PriceBox>
+        </InputAddBookForm>
         <InputAddBookForm
           name='photos'
           label='Add images / optimal size 1200x900'
-        ></InputAddBookForm>
+        >
+          <PhotosBox>
+            <PhotoItemBox>
+              {formData.photos[0] ? (
+                <Image
+                  src={
+                    formData.photos[0]
+                      ? `${formData.photos[0].photo1}`
+                      : BannerBestsellers
+                  }
+                  alt='book photo'
+                  style={{
+                    borderRadius: "16px",
+                    width: "78px",
+                    minHeight: "89px",
+                    border: "1px solid",
+                  }}
+                  width={78}
+                  height={90}
+                />
+              ) : (
+                <PhotoInputBox>
+                  <Clip style={{ width: "24px", height: "24px" }} />
+                  Upload a file
+                  <InputHidden
+                    id={0}
+                    type='file'
+                    name='photo1'
+                    placeholder='Upload a photo'
+                    accept='image/png, image/jpeg'
+                    onChange={handleChangePhoto}
+                  />
+                </PhotoInputBox>
+              )}
+            </PhotoItemBox>
+            <PhotoItemBox>
+              {formData.photos[1] ? (<Image
+                src={
+                  formData.photos[1]
+                    ? `${formData.photos[1].photo2}`
+                    : BannerBestsellers
+                }
+                alt='book photo'
+                style={{
+                  borderRadius: "16px",
+                  width: "78px",
+                  minHeight: "89px",
+                  border: "1px solid",
+                }}
+                width={78}
+                height={90}
+              />) : (<PhotoInputBox>
+                {formData.photos[0] ? (
+                  <>
+                    <Clip style={{ width: "24px", height: "24px" }} />
+                    Upload a file
+                    <InputHidden
+                      id={1}
+                      type='file'
+                      name='photo2'
+                      placeholder='Upload a photo'
+                      accept='image/png, image/jpeg'
+                      onChange={handleChangePhoto}
+                    />
+                  </>
+                ) : (
+                  <PlusCircle style={{ width: "24px", height: "24px" }} />
+                )}
+              </PhotoInputBox>)}
+            </PhotoItemBox>
+            <PhotoItemBox>
+              {formData.photos[2] ? (<Image
+                src={
+                  formData.photos[2]
+                    ? `${formData.photos[2].photo3}`
+                    : BannerBestsellers
+                }
+                alt='book photo'
+                style={{
+                  borderRadius: "16px",
+                  width: "78px",
+                  minHeight: "89px",
+                  border: "1px solid",
+                }}
+                width={78}
+                height={90}
+                onClick={removePhotos}
+              />) : (
+                <PhotoInputBox>
+                  {formData.photos[1] ? (
+                    <>
+                      <Clip style={{ width: "24px", height: "24px" }} />
+                      Upload a file
+                      <InputHidden
+                        id={2}
+                        type='file'
+                        name='photo3'
+                        placeholder='Upload a photo'
+                        accept='image/png, image/jpeg'
+                        onChange={handleChangePhoto}
+                      />
+                    </>
+                  ) : (
+                    <PlusCircle style={{ width: "24px", height: "24px" }} />
+                  )}
+                </PhotoInputBox>
+              )}
+            </PhotoItemBox>
+            <PhotoItemBox>
+              {formData.photos[3] ? (<Image
+                src={
+                  formData.photos[3]
+                    ? `${formData.photos[3].photo4}`
+                    : BannerBestsellers
+                }
+                alt='book photo'
+                style={{
+                  borderRadius: "16px",
+                  width: "78px",
+                  minHeight: "89px",
+                  border: "1px solid",
+                }}
+                width={78}
+                height={90}
+              />) : (<PhotoInputBox>
+                {formData.photos[2] ? (
+                  <>
+                    <Clip style={{ width: "24px", height: "24px" }} />
+                    Upload a file
+                    <InputHidden
+                      id={3}
+                      type='file'
+                      name='photo4'
+                      placeholder='Upload a photo'
+                      accept='image/png, image/jpeg'
+                      onChange={handleChangePhoto}
+                    />
+                  </>
+                ) : (
+                  <PlusCircle style={{ width: "24px", height: "24px" }} />
+                )}
+              </PhotoInputBox>)}
+            </PhotoItemBox>
+            <RemovePhotosBtn type="button" onClick={removePhotos}>Remove photos (test)</RemovePhotosBtn>
+          </PhotosBox>
+        </InputAddBookForm>
         <InputAddBookForm name={"description"} label={"Add book description"}>
           <Textarea
             name='description'
@@ -332,15 +572,20 @@ export default function AddBookForm() {
             placeholder={
               "Please briefly summarize the book's content. The author's annotation can also be included in your write-up if available."
             }
+            value={formData.description}
             onChange={handleChange}
-          >
-            {formData.description}
-          </Textarea>
+          />
+          {/* </Textarea> */}
         </InputAddBookForm>
-        <button type="button">Cancel</button>
-        <button type="button">Save</button>
-{/* btn save === save data to localeHost, publish === submit ?? */}
-        <SecondaryButton type='submit' text='Publish' style={{width: '342px'}}/>
+        <CancelBtn type='button' onClick={resetForm}>
+          <CancelTrash style={{ width: "24px", height: "24px" }} />
+          Cancel
+        </CancelBtn>
+        <SecondaryButton
+          type='submit'
+          text='Publish'
+          style={{ width: "342px" }}
+        />
       </form>
     </>
   );

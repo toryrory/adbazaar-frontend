@@ -39,6 +39,9 @@ export const BtnSearch = styled.button`
   background-color: transparent;
   border: none;
   cursor: pointer;
+  &:focus {
+    outline: none;
+  }
 `;
 export const BtnsWrapper = styled.div`
 display: flex;
