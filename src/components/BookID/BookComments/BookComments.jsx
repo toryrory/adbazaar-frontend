@@ -1,7 +1,11 @@
 import { Rating } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectIsLoggedIn, selectUserName } from '@/redux/selectors';
+import {
+  selectIsLoggedIn,
+  selectUserName,
+  selectBookById,
+} from '@/redux/selectors';
 import { addComment, updateRating } from '@/redux/bookSlice';
 import { addComments } from '@/redux/accountSlice';
 import SecondaryButton from '@/components/secondaryButton/SecondaryButton';
@@ -133,7 +137,7 @@ export default function BookComments({ book }) {
         {comments &&
           comments.map((comment) => {
             return (
-              <Item>
+              <Item key={comment.bookId}>
                 <CommentHeader>
                   <CommentTitle>{comment.author}</CommentTitle>
                   <CommentDate>{comment.date.slice(0, 10)}</CommentDate>

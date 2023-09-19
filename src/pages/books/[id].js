@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-// import { books } from '@/data/books';
 import { useSelector } from 'react-redux';
 import { selectBooks } from '@/redux/selectors';
 import SearchBar from '@/components/SearchBar/SearchBar';

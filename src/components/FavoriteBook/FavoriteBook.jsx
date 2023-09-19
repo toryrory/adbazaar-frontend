@@ -28,7 +28,10 @@ export default function FavoriteBook({ book }) {
 
   return (
     <Item key={book.id}>
-      <StyledImg src={book.photo} alt={book.name} priority={true} />
+      <Link href={`/books/${book.id}`}>
+        <StyledImg src={book.photo} alt={book.name} priority={true} />
+      </Link>
+
       <InfoContainer>
         <RatingBox>
           <Rating

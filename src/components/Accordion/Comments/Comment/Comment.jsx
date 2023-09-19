@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Link from 'next/link';
 import {
   Item,
   BookImage,
@@ -22,11 +23,14 @@ export default function Comment({ comment }) {
 
   return (
     <Item key={comment.id}>
-      <BookImage
-        src={comment.bookPhoto}
-        alt={comment.bookName}
-        priority={true}
-      />
+      <Link href={`/books/${comment.bookId}`}>
+        <BookImage
+          src={comment.bookPhoto}
+          alt={comment.bookName}
+          priority={true}
+        />
+      </Link>
+
       <InfoContainer>
         <InfoHeaderContainer>
           <Title>{comment.bookName}</Title>
