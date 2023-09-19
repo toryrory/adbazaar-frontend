@@ -75,12 +75,15 @@ export default function Book({ book, variant }) {
           <HeartPlus style={{ width: 24, height: 24 }} />
         </ButtonFavorites>
       )}
-      <StyledImg
-        src={book.photo}
-        alt={book.name}
-        priority={true}
-        variant={variant}
-      />
+      <Link href={`/books/${book.id}`}>
+        <StyledImg
+          src={book.photo}
+          alt={book.name}
+          priority={true}
+          variant={variant}
+        />
+      </Link>
+
       <RatingBox>
         <Rating
           readOnly

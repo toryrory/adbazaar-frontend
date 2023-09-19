@@ -43,6 +43,7 @@ export default function BookHeader({ book }) {
   const [showSeller, setShowSeller] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [comments, setComments] = useState(book.comments);
   const favoriteBooks = useSelector(selectFavorites);
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const dispatch = useDispatch();
@@ -100,10 +101,10 @@ export default function BookHeader({ book }) {
                 size="small"
                 emptyIcon={<EmptyStar />}
               />
-              {book.comments.length === 1 ? (
-                <Comments>({book.comments.length} comment)</Comments>
+              {comments.length === 1 ? (
+                <Comments>({comments.length} comment)</Comments>
               ) : (
-                <Comments>({book.comments.length} comments)</Comments>
+                <Comments>({comments.length} comments)</Comments>
               )}
             </div>
 
@@ -126,7 +127,6 @@ export default function BookHeader({ book }) {
         ) : (
           <AddFavoriteBtn onClick={addToFavorites} />
         )}
-
         <StyledImg src={book.photo} alt={book.name} priority={true} />
         <PriceContainer>
           <Price>

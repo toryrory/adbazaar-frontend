@@ -6,6 +6,7 @@ export const Item = styled.li`
   padding: 8px 24px 8px 16px;
   display: flex;
   align-items: flex-start;
+  justify-content: space-between;
   gap: 16px;
 `;
 
@@ -18,6 +19,7 @@ export const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+  width: 270px;
 `;
 
 export const InfoHeaderContainer = styled.div`

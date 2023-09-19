@@ -24,7 +24,7 @@ export const Label = styled.label`
 `;
 
 export const Input = styled.input`
-font-size: 16px;
+  font-size: 16px;
   line-height: 1.25;
   outline: none;
   background: none;
@@ -35,6 +35,7 @@ font-size: 16px;
 
   &::placeholder {
     color: var(--brand-color);
+  }
 `;
 
 export const PasswordContainer = styled.div`
