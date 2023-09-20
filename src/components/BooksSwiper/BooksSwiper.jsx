@@ -3,6 +3,7 @@ import { List } from './BooksSwiper.styled';
 import Book from '../Book/Book';
 import { useSelector } from 'react-redux';
 import { selectBooks } from '@/redux/selectors';
+import { nanoid } from '@reduxjs/toolkit';
 
 export default function BooksSwiper({ id, banner }) {
   const books = useSelector(selectBooks);
@@ -28,6 +29,7 @@ export default function BooksSwiper({ id, banner }) {
     default:
       break;
   }
+ 
   return (
     <List>
       {fourBooks.map((item) => {
@@ -35,17 +37,17 @@ export default function BooksSwiper({ id, banner }) {
           <>
             {item.name ? (
               <li key={item.id}>
-                <Book book={item} variant={'main'} />
+                <Book book={item} variant={"main"} />
               </li>
             ) : (
               <Image
                 key={id}
                 src={item}
-                alt="banner"
+                alt='banner'
                 width={210}
                 height={242}
                 priority={true}
-                style={{ height: '242px' }}
+                style={{ height: "242px" }}
               ></Image>
             )}
           </>

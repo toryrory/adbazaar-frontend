@@ -1,12 +1,5 @@
 import styled from 'styled-components';
 import Image from 'next/image';
-import { Barlow_Condensed } from 'next/font/google';
-
-const barlowCondensed = Barlow_Condensed({
-  weight: '500',
-  subsets: ['latin'],
-  variable: '--font-barlow',
-});
 
 export const StyledImg = styled(Image)`
   width: ${(props) => (props.variant === 'main' ? '77px' : '96px')};
@@ -88,6 +81,7 @@ export const Price = styled.p`
   color: var(--white-text);
   display: block;
   font-stretch: condensed;
+  /* font-family: ; */
 `;
 
 export const Dollar = styled.span`

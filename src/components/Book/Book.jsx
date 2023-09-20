@@ -21,6 +21,12 @@ import {
   RatingBox,
   Reviews,
 } from './Book.styled';
+import { Barlow_Condensed } from "next/font/google";
+
+const barlowCondensed = Barlow_Condensed({
+  weight: "500",
+  subsets: ["latin"],
+});
 
 export default function Book({ book, variant }) {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -102,7 +108,7 @@ export default function Book({ book, variant }) {
         <Author variant={variant}>{book.author}</Author>
       </Link>
       <Bottom>
-        <Price variant={variant}>
+        <Price variant={variant} style={barlowCondensed.style} >
           <Dollar>$</Dollar>
           {book.price}
         </Price>

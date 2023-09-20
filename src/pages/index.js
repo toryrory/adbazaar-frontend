@@ -22,14 +22,17 @@ import { BannerBestsellers, BannerChildren, BannerNewest, BannerSeller, BannerUs
 import BecomeSeller from "@/components/BecomeSeller/BecomeSeller";
 import Subscription from "@/components/Subscribtion/Subscription";
 import TopBookSellersSection from "@/components/TopBooksellersSection/TopBookSellersSection";
+import PopularAuthorsSection from "@/components/PopularAuthorsSection/PopularAuthorsSection";
 import { ToastContainer } from "react-toastify";
 import { BgFull } from "../../public/backgrounds";
-import { selectShowStars } from "@/redux/selectors";
+import { selectShowStars, selectTopBookSellers, selectPopularAuthors } from "@/redux/selectors";
 import { useSelector } from "react-redux";
 
 export default function Home() {
   const router = useRouter();
   const starVisibility = useSelector(selectShowStars);
+  const bookSellers = useSelector(selectTopBookSellers);
+  const popularAuthors = useSelector(selectPopularAuthors);
 
   return (
     <>
@@ -87,7 +90,7 @@ export default function Home() {
           />
           {starVisibility && <UsedStar src={BgFull} alt='star' />}
           {starVisibility && <DarkBgUsed></DarkBgUsed>}
-          <TopBookSellersSection />
+          <TopBookSellersSection sellers={bookSellers} />
           <BecomeSeller />
           <BookSectionLayout
             title={sectionTexts[5].title}
@@ -95,9 +98,7 @@ export default function Home() {
             banner={BannerSeller}
             id={"sale"}
           />
-          <div style={{ color: "white", fontSize: "26px", height: "447px" }}>
-            Popular authors & series in progress
-          </div>
+          <PopularAuthorsSection authors={popularAuthors} />
           <ToastContainer />
         </Layout>
       </main>
