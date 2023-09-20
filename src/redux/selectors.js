@@ -17,6 +17,8 @@ export const selectUserComments = (state) => state.account.comments;
 //main selectors
 export const selectShowStars = (state) => state.main.showStars;
 export const selectSubscription = (state) => state.main.subscription;
+export const selectTopBookSellers = (state) => state.main.bookSellers;
+export const selectPopularAuthors = (state) => state.main.popularAuthors;
 
 //books selectors
 export const selectBooks = (state) => state.books;

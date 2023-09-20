@@ -44,20 +44,22 @@ import {
   Clip,
   PlusCircle,
 } from "../../../../../public/svg-account";
+import { Formik } from "formik";
+// import { addBookSchema } from "@/services/addBookSchema";
 import { InputHidden } from "../../Settings/Settings.styled";
 import { BannerBestsellers } from "../../../../../public/png/banners"; // for test
 
 const FormDataInitValues = {
-  title: "",
-  author: "",
+  title: null,
+  author: null,
   language: "En",
   format: "Paper",
   genre: "Fiction",
-  publisher: "",
-  price: "",
+  publisher: null,
+  price: null,
   bargain: true,
   photos: [],
-  description: "",
+  description: null,
 };
 export default function AddBookForm() {
   const [formData, setFormData] = useState(FormDataInitValues);
@@ -76,8 +78,7 @@ export default function AddBookForm() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name);
-    console.log(value);
+    
     if (name === "language") {
       switch (value) {
         case "En":
@@ -144,16 +145,16 @@ export default function AddBookForm() {
 
   const handlePrice = (e) => {
     const { value } = e.target;
-    if (value.length > 7) {
+    if (value.length > 7 || value === '-') {
       return;
     }
-
+console.log(typeof(value));
     setFormData({ ...formData, price: value });
   };
 
   const handleChangePhoto = (e) => {
     const { name, files, id } = e.target;
-    // setPhotos([ ...photos, { [name]: window.URL.createObjectURL(files[0]) }])
+
     setFormData({
       ...formData,
       photos: [
@@ -163,19 +164,10 @@ export default function AddBookForm() {
     });
   };
   const removePhotos = (e) => {
-    // console.dir(e.target.id);
-
     setFormData({
       ...formData,
       photos: [],
     });
-
-    // setFormData({
-    //   ...formData,
-    //   photos: 
-    //     formData.photos.splice(e.target.id, 1)
-    //   ,
-    // });
   }
 
   const resetForm = () => {
@@ -185,6 +177,7 @@ export default function AddBookForm() {
     e.preventDefault();
     alert(JSON.stringify(formData, null, 2));
     // const formFile = new FormData();
+    // console.log(formFile);
     // formFile.append("avatar", photo); // "avatar" это свойство картинки в БД на бекенде, нужно узнать как будет называться это поле.
 
     //dispatch(addBookData(formData)) photos:FormFile
@@ -222,20 +215,20 @@ export default function AddBookForm() {
   //   });
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
+    <Formik >
+      <form onSubmit={handleSubmit} encType='multipart/form-data'>
         <InputAddBookForm
           name={"title"}
           label={"Book Title"}
           placeholder={"Provide the accurate book title |"}
-          value={formData.title}
+          value={formData.title || ""}
           onChange={handleChange}
         />
         <InputAddBookForm
           name={"author"}
           label={"Author(s) name(s)"}
           placeholder={"Provide the accurate author(s) name(s) |"}
-          value={formData.author}
+          value={formData.author || ""}
           onChange={handleChange}
         />
         <InputAddBookForm label={"Choose book language"}>
@@ -384,7 +377,7 @@ export default function AddBookForm() {
           name={"publisher"}
           label={"Publisher"}
           placeholder={"Provide publisher house name |"}
-          value={formData.publisher}
+          value={formData.publisher || ""}
           onChange={handleChange}
         />
         <InputAddBookForm name='price' label='Enter your selling price'>
@@ -394,9 +387,12 @@ export default function AddBookForm() {
               <PriceInput
                 name='price'
                 type='number'
-                value={formData.price}
+                
+                value={formData.price || ""}
                 placeholder='0000.00'
                 onChange={handlePrice}
+                min={0}
+                required
               />
             </PriceInputBox>
             <BargainBox>
@@ -455,58 +451,64 @@ export default function AddBookForm() {
               )}
             </PhotoItemBox>
             <PhotoItemBox>
-              {formData.photos[1] ? (<Image
-                src={
-                  formData.photos[1]
-                    ? `${formData.photos[1].photo2}`
-                    : BannerBestsellers
-                }
-                alt='book photo'
-                style={{
-                  borderRadius: "16px",
-                  width: "78px",
-                  minHeight: "89px",
-                  border: "1px solid",
-                }}
-                width={78}
-                height={90}
-              />) : (<PhotoInputBox>
-                {formData.photos[0] ? (
-                  <>
-                    <Clip style={{ width: "24px", height: "24px" }} />
-                    Upload a file
-                    <InputHidden
-                      id={1}
-                      type='file'
-                      name='photo2'
-                      placeholder='Upload a photo'
-                      accept='image/png, image/jpeg'
-                      onChange={handleChangePhoto}
-                    />
-                  </>
-                ) : (
-                  <PlusCircle style={{ width: "24px", height: "24px" }} />
-                )}
-              </PhotoInputBox>)}
+              {formData.photos[1] ? (
+                <Image
+                  src={
+                    formData.photos[1]
+                      ? `${formData.photos[1].photo2}`
+                      : BannerBestsellers
+                  }
+                  alt='book photo'
+                  style={{
+                    borderRadius: "16px",
+                    width: "78px",
+                    minHeight: "89px",
+                    border: "1px solid",
+                  }}
+                  width={78}
+                  height={90}
+                />
+              ) : (
+                <PhotoInputBox>
+                  {formData.photos[0] ? (
+                    <>
+                      <Clip style={{ width: "24px", height: "24px" }} />
+                      Upload a file
+                      <InputHidden
+                        id={1}
+                        type='file'
+                        name='photo2'
+                        placeholder='Upload a photo'
+                        accept='image/png, image/jpeg'
+                        onChange={handleChangePhoto}
+                      />
+                    </>
+                  ) : (
+                    <PlusCircle style={{ width: "24px", height: "24px" }} />
+                  )}
+                </PhotoInputBox>
+              )}
             </PhotoItemBox>
             <PhotoItemBox>
-              {formData.photos[2] ? (<Image
-                src={
-                  formData.photos[2]
-                    ? `${formData.photos[2].photo3}`
-                    : BannerBestsellers
-                }
-                alt='book photo'
-                style={{
-                  borderRadius: "16px",
-                  width: "78px",
-                  minHeight: "89px",
-                  border: "1px solid",
-                }}
-                width={78}
-                height={90}
-                onClick={removePhotos}
-              />) : (
+              {formData.photos[2] ? (
+                <Image
+                  src={
+                    formData.photos[2]
+                      ? `${formData.photos[2].photo3}`
+                      : BannerBestsellers
+                  }
+                  alt='book photo'
+                  style={{
+                    borderRadius: "16px",
+                    width: "78px",
+                    minHeight: "89px",
+                    border: "1px solid",
+                  }}
+                  width={78}
+                  height={90}
+                  onClick={removePhotos}
+                />
+              ) : (
                 <PhotoInputBox>
                   {formData.photos[1] ? (
                     <>
@@ -528,41 +530,47 @@ export default function AddBookForm() {
               )}
             </PhotoItemBox>
             <PhotoItemBox>
-              {formData.photos[3] ? (<Image
-                src={
-                  formData.photos[3]
-                    ? `${formData.photos[3].photo4}`
-                    : BannerBestsellers
-                }
-                alt='book photo'
-                style={{
-                  borderRadius: "16px",
-                  width: "78px",
-                  minHeight: "89px",
-                  border: "1px solid",
-                }}
-                width={78}
-                height={90}
-              />) : (<PhotoInputBox>
-                {formData.photos[2] ? (
-                  <>
-                    <Clip style={{ width: "24px", height: "24px" }} />
-                    Upload a file
-                    <InputHidden
-                      id={3}
-                      type='file'
-                      name='photo4'
-                      placeholder='Upload a photo'
-                      accept='image/png, image/jpeg'
-                      onChange={handleChangePhoto}
-                    />
-                  </>
-                ) : (
-                  <PlusCircle style={{ width: "24px", height: "24px" }} />
-                )}
-              </PhotoInputBox>)}
+              {formData.photos[3] ? (
+                <Image
+                  src={
+                    formData.photos[3]
+                      ? `${formData.photos[3].photo4}`
+                      : BannerBestsellers
+                  }
+                  alt='book photo'
+                  style={{
+                    borderRadius: "16px",
+                    width: "78px",
+                    minHeight: "89px",
+                    border: "1px solid",
+                  }}
+                  width={78}
+                  height={90}
+                />
+              ) : (
+                <PhotoInputBox>
+                  {formData.photos[2] ? (
+                    <>
+                      <Clip style={{ width: "24px", height: "24px" }} />
+                      Upload a file
+                      <InputHidden
+                        id={3}
+                        type='file'
+                        name='photo4'
+                        placeholder='Upload a photo'
+                        accept='image/png, image/jpeg'
+                        onChange={handleChangePhoto}
+                      />
+                    </>
+                  ) : (
+                    <PlusCircle style={{ width: "24px", height: "24px" }} />
+                  )}
+                </PhotoInputBox>
+              )}
             </PhotoItemBox>
-            <RemovePhotosBtn type="button" onClick={removePhotos}>Remove photos (test)</RemovePhotosBtn>
+            <RemovePhotosBtn type='button' onClick={removePhotos}>
+              Remove photos (test)
+            </RemovePhotosBtn>
           </PhotosBox>
         </InputAddBookForm>
         <InputAddBookForm name={"description"} label={"Add book description"}>
@@ -572,7 +580,7 @@ export default function AddBookForm() {
             placeholder={
               "Please briefly summarize the book's content. The author's annotation can also be included in your write-up if available."
             }
-            value={formData.description}
+            value={formData.description || ''}
             onChange={handleChange}
           />
           {/* </Textarea> */}
@@ -587,6 +595,6 @@ export default function AddBookForm() {
           style={{ width: "342px" }}
         />
       </form>
-    </>
+    </Formik>
   );
 }

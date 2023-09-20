@@ -22,6 +22,7 @@ export default function InputAddBookForm({
           placeholder={placeholder}
             onChange={onChange}
             value={value}
+            required
         />
       )}
     </InputBox>
