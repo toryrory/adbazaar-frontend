@@ -57,7 +57,7 @@ export const books = [
     id: 1,
     name: 'The Great Gatsby',
     author: 'F.Scott Fitzgerald',
-    price: '882.15',
+    price: '82.15',
     type: 'paper',
     genre: 'fiction',
     language: 'en',
