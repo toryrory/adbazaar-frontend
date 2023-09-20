@@ -5,6 +5,7 @@ import {
   selectSettings,
   selectIsLoggedIn,
   selectFavorites,
+  selectCart,
 } from '@/redux/selectors';
 import MobileMenu from '../MobileMenu/MobileMenu';
 import CounterButton from '../CounterButton/CounterButton';
@@ -31,6 +32,10 @@ export default function Header() {
   const [state, setState] = useState(settings);
   const [showMenu, setShowMenu] = useState(false);
   const favorites = useSelector(selectFavorites);
+  const cartBooks = useSelector(selectCart);
+  const cartBooksCount = cartBooks.reduce((total, book) => {
+    return total + book.count;
+  }, 0);
 
   const onOpenMenu = () => {
     setShowMenu(true);
@@ -69,8 +74,8 @@ export default function Header() {
             <Heart style={{ width: 24, height: 24 }} />
           </CounterButton>
           <CounterButton
-            onClick={() => console.log('open shopping cart')}
-            count={0}
+            onClick={() => router.push('/cart')}
+            count={cartBooksCount}
           >
             <ShoppingCart style={{ width: 24, height: 24 }} />
           </CounterButton>

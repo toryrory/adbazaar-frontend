@@ -3,9 +3,18 @@ import { Rating } from '@mui/material';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useState } from 'react';
-import { addFavorites, deleteFavorites } from '@/redux/accountSlice';
+import {
+  addFavorites,
+  deleteFavorites,
+  addCart,
+  deleteCart,
+} from '@/redux/accountSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectFavorites, selectIsLoggedIn } from '@/redux/selectors';
+import {
+  selectCart,
+  selectFavorites,
+  selectIsLoggedIn,
+} from '@/redux/selectors';
 import Seller from '../Seller/Seller';
 import AddFavoriteBtn from '../FavoriteBtn/AddFavoriteBtn';
 import DeleteFavoriteBtn from '../FavoriteBtn/DeleteFavoriteBtn';
@@ -77,6 +86,19 @@ export default function BookHeader({ book }) {
     setIsFavorite(false);
   };
 
+  const addToCart = () => {
+    if (!isLoggedIn) {
+      setShowModal(true);
+      return;
+    }
+    dispatch(addCart(book));
+  };
+
+  const removeFromCart = () => {
+    dispatch(deleteCart(book.id));
+    setIsFavorite(false);
+  };
+
   const onCloseModal = () => {
     setShowModal(false);
   };
@@ -133,10 +155,7 @@ export default function BookHeader({ book }) {
             <Dollar>$</Dollar>
             {book.price}
           </Price>
-          <ButtonShopping
-            type="button"
-            onClick={() => console.log('add to cart')}
-          >
+          <ButtonShopping type="button" onClick={addToCart}>
             Add to Cart
             <ShoppingCart style={{ width: 24, height: 24 }} />
           </ButtonShopping>

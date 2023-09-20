@@ -1,4 +1,4 @@
-import { addFavorites, deleteFavorites } from '@/redux/accountSlice';
+import { addFavorites, deleteFavorites, addCart } from '@/redux/accountSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectFavorites, selectIsLoggedIn } from '@/redux/selectors';
 import { useEffect, useState } from 'react';
@@ -59,6 +59,14 @@ export default function Book({ book, variant }) {
     setShowModal(false);
   };
 
+  const addToCart = () => {
+    if (!isLoggedIn) {
+      setShowModal(true);
+      return;
+    }
+    dispatch(addCart(book));
+  };
+
   return (
     <Item variant={variant} key={book.id}>
       <Label variant={variant}>{book.type}</Label>
@@ -107,11 +115,7 @@ export default function Book({ book, variant }) {
           {book.price}
         </Price>
 
-        <ButtonShopping
-          variant={variant}
-          type="button"
-          onClick={() => console.log('add to cart')}
-        >
+        <ButtonShopping variant={variant} type="button" onClick={addToCart}>
           <ShoppingCart style={{ width: 24, height: 24 }} />
         </ButtonShopping>
       </Bottom>

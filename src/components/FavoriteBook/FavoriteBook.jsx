@@ -1,6 +1,6 @@
 import { Rating } from '@mui/material';
 import Link from 'next/link';
-import { deleteFavorites } from '@/redux/accountSlice';
+import { deleteFavorites, addCart } from '@/redux/accountSlice';
 import { useDispatch } from 'react-redux';
 import { ShoppingCart } from '../../../public/svg-layout';
 import { Cross } from '../../../public/svg-layout';
@@ -24,6 +24,10 @@ export default function FavoriteBook({ book }) {
 
   const removeFromFavorites = () => {
     dispatch(deleteFavorites(book.id));
+  };
+
+  const addToCart = () => {
+    dispatch(addCart(book));
   };
 
   return (
@@ -54,10 +58,7 @@ export default function FavoriteBook({ book }) {
       <PriceContainer>
         <Price>${book.price}</Price>
 
-        <ButtonShopping
-          type="button"
-          onClick={() => console.log('add to cart')}
-        >
+        <ButtonShopping type="button" onClick={addToCart}>
           <ShoppingCart style={{ width: 24, height: 24 }} />
         </ButtonShopping>
       </PriceContainer>
