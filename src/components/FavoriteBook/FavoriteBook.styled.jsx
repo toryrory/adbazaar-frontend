@@ -75,6 +75,17 @@ export const ButtonShopping = styled.button`
   padding: 6px 20px;
 `;
 
+export const ButtonInCart = styled.button`
+  display: flex;
+  background-color: var(--brand-color);
+  border: none;
+  border-radius: 12px;
+  color: #111;
+  font-size: 14px;
+  line-height: 1.43;
+  padding: 8px 10px;
+`;
+
 export const ButtonFavorites = styled.button`
   display: flex;
   align-items: center;

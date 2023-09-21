@@ -127,6 +127,20 @@ export const ButtonShopping = styled.button`
   line-height: 1;
 `;
 
+export const ButtonInCart = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background-color: var(--brand-color);
+  border: none;
+  border-radius: 12px;
+  padding: 12px 36px;
+  color: #111;
+  font-size: 16px;
+  line-height: 1;
+`;
+
 export const SellerContainer = styled.div`
   position: relative;
   width: 100%;

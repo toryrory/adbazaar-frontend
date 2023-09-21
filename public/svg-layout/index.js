@@ -2,6 +2,7 @@ export { default as User } from './user.svg';
 export { default as Burger } from './burger.svg';
 export { default as Logo } from './logo.svg';
 export { default as ShoppingCart } from './shopping-cart.svg';
+export { default as ShoppingCartBlack } from './shopping-cart-black.svg';
 export { default as Heart } from './heart.svg';
 export { default as Facebook } from './facebook.svg';
 export { default as Instagram } from './instagram.svg';
