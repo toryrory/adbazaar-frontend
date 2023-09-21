@@ -39,7 +39,7 @@ export default function CartBook({ book }) {
   };
 
   return (
-    <Item key={book.id}>
+    <Item>
       <Link href={`/books/${book.id}`}>
         <StyledImg src={book.photo} alt={book.name} priority={true} />
       </Link>

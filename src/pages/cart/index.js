@@ -39,7 +39,7 @@ export default function Cart() {
         <Subtitle>{cartBooksCount} items in cart</Subtitle>
         <List>
           {cartBooks.map((book) => {
-            return <CartBook book={book} />;
+            return <CartBook book={book} key={book.id} />;
           })}
         </List>
         <CartTotal books={cartBooks} />

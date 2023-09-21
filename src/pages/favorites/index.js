@@ -35,7 +35,7 @@ export default function FavoritesPage() {
       </Container>
       <List>
         {favoriteBooks.map((book) => {
-          return <FavoriteBook book={book} />;
+          return <FavoriteBook book={book} key={book.id} />;
         })}
       </List>
       <ContinueButton type="button" onClick={() => router.push('/')}>
