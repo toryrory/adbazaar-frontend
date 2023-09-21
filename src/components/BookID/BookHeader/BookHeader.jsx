@@ -26,7 +26,7 @@ import {
   Chat,
   EmptyStar,
 } from '../../../../public/svg-book';
-import { ShoppingCart } from '../../../../public/svg-layout';
+import { ShoppingCart, ShoppingCartBlack } from '../../../../public/svg-layout';
 import {
   HeadContainer,
   TitleContainer,
@@ -42,6 +42,7 @@ import {
   Price,
   Dollar,
   ButtonShopping,
+  ButtonInCart,
   ContactContainer,
   ContactButton,
   SellerContainer,
@@ -51,9 +52,11 @@ import {
 export default function BookHeader({ book }) {
   const [showSeller, setShowSeller] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [isInCart, setIsInCart] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [comments, setComments] = useState(book.comments);
   const favoriteBooks = useSelector(selectFavorites);
+  const cartBooks = useSelector(selectCart);
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const dispatch = useDispatch();
 
@@ -65,6 +68,17 @@ export default function BookHeader({ book }) {
       setIsFavorite(true);
     } else {
       setIsFavorite(false);
+    }
+  });
+
+  useEffect(() => {
+    const isCurrentInCart = cartBooks.find(
+      (cartBook) => cartBook.id === book.id
+    );
+    if (isCurrentInCart) {
+      setIsInCart(true);
+    } else {
+      setIsInCart(false);
     }
   });
 
@@ -96,7 +110,7 @@ export default function BookHeader({ book }) {
 
   const removeFromCart = () => {
     dispatch(deleteCart(book.id));
-    setIsFavorite(false);
+    setIsInCart(false);
   };
 
   const onCloseModal = () => {
@@ -155,10 +169,17 @@ export default function BookHeader({ book }) {
             <Dollar>$</Dollar>
             {book.price}
           </Price>
-          <ButtonShopping type="button" onClick={addToCart}>
-            Add to Cart
-            <ShoppingCart style={{ width: 24, height: 24 }} />
-          </ButtonShopping>
+          {isInCart ? (
+            <ButtonInCart type="button" onClick={removeFromCart}>
+              In Cart
+              <ShoppingCartBlack style={{ width: 24, height: 24 }} />
+            </ButtonInCart>
+          ) : (
+            <ButtonShopping type="button" onClick={addToCart}>
+              Add to Cart
+              <ShoppingCart style={{ width: 24, height: 24 }} />
+            </ButtonShopping>
+          )}
         </PriceContainer>
       </BookContainer>
       <SellerContainer>

@@ -1,6 +1,15 @@
-import { addFavorites, deleteFavorites, addCart } from '@/redux/accountSlice';
+import {
+  addFavorites,
+  deleteFavorites,
+  addCart,
+  deleteCart,
+} from '@/redux/accountSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectFavorites, selectIsLoggedIn } from '@/redux/selectors';
+import {
+  selectFavorites,
+  selectIsLoggedIn,
+  selectCart,
+} from '@/redux/selectors';
 import { useEffect, useState } from 'react';
 import Modal from '../modal/Modal';
 import Link from 'next/link';
@@ -17,21 +26,24 @@ import {
   Price,
   Dollar,
   ButtonShopping,
+  ButtonInCart,
   StyledImg,
   RatingBox,
   Reviews,
 } from './Book.styled';
-import { Barlow_Condensed } from "next/font/google";
+import { Barlow_Condensed } from 'next/font/google';
 
 const barlowCondensed = Barlow_Condensed({
-  weight: "500",
-  subsets: ["latin"],
+  weight: '500',
+  subsets: ['latin'],
 });
 
 export default function Book({ book, variant }) {
+  const [isInCart, setIsInCart] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const favoriteBooks = useSelector(selectFavorites);
+  const cartBooks = useSelector(selectCart);
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const dispatch = useDispatch();
@@ -44,6 +56,17 @@ export default function Book({ book, variant }) {
       setIsFavorite(true);
     } else {
       setIsFavorite(false);
+    }
+  });
+
+  useEffect(() => {
+    const isCurrentInCart = cartBooks.find(
+      (cartBook) => cartBook.id === book.id
+    );
+    if (isCurrentInCart) {
+      setIsInCart(true);
+    } else {
+      setIsInCart(false);
     }
   });
 
@@ -71,6 +94,11 @@ export default function Book({ book, variant }) {
       return;
     }
     dispatch(addCart(book));
+  };
+
+  const removeFromCart = () => {
+    dispatch(deleteCart(book.id));
+    setIsInCart(false);
   };
 
   return (
@@ -116,14 +144,23 @@ export default function Book({ book, variant }) {
         <Author variant={variant}>{book.author}</Author>
       </Link>
       <Bottom>
-        <Price variant={variant} style={barlowCondensed.style} >
+        <Price variant={variant} style={barlowCondensed.style}>
           <Dollar>$</Dollar>
           {book.price}
         </Price>
-
-        <ButtonShopping variant={variant} type="button" onClick={addToCart}>
-          <ShoppingCart style={{ width: 24, height: 24 }} />
-        </ButtonShopping>
+        {isInCart ? (
+          <ButtonInCart
+            variant={variant}
+            type="button"
+            onClick={removeFromCart}
+          >
+            In Cart
+          </ButtonInCart>
+        ) : (
+          <ButtonShopping variant={variant} type="button" onClick={addToCart}>
+            <ShoppingCart style={{ width: 24, height: 24 }} />
+          </ButtonShopping>
+        )}
       </Bottom>
       {showModal && (
         <Modal

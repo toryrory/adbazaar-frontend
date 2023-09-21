@@ -1,7 +1,9 @@
 import { Rating } from '@mui/material';
 import Link from 'next/link';
-import { deleteFavorites, addCart } from '@/redux/accountSlice';
-import { useDispatch } from 'react-redux';
+import { deleteFavorites, addCart, deleteCart } from '@/redux/accountSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCart } from '@/redux/selectors';
+import { useState, useEffect } from 'react';
 import { ShoppingCart } from '../../../public/svg-layout';
 import { Cross } from '../../../public/svg-layout';
 import { EmptyStar } from '../../../public/svg-book';
@@ -15,12 +17,26 @@ import {
   Author,
   Price,
   ButtonShopping,
+  ButtonInCart,
   ButtonFavorites,
   PriceContainer,
 } from './FavoriteBook.styled';
 
 export default function FavoriteBook({ book }) {
+  const [isInCart, setIsInCart] = useState(false);
+  const cartBooks = useSelector(selectCart);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const isCurrentInCart = cartBooks.find(
+      (cartBook) => cartBook.id === book.id
+    );
+    if (isCurrentInCart) {
+      setIsInCart(true);
+    } else {
+      setIsInCart(false);
+    }
+  });
 
   const removeFromFavorites = () => {
     dispatch(deleteFavorites(book.id));
@@ -28,6 +44,11 @@ export default function FavoriteBook({ book }) {
 
   const addToCart = () => {
     dispatch(addCart(book));
+  };
+
+  const removeFromCart = () => {
+    dispatch(deleteCart(book.id));
+    setIsInCart(false);
   };
 
   return (
@@ -58,9 +79,15 @@ export default function FavoriteBook({ book }) {
       <PriceContainer>
         <Price>${book.price}</Price>
 
-        <ButtonShopping type="button" onClick={addToCart}>
-          <ShoppingCart style={{ width: 24, height: 24 }} />
-        </ButtonShopping>
+        {isInCart ? (
+          <ButtonInCart type="button" onClick={removeFromCart}>
+            In Cart
+          </ButtonInCart>
+        ) : (
+          <ButtonShopping type="button" onClick={addToCart}>
+            <ShoppingCart style={{ width: 24, height: 24 }} />
+          </ButtonShopping>
+        )}
       </PriceContainer>
       <ButtonFavorites>
         <Cross
