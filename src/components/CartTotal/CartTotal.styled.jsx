@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { Form, Field } from 'formik';
 
-export const Container = styled.div`
+export const StyledForm = styled(Form)`
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -66,7 +67,7 @@ export const DeliveryButton = styled.button`
   gap: 24px;
 `;
 
-export const DeliveryForm = styled.form`
+export const DeliveryContainer = styled.div`
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -77,6 +78,7 @@ export const DeliveryForm = styled.form`
   width: 263px;
   padding: 8px 16px;
   z-index: 999;
+  border-radius: 0px 0px 0px 15px;
 `;
 
 export const DeliveryItem = styled.label`
@@ -87,7 +89,7 @@ export const DeliveryItem = styled.label`
   border-bottom: 0.5px solid var(--light-text);
 `;
 
-export const DeliveryInput = styled.input`
+export const DeliveryInput = styled(Field)`
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -99,4 +101,20 @@ export const DeliveryPrice = styled.p`
   line-height: 1;
   color: #ffffff;
   font-stretch: condensed;
+`;
+
+export const Checkbox = styled(Field)`
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  position: absolute;
+`;
+
+export const CheckboxLabel = styled.label`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  line-height: 1.3;
+  color: var(--white-text);
 `;
