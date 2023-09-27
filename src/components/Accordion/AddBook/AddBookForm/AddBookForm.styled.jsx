@@ -288,7 +288,10 @@ export const PhotoInputBox = styled.label`
 `;
 
 export const RemovePhotosBtn = styled.button`
-padding: 10px 10px 0;
+  display: flex;
+  padding: 8px 0px;
+  align-items: center;
+  gap: 8px;
   background-color: transparent;
   border: none;
   color: var(--brand-color);
