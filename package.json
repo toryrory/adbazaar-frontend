@@ -24,6 +24,7 @@
     "eslint-config-next": "13.4.12",
     "formik": "^2.4.2",
     "jwt-decode": "^3.1.2",
+    "moment": "^2.29.4",
     "next": "13.4.12",
     "next-images": "^1.8.5",
     "normalize.css": "^8.0.1",

@@ -32,7 +32,7 @@ import {
   RemovePhotosBtn,
 } from "./AddBookForm.styled";
 import { Search } from "../../../../../public/svg-index";
-import { ArrowDown } from "../../../../../public/svg-account";
+import { ArrowDown, Trash } from "../../../../../public/svg-account";
 import { Popover, Checkbox } from "@mui/material";
 import SecondaryButton from "@/components/secondaryButton/SecondaryButton";
 import {
@@ -45,7 +45,6 @@ import {
   PlusCircle,
 } from "../../../../../public/svg-account";
 import { Formik } from "formik";
-// import { addBookSchema } from "@/services/addBookSchema";
 import { InputHidden } from "../../Settings/Settings.styled";
 import { BannerBestsellers } from "../../../../../public/png/banners"; // for test
 
@@ -58,6 +57,8 @@ const FormDataInitValues = {
   publisher: null,
   price: null,
   bargain: true,
+  quantity: null,
+  linkToStock: true,
   photos: [],
   description: null,
 };
@@ -145,11 +146,17 @@ export default function AddBookForm() {
 
   const handlePrice = (e) => {
     const { value } = e.target;
-    if (value.length > 7 || value === '-') {
+    if (value.length > 7) {
       return;
     }
-console.log(typeof(value));
     setFormData({ ...formData, price: value });
+  };
+  const handleQuantity = (e) => {
+    const { value } = e.target;
+    if (value.length > 4) {
+      return;
+    }
+    setFormData({ ...formData, quantity: value });
   };
 
   const handleChangePhoto = (e) => {
@@ -215,8 +222,12 @@ console.log(typeof(value));
   //   });
 
   return (
-    <Formik >
-      <form onSubmit={handleSubmit} encType='multipart/form-data'>
+    <Formik>
+      <form
+        onSubmit={handleSubmit}
+        encType='multipart/form-data'
+        autoComplete='off'
+      >
         <InputAddBookForm
           name={"title"}
           label={"Book Title"}
@@ -387,7 +398,6 @@ console.log(typeof(value));
               <PriceInput
                 name='price'
                 type='number'
-                
                 value={formData.price || ""}
                 placeholder='0000.00'
                 onChange={handlePrice}
@@ -407,6 +417,40 @@ console.log(typeof(value));
                 checked={formData.bargain}
                 onChange={() =>
                   setFormData({ ...formData, bargain: !formData.bargain })
+                }
+              />
+            </BargainBox>
+          </PriceBox>
+        </InputAddBookForm>
+        <InputAddBookForm name='quantity' label='Enter book quantity'>
+          <PriceBox>
+            <PriceInputBox>
+              <PriceDollar>items:</PriceDollar>
+              <PriceInput
+                name='price'
+                type='number'
+                value={formData.quantity || ""}
+                placeholder='0000'
+                onChange={handleQuantity}
+                min={0}
+                required
+              />
+            </PriceInputBox>
+            <BargainBox>
+              <BargainText>minus from stock</BargainText>
+              <Checkbox
+                icon={
+                  <CheckboxEmpty style={{ width: "24px", height: "24px" }} />
+                }
+                checkedIcon={
+                  <CheckboxChecked style={{ width: "24px", height: "24px" }} />
+                }
+                checked={formData.linkToStock}
+                onChange={() =>
+                  setFormData({
+                    ...formData,
+                    linkToStock: !formData.linkToStock,
+                  })
                 }
               />
             </BargainBox>
@@ -569,7 +613,8 @@ console.log(typeof(value));
               )}
             </PhotoItemBox>
             <RemovePhotosBtn type='button' onClick={removePhotos}>
-              Remove photos (test)
+              <Trash style={{ width: "24px", height: "24px" }} />
+              Remove images
             </RemovePhotosBtn>
           </PhotosBox>
         </InputAddBookForm>
@@ -580,7 +625,7 @@ console.log(typeof(value));
             placeholder={
               "Please briefly summarize the book's content. The author's annotation can also be included in your write-up if available."
             }
-            value={formData.description || ''}
+            value={formData.description || ""}
             onChange={handleChange}
           />
           {/* </Textarea> */}

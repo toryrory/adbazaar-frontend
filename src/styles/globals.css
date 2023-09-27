@@ -10,6 +10,7 @@
   --light-grey: #d8e9fe;
   --light-grey-05: #d8e9fe92;
   --dark-grey: #3f5870;
+  --very-dark-grey:#2b364a;
   --grey: #20252f;
   --product-background: #212837;
   --product-background-06: #2128379c;
@@ -18,6 +19,7 @@
   --hero-rose: #fdacff;
   --dark-text: #23314f;
   --required-color: #E83B50;
+  --green: #22bc4d;
 }
 @font-face {
   font-family: 'TrueHelvetica';

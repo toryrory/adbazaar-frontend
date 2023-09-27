@@ -25,3 +25,5 @@ export { default as InstWhite } from './inst-white.svg';
 export { default as PhonePlus } from './phone-plus.svg';
 export { default as CancelTrash } from './cancel-trash.svg';
 export { default as PlusCircle } from './plus-circle.svg';
+export { default as Bell } from './bell.svg';
+export { default as NewNotif } from './new-notif.svg';
