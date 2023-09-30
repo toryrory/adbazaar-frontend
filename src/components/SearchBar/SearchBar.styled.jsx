@@ -1,7 +1,7 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const InputWrapper = styled.div`
-min-width: 358px;
+  min-width: 358px;
   display: flex;
   padding: 4px 0px 3px;
   justify-content: space-between;
@@ -44,8 +44,8 @@ export const BtnSearch = styled.button`
   }
 `;
 export const BtnsWrapper = styled.div`
-display: flex;
-`
+  display: flex;
+`;
 export const BtnDelete = styled.button`
   padding: 8px 0 4px 7px;
   justify-content: center;
