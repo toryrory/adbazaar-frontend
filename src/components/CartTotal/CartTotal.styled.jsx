@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Form, Field } from 'formik';
 
-export const StyledForm = styled(Form)`
+export const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -89,7 +89,7 @@ export const DeliveryItem = styled.label`
   border-bottom: 0.5px solid var(--light-text);
 `;
 
-export const DeliveryInput = styled(Field)`
+export const DeliveryInput = styled.input`
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -103,7 +103,7 @@ export const DeliveryPrice = styled.p`
   font-stretch: condensed;
 `;
 
-export const Checkbox = styled(Field)`
+export const Checkbox = styled.input`
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;

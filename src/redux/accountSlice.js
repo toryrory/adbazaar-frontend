@@ -103,6 +103,9 @@ const accountSlice = createSlice({
       const repeatBook = state.cart.find((book) => book.id === action.payload);
       repeatBook.count -= 1;
     },
+    clearCart(state, action) {
+      state.cart = [];
+    },
   },
 });
 // сделать екстраредюсер на получение данных с формы
@@ -114,5 +117,6 @@ export const {
   addCart,
   deleteCart,
   minusCountCart,
+  clearCart,
 } = accountSlice.actions;
 export const accountReducer = accountSlice.reducer;
