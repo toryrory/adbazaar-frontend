@@ -29,3 +29,8 @@ export { default as Phone } from './phone.svg';
 export { default as MailSeller } from './mail-seller.svg';
 export { default as EmptyStar } from './empty-star.svg';
 export { default as Send } from './send.svg';
+export { default as Truck } from './truck.svg';
+export { default as Promo } from './promo.svg';
+export { default as Wallet } from './wallet.svg';
+export { default as Comment } from './comment.svg';
+export { default as Rocket } from './rocket.svg';
