@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  padding: 16px 16px 90px;
+  padding: 16px 16px 24px;
 `;
 
 export const BackButton = styled.button`
@@ -31,23 +31,30 @@ export const Subtitle = styled.p`
   color: var(--brand-color);
 `;
 
-export const List = styled.ul`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-`;
-
-export const ContinueButton = styled.button`
+export const TotalContainer = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 0;
-  color: var(--light-grey);
-  background: transparent;
-  border: none;
-  font-size: 13px;
-  line-height: 1.15;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 32px;
+  justify-content: space-between;
+  width: 100%;
+  position: relative;
+`;
+
+export const Price = styled.p`
+  font-size: 24px;
+  line-height: 1;
+  color: #ffffff;
+  font-stretch: condensed;
+`;
+
+export const Dollar = styled.span`
+  font-size: 16px;
+  margin-right: 8px;
+  font-family: barlowCondensed, sans-serif;
+`;
+
+export const ResultPrice = styled.h3`
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1;
+  color: #ffffff;
 `;

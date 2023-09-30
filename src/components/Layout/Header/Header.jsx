@@ -88,9 +88,12 @@ export default function Header() {
           <Button type="button" onClick={() => router.push('/login')}>
             <Heart style={{ width: 24, height: 24 }} />
           </Button>
-          <Button type="button" onClick={() => router.push('/login')}>
+          <CounterButton
+            onClick={() => router.push('/cart')}
+            count={cartBooksCount}
+          >
             <ShoppingCart style={{ width: 24, height: 24 }} />
-          </Button>
+          </CounterButton>
         </ButtonContainer>
       )}
       {showMenu ? (
