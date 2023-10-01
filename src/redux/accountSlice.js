@@ -105,6 +105,7 @@ const accountSlice = createSlice({
       const repeatBook = state.cart.find((book) => book.id === action.payload);
       repeatBook.count -= 1;
     },
+
     changeCheckBox(state, action) {
       const notification = state.notifications.find(
         (notification) => notification.id === action.payload
@@ -119,7 +120,11 @@ const accountSlice = createSlice({
     },
     deleteNotification(state, action) { 
       state.notifications = state.notifications.filter(notif => notif.checked === false)
-    }
+    },
+    clearCart(state, action) {
+      state.cart = [];
+    },
+
   },
   
 });
@@ -135,5 +140,7 @@ export const {
   changeCheckBox,
   markAsRead,
   deleteNotification,
+  clearCart,
+
 } = accountSlice.actions;
 export const accountReducer = accountSlice.reducer;

@@ -126,15 +126,9 @@ export default function Overlay({ onClose, style }) {
             </GreyItem>
             <GreyItem>
               <ShoppingCircle style={{ width: 34, height: 34 }} />
-              {isLoggedIn ? (
-                <Link href="/" style={{ color: 'inherit' }}>
-                  My cart
-                </Link>
-              ) : (
-                <Link href="/login" style={{ color: 'inherit' }}>
-                  My cart
-                </Link>
-              )}
+              <Link href="/cart" style={{ color: 'inherit' }}>
+                My cart
+              </Link>
             </GreyItem>
           </GreyList>
           <div>

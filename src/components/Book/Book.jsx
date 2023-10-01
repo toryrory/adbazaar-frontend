@@ -89,10 +89,6 @@ export default function Book({ book, variant }) {
   };
 
   const addToCart = () => {
-    if (!isLoggedIn) {
-      setShowModal(true);
-      return;
-    }
     dispatch(addCart(book));
   };
 

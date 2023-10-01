@@ -9,8 +9,9 @@ import {
   Title,
   Subtitle,
   List,
+  ContinueButton,
 } from '@/styles/cart.styled';
-import { ArrowBack } from '../../../public/svg-book';
+import { ArrowBack, ArrowRight } from '../../../public/svg-book';
 import { BgFull } from '../../../public/backgrounds';
 import { HeroStar } from '@/styles/index.styled';
 import { useSelector } from 'react-redux';
@@ -36,13 +37,24 @@ export default function Cart() {
           Previous page
         </BackButton>
         <Title>My Cart</Title>
-        <Subtitle>{cartBooksCount} items in cart</Subtitle>
+        {cartBooksCount === 1 ? (
+          <Subtitle>{cartBooksCount} item in the cart</Subtitle>
+        ) : (
+          <Subtitle>{cartBooksCount} items in the cart</Subtitle>
+        )}
         <List>
           {cartBooks.map((book) => {
             return <CartBook book={book} key={book.id} />;
           })}
         </List>
-        <CartTotal books={cartBooks} />
+        {cartBooks.length > 0 && (
+          <CartTotal books={cartBooks} cartBooksCount={cartBooksCount} />
+        )}
+
+        <ContinueButton type="button" onClick={() => router.push('/')}>
+          Continue shopping
+          <ArrowRight style={{ width: 14, height: 15 }} />
+        </ContinueButton>
       </Container>
     </>
   );
