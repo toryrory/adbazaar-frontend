@@ -1,6 +1,10 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 import Image from "next/image";
-import { TextBookSvg, EBookSvg, AudioBookSvg } from '../../../../../public/svg-index';
+import {
+  TextBookSvg,
+  EBookSvg,
+  AudioBookSvg,
+} from "../../../../../public/svg-index";
 import {
   Select,
   MenuItem,
@@ -9,14 +13,13 @@ import {
   Popover,
 } from "@mui/material";
 
-
 export const LanguageBox = styled.div`
-display: flex;
-gap: 16px;
-padding: 8px;
-align-items: center;
-height: 30px;
-`
+  display: flex;
+  gap: 16px;
+  padding: 8px;
+  align-items: center;
+  height: 30px;
+`;
 export const LanguageInput = styled.input`
   width: 30px;
   padding: 6px 4px;
@@ -27,7 +30,7 @@ export const LanguageInput = styled.input`
   color: var(--white-text);
   font-size: 16px;
   caret-color: transparent;
-  opacity: ${({ selectedlang }) => (selectedlang === "true" ? 1 : 0.5)};
+  opacity: ${({ $selectedlang }) => ($selectedlang === "true" ? 1 : 0.5)};
 
   &:focus {
     outline: none;
@@ -44,8 +47,8 @@ export const Format = styled.div`
   display: flex;
   gap: 4px;
   width: 85px;
-  border-bottom: ${({ selectedformat }) =>
-    selectedformat === "true"
+  border-bottom: ${({ $selectedformat }) =>
+    $selectedformat === "true"
       ? "1px solid var(--white-text)"
       : "1px solid #808080"};
 
@@ -60,7 +63,7 @@ export const FormatInput = styled.input`
   color: var(--white-text);
   font-size: 16px;
   caret-color: transparent;
-  opacity: ${({ selectedformat }) => (selectedformat === "true" ? 1 : 0.5)};
+  opacity: ${({ $selectedformat }) => ($selectedformat === "true" ? 1 : 0.5)};
 
   &:focus {
     outline: none;
@@ -70,20 +73,20 @@ export const FormatInput = styled.input`
 export const PaperSvgStyled = styled(TextBookSvg)`
   width: 20px;
   height: 20px;
-  fill: ${({ selectedformat }) =>
-    selectedformat === "true" ? "white" : "#808080"};
+  fill: ${({ $selectedformat }) =>
+    $selectedformat === "true" ? "white" : "#808080"};
 `;
 export const EBookSvgStyled = styled(EBookSvg)`
   width: 20px;
   height: 20px;
-  fill: ${({ selectedformat }) =>
-    selectedformat === "true" ? "white" : "#808080"};
+  fill: ${({ $selectedformat }) =>
+    $selectedformat === "true" ? "white" : "#808080"};
 `;
 export const AudioSvgStyled = styled(AudioBookSvg)`
   width: 20px;
   height: 20px;
-  fill: ${({ selectedformat }) =>
-    selectedformat === "true" ? "white" : "#808080"};
+  fill: ${({ $selectedformat }) =>
+    $selectedformat === "true" ? "white" : "#808080"};
 `;
 
 export const FormBox = styled.div`
@@ -103,7 +106,7 @@ export const SelectLangInput = styled.input`
 
   &::placeholder {
     color: var(--white-text);
-    opacity: ${({selectedlang}) => selectedlang === 'true' ? '1' : '0.5' }
+    opacity: ${({ $selectedlang }) => ($selectedlang === "true" ? "1" : "0.5")};
   }
   &:focus {
     outline: none;
@@ -127,15 +130,17 @@ export const GenreInput = styled.input`
   &:focus {
     outline: none;
   }
-  
 `;
 
 export const SelectListMenu = styled.div`
   display: flex;
   justify-content: space-between;
-  border-bottom: ${({ selectlang }) =>
-      selectlang === "true" ? "1px solid var(--light-grey-05)" : "1px solid var(--light-grey)"};
-  width: ${({ selectmenu }) => (selectmenu === "language" ? "234px" : "126px")};
+  border-bottom: ${({ $selectlang }) =>
+    $selectlang === "true"
+      ? "1px solid var(--light-grey-05)"
+      : "1px solid var(--light-grey)"};
+  width: ${({ $selectmenu }) =>
+    $selectmenu === "language" ? "234px" : "126px"};
 `;
 
 export const SelectGenreText = styled.p`
@@ -160,8 +165,8 @@ export const GenreList = styled.ul`
   padding: 0px;
 `;
 export const GenreItem = styled(MenuItem)`
-  padding: ${({ menutype }) =>
-      menutype === "submenu" ? "0px 48px" : "0px 24px"};
+  padding: ${({ $menutype }) =>
+    $menutype === "submenu" ? "0px 48px" : "0px 24px"};
   border-bottom: 0.3px solid var(--light-grey);
   color: var(--white-text);
   font-size: 16px;
@@ -198,10 +203,10 @@ export const Textarea = styled.textarea`
 `;
 
 export const PriceBox = styled.div`
-padding: 8px 8px 0 8px;
-display: flex;
-gap: 16px;
-`
+  padding: 8px 8px 0 8px;
+  display: flex;
+  gap: 16px;
+`;
 export const PriceInputBox = styled.div`
   display: flex;
   width: 106px;
@@ -215,7 +220,7 @@ export const PriceInput = styled.input`
   border: none;
   color: var(--white-text);
   font-size: 20px;
-  
+
   &::placeholder {
     color: var(--white-text-06);
   }
@@ -297,6 +302,7 @@ export const RemovePhotosBtn = styled.button`
   color: var(--brand-color);
   font-size: 13px;
 `;
+
 // export const StyledImg = styled(Image)`
 //   border-radius: 16px;
 //   max-width: 78px;

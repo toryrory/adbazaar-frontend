@@ -249,21 +249,21 @@ export default function AddBookForm() {
               defaultValue={"En"}
               defaultChecked
               onClick={handleChange}
-              selectedlang={`${selectedLang.en}`}
+              $selectedlang={`${selectedLang.en}`}
               readOnly
             />
             <LanguageInput
               name='language'
               defaultValue={"Ua"}
               onClick={handleChange}
-              selectedlang={`${selectedLang.ua}`}
+              $selectedlang={`${selectedLang.ua}`}
               readOnly
             />
-            <SelectListMenu selectmenu='language'>
+            <SelectListMenu $selectmenu='language'>
               <SelectLangInput
                 name={"language"}
                 placeholder='choose other'
-                selectedlang={`${selectedLang.other}`}
+                $selectedlang={`${selectedLang.other}`}
                 value={
                   formData.language !== "Ua" && formData.language !== "En"
                     ? formData.language
@@ -303,36 +303,36 @@ export default function AddBookForm() {
 
         <InputAddBookForm label='Choose book format'>
           <FormatBox>
-            <Format selectedformat={`${selectedFormat.paper}`}>
-              <PaperSvgStyled selectedformat={`${selectedFormat.paper}`} />
+            <Format $selectedformat={`${selectedFormat.paper}`}>
+              <PaperSvgStyled $selectedformat={`${selectedFormat.paper}`} />
               <FormatInput
                 name='format'
                 onClick={handleChange}
                 type='text'
                 defaultValue='Paper'
-                selectedformat={`${selectedFormat.paper}`}
+                $selectedformat={`${selectedFormat.paper}`}
                 style={{ width: "48px" }}
               />
             </Format>
-            <Format selectedformat={`${selectedFormat.eBook}`}>
-              <EBookSvgStyled selectedformat={`${selectedFormat.eBook}`} />
+            <Format $selectedformat={`${selectedFormat.eBook}`}>
+              <EBookSvgStyled $selectedformat={`${selectedFormat.eBook}`} />
               <FormatInput
                 name='format'
                 onClick={handleChange}
                 type='text'
                 defaultValue='E-book'
-                selectedformat={`${selectedFormat.eBook}`}
+                $selectedformat={`${selectedFormat.eBook}`}
                 style={{ width: "55px" }}
               />
             </Format>
-            <Format selectedformat={`${selectedFormat.audio}`}>
-              <AudioSvgStyled selectedformat={`${selectedFormat.audio}`} />
+            <Format $selectedformat={`${selectedFormat.audio}`}>
+              <AudioSvgStyled $selectedformat={`${selectedFormat.audio}`} />
               <FormatInput
                 name='format'
                 onClick={handleChange}
                 type='text'
                 defaultValue='Audio-book'
-                selectedformat={`${selectedFormat.audio}`}
+                $selectedformat={`${selectedFormat.audio}`}
                 style={{ width: "85px" }}
               />
             </Format>
@@ -367,19 +367,19 @@ export default function AddBookForm() {
                 <GenreItem>Children&#039;s</GenreItem>
                 <GenreItem>Computer & Technology</GenreItem>
                 <GenreItem>Education</GenreItem>
-                <GenreItem menutype='submenu'>History</GenreItem>
-                <GenreItem menutype='submenu'>Medical & Nursing</GenreItem>
-                <GenreItem menutype='submenu'>Political Science</GenreItem>
-                <GenreItem menutype='submenu'>Psychology &Religion</GenreItem>
-                <GenreItem menutype='submenu'>Social Science</GenreItem>
-                <GenreItem menutype='submenu'>Textbooks</GenreItem>
+                <GenreItem $menutype='submenu'>History</GenreItem>
+                <GenreItem $menutype='submenu'>Medical & Nursing</GenreItem>
+                <GenreItem $menutype='submenu'>Political Science</GenreItem>
+                <GenreItem $menutype='submenu'>Psychology &Religion</GenreItem>
+                <GenreItem $menutype='submenu'>Social Science</GenreItem>
+                <GenreItem $menutype='submenu'>Textbooks</GenreItem>
                 <GenreItem>Fiction</GenreItem>
-                <GenreItem menutype='submenu'>Horror</GenreItem>
-                <GenreItem menutype='submenu'>Mystery & Thrillers</GenreItem>
-                <GenreItem menutype='submenu'>Poetry</GenreItem>
-                <GenreItem menutype='submenu'>Romance</GenreItem>
-                <GenreItem menutype='submenu'>Science Fiction</GenreItem>
-                <GenreItem menutype='submenu'>True Crime</GenreItem>
+                <GenreItem $menutype='submenu'>Horror</GenreItem>
+                <GenreItem $menutype='submenu'>Mystery & Thrillers</GenreItem>
+                <GenreItem $menutype='submenu'>Poetry</GenreItem>
+                <GenreItem $menutype='submenu'>Romance</GenreItem>
+                <GenreItem $menutype='submenu'>Science Fiction</GenreItem>
+                <GenreItem $menutype='submenu'>True Crime</GenreItem>
               </GenreList>
             </Popover>
           </GenreBox>
