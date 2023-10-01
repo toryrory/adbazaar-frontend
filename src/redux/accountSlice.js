@@ -1,9 +1,10 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { TestAvatar } from '../../public/png';
-import { nanoid } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
+import { TestAvatar } from "../../public/png";
+import { nanoid } from "@reduxjs/toolkit";
+import { notifications } from "@/data/notifications";
 
 const accountSlice = createSlice({
-  name: 'account',
+  name: "account",
   initialState: {
     settings: {
       avatar: null, //проверить подставив вместо null -> TestAvatar
@@ -12,17 +13,18 @@ const accountSlice = createSlice({
     cart: [],
 
     addBook: {
-      title: '',
-      author: '',
-      language: '',
-      format: '',
-      genre: '',
-      publisher: '',
-      price: '',
+      title: "",
+      author: "",
+      language: "",
+      format: "",
+      genre: "",
+      publisher: "",
+      price: "",
       photos: [],
-      description: '',
+      description: "",
     },
     comments: [],
+    notifications: notifications,
   },
   reducers: {
     addFavorites: {
@@ -103,10 +105,28 @@ const accountSlice = createSlice({
       const repeatBook = state.cart.find((book) => book.id === action.payload);
       repeatBook.count -= 1;
     },
+
+    changeCheckBox(state, action) {
+      const notification = state.notifications.find(
+        (notification) => notification.id === action.payload
+      );
+      notification.checked = !notification.checked;
+    },
+    markAsRead(state, action) {
+      state.notifications = state.notifications.map((notif) => ({
+        ...notif,
+        isRead: notif.checked ? true : notif.isRead,
+      }));
+    },
+    deleteNotification(state, action) { 
+      state.notifications = state.notifications.filter(notif => notif.checked === false)
+    },
     clearCart(state, action) {
       state.cart = [];
     },
+
   },
+  
 });
 // сделать екстраредюсер на получение данных с формы
 
@@ -117,6 +137,10 @@ export const {
   addCart,
   deleteCart,
   minusCountCart,
+  changeCheckBox,
+  markAsRead,
+  deleteNotification,
   clearCart,
+
 } = accountSlice.actions;
 export const accountReducer = accountSlice.reducer;

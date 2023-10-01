@@ -10,37 +10,40 @@ import {
   BookAuthor,
   BookTitle,
   BookInfoDollar,
-    BookInfoPrice,
+  BookInfoPrice,
   ActiveBtn,
 } from "./NotificationBookInfo.styled";
 import { RatingBox, Reviews } from "@/components/Book/Book.styled";
 
-export default function NotificationBookInfo() {
+export default function NotificationBookInfo({ data }) {
+  const { id, author, image_path, price, rate, reviews, status, title } = data;
+
   return (
-    <InfoContainer title={"Ordered book"}>
-      <StyledImg src={GreatGatsby} alt='book title' />
-      <BookInfoBox>
+    <InfoContainer name='book' title={"Ordered book"}>
+      <StyledImg src={image_path} alt='book title' />
+      <BookInfoBox id={id}>
         <BookInfoText>
-          <BookTitle>The Invisible Life of Euridice Gusmao</BookTitle>
-          <BookAuthor>Martha Batalha</BookAuthor>
+          <BookTitle>{title}</BookTitle>
+          <BookAuthor>{author}</BookAuthor>
           <RatingBox>
             <Rating
               readOnly
               precision={0.5}
-              defaultValue={4}
+              defaultValue={rate}
               sx={{
                 color: "var(--rose-color)",
               }}
               size='small'
               emptyIcon={<EmptyStar />}
             />
-            <Reviews style={{ margin: 0 }}>(12)</Reviews>
+            <Reviews style={{ margin: 0 }}>({reviews})</Reviews>
           </RatingBox>
         </BookInfoText>
         <BookInfoBtn>
-          <ActiveBtn>Active</ActiveBtn>
+          <ActiveBtn $status={status}>{status}</ActiveBtn>
           <BookInfoPrice>
-            <BookInfoDollar>$</BookInfoDollar>2.44
+            <BookInfoDollar>$</BookInfoDollar>
+            {price}
           </BookInfoPrice>
         </BookInfoBtn>
       </BookInfoBox>

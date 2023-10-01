@@ -46,7 +46,7 @@ export const ActiveBtn = styled.button`
   flex-shrink: 0;
   border-radius: 10px;
   border: none;
-  background-color: var(--green);
+  background-color:${({$status}) => $status === 'active' ? 'var(--green)' : 'var(--error-color)'};
   font-size: 12px;
   color: var(--main-background);
   &:focus {

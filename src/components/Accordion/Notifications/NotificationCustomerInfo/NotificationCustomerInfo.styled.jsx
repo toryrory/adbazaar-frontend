@@ -36,6 +36,7 @@ export const StyledImg = styled(Image)`
   background-color: var(--dark-grey);
 `;
 export const CustomerName = styled.p`
+  /* width: 135px; */
   overflow: hidden;
   color: var(--white-text);
   text-overflow: ellipsis;
@@ -49,8 +50,9 @@ export const CustomerDataField = styled.p`
   
 `;
 export const CustomerData = styled.p`
-width: 200px;
+  width: 200px;
   overflow: hidden;
+  vertical-align: bottom;
   color: var(--white-text);
   text-align: right;
   text-overflow: ellipsis;

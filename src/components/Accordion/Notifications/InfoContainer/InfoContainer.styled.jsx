@@ -8,6 +8,7 @@ export const BoxTitle = styled.span`
 
 export const Box = styled.div`
   display: flex;
+  flex-direction: ${({ $name }) => $name === 'comment' ? 'column' : 'row' };
   width: 358px;
   padding: 8px;
   align-items: flex-start;

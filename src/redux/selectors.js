@@ -14,6 +14,7 @@ export const selectAvatarImg = (state) => state.account.settings.avatar;
 export const selectFavorites = (state) => state.account.favorites;
 export const selectUserComments = (state) => state.account.comments;
 export const selectCart = (state) => state.account.cart;
+export const selectNotifications = (state) => state.account.notifications;
 
 //main selectors
 export const selectShowStars = (state) => state.main.showStars;
