@@ -21,6 +21,8 @@ export const schema = yup.object({
       'must include 1 number and special symbol'
     )
     .matches('^[^А-Яа-яЇїІіЄєҐґЁё]+$', 'must include only latin letters')
+    .min(8)
+    .max(20)
     .required('Please Enter your Password'),
   confirm: yup
     .string()
