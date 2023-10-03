@@ -20,7 +20,10 @@ export const authRegister = createAsyncThunk(
   'auth/register',
   async (credentials, thunkAPI) => {
     try {
-      const response = await axios.post(`auth/register`, credentials);
+      const response = await axios.post(
+        `/authentication/register`,
+        credentials
+      );
       console.log(response.data);
       return response.data;
     } catch (e) {
@@ -33,7 +36,7 @@ export const authLogin = createAsyncThunk(
   'auth/login',
   async (credentials, thunkAPI) => {
     try {
-      const response = await axios.post(`auth/login`, credentials);
+      const response = await axios.post(`/authentication/login`, credentials);
       token.set(response.data.access_token);
       console.log(response.data);
       return response.data;
@@ -47,7 +50,7 @@ export const authLogout = createAsyncThunk(
   'auth/logout',
   async (_, thunkAPI) => {
     try {
-      const response = await axios.post(`auth/logout`);
+      const response = await axios.post(`/authentication/token/revoke`);
       token.unset();
       console.log(response);
       return response.data;
@@ -96,7 +99,10 @@ export const verification = createAsyncThunk(
   'auth/verification',
   async (credentials, thunkAPI) => {
     try {
-      const response = await axios.post(`auth/verification`, credentials);
+      const response = await axios.post(
+        `/authentication/verification`,
+        credentials
+      );
       console.log(response.data);
       return response.data;
     } catch (e) {
@@ -106,10 +112,13 @@ export const verification = createAsyncThunk(
 );
 
 export const resetPassword = createAsyncThunk(
-  'auth/password-reset',
+  '/auth/password-reset',
   async (credentials, thunkAPI) => {
     try {
-      const response = await axios.post(`auth/password-reset`, credentials);
+      const response = await axios.post(
+        `authentication/password-reset`,
+        credentials
+      );
       console.log(response.data);
       return response.data;
     } catch (e) {
