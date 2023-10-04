@@ -9,7 +9,7 @@ import AuthorizationContainer from '@/components/Authorization/authorizationCont
 import CloseButton from '@/components/closeButton/CloseButton';
 import RegisterHeader from '@/components/Authorization/registerHeader/RegisterHeader';
 import SecondaryButton from '@/components/secondaryButton/SecondaryButton';
-import { verification } from '@/redux/operations';
+import { verification, resendVerification } from '@/redux/operations';
 import { selectIsVerified } from '@/redux/selectors';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -47,8 +47,13 @@ export default function Confirmation() {
   };
 
   const onResendCode = () => {
-    //dispatch(sendVerificationCode)
-    toast.success('code has been sent to your email');
+    dispatch(resendVerification({ email: email }));
+    if (authError) {
+      toast.error(`${authError}`);
+    } else {
+      toast.success('code has been sent to your email');
+    }
+    console.log(email);
   };
 
   useEffect(() => {

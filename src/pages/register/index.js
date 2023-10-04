@@ -284,7 +284,8 @@ export default function SignUp() {
       {showModalError && (
         <Modal
           onClose={onCloseModalError}
-          message="Email is already taken or something went wrong. Please try again"
+          // message="Email is already taken or something went wrong. Please try again"
+          message={authError}
         />
       )}
       {!authError && showModal && (

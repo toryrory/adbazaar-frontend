@@ -6,6 +6,7 @@ import {
   googleLogin,
   googleLogOut,
   verification,
+  resendVerification,
   resetPassword,
 } from './operations';
 
@@ -104,6 +105,12 @@ const authSlice = createSlice({
       .addCase(verification.rejected, (state) => {
         state.isVerified = false;
       })
+      .addCase(resendVerification.pending, handlePending)
+      .addCase(resendVerification.fulfilled, (state) => {
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(resendVerification.rejected, handleRejected)
       .addCase(resetPassword.rejected, handleRejected)
       .addCase(resetPassword.pending, handlePending)
       .addCase(resetPassword.fulfilled);

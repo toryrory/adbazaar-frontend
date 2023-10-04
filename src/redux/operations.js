@@ -111,6 +111,22 @@ export const verification = createAsyncThunk(
   }
 );
 
+export const resendVerification = createAsyncThunk(
+  'auth/resendVerification',
+  async (credentials, thunkAPI) => {
+    try {
+      const response = await axios.post(
+        `/authentication/verification/resend`,
+        credentials
+      );
+      console.log(response.data);
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
 export const resetPassword = createAsyncThunk(
   '/auth/password-reset',
   async (credentials, thunkAPI) => {
