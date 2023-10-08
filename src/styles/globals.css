@@ -20,15 +20,16 @@
   --dark-text: #23314f;
   --required-color: #E83B50;
   --green: #22bc4d;
+  --black: #000;
 }
 @font-face {
   font-family: 'TrueHelvetica';
   src: url(/fonts/Helvetica.ttf) format('truetype');
 }
-@font-face {
+/* @font-face {
   font-family: 'TrueHelvetica-light';
   src: url(/fonts/light-hel.otf) format('opentype');
-} 
+}  */
 /* helvetica-light otf, ttf format not work */
 
 body {

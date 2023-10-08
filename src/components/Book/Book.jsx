@@ -98,18 +98,18 @@ export default function Book({ book, variant }) {
   };
 
   return (
-    <Item variant={variant} key={book.id}>
-      <Label variant={variant}>{book.type}</Label>
+    <Item $variant={variant} key={book.id}>
+      <Label $variant={variant}>{book.type}</Label>
       {isFavorite ? (
         <ButtonFavorites
-          variant={variant}
+          $variant={variant}
           onClick={removeFromFavorites}
-          style={{ backgroundColor: '#F38FF5' }}
+          style={{ backgroundColor: "#F38FF5" }}
         >
           <HeartMinus style={{ width: 24, height: 24 }} />
         </ButtonFavorites>
       ) : (
-        <ButtonFavorites variant={variant} onClick={addToFavorites}>
+        <ButtonFavorites $variant={variant} onClick={addToFavorites}>
           <HeartPlus style={{ width: 24, height: 24 }} />
         </ButtonFavorites>
       )}
@@ -118,7 +118,7 @@ export default function Book({ book, variant }) {
           src={book.photo}
           alt={book.name}
           priority={true}
-          variant={variant}
+          $variant={variant}
         />
       </Link>
 
@@ -128,32 +128,32 @@ export default function Book({ book, variant }) {
           precision={0.5}
           defaultValue={book.rating}
           sx={{
-            color: 'var(--rose-color)',
+            color: "var(--rose-color)",
           }}
-          size="small"
+          size='small'
           emptyIcon={<EmptyStar />}
         />
         <Reviews>({book.comments.length})</Reviews>
       </RatingBox>
       <Link href={`/books/${book.id}`}>
-        <Title variant={variant}>{book.name}</Title>
-        <Author variant={variant}>{book.author}</Author>
+        <Title $variant={variant}>{book.name}</Title>
+        <Author $variant={variant}>{book.author}</Author>
       </Link>
       <Bottom>
-        <Price variant={variant} style={barlowCondensed.style}>
+        <Price $variant={variant}>
           <Dollar>$</Dollar>
           {book.price}
         </Price>
         {isInCart ? (
           <ButtonInCart
-            variant={variant}
-            type="button"
+            $variant={variant}
+            type='button'
             onClick={removeFromCart}
           >
             In Cart
           </ButtonInCart>
         ) : (
-          <ButtonShopping variant={variant} type="button" onClick={addToCart}>
+          <ButtonShopping $variant={variant} type='button' onClick={addToCart}>
             <ShoppingCart style={{ width: 24, height: 24 }} />
           </ButtonShopping>
         )}
@@ -161,7 +161,7 @@ export default function Book({ book, variant }) {
       {showModal && (
         <Modal
           onClose={onCloseModal}
-          message="This service is exclusively available for authorized site visitors"
+          message='This service is exclusively available for authorized site visitors'
           messageStyles={{ marginTop: 40, fontSize: 16 }}
           showLoginButton={true}
           showLink={true}
