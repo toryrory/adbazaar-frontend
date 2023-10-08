@@ -16,8 +16,7 @@ export default function Notifications() {
 
 
   const handleLoadMore = () => {
-    setPage(prevState => prevState += 1)
-    console.log(page);
+    setPage(prevState => prevState += 1);
     //dispatch(getNotifications(page))
   }
   return (

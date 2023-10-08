@@ -15,7 +15,7 @@ const mainSlice = createSlice({
         rating: 4,
         reviews: 12,
         comment:
-          "I recently had the pleasure of purchasing books from Karl, and I must say that his op",
+          "I recently had the pleasure of purchasing books from Karl, and I must say that his opI recently had the pleasure of purchasing books from Karl, and I must say that his opI recently had the pleasure of purchasing books from Karl, and I must say that his opI recently had the pleasure of purchasing books from Karl, and I must say that his opI recently had the pleasure of purchasing books from Karl, and I must say that his op",
       },
       {
         id: 2,
@@ -83,6 +83,48 @@ const mainSlice = createSlice({
       },
       {
         id: 6,
+        photo: Shakespeare,
+        name: "W. Shakespeare",
+        works: "38 plays",
+        series: "154 sonnets",
+      },
+      {
+        id: 7,
+        photo: Simenon,
+        name: "G. Simenon",
+        works: "200 tabloid novels",
+        series: "425 books",
+      },
+      {
+        id: 8,
+        photo: HarryPotter,
+        name: "Harry Potter",
+        works: "J.K. Rowling",
+        series: "7 book series",
+      },
+      {
+        id: 9,
+        photo: Sheldon,
+        name: "S. Sheldon",
+        works: "469 novels",
+        series: "29 book series",
+      },
+      {
+        id: 10,
+        photo: Tolkien,
+        name: "J.R.R.Tolkien",
+        works: "37 books",
+        series: "63 articles",
+      },
+      {
+        id: 11,
+        photo: Coelho,
+        name: "Paulo Coelho",
+        works: "16 novels",
+        series: "7 series of short stories-parables",
+      },
+      {
+        id: 12,
         photo: Shakespeare,
         name: "W. Shakespeare",
         works: "38 plays",

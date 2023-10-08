@@ -25,3 +25,21 @@ export const Details = styled(AccordionDetails)`
   background-color: #20252f;
   padding: 0;
 `;
+
+export const NotificationCounter = styled.div`
+position: absolute;
+left: 12px;
+top: -3px;
+  width: 11px;
+  height: 11px;
+  flex-shrink: 0;
+  background-color: var(--brand-color);
+  color: var(--black);
+  text-align: center;
+  font-size: 9px;
+  border-radius: 50%;
+`;
+export const IconBox = styled.div`
+display: flex;
+position: relative;
+`;
