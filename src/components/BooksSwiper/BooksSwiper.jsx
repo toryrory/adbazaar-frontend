@@ -44,7 +44,7 @@ export default function BooksSwiper({ id, banner }) {
                 key={id}
                 src={item}
                 alt='banner'
-                width={210}
+                width={"auto"}
                 height={242}
                 priority={true}
                 style={{ height: "242px" }}

@@ -7,6 +7,8 @@ export const AuthorList = styled.ul`
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 32px;
+  overflow: ${({ $showMore }) => ($showMore ? "visible" : "hidden")};
+  height: ${({ $showMore }) => ($showMore ? "fit-content" : "322px")};
 `;
 export const AuthorItem = styled.li`
 display: flex;

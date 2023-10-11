@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import Image from 'next/image';
 
 export const StyledImg = styled(Image)`
-  width: ${(props) => (props.variant === 'main' ? '77px' : '96px')};
-  height: ${(props) => (props.variant === 'main' ? '112px' : '140px')};
+  width: ${(props) => (props.$variant === "main" ? "77px" : "96px")};
+  height: ${(props) => (props.$variant === "main" ? "112px" : "140px")};
   margin-bottom: 5px;
 `;
 
@@ -12,13 +12,13 @@ export const Item = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: ${(props) => (props.variant === 'main' ? '146px' : '172px')};
+  width: ${(props) => (props.$variant === "main" ? "146px" : "172px")};
   //   height: 260px;
-  height: ${(props) => (props.variant === 'main' ? '242px' : '260px')};
+  height: ${(props) => (props.$variant === "main" ? "242px" : "260px")};
   background-color: var(--product-background);
   border: 0.5px solid rgba(242, 242, 242, 0.15);
   border-radius: 10px;
-  padding: ${(props) => (props.variant === 'main' ? '16px 8px' : '10px')};
+  padding: ${(props) => (props.$variant === "main" ? "16px 8px" : "10px")};
 `;
 
 export const Title = styled.h3`
@@ -27,7 +27,7 @@ export const Title = styled.h3`
   line-height: 1.15;
   color: var(--white-text);
   margin-top: 4px;
-  width: ${(props) => (props.variant === 'main' ? '126px' : '152px')};
+  width: ${(props) => (props.$variant === "main" ? "126px" : "152px")};
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -38,7 +38,7 @@ export const Author = styled.p`
   line-height: 1.15;
   color: var(--brand-color);
   margin-top: 4px;
-  width: ${(props) => (props.variant === 'main' ? '126px' : '152px')};
+  width: ${(props) => (props.$variant === "main" ? "126px" : "152px")};
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -53,7 +53,7 @@ export const Label = styled.p`
   background-color: #355896;
   padding: 4px 2px;
   border-radius: 0px 5px 5px 0px;
-  top: ${(props) => (props.variant === 'main' ? '16px' : '10px')};
+  top: ${(props) => (props.$variant === "main" ? "16px" : "10px")};
   left: 0;
 `;
 
@@ -64,7 +64,7 @@ export const ButtonFavorites = styled.button`
   border-radius: 5px 0px 0px 5px;
   padding: 2px;
   position: absolute;
-  top: ${(props) => (props.variant === 'main' ? '100px' : '122px')};
+  top: ${(props) => (props.$variant === "main" ? "100px" : "122px")};
   right: 0;
 `;
 
@@ -81,7 +81,7 @@ export const Price = styled.p`
   color: var(--white-text);
   display: block;
   font-stretch: condensed;
-  /* font-family: ; */
+  font-family: barlowCondensed, sans-serif;
 `;
 
 export const Dollar = styled.span`
@@ -95,7 +95,7 @@ export const ButtonShopping = styled.button`
   background-color: #3b78e8;
   border: none;
   border-radius: 12px;
-  padding: ${(props) => (props.variant === 'main' ? '6px 16px' : '6px 20px')};
+  padding: ${(props) => (props.$variant === "main" ? "6px 16px" : "6px 20px")};
 `;
 
 export const ButtonInCart = styled.button`
