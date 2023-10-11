@@ -38,6 +38,7 @@ export const authLogin = createAsyncThunk(
     try {
       const response = await axios.post(`/authentication/login`, credentials);
       token.set(response.data.access_token);
+      // token.set(response.data.refresh_token);
       console.log(response.data);
       return response.data;
     } catch (e) {
@@ -48,9 +49,16 @@ export const authLogin = createAsyncThunk(
 
 export const authLogout = createAsyncThunk(
   'auth/logout',
-  async (_, thunkAPI) => {
+  async (refreshToken, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const currentToken = state.auth.token;
+    token.set(currentToken);
+
     try {
-      const response = await axios.post(`/authentication/token/revoke`);
+      const response = await axios.post(
+        `/authentication/token/revoke`,
+        refreshToken
+      );
       token.unset();
       console.log(response);
       return response.data;
@@ -73,7 +81,7 @@ export const googleLogin = createAsyncThunk(
           },
         }
       );
-      console.log(response.data);
+      console.log(response.data, googleToken);
       // token.set(googleToken);
       return response.data;
     } catch (e) {
@@ -142,6 +150,42 @@ export const resetPassword = createAsyncThunk(
     }
   }
 );
+
+export const fetchCurrentUser = createAsyncThunk(
+  'auth/refresh',
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const currentToken = state.auth.token;
+
+    // if (currentToken === null) {
+    //   return;
+    // } else {
+    token.set(currentToken);
+
+    try {
+      const response = await axios.get(`/users/token`);
+      console.log(response.data);
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+  // }
+);
+
+// export const authLogin = createAsyncThunk(
+//   'auth/login',
+//   async (credentials, thunkAPI) => {
+//     try {
+//       const response = await axios.post(`/authentication/login`, credentials);
+//       token.set(response.data.access_token);
+//       console.log(response.data);
+//       return response.data;
+//     } catch (e) {
+//       return thunkAPI.rejectWithValue(e.message);
+//     }
+//   }
+// );
 
 // export const authRegister = createAsyncThunk(
 //   'auth/register',

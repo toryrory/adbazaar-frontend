@@ -8,6 +8,7 @@ import {
   selectUserData,
   selectAuthError,
   selectIsVerified,
+  selectRefreshToken,
 } from '@/redux/selectors';
 import AccountAccordion from '@/components/Accordion/Accordion';
 import Modal from '@/components/modal/Modal';
@@ -52,6 +53,7 @@ export default function Account() {
   const userName = useSelector(selectUserData);
   const authType = useSelector(selectAuthType);
   const authError = useSelector(selectAuthError);
+  const refreshToken = useSelector(selectRefreshToken);
   const [showModal, setShowModal] = useState(false);
 
   const isVerified = useSelector(selectIsVerified);
@@ -66,7 +68,7 @@ export default function Account() {
       dispatch(googleLogOut());
       setShowModal(true);
     } else if (authType === 'email') {
-      dispatch(authLogout());
+      dispatch(authLogout({ refresh_token: refreshToken }));
       setShowModal(true);
     } else if (!authType) {
       console.log('please log in first');
@@ -95,7 +97,7 @@ export default function Account() {
               <ErrorMessage>
                 Vertification failed! Try entering the code again.
               </ErrorMessage>
-              <SendCodeButton type='button' onClick={onSendCode}>
+              <SendCodeButton type="button" onClick={onSendCode}>
                 <Load style={{ width: 24, height: 24 }} />
                 Send a new code
               </SendCodeButton>
@@ -105,7 +107,7 @@ export default function Account() {
           <Title style={{ marginBottom: 52 }}>Hello, {userName.name}</Title>
         )}
         <AccountAccordion //сделать покрасивее без повторов
-          text='Personal Information'
+          text="Personal Information"
           icon={
             <PersonSvg style={{ width: 24, height: 24, marginRight: 16 }} />
           }
@@ -113,7 +115,7 @@ export default function Account() {
           <PersonalInfo />
         </AccountAccordion>
         <AccountAccordion
-          text='Order History'
+          text="Order History"
           icon={
             <OrderHistorySvg
               style={{ width: 24, height: 24, marginRight: 16 }}
@@ -123,7 +125,7 @@ export default function Account() {
           <OrderHistory />
         </AccountAccordion>
         <AccountAccordion
-          text='Payment Methods'
+          text="Payment Methods"
           icon={
             <PaymentsSvg style={{ width: 24, height: 24, marginRight: 16 }} />
           }
@@ -131,7 +133,7 @@ export default function Account() {
           <Payments />
         </AccountAccordion>
         <AccountAccordion
-          text='Favorites'
+          text="Favorites"
           icon={
             <FavoritesSvg style={{ width: 24, height: 24, marginRight: 16 }} />
           }
@@ -139,7 +141,7 @@ export default function Account() {
           <Favorites />
         </AccountAccordion>
         <AccountAccordion
-          text='My Comments'
+          text="My Comments"
           icon={
             <MessagesSvg style={{ width: 24, height: 24, marginRight: 16 }} />
           }
@@ -147,13 +149,13 @@ export default function Account() {
           <Comments />
         </AccountAccordion>
         <AccountAccordion
-          text='Notifications'
+          text="Notifications"
           icon={<Bell style={{ width: 24, height: 24, marginRight: 16 }} />}
         >
           <Notifications />
         </AccountAccordion>
         <AccountAccordion
-          text='Setting'
+          text="Setting"
           icon={
             <SettingsSvg style={{ width: 24, height: 24, marginRight: 16 }} />
           }
@@ -161,7 +163,7 @@ export default function Account() {
           <Settings />
         </AccountAccordion>
         <AccountAccordion
-          text='Support'
+          text="Support"
           icon={
             <PhonePlus style={{ width: 24, height: 24, marginRight: 16 }} />
           }
@@ -169,25 +171,25 @@ export default function Account() {
           <Support />
         </AccountAccordion>
         <AccountAccordion
-          text='Books I sell / Add Book'
+          text="Books I sell / Add Book"
           icon={
             <AddBookSvg style={{ width: 24, height: 24, marginRight: 16 }} />
           }
         >
           <AddBook />
         </AccountAccordion>
-        <LogOutBtn type='button' onClick={onLogOut}>
+        <LogOutBtn type="button" onClick={onLogOut}>
           <LogOut style={{ width: 24, height: 24 }} />
           Log out
         </LogOutBtn>
         {showModal && (
           <Modal
             onClose={onCloseModal}
-            message='You have logged out of your personal account'
+            message="You have logged out of your personal account"
             showOkButton={true}
           />
         )}
-        <ToastContainer theme='dark' />
+        <ToastContainer theme="dark" />
       </Container>
     </>
   );

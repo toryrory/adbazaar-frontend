@@ -8,6 +8,7 @@ import {
   verification,
   resendVerification,
   resetPassword,
+  fetchCurrentUser,
 } from './operations';
 
 const handlePending = (state) => {
@@ -30,6 +31,7 @@ const authSlice = createSlice({
       socials: { first: '@example', second: '@example' },
     },
     token: null,
+    refreshToken: null,
     isLoggedIn: false,
     isLoading: false,
     error: null,
@@ -60,6 +62,7 @@ const authSlice = createSlice({
           email: action.payload.email,
         };
         state.token = action.payload.access_token;
+        state.refreshToken = action.payload.refresh_token;
         state.isLoggedIn = true;
         state.isLoading = false;
         state.error = null;
@@ -85,6 +88,7 @@ const authSlice = createSlice({
         state.error = null;
         state.type = 'google';
         state.isVerified = true;
+        // state.token = action.payload.googleToken;
       })
       .addCase(googleLogin.rejected, handleRejected)
       .addCase(googleLogOut.pending, handlePending)
@@ -113,7 +117,23 @@ const authSlice = createSlice({
       .addCase(resendVerification.rejected, handleRejected)
       .addCase(resetPassword.rejected, handleRejected)
       .addCase(resetPassword.pending, handlePending)
-      .addCase(resetPassword.fulfilled);
+      .addCase(resetPassword.fulfilled)
+      .addCase(fetchCurrentUser.rejected, handleRejected)
+      .addCase(fetchCurrentUser.pending, handlePending)
+      .addCase(fetchCurrentUser.fulfilled, (state, action) => {
+        state.user = {
+          ...state.user,
+          name: action.payload.full_name,
+          email: action.payload.email,
+          phone: action.payload.phone,
+          birthday: action.payload.birt_date,
+        };
+        state.isVerified = action.payload.user_verified;
+        state.isLoggedIn = true;
+        state.isLoading = false;
+        state.error = null;
+        state.type = 'email';
+      });
   },
 });
 

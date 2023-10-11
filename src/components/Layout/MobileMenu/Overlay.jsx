@@ -6,6 +6,7 @@ import {
   selectUserName,
   selectAuthType,
   selectAuthError,
+  selectRefreshToken,
 } from '@/redux/selectors';
 import { authLogout, googleLogOut } from '@/redux/operations';
 import Link from 'next/link';
@@ -47,6 +48,7 @@ export default function Overlay({ onClose, style }) {
   const dispatch = useDispatch();
   const settings = useSelector(selectSettings);
   const name = useSelector(selectUserName);
+  const refreshToken = useSelector(selectRefreshToken);
   const authType = useSelector(selectAuthType);
   const authError = useSelector(selectAuthError);
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -57,7 +59,7 @@ export default function Overlay({ onClose, style }) {
     if (authType === 'google') {
       dispatch(googleLogOut());
     } else if (authType === 'email') {
-      dispatch(authLogout());
+      dispatch(authLogout({ refresh_token: refreshToken }));
     } else if (!authType) {
       console.log('please log in first');
     }

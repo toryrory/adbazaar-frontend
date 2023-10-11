@@ -5,6 +5,8 @@ export const selectAuthIsLoading = (state) => state.auth.isLoading;
 export const selectAuthError = (state) => state.auth.error;
 export const selectAuthType = (state) => state.auth.type;
 export const selectIsVerified = (state) => state.auth.isVerified;
+export const selectToken = (state) => state.auth.token;
+export const selectRefreshToken = (state) => state.auth.refreshToken;
 
 export const selectUserData = (state) => state.auth.user;
 
