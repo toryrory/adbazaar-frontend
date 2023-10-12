@@ -71,6 +71,7 @@ export const Price = styled.p`
   line-height: 0.8;
   color: #ffffff;
   font-stretch: condensed;
+  font-family: barlowCondensed, sans-serif;
 `;
 
 export const Dollar = styled.span`

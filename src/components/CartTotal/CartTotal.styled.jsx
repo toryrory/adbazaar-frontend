@@ -40,6 +40,7 @@ export const Price = styled.p`
   line-height: 1;
   color: #ffffff;
   font-stretch: condensed;
+  font-family: barlowCondensed, sans-serif;
 `;
 
 export const Dollar = styled.span`
@@ -101,6 +102,7 @@ export const DeliveryPrice = styled.p`
   line-height: 1;
   color: #ffffff;
   font-stretch: condensed;
+  font-family: barlowCondensed, sans-serif;
 `;
 
 export const Checkbox = styled.input`
