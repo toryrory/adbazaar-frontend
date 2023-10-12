@@ -65,6 +65,8 @@ export const Price = styled.p`
   font-size: 14px;
   line-height: 1.15;
   color: #ffffff;
+  font-stretch: condensed;
+  font-family: barlowCondensed, sans-serif;
 `;
 
 export const ButtonShopping = styled.button`
