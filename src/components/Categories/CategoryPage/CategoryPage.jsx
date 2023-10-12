@@ -15,7 +15,6 @@ export default function CategoryPage({ currentCategory }) {
       <GenresList>
         {categories
           .map((category) => {
-            console.log(category.link);
             if (category.link !== currentCategory.link) {
               return (
                 <GenresItem key={category.id}>

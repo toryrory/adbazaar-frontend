@@ -29,28 +29,27 @@ export default function BooksSwiper({ id, banner }) {
     default:
       break;
   }
- 
+
   return (
     <List>
       {fourBooks.map((item) => {
         return (
-          <>
+          <li key={nanoid()}>
             {item.name ? (
-              <li key={item.id}>
-                <Book book={item} variant={"main"} />
-              </li>
+              <Book book={item} variant={'main'} />
             ) : (
-              <Image
-                key={id}
-                src={item}
-                alt='banner'
-                width={"auto"}
-                height={242}
-                priority={true}
-                style={{ height: "242px" }}
-              ></Image>
+              <div style={{ minWidth: 220 }}>
+                <Image
+                  src={item}
+                  alt="banner"
+                  width={220}
+                  height={242}
+                  priority={true}
+                  style={{ height: '242px' }}
+                />
+              </div>
             )}
-          </>
+          </li>
         );
       })}
     </List>

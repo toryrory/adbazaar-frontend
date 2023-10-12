@@ -14,7 +14,7 @@ import {
   BtnBox,
   Button,
   SocialsLabel,
-} from "./PersonalInfo.styled";
+} from './PersonalInfo.styled';
 import { FlagUa } from '../../../../public/svg-account';
 import { ArrowDown } from '../../../../public/svg-account';
 import { Instagram } from '../../../../public/svg-account';
@@ -44,45 +44,44 @@ export default function PersonalInfo() {
   });
 
   return (
-    <Form autoComplete='off' onSubmit={handleSubmit}>
+    <Form autoComplete="off" onSubmit={handleSubmit}>
       <InputBox>
         <Label>
           Full Name
           <Input
-            name='name'
-            type='text'
-            value={values.name || ""}
+            name="name"
+            type="text"
+            value={values.name || ''}
             onChange={handleChange}
             readOnly={readOnly}
           />
         </Label>
       </InputBox>
-        <Label htmlFor='phone'>
-          Phone</Label>
-          <InputFlexBox>
-            <FlagUa style={{ width: 31, height: 19 }} />
-            <HiddenBtn type='button'>
-              <ArrowDown style={{ width: 17, height: 9 }} />
-            </HiddenBtn>
-            <CountryCode>+38</CountryCode>
+      <Label htmlFor="phone">Phone</Label>
+      <InputFlexBox>
+        <FlagUa style={{ width: 31, height: 19 }} />
+        <HiddenBtn type="button">
+          <ArrowDown style={{ width: 17, height: 9 }} />
+        </HiddenBtn>
+        <CountryCode>+38</CountryCode>
         <InputLib
-          id='phone'
-              name='phone'
-              type='tel'
-              value={values.phone || ""}
-              onChange={handleChange}
-              readOnly={readOnly}
-              placeholder='(000) 000-0000'
-              mask='(999) 999-9999'
-            />
-          </InputFlexBox>
+          id="phone"
+          name="phone"
+          type="tel"
+          value={values.phone || ''}
+          onChange={handleChange}
+          readOnly={readOnly}
+          placeholder="(000) 000-0000"
+          mask="(999) 999-9999"
+        />
+      </InputFlexBox>
       <InputBox>
         <Label>
           Email
           <Input
-            name='email'
-            type='email'
-            value={values.email || ""}
+            name="email"
+            type="email"
+            value={values.email || ''}
             onChange={handleChange}
             readOnly={readOnly}
           />
@@ -92,26 +91,26 @@ export default function PersonalInfo() {
         <Label>
           Date of Birth
           <InputLib
-            name='birthday'
-            type='text'
+            name="birthday"
+            type="text"
             value={values.birthday || ''}
             onChange={handleChange}
             readOnly={readOnly}
-            mask='99/99/9999'
-            placeholder='00/00/0000'
+            mask="99/99/9999"
+            placeholder="00/00/0000"
           />
         </Label>
       </InputBox>
-      <SocialsLabel htmlFor='socials'>Social media</SocialsLabel>
+      <SocialsLabel htmlFor="socials">Social media</SocialsLabel>
       <InputFlexBox>
         <Instagram style={{ width: 28, height: 28 }} />
-        <HiddenBtn type='button'>
+        <HiddenBtn type="button">
           <ArrowDown style={{ width: 17, height: 9 }} />
         </HiddenBtn>
         <Input
-          id='socials'
-          name='socials.first'
-          type='text'
+          id="socials1"
+          name="socials.first"
+          type="text"
           value={values.socials.first || ''}
           onChange={handleChange}
           readOnly={readOnly}
@@ -119,13 +118,13 @@ export default function PersonalInfo() {
       </InputFlexBox>
       <InputFlexBox>
         <Facebook style={{ width: 28, height: 28 }} />
-        <HiddenBtn type='button'>
+        <HiddenBtn type="button">
           <ArrowDown style={{ width: 17, height: 9 }} />
         </HiddenBtn>
         <Input
-          id='socials'
-          name='socials.second'
-          type='text'
+          id="socials2"
+          name="socials.second"
+          type="text"
           value={values.socials.second || ''}
           onChange={handleChange}
           readOnly={readOnly}
@@ -133,11 +132,11 @@ export default function PersonalInfo() {
       </InputFlexBox>
 
       <BtnBox>
-        <Button type='button' onClick={handleClickEdit}>
+        <Button type="button" onClick={handleClickEdit}>
           <Edit style={{ width: 24, height: 24 }} />
           Edit
         </Button>
-        <Button type='submit'>
+        <Button type="submit">
           Save
           <Save style={{ width: 24, height: 24 }} />
         </Button>
