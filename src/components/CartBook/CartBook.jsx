@@ -41,7 +41,13 @@ export default function CartBook({ book }) {
   return (
     <Item>
       <Link href={`/books/${book.id}`}>
-        <StyledImg src={book.photo} alt={book.name} priority={true} />
+        <StyledImg
+          src={book.photo}
+          alt={book.name}
+          priority={true}
+          width={70}
+          height={100}
+        />
       </Link>
 
       <InfoContainer>

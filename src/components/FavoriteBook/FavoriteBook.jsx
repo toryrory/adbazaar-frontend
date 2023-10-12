@@ -54,7 +54,13 @@ export default function FavoriteBook({ book }) {
   return (
     <Item>
       <Link href={`/books/${book.id}`}>
-        <StyledImg src={book.photo} alt={book.name} priority={true} />
+        <StyledImg
+          src={book.photo}
+          alt={book.name}
+          priority={true}
+          width={60}
+          height={80}
+        />
       </Link>
 
       <InfoContainer>

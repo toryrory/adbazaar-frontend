@@ -28,6 +28,8 @@ export default function Comment({ comment }) {
           src={comment.bookPhoto}
           alt={comment.bookName}
           priority={true}
+          width={32}
+          height={48}
         />
       </Link>
 

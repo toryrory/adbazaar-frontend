@@ -159,7 +159,13 @@ export default function BookHeader({ book }) {
         ) : (
           <AddFavoriteBtn onClick={addToFavorites} />
         )}
-        <StyledImg src={book.photo} alt={book.name} priority={true} />
+        <StyledImg
+          src={book.photo}
+          alt={book.name}
+          width={188}
+          height={270}
+          priority={true}
+        />
         <PriceContainer>
           <Price>
             <Dollar>$</Dollar>

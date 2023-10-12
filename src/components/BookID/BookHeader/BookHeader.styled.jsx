@@ -105,6 +105,7 @@ export const Price = styled.p`
   color: var(--white-text);
   display: block;
   font-stretch: condensed;
+  font-family: barlowCondensed, sans-serif;
 `;
 
 export const Dollar = styled.span`
