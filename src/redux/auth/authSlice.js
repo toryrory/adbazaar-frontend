@@ -9,7 +9,8 @@ import {
   resendVerification,
   resetPassword,
   fetchCurrentUser,
-} from './operations';
+  refreshAccessToken,
+} from '../operations';
 
 const handlePending = (state) => {
   state.isLoading = true;
@@ -24,11 +25,17 @@ const authSlice = createSlice({
   name: 'auth',
   initialState: {
     user: {
+      id: null,
       name: null,
       email: null,
       phone: '',
       birthday: '00/00/0000',
       socials: { first: '@example', second: '@example' },
+      isVerified: false,
+      orders: [],
+      favorites: [],
+      comments: [],
+      books: [],
     },
     token: null,
     refreshToken: null,
@@ -36,16 +43,12 @@ const authSlice = createSlice({
     isLoading: false,
     error: null,
     type: null,
-    isVerified: false,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(authRegister.pending, handlePending)
       .addCase(authRegister.fulfilled, (state, action) => {
-        // state.user = { ...state.user, ...action.payload.user };
-        // state.token = action.payload.token;
-        // state.isLoggedIn = true;
         state.user = { ...state.user, email: action.payload.email };
         state.isLoggedIn = false;
         state.isLoading = false;
@@ -55,7 +58,6 @@ const authSlice = createSlice({
       .addCase(authRegister.rejected, handleRejected)
       .addCase(authLogin.pending, handlePending)
       .addCase(authLogin.fulfilled, (state, action) => {
-        // state.user = { ...state.user, ...action.payload.user };
         state.user = {
           ...state.user,
           name: action.payload.full_name,
@@ -87,7 +89,7 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.error = null;
         state.type = 'google';
-        state.isVerified = true;
+        state.user.isVerified = true;
         // state.token = action.payload.googleToken;
       })
       .addCase(googleLogin.rejected, handleRejected)
@@ -104,10 +106,10 @@ const authSlice = createSlice({
       .addCase(googleLogOut.rejected, handleRejected)
       .addCase(verification.pending, handlePending)
       .addCase(verification.fulfilled, (state) => {
-        state.isVerified = true;
+        state.user.isVerified = true;
       })
       .addCase(verification.rejected, (state) => {
-        state.isVerified = false;
+        state.user.isVerified = false;
       })
       .addCase(resendVerification.pending, handlePending)
       .addCase(resendVerification.fulfilled, (state) => {
@@ -123,17 +125,32 @@ const authSlice = createSlice({
       .addCase(fetchCurrentUser.fulfilled, (state, action) => {
         state.user = {
           ...state.user,
+          id: action.payload.id,
           name: action.payload.full_name,
           email: action.payload.email,
           phone: action.payload.phone,
           birthday: action.payload.birt_date,
+          isVerified: action.payload.user_verified,
+          orders: action.payload.orders,
+          favorites: action.payload.favorites,
+          comments: action.payload.comments,
+          books: action.payload.books,
         };
-        state.isVerified = action.payload.user_verified;
         state.isLoggedIn = true;
         state.isLoading = false;
         state.error = null;
         state.type = 'email';
-      });
+      })
+      .addCase(refreshAccessToken.pending, handlePending)
+      .addCase(refreshAccessToken.fulfilled, (state, action) => {
+        state.token = action.payload.access_token;
+        state.refreshToken = action.payload.refresh_token;
+        state.isLoggedIn = true;
+        state.isLoading = false;
+        state.error = null;
+        state.type = 'email';
+      })
+      .addCase(refreshAccessToken.rejected, handleRejected);
   },
 });
 

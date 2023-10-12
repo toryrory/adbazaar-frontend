@@ -35,11 +35,12 @@ import {
   selectShowStars,
   selectTopBookSellers,
   selectPopularAuthors,
+  selectRefreshToken,
 } from '@/redux/selectors';
 import { useSelector } from 'react-redux';
 
 import { useDispatch } from 'react-redux';
-import { fetchCurrentUser } from '@/redux/operations';
+import { fetchCurrentUser, refreshAccessToken } from '@/redux/operations';
 import { selectToken } from '@/redux/selectors';
 import { useEffect } from 'react';
 
@@ -51,10 +52,18 @@ export default function Home() {
 
   const dispatch = useDispatch();
   const currentToken = useSelector(selectToken);
+  const refreshToken = useSelector(selectRefreshToken);
+
+  // const handleRefreshToken = () => {
+  //   const refreshInterval = setInterval(() => {
+  //     console.log(`I love async JS!  ${Math.random()}`);
+  //   }, 1000);
+  // };
 
   useEffect(() => {
     if (currentToken) {
       dispatch(fetchCurrentUser());
+      // dispatch(refreshAccessToken({ refresh_token: refreshToken }));
     }
   }, [dispatch]);
 

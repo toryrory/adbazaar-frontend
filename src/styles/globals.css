@@ -5,27 +5,28 @@
   --white-text-06: #f1f1f1bc;
   --main-background: #131b2c;
   --gradient: linear-gradient(89.44deg, #51c5ea 4.39%, #f18ff3 118.29%);
-  --gradient-bottom: linear-gradient(180deg, #A3E9FF 0%, #F38FF5 100%);
+  --gradient-bottom: linear-gradient(180deg, #a3e9ff 0%, #f38ff5 100%);
   --error-color: #f97484;
   --light-grey: #d8e9fe;
   --light-grey-05: #d8e9fe92;
   --dark-grey: #3f5870;
-  --very-dark-grey:#2b364a;
+  --very-dark-grey: #2b364a;
   --grey: #20252f;
   --product-background: #212837;
   --product-background-06: #2128379c;
   --dark-gradient: linear-gradient(180deg, #1f293e 0%, #131b2c 29.17%);
-  --rose-color: #F38FF5;
+  --rose-color: #f38ff5;
   --hero-rose: #fdacff;
   --dark-text: #23314f;
-  --required-color: #E83B50;
+  --required-color: #e83b50;
   --green: #22bc4d;
   --black: #000;
 }
 @font-face {
   font-family: 'TrueHelvetica';
-  src: url(/fonts/Helvetica.ttf) format('truetype');
+  src: url('../fonts/Helvetica.ttf') format('truetype');
 }
+
 /* @font-face {
   font-family: 'TrueHelvetica-light';
   src: url(/fonts/light-hel.otf) format('opentype');

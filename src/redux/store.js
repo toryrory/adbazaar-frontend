@@ -10,7 +10,7 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { configureStore } from '@reduxjs/toolkit';
-import { authReducer } from './authSlice';
+import { authReducer } from './auth/authSlice';
 import { accountReducer } from './accountSlice';
 import { mainReducer } from './mainPageSlice';
 import { booksReducer } from './bookSlice';

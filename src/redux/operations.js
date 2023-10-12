@@ -2,9 +2,6 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { googleLogout } from '@react-oauth/google';
 
-const initialCode = '1111';
-
-// axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 axios.defaults.baseURL = 'http://localhost:8080';
 
 const token = {
@@ -157,83 +154,62 @@ export const fetchCurrentUser = createAsyncThunk(
     const state = thunkAPI.getState();
     const currentToken = state.auth.token;
 
-    // if (currentToken === null) {
-    //   return;
-    // } else {
-    token.set(currentToken);
+    if (currentToken === null) {
+      return;
+    } else {
+      token.set(currentToken);
+
+      try {
+        const response = await axios.get(`/users/token`);
+        console.log(response.data);
+        return response.data;
+      } catch (e) {
+        return thunkAPI.rejectWithValue(e.message);
+      }
+    }
+  }
+);
+
+export const refreshAccessToken = createAsyncThunk(
+  'auth/refreshToken',
+  async (refreshToken, thunkAPI) => {
+    // const state = thunkAPI.getState();
+    // const refreshToken = state.auth.refreshToken;
+    // const state = thunkAPI.getState();
+    // const currentToken = state.auth.token;
+    // token.set(currentToken);
 
     try {
-      const response = await axios.get(`/users/token`);
+      const response = await axios.post(
+        `/authentication/token/refresh`,
+        refreshToken
+      );
       console.log(response.data);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
   }
-  // }
 );
 
-// export const authLogin = createAsyncThunk(
-//   'auth/login',
-//   async (credentials, thunkAPI) => {
-//     try {
-//       const response = await axios.post(`/authentication/login`, credentials);
-//       token.set(response.data.access_token);
-//       console.log(response.data);
-//       return response.data;
-//     } catch (e) {
-//       return thunkAPI.rejectWithValue(e.message);
-//     }
-//   }
-// );
-
-// export const authRegister = createAsyncThunk(
-//   'auth/register',
-//   async (credentials, thunkAPI) => {
-//     try {
-//       const response = await axios.post(`/users/signup`, credentials);
-//       console.log(response);
-//       token.set(response.data.token);
-//       return response.data;
-//     } catch (e) {
-//       return thunkAPI.rejectWithValue(e.message);
-//     }
-//   }
-// );
-
-// export const authLogin = createAsyncThunk(
-//   'auth/login',
-//   async (credentials, thunkAPI) => {
-//     try {
-//       const response = await axios.post(`/users/login`, credentials);
-//       token.set(response.data.token);
-//       return response.data;
-//     } catch (e) {
-//       return thunkAPI.rejectWithValue(e.message);
-//     }
-//   }
-// );
-
-// export const authLogout = createAsyncThunk(
-//   'auth/logout',
+// export const fetchBooks = createAsyncThunk(
+//   'books/fetch',
 //   async (_, thunkAPI) => {
-//     try {
-//       const response = await axios.post(`/users/logout`);
-//       token.unset();
-//       return response.data;
-//     } catch (e) {
-//       return thunkAPI.rejectWithValue(e.message);
-//     }
-//   }
-// );
+//     const state = thunkAPI.getState();
+//     const currentToken = state.auth.token;
 
-// export const verification = createAsyncThunk(
-//   'auth/verification',
-//   async (value, thunkApi) => {
-//     if (JSON.stringify(initialCode) === JSON.stringify(value)) {
-//       return true;
+//     if (currentToken === null) {
+//       return;
 //     } else {
-//       return thunkApi.rejectWithValue('code wrong');
+//       token.set(currentToken);
+
+//       try {
+//         const response = await axios.get(`/users/token`);
+//         console.log(response.data);
+//         return response.data;
+//       } catch (e) {
+//         return thunkAPI.rejectWithValue(e.message);
+//       }
 //     }
 //   }
 // );
