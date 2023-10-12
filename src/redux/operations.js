@@ -153,6 +153,7 @@ export const fetchCurrentUser = createAsyncThunk(
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
     const currentToken = state.auth.token;
+    const refreshToken = state.auth.refreshToken;
 
     if (currentToken === null) {
       return;
@@ -164,6 +165,8 @@ export const fetchCurrentUser = createAsyncThunk(
         console.log(response.data);
         return response.data;
       } catch (e) {
+        // console.log(`current: ${currentToken},refresh: ${refreshToken}`);
+        refreshAccessToken({ refresh_token: refreshToken });
         return thunkAPI.rejectWithValue(e.message);
       }
     }
