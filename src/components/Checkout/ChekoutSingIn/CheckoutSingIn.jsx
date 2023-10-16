@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
-import { authLogin } from '@/redux/operations';
+import { authLogin } from '@/redux/auth/operations';
 import { selectAuthError } from '@/redux/selectors';
 import GoogleRegistration from '@/components/Authorization/googleRegistration/GoogleRegistration';
 import ErrorMessage from '@/components/Authorization/errorMessage/ErrorMessage';

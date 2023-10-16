@@ -3,7 +3,7 @@ import { Text, List, Item, SocialLink } from './GoogleRegistration.styled';
 import { useGoogleLogin } from '@react-oauth/google';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { googleLogin } from '@/redux/operations';
+import { googleLogin } from '@/redux/auth/operations';
 
 export default function GoogleRegistration() {
   const [user, setUser] = useState(null);

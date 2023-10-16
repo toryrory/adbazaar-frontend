@@ -13,7 +13,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { authReducer } from './auth/authSlice';
 import { accountReducer } from './accountSlice';
 import { mainReducer } from './mainPageSlice';
-import { booksReducer } from './bookSlice';
+import { booksReducer } from './books/bookSlice';
 
 const authPersistConfig = {
   key: 'auth',

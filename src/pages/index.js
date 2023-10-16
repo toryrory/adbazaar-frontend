@@ -36,36 +36,47 @@ import {
   selectTopBookSellers,
   selectPopularAuthors,
   selectRefreshToken,
+  selectAuthError,
+  selectBooks,
 } from '@/redux/selectors';
 import { useSelector } from 'react-redux';
 
 import { useDispatch } from 'react-redux';
-import { fetchCurrentUser, refreshAccessToken } from '@/redux/operations';
+import { fetchCurrentUser, refreshAccessToken } from '@/redux/auth/operations';
 import { selectToken } from '@/redux/selectors';
 import { useEffect } from 'react';
+import { fetchBooks } from '@/redux/books/operations';
 
 export default function Home() {
   const router = useRouter();
+  const dispatch = useDispatch();
   const starVisibility = useSelector(selectShowStars);
   const bookSellers = useSelector(selectTopBookSellers);
   const popularAuthors = useSelector(selectPopularAuthors);
-
-  const dispatch = useDispatch();
   const currentToken = useSelector(selectToken);
   const refreshToken = useSelector(selectRefreshToken);
-
-  // const handleRefreshToken = () => {
-  //   const refreshInterval = setInterval(() => {
-  //     console.log(`I love async JS!  ${Math.random()}`);
-  //   }, 1000);
-  // };
+  const authError = useSelector(selectAuthError);
+  const books = useSelector(selectBooks);
 
   useEffect(() => {
     if (currentToken) {
       dispatch(fetchCurrentUser());
-      // dispatch(refreshAccessToken({ refresh_token: refreshToken }));
+
+      if (books.length === 0) {
+        dispatch(fetchBooks());
+      }
     }
-  }, [dispatch]);
+  }, [dispatch, currentToken, books]);
+
+  useEffect(() => {
+    if (authError === 'Request failed with status code 401') {
+      dispatch(refreshAccessToken(refreshToken));
+    }
+  }, [authError]);
+
+  // useEffect(() => {
+  //   dispatch(fetchBooks());
+  // }, []);
 
   return (
     <>

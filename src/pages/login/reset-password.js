@@ -2,7 +2,7 @@ import { useFormik } from 'formik';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { resetPassword } from '@/redux/operations';
+import { resetPassword } from '@/redux/auth/operations';
 import Modal from '@/components/modal/Modal';
 import AuthorizationContainer from '@/components/Authorization/authorizationContainer/AuthorizationContainer';
 import CloseButton from '@/components/closeButton/CloseButton';

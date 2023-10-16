@@ -21,7 +21,7 @@ export const authRegister = createAsyncThunk(
         `/authentication/register`,
         credentials
       );
-      console.log(`register: ${response.data}`);
+      console.log(`register:`, response.data);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -35,8 +35,7 @@ export const authLogin = createAsyncThunk(
     try {
       const response = await axios.post(`/authentication/login`, credentials);
       token.set(response.data.access_token);
-      // token.set(response.data.refresh_token);
-      console.log(`login: ${response.data}`);
+      console.log(`login:`, response.data);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -57,7 +56,7 @@ export const authLogout = createAsyncThunk(
         refreshToken
       );
       token.unset();
-      console.log(`logout: ${response.data}`);
+      console.log(`logout:`, response.data);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -78,10 +77,7 @@ export const googleLogin = createAsyncThunk(
           },
         }
       );
-      console.log(
-        `google login: ${response.data}, google token: ${googleToken}`
-      );
-      // token.set(googleToken);
+      console.log(`google login:`, response.data, `google token:`, googleToken);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -94,7 +90,6 @@ export const googleLogOut = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const response = await googleLogout();
-      // token.unset();
       return response;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -110,7 +105,7 @@ export const verification = createAsyncThunk(
         `/authentication/verification`,
         credentials
       );
-      console.log(`verification: ${response.data}`);
+      console.log(`verification:`, response.data);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -126,7 +121,7 @@ export const resendVerification = createAsyncThunk(
         `/authentication/verification/resend`,
         credentials
       );
-      console.log(`verification resend: ${response.data}`);
+      console.log(`verification resend:`, response.data);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -142,7 +137,7 @@ export const resetPassword = createAsyncThunk(
         `authentication/password-reset`,
         credentials
       );
-      console.log(`password reset: ${response.data}`);
+      console.log(`password reset:`, response.data);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
@@ -155,7 +150,6 @@ export const fetchCurrentUser = createAsyncThunk(
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
     const currentToken = state.auth.token;
-    const refreshToken = state.auth.refreshToken;
 
     if (currentToken === null) {
       return;
@@ -164,11 +158,9 @@ export const fetchCurrentUser = createAsyncThunk(
 
       try {
         const response = await axios.get(`/users/token`);
-        console.log(`fetch current user: ${response.data}`);
+        console.log(`fetch current user:`, response.data);
         return response.data;
       } catch (e) {
-        // console.log(`current: ${currentToken},refresh: ${refreshToken}`);
-        refreshAccessToken({ refresh_token: refreshToken });
         return thunkAPI.rejectWithValue(e.message);
       }
     }
@@ -178,43 +170,15 @@ export const fetchCurrentUser = createAsyncThunk(
 export const refreshAccessToken = createAsyncThunk(
   'auth/refreshToken',
   async (refreshToken, thunkAPI) => {
-    // const state = thunkAPI.getState();
-    // const refreshToken = state.auth.refreshToken;
-    // const state = thunkAPI.getState();
-    // const currentToken = state.auth.token;
-    // token.set(currentToken);
-
     try {
       const response = await axios.post(
         `/authentication/token/refresh`,
         refreshToken
       );
-      console.log(`refresh access token: ${response.data}`);
+      console.log(`refresh access token:`, response.data);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
   }
 );
-
-// export const fetchBooks = createAsyncThunk(
-//   'books/fetch',
-//   async (_, thunkAPI) => {
-//     const state = thunkAPI.getState();
-//     const currentToken = state.auth.token;
-
-//     if (currentToken === null) {
-//       return;
-//     } else {
-//       token.set(currentToken);
-
-//       try {
-//         const response = await axios.get(`/users/token`);
-//         console.log(response.data);
-//         return response.data;
-//       } catch (e) {
-//         return thunkAPI.rejectWithValue(e.message);
-//       }
-//     }
-//   }
-// );

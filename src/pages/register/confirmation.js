@@ -9,7 +9,7 @@ import AuthorizationContainer from '@/components/Authorization/authorizationCont
 import CloseButton from '@/components/closeButton/CloseButton';
 import RegisterHeader from '@/components/Authorization/registerHeader/RegisterHeader';
 import SecondaryButton from '@/components/secondaryButton/SecondaryButton';
-import { verification, resendVerification } from '@/redux/operations';
+import { verification, resendVerification } from '@/redux/auth/operations';
 import { selectIsVerified } from '@/redux/selectors';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

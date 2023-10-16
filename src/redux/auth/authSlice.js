@@ -10,7 +10,7 @@ import {
   resetPassword,
   fetchCurrentUser,
   refreshAccessToken,
-} from '../operations';
+} from './operations';
 
 const handlePending = (state) => {
   state.isLoading = true;

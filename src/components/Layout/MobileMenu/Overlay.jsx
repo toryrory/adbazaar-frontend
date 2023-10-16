@@ -8,7 +8,7 @@ import {
   selectAuthError,
   selectRefreshToken,
 } from '@/redux/selectors';
-import { authLogout, googleLogOut } from '@/redux/operations';
+import { authLogout, googleLogOut } from '@/redux/auth/operations';
 import Link from 'next/link';
 import {
   Menu,
