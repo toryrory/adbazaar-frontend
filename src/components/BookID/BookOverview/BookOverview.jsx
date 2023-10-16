@@ -59,7 +59,13 @@ export default function BookOverview({ book }) {
       )}
       {showAboutBook && (
         <AboutContainer>
-          <StyledImg src={book.photo} alt={book.name} priority={true} />
+          <StyledImg
+            src={book.photo}
+            alt={book.name}
+            width={70}
+            height={100}
+            priority={true}
+          />
           <Description>{book.description}</Description>
         </AboutContainer>
       )}

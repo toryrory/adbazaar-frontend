@@ -2,7 +2,7 @@ import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
-import { authLogin } from '@/redux/operations';
+import { authLogin } from '@/redux/auth/operations';
 import { selectAuthError, selectIsLoggedIn } from '@/redux/selectors';
 import Modal from '@/components/modal/Modal';
 import AuthorizationContainer from '@/components/Authorization/authorizationContainer/AuthorizationContainer';

@@ -1,3 +1,5 @@
+import { createSelector } from '@reduxjs/toolkit';
+
 export const selectIsLoggedIn = (state) => state.auth.isLoggedIn;
 export const selectUserName = (state) => state.auth.user.name;
 export const selectUserEmail = (state) => state.auth.user.email;
@@ -25,4 +27,9 @@ export const selectTopBookSellers = (state) => state.main.bookSellers;
 export const selectPopularAuthors = (state) => state.main.popularAuthors;
 
 //books selectors
-export const selectBooks = (state) => state.books;
+export const selectBooks = (state) => state.books.items;
+export const selectIsBookLoading = (state) => state.books.isLoading;
+// export const selctBookById = ({ state: state, id }) => state.books.items.id;
+// export const selectBookById = createSelector([selectBooks], (books, id) => {
+//   books.map((book) => book.id === id);
+// });

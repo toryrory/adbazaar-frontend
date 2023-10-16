@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { authLogout, googleLogOut } from '@/redux/operations';
+import { authLogout, googleLogOut } from '@/redux/auth/operations';
 import { LogOut } from '../../../public/svg-authorization';
 import { Title, Container } from '@/styles/account.styled';
 import { useSelector } from 'react-redux';

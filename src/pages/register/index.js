@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useDispatch, useSelector } from 'react-redux';
-import { authRegister } from '@/redux/operations';
+import { authRegister } from '@/redux/auth/operations';
 import {
   selectAuthError,
   selectUserEmail,

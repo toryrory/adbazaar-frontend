@@ -6,7 +6,7 @@ import {
   selectUserName,
   selectBookById,
 } from '@/redux/selectors';
-import { addComment, updateRating } from '@/redux/bookSlice';
+import { addComment, updateRating } from '@/redux/books/bookSlice';
 import { addComments } from '@/redux/accountSlice';
 import SecondaryButton from '@/components/secondaryButton/SecondaryButton';
 import Modal from '@/components/modal/Modal';

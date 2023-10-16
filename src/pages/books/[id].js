@@ -2,7 +2,8 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { useSelector } from 'react-redux';
-import { selectBooks } from '@/redux/selectors';
+import { selectIsBookLoading, selectBooks } from '@/redux/selectors';
+import { useDispatch } from 'react-redux';
 
 import SearchBar from '@/components/SearchBar/SearchBar';
 import Layout from '@/components/Layout/Layout';
@@ -28,9 +29,11 @@ import {
 import { ToastContainer } from 'react-toastify';
 import { OrnamentImg } from '@/components/Categories/CategoryBooks/CategoryBooks.styled';
 import { FullOrnamentClipped } from '../../../public/backgrounds';
+import { fetchBookById } from '@/redux/books/operations';
 
 export default function BooksId() {
   const router = useRouter();
+  const dispatch = useDispatch();
   const { id } = router.query;
   const currentId = Number(id);
   const [currentBook, setCurrentBook] = useState(null);
@@ -38,11 +41,18 @@ export default function BooksId() {
   const [showOverview, setShowOverview] = useState(false);
   const [showShipping, setShowShipping] = useState(false);
   const books = useSelector(selectBooks);
+  const isLoading = useSelector(selectIsBookLoading);
+
+  useEffect(() => {
+    dispatch(fetchBookById(currentId));
+  }, [id, dispatch]);
 
   useEffect(() => {
     const newBook = books.find((book) => book.id === currentId);
-    setCurrentBook(newBook);
-  }, [id]);
+    if (newBook.genre) {
+      setCurrentBook(newBook);
+    }
+  }, [id, isLoading]);
 
   const toggleDetails = () => {
     setShowDetails(!showDetails);
@@ -63,7 +73,7 @@ export default function BooksId() {
           <ArrowBack style={{ width: 21, height: 24 }} />
           Go back
         </BackButton>
-        {currentBook && (
+        {currentBook && !isLoading && (
           <>
             <GenreList currentGenre={currentBook.genre} />
             <BookHeader book={currentBook} />
