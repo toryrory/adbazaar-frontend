@@ -20,14 +20,14 @@ export default function CategoriesLink() {
     const newCategory = categories.find((category) => category.link === link);
     setCurrentCategory(newCategory);
 
-    if (link === 'paper' || 'e-book' || 'audio') {
+    if (link === "paper" || "e-book" || "audio") {
       const newBooks = books.filter((book) => book.type === link);
       setFoundedBooks(newBooks);
 
       const newBooksCount = newBooks.length;
       setBooksCount(newBooksCount);
     }
-  }, [link]);
+  }, [link]); // eslint-disable-line
 
   return (
     <Layout>
@@ -37,7 +37,7 @@ export default function CategoriesLink() {
         {booksCount === 1 && <BooksCount>{booksCount} product</BooksCount>}
       </Container>
       {foundedBooks && (
-        <CategoryBooks books={foundedBooks} variant={'category'} />
+        <CategoryBooks books={foundedBooks} variant={"category"} />
       )}
     </Layout>
   );

@@ -16,12 +16,12 @@ export const fetchBooks = createAsyncThunk(
   'books/fetch',
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
-    const currentToken = state.auth.token;
+    // const currentToken = state.auth.token;
 
-    if (currentToken === null) {
-      return;
-    } else {
-      token.set(currentToken);
+    // if (currentToken === null) {
+    //   return;
+    // } else {
+    //   token.set(currentToken);
 
       try {
         const response = await axios.get(`/books?size=48`);
@@ -31,7 +31,7 @@ export const fetchBooks = createAsyncThunk(
         return thunkAPI.rejectWithValue(e.message);
       }
     }
-  }
+  // }
 );
 
 export const fetchBookById = createAsyncThunk(

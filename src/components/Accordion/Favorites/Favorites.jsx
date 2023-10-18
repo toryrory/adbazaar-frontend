@@ -11,7 +11,7 @@ export default function Favorites() {
       <Subtitle>{favoriteBooks.length} items in favorites</Subtitle>
       <List>
         {favoriteBooks.map((book) => {
-          return <FavoriteBook book={book} />;
+          return <FavoriteBook key={book.id} book={book} />;
         })}
       </List>
     </Container>

@@ -59,24 +59,23 @@ export default function Home() {
   const books = useSelector(selectBooks);
 
   useEffect(() => {
-    if (currentToken) {
-      dispatch(fetchCurrentUser());
-
-      if (books.length === 0) {
-        dispatch(fetchBooks());
-      }
+    if (books.length === 0) {
+      dispatch(fetchBooks());
     }
-  }, [dispatch, currentToken, books]);
+  }, [dispatch, books]);
 
   useEffect(() => {
-    if (authError === 'Request failed with status code 401') {
+    if (currentToken) {
+      dispatch(fetchCurrentUser());
+    }
+  }, [dispatch, currentToken]);
+
+  useEffect(() => {
+    if (authError === "Request failed with status code 401") {
       dispatch(refreshAccessToken(refreshToken));
     }
-  }, [authError]);
-
-  // useEffect(() => {
-  //   dispatch(fetchBooks());
-  // }, []);
+  }, [dispatch, authError, refreshToken]);
+console.log(books);
 
   return (
     <>

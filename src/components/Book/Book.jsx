@@ -48,7 +48,7 @@ export default function Book({ book, variant }) {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  useEffect(() => {// eslint-disable-line
     const isCurrentFavorite = favoriteBooks.find(
       (favorite) => favorite.id === book.id
     );
@@ -57,9 +57,9 @@ export default function Book({ book, variant }) {
     } else {
       setIsFavorite(false);
     }
-  });
+  }); 
 
-  useEffect(() => {
+  useEffect(() => {   // eslint-disable-line
     const isCurrentInCart = cartBooks.find(
       (cartBook) => cartBook.id === book.id
     );
@@ -68,7 +68,7 @@ export default function Book({ book, variant }) {
     } else {
       setIsInCart(false);
     }
-  });
+  }); 
 
   const addToFavorites = () => {
     if (!isLoggedIn) {
@@ -104,7 +104,7 @@ export default function Book({ book, variant }) {
         <ButtonFavorites
           $variant={variant}
           onClick={removeFromFavorites}
-          style={{ backgroundColor: '#F38FF5' }}
+          style={{ backgroundColor: "#F38FF5" }}
         >
           <HeartMinus style={{ width: 24, height: 24 }} />
         </ButtonFavorites>
@@ -130,9 +130,9 @@ export default function Book({ book, variant }) {
           precision={0.5}
           defaultValue={book.rating}
           sx={{
-            color: 'var(--rose-color)',
+            color: "var(--rose-color)",
           }}
-          size="small"
+          size='small'
           emptyIcon={<EmptyStar />}
         />
         <Reviews>({book.comments.length})</Reviews>
@@ -149,13 +149,13 @@ export default function Book({ book, variant }) {
         {isInCart ? (
           <ButtonInCart
             $variant={variant}
-            type="button"
+            type='button'
             onClick={removeFromCart}
           >
             In Cart
           </ButtonInCart>
         ) : (
-          <ButtonShopping $variant={variant} type="button" onClick={addToCart}>
+          <ButtonShopping $variant={variant} type='button' onClick={addToCart}>
             <ShoppingCart style={{ width: 24, height: 24 }} />
           </ButtonShopping>
         )}
@@ -163,7 +163,7 @@ export default function Book({ book, variant }) {
       {showModal && (
         <Modal
           onClose={onCloseModal}
-          message="This service is exclusively available for authorized site visitors"
+          message='This service is exclusively available for authorized site visitors'
           messageStyles={{ marginTop: 40, fontSize: 16 }}
           showLoginButton={true}
           showLink={true}

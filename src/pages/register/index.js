@@ -56,19 +56,19 @@ export default function SignUp() {
 
   const onCloseModal = () => {
     setShowModal(false);
-    router.push('/');
+    router.push("/");
   };
 
   useEffect(() => {
     if (authError) {
       console.log(authError);
       setShowModalError(true);
-    } else if (!authError && isUser && !isVerified && authType === 'email') {
-      router.push('/register/confirmation');
-    } else if (!authError && isUser && authType === 'google' && isVerified) {
+    } else if (!authError && isUser && !isVerified && authType === "email") {
+      router.push("/register/confirmation");
+    } else if (!authError && isUser && authType === "google" && isVerified) {
       setShowModal(true);
     }
-  }, [authError, isUser]);
+  }, [authError, isUser]); // eslint-disable-line
 
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
@@ -87,10 +87,10 @@ export default function SignUp() {
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: {
-        name: '',
-        email: '',
-        password: '',
-        confirm: '',
+        name: "",
+        email: "",
+        password: "",
+        confirm: "",
         termsChecked: false,
         notificationsChecked: false,
       },
@@ -101,7 +101,7 @@ export default function SignUp() {
   return (
     <>
       <AuthorizationContainer>
-        <CloseButton onClick={() => router.push('/')} />
+        <CloseButton onClick={() => router.push("/")} />
         <RegisterHeader />
         <form onSubmit={handleSubmit} style={{ marginBottom: 32 }}>
           <InputList>
@@ -109,12 +109,12 @@ export default function SignUp() {
               {errors.name && touched.name ? (
                 <ErrorMessage text={errors.name} />
               ) : (
-                <Label htmlFor="name">
+                <Label htmlFor='name'>
                   Full Name
                   <span
                     style={{
                       marginLeft: 2,
-                      color: 'var(--error-color)',
+                      color: "var(--error-color)",
                     }}
                   >
                     *
@@ -125,22 +125,22 @@ export default function SignUp() {
                 value={values.name}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                type="text"
-                name="name"
-                id="name"
-                placeholder="Enter your name"
+                type='text'
+                name='name'
+                id='name'
+                placeholder='Enter your name'
               />
             </InputItem>
             <InputItem>
               {errors.email && touched.email ? (
                 <ErrorMessage text={errors.email} />
               ) : (
-                <Label htmlFor="email">
+                <Label htmlFor='email'>
                   Email
                   <span
                     style={{
                       marginLeft: 2,
-                      color: 'var(--error-color)',
+                      color: "var(--error-color)",
                     }}
                   >
                     *
@@ -151,22 +151,22 @@ export default function SignUp() {
                 value={values.email}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                type="email"
-                name="email"
-                id="email"
-                placeholder="Enter your mail"
+                type='email'
+                name='email'
+                id='email'
+                placeholder='Enter your mail'
               />
             </InputItem>
             <InputItem>
               {errors.password && touched.password ? (
                 <ErrorMessage text={errors.password} />
               ) : (
-                <Label htmlFor="password">
+                <Label htmlFor='password'>
                   Password
                   <span
                     style={{
                       marginLeft: 2,
-                      color: 'var(--error-color)',
+                      color: "var(--error-color)",
                     }}
                   >
                     *
@@ -178,12 +178,12 @@ export default function SignUp() {
                   value={values.password}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  type={passwordShown ? 'text' : 'password'}
-                  name="password"
-                  id="password"
-                  placeholder="Password"
+                  type={passwordShown ? "text" : "password"}
+                  name='password'
+                  id='password'
+                  placeholder='Password'
                 />
-                <EyeButton type="button" onClick={togglePassword}>
+                <EyeButton type='button' onClick={togglePassword}>
                   {passwordShown ? (
                     <EyeOpened style={{ width: 24, height: 24 }} />
                   ) : (
@@ -196,12 +196,12 @@ export default function SignUp() {
               {errors.confirm && touched.confirm ? (
                 <ErrorMessage text={errors.confirm} />
               ) : (
-                <Label htmlFor="confirm">
+                <Label htmlFor='confirm'>
                   Confirm your Password
                   <span
                     style={{
                       marginLeft: 2,
-                      color: 'var(--error-color)',
+                      color: "var(--error-color)",
                     }}
                   >
                     *
@@ -213,12 +213,12 @@ export default function SignUp() {
                   value={values.confirm}
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  type={passwordShown ? 'text' : 'password'}
-                  name="confirm"
-                  id="confirm"
-                  placeholder="Confirm your Password"
+                  type={passwordShown ? "text" : "password"}
+                  name='confirm'
+                  id='confirm'
+                  placeholder='Confirm your Password'
                 />
-                <EyeButton type="button" onClick={togglePassword}>
+                <EyeButton type='button' onClick={togglePassword}>
                   {passwordShown ? (
                     <EyeOpened style={{ width: 24, height: 24 }} />
                   ) : (
@@ -236,16 +236,16 @@ export default function SignUp() {
                 <CheckboxEmpty style={{ width: 20, height: 20 }} />
               )}
               <CheckboxInput
-                type="checkbox"
+                type='checkbox'
                 value={values.termsChecked}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                name="termsChecked"
+                name='termsChecked'
               />
               You accept
               <Link
-                style={{ color: '#a3e9ff', textDecoration: 'underline' }}
-                href="/terms"
+                style={{ color: "#a3e9ff", textDecoration: "underline" }}
+                href='/terms'
               >
                 our Terms and Conditions
               </Link>
@@ -264,21 +264,21 @@ export default function SignUp() {
                 <CheckboxEmpty style={{ width: 20, height: 20 }} />
               )}
               <CheckboxInput
-                type="checkbox"
+                type='checkbox'
                 value={values.notificationsChecked}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                name="notificationsChecked"
+                name='notificationsChecked'
               />
               Sign me up for notifications
             </CheckboxLabel>
           </CheckboxContainer>
-          <SecondaryButton text="Sign up" type="submit" />
+          <SecondaryButton text='Sign up' type='submit' />
         </form>
         <GoogleRegistration />
 
         <RedirectText>
-          Have account? <RedirectLink href="/login"> Sign in</RedirectLink>
+          Have account? <RedirectLink href='/login'> Sign in</RedirectLink>
         </RedirectText>
       </AuthorizationContainer>
       {showModalError && (
@@ -291,7 +291,7 @@ export default function SignUp() {
       {!authError && showModal && (
         <Modal
           onClose={onCloseModal}
-          message="You have successfully created your account"
+          message='You have successfully created your account'
           showTick={true}
           showButton={true}
         />
