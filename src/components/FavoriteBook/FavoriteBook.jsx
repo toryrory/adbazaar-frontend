@@ -27,7 +27,7 @@ export default function FavoriteBook({ book }) {
   const cartBooks = useSelector(selectCart);
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  useEffect(() => { // eslint-disable-line
     const isCurrentInCart = cartBooks.find(
       (cartBook) => cartBook.id === book.id
     );

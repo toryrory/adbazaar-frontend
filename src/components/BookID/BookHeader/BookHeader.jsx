@@ -60,7 +60,7 @@ export default function BookHeader({ book }) {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  useEffect(() => { // eslint-disable-line
     const isCurrentFavorite = favoriteBooks.find(
       (favorite) => favorite.id === book.id
     );
@@ -71,7 +71,7 @@ export default function BookHeader({ book }) {
     }
   });
 
-  useEffect(() => {
+  useEffect(() => { // eslint-disable-line
     const isCurrentInCart = cartBooks.find(
       (cartBook) => cartBook.id === book.id
     );

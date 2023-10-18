@@ -25,7 +25,7 @@ export default function GenresLink() {
 
     const newBooksCount = newBooks.length;
     setBooksCount(newBooksCount);
-  }, [link]);
+  }, [link]); // eslint-disable-line
 
   return (
     <Layout>

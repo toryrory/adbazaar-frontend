@@ -19,7 +19,7 @@ export default function GoogleRegistration() {
       console.log(user.access_token);
       dispatch(googleLogin(user.access_token));
     }
-  }, [user]);
+  }, [dispatch, user]);
 
   return (
     <>

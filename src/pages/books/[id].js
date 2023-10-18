@@ -45,15 +45,14 @@ export default function BooksId() {
 
   useEffect(() => {
     dispatch(fetchBookById(currentId));
-  }, [id, dispatch]);
+  }, [currentId, dispatch]);
 
   useEffect(() => {
     const newBook = books.find((book) => book.id === currentId);
     if (newBook.genre) {
       setCurrentBook(newBook);
     }
-  }, [id, isLoading]);
-
+  }, [books, currentId, id, isLoading]);
   const toggleDetails = () => {
     setShowDetails(!showDetails);
   };

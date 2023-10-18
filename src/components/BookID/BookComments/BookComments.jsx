@@ -60,7 +60,7 @@ export default function BookComments({ book }) {
         Date.parse(secondComment.date) - Date.parse(firstComment.date)
     );
     setComments(sortedComments);
-  }, [book]);
+  }, [book, comments]); 
 
   const openCommentField = () => {
     if (!isLoggedIn) {
