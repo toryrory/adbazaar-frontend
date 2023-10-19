@@ -49,10 +49,11 @@ export default function BooksId() {
 
   useEffect(() => {
     const newBook = books.find((book) => book.id === currentId);
-    if (newBook.genre) {
+    if (newBook.description) {
       setCurrentBook(newBook);
     }
   }, [books, currentId, id, isLoading]);
+
   const toggleDetails = () => {
     setShowDetails(!showDetails);
   };

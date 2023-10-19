@@ -23,35 +23,35 @@ export const fetchBooks = createAsyncThunk(
     // } else {
     //   token.set(currentToken);
 
-      try {
-        const response = await axios.get(`/books?size=48`);
-        console.log(`fetch books:`, response.data);
-        return response.data;
-      } catch (e) {
-        return thunkAPI.rejectWithValue(e.message);
-      }
+    try {
+      const response = await axios.get(`/books?size=48`);
+      console.log(`fetch books:`, response.data);
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
     }
+  }
   // }
 );
 
 export const fetchBookById = createAsyncThunk(
   'books/fetchById',
   async (id, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const currentToken = state.auth.token;
+    // const state = thunkAPI.getState();
+    // const currentToken = state.auth.token;
 
-    if (currentToken === null) {
-      return;
-    } else {
-      token.set(currentToken);
+    // if (currentToken === null) {
+    //   return;
+    // } else {
+    //   token.set(currentToken);
 
-      try {
-        const response = await axios.get(`/books/${id}`);
-        console.log(`fetchBookById`, response.data);
-        return response.data;
-      } catch (e) {
-        return thunkAPI.rejectWithValue(e.message);
-      }
+    try {
+      const response = await axios.get(`/books/${id}`);
+      console.log(`fetchBookById`, response.data);
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
     }
   }
+  // }
 );

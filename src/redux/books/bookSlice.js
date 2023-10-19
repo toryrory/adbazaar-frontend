@@ -77,6 +77,7 @@ const booksSlice = createSlice({
             comments: [],
             grades: [],
             rating: book.rate,
+            genre: book.genre,
           };
         });
         state.isLoading = false;
@@ -85,6 +86,7 @@ const booksSlice = createSlice({
       .addCase(fetchBooks.rejected, handleRejected)
       .addCase(fetchBookById.pending, handlePending)
       .addCase(fetchBookById.fulfilled, (state, action) => {
+        console.log(action.payload);
         const index = state.items.findIndex(
           (book) => book.id === action.payload.id
         );
