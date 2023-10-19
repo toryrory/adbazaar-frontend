@@ -53,14 +53,14 @@ export default function BookComments({ book }) {
   const [value, setValue] = useState(0);
   const [comments, setComments] = useState(book.comments);
 
-  useEffect(() => {
-    const cloneComments = comments.slice(0);
-    const sortedComments = cloneComments.sort(
-      (firstComment, secondComment) =>
-        Date.parse(secondComment.date) - Date.parse(firstComment.date)
-    );
-    setComments(sortedComments);
-  }, [book, comments]); 
+  // useEffect(() => {
+  //   const cloneComments = comments.slice(0);
+  //   const sortedComments = cloneComments.sort(
+  //     (firstComment, secondComment) =>
+  //       Date.parse(secondComment.date) - Date.parse(firstComment.date)
+  //   );
+  //   setComments(sortedComments);
+  // }, [book, comments]);
 
   const openCommentField = () => {
     if (!isLoggedIn) {
