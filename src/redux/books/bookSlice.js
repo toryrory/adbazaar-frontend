@@ -1,5 +1,5 @@
 import { createSlice, nanoid } from '@reduxjs/toolkit';
-import { books } from '@/data/books';
+// import { books } from '@/data/books';
 import { Img32Girl } from '../../../public/png';
 
 import { fetchBooks, fetchBookById } from './operations';
