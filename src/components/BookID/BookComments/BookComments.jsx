@@ -6,8 +6,9 @@ import {
   selectUserName,
   selectBookById,
 } from '@/redux/selectors';
-import { addComment, updateRating } from '@/redux/books/bookSlice';
-import { addComments } from '@/redux/accountSlice';
+// import { addComment, updateRating } from '@/redux/books/bookSlice';
+// import { addComments } from '@/redux/accountSlice';
+import { addComment } from '@/redux/books/operations';
 import SecondaryButton from '@/components/secondaryButton/SecondaryButton';
 import Modal from '@/components/modal/Modal';
 import CloseButton from '@/components/closeButton/CloseButton';
@@ -85,14 +86,16 @@ export default function BookComments({ book }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const today = new Date();
-    const now = today.toLocaleString();
-    dispatch(addComment(book.id, commentText, currentUser, now));
-    if (value > 0) {
-      const rating = value;
-      dispatch(updateRating(book.id, rating));
-    }
-    dispatch(addComments(commentText, now, book));
+    const rate = value;
+    // const today = new Date();
+    // const now = today.toLocaleString();
+    // dispatch(addComment(book.id, commentText, currentUser, now));
+    // if (value > 0) {
+    //   const rating = value;
+    //   dispatch(updateRating(book.id, rating));
+    // }
+    // dispatch(addComments(commentText, now, book));
+    dispatch(addComment({ bookId: book.id, rate, message: commentText }));
     toast.success(`Your comment will appear soon`);
     reset();
   };
@@ -137,12 +140,14 @@ export default function BookComments({ book }) {
         {comments &&
           comments.map((comment) => {
             return (
-              <Item key={comment.bookId}>
+              <Item key={comment.id}>
                 <CommentHeader>
                   <CommentTitle>{comment.author}</CommentTitle>
-                  <CommentDate>{comment.date.slice(0, 10)}</CommentDate>
+                  <CommentDate>
+                    {comment.creation_date.slice(0, 10)}
+                  </CommentDate>
                 </CommentHeader>
-                <CommentText>{comment.text}</CommentText>
+                <CommentText>{comment.message}</CommentText>
                 <AllBtnContainer>
                   <BtnSeeMore type="button">
                     See more
@@ -155,9 +160,11 @@ export default function BookComments({ book }) {
                   </BtnSeeMore>
                   <LikeBtnContainer>
                     <LikeBtn type="button">
+                      {/* {comment.likes} */}
                       <Like style={{ width: 20, height: 20 }} />
                     </LikeBtn>
                     <LikeBtn type="button">
+                      {/* {comment.dislikes} */}
                       <Dislike style={{ width: 20, height: 20 }} />
                     </LikeBtn>
                   </LikeBtnContainer>

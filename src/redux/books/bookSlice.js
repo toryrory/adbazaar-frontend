@@ -2,7 +2,7 @@ import { createSlice, nanoid } from '@reduxjs/toolkit';
 // import { books } from '@/data/books';
 import { Img32Girl } from '../../../public/png';
 
-import { fetchBooks, fetchBookById } from './operations';
+import { fetchBooks, fetchBookById, addComment } from './operations';
 
 const handlePending = (state) => {
   state.isLoading = true;
@@ -86,15 +86,14 @@ const booksSlice = createSlice({
       .addCase(fetchBooks.rejected, handleRejected)
       .addCase(fetchBookById.pending, handlePending)
       .addCase(fetchBookById.fulfilled, (state, action) => {
-        console.log(action.payload);
         const index = state.items.findIndex(
           (book) => book.id === action.payload.id
         );
-        state.items[index].genre = action.payload.genre;
         state.items[index].language = action.payload.language;
         state.items[index].publisher = action.payload.publishing_house;
         state.items[index].description = action.payload.description;
         state.items[index].publicationDate = action.payload.creation_date;
+        state.items[index].comments = action.payload.comments;
         state.items[index].seller = {
           name: action.payload.seller.full_name,
           email: action.payload.seller.email,
@@ -109,7 +108,13 @@ const booksSlice = createSlice({
         state.isLoading = false;
         state.error = null;
       })
-      .addCase(fetchBookById.rejected, handleRejected);
+      .addCase(fetchBookById.rejected, handleRejected)
+      .addCase(addComment.pending, handlePending)
+      .addCase(addComment.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(addComment.rejected, handleRejected);
   },
 });
 
