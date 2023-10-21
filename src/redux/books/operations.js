@@ -17,7 +17,7 @@ const token = {
 export const fetchBooks = createAsyncThunk(
   'books/fetch',
   async (_, thunkAPI) => {
-    const state = thunkAPI.getState();
+    // const state = thunkAPI.getState();
     // const currentToken = state.auth.token;
 
     // if (currentToken === null) {
@@ -56,4 +56,34 @@ export const fetchBookById = createAsyncThunk(
     }
   }
   // }
+);
+
+export const addComment = createAsyncThunk(
+  'books/addComment',
+  async (bookId, rate, message, thunkAPI) => {
+    const state = thunkAPI.getState();
+    console.log(state);
+    const currentToken = state.auth.token;
+    // const currentUserId = state.auth.user.id;
+    const currentUserId = 2;
+    console.log(currentToken, currentUserId);
+
+    if (currentToken === null || currentUserId === null) {
+      console.log(currentToken, currentUserId);
+      return;
+    } else {
+      token.set(currentToken);
+
+      try {
+        const response = await axios.post(
+          `/users/${currentUserId}/books/${bookId}/comments`,
+          { rate, message }
+        );
+        console.log(`addComment:`, response.data);
+        return response.data;
+      } catch (e) {
+        return thunkAPI.rejectWithValue(e.message);
+      }
+    }
+  }
 );
