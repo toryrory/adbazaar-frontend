@@ -94,6 +94,7 @@ const booksSlice = createSlice({
         state.items[index].description = action.payload.description;
         state.items[index].publicationDate = action.payload.creation_date;
         state.items[index].comments = action.payload.comments;
+        state.items[index].rating = action.payload.rate;
         state.items[index].seller = {
           name: action.payload.seller.full_name,
           email: action.payload.seller.email,

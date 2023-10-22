@@ -17,14 +17,6 @@ const token = {
 export const fetchBooks = createAsyncThunk(
   'books/fetch',
   async (_, thunkAPI) => {
-    // const state = thunkAPI.getState();
-    // const currentToken = state.auth.token;
-
-    // if (currentToken === null) {
-    //   return;
-    // } else {
-    //   token.set(currentToken);
-
     try {
       const response = await axios.get(`/books?size=48`);
       console.log(`fetch books:`, response.data);
@@ -33,20 +25,11 @@ export const fetchBooks = createAsyncThunk(
       return thunkAPI.rejectWithValue(e.message);
     }
   }
-  // }
 );
 
 export const fetchBookById = createAsyncThunk(
   'books/fetchById',
   async (id, thunkAPI) => {
-    // const state = thunkAPI.getState();
-    // const currentToken = state.auth.token;
-
-    // if (currentToken === null) {
-    //   return;
-    // } else {
-    //   token.set(currentToken);
-
     try {
       const response = await axios.get(`/books/${id}`);
       console.log(`fetchBookById`, response.data);
@@ -55,35 +38,24 @@ export const fetchBookById = createAsyncThunk(
       return thunkAPI.rejectWithValue(e.message);
     }
   }
-  // }
 );
 
 export const addComment = createAsyncThunk(
   'books/addComment',
-  async (bookId, rate, message, thunkAPI) => {
+  async (credentials, thunkAPI) => {
     const state = thunkAPI.getState();
-    console.log(state);
-    const currentToken = state.auth.token;
-    // const currentUserId = state.auth.user.id;
-    const currentUserId = 2;
-    console.log(currentToken, currentUserId);
+    const currentUserId = state.auth.user.id;
+    const bookId = credentials.bookId;
 
-    if (currentToken === null || currentUserId === null) {
-      console.log(currentToken, currentUserId);
-      return;
-    } else {
-      token.set(currentToken);
-
-      try {
-        const response = await axios.post(
-          `/users/${currentUserId}/books/${bookId}/comments`,
-          { rate, message }
-        );
-        console.log(`addComment:`, response.data);
-        return response.data;
-      } catch (e) {
-        return thunkAPI.rejectWithValue(e.message);
-      }
+    try {
+      const response = await axios.post(
+        `/users/${currentUserId}/books/${bookId}/comments`,
+        credentials
+      );
+      console.log(`addComment:`, response.data);
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
     }
   }
 );

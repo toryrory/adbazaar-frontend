@@ -10,6 +10,7 @@ import {
   resetPassword,
   fetchCurrentUser,
   refreshAccessToken,
+  addFavorites,
 } from './operations';
 
 const handlePending = (state) => {
@@ -150,7 +151,13 @@ const authSlice = createSlice({
         state.error = null;
         state.type = 'email';
       })
-      .addCase(refreshAccessToken.rejected, handleRejected);
+      .addCase(refreshAccessToken.rejected, handleRejected)
+      .addCase(addFavorites.pending, handlePending)
+      .addCase(addFavorites.fulfilled, (state) => {
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(addFavorites.rejected, handleRejected);
   },
 });
 
