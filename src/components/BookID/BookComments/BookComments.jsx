@@ -8,7 +8,7 @@ import {
 } from '@/redux/selectors';
 // import { addComment, updateRating } from '@/redux/books/bookSlice';
 // import { addComments } from '@/redux/accountSlice';
-import { addComment } from '@/redux/books/operations';
+import { addComment, fetchBookById } from '@/redux/books/operations';
 import SecondaryButton from '@/components/secondaryButton/SecondaryButton';
 import Modal from '@/components/modal/Modal';
 import CloseButton from '@/components/closeButton/CloseButton';
@@ -50,7 +50,7 @@ export default function BookComments({ book }) {
   const currentUser = useSelector(selectUserName);
   const [showModal, setShowModal] = useState(false);
   const [showCommentField, setShowCommentField] = useState(false);
-  const [commentText, setCommentText] = useState(null);
+  const [commentText, setCommentText] = useState('');
   const [value, setValue] = useState(0);
   const [comments, setComments] = useState(book.comments);
 
@@ -86,16 +86,9 @@ export default function BookComments({ book }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const rate = value;
-    // const today = new Date();
-    // const now = today.toLocaleString();
-    // dispatch(addComment(book.id, commentText, currentUser, now));
-    // if (value > 0) {
-    //   const rating = value;
-    //   dispatch(updateRating(book.id, rating));
-    // }
-    // dispatch(addComments(commentText, now, book));
-    dispatch(addComment({ bookId: book.id, rate, message: commentText }));
+    dispatch(
+      addComment({ bookId: book.id, rate: value, message: commentText })
+    );
     toast.success(`Your comment will appear soon`);
     reset();
   };

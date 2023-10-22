@@ -184,3 +184,22 @@ export const refreshAccessToken = createAsyncThunk(
     }
   }
 );
+
+export const addFavorites = createAsyncThunk(
+  'auth/addFavorites',
+  async (credentials, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const currentUserId = state.auth.user.id;
+
+    try {
+      const response = await axios.post(
+        `/users/${currentUserId}/favorites`,
+        credentials
+      );
+      console.log(`addFavorites:`, response.data);
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
