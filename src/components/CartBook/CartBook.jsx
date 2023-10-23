@@ -1,5 +1,6 @@
-import { useDispatch } from 'react-redux';
-import { deleteCart, minusCountCart, addCart } from '@/redux/accountSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { minusCountCart } from '@/redux/accountSlice';
+import { addCart, deleteCart } from '@/redux/auth/operations';
 import {
   Item,
   StyledImg,
@@ -18,32 +19,34 @@ import {
 import Link from 'next/link';
 import { PaperType, EBookType, AudioType } from '../../../public/svg-book';
 import { Trash } from '../../../public/svg-account';
+import { useEffect } from 'react';
 
 export default function CartBook({ book }) {
   const dispatch = useDispatch();
+  const count = 1;
 
   const removeFromCart = () => {
     dispatch(deleteCart(book.id));
   };
 
   const minusCount = () => {
-    if (book.count === 1) {
-      dispatch(deleteCart(book.id));
-    } else if (book.count > 1) {
-      dispatch(minusCountCart(book.id));
-    }
+    // if (book.count === 1) {
+    dispatch(deleteCart(book.id));
+    // } else if (book.count > 1) {
+    //   dispatch(minusCountCart(book.id));
+    // }
   };
 
   const plusCount = () => {
-    dispatch(addCart(book));
+    dispatch(addCart(book.id));
   };
 
   return (
     <Item>
       <Link href={`/books/${book.id}`}>
         <StyledImg
-          src={book.photo}
-          alt={book.name}
+          src={book.image_path}
+          alt={book.title}
           priority={true}
           width={70}
           height={100}
@@ -52,9 +55,9 @@ export default function CartBook({ book }) {
 
       <InfoContainer>
         <Link href={`/books/${book.id}`}>
-          <Title>{book.name}</Title>
+          <Title>{book.title}</Title>
           <Author>{book.author}</Author>
-          <TypeContainer>
+          {/* <TypeContainer>
             {book.type === 'e-book' && (
               <EBookType
                 style={{ width: 16, height: 16, fill: 'var(--light-grey)' }}
@@ -71,7 +74,7 @@ export default function CartBook({ book }) {
               />
             )}
             <Type>{book.type}</Type>
-          </TypeContainer>
+          </TypeContainer> */}
         </Link>
         <PriceContainer>
           <Price>
@@ -82,8 +85,12 @@ export default function CartBook({ book }) {
             <ButtonMinus type="button" onClick={minusCount}>
               -
             </ButtonMinus>
-            <span>{book.count}</span>
-            <ButtonMinus type="button" onClick={plusCount}>
+            <span>{count}</span>
+            <ButtonMinus
+              type="button"
+              onClick={plusCount}
+              disabled={count <= 1}
+            >
               +
             </ButtonMinus>
           </ButtonContainer>

@@ -1,8 +1,7 @@
-import Header from '@/components/Layout/Header/Header';
-import SearchBar from '@/components/SearchBar/SearchBar';
-import CartBook from '@/components/CartBook/CartBook';
-import CartTotal from '@/components/CartTotal/CartTotal';
 import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { fetchCurrentUser } from '@/redux/auth/operations';
 import {
   Container,
   BackButton,
@@ -11,6 +10,11 @@ import {
   List,
   ContinueButton,
 } from '@/styles/cart.styled';
+
+import Header from '@/components/Layout/Header/Header';
+import SearchBar from '@/components/SearchBar/SearchBar';
+import CartBook from '@/components/CartBook/CartBook';
+import CartTotal from '@/components/CartTotal/CartTotal';
 import { ArrowBack, ArrowRight } from '../../../public/svg-book';
 import { BgFull } from '../../../public/backgrounds';
 import { HeroStar } from '@/styles/index.styled';
@@ -20,11 +24,17 @@ import { selectCart } from '@/redux/selectors';
 export default function Cart() {
   const cartBooks = useSelector(selectCart);
 
-  const cartBooksCount = cartBooks.reduce((total, book) => {
-    return total + book.count;
-  }, 0);
+  // const cartBooksCount = cartBooks.reduce((total, book) => {
+  //   return total + book.count;
+  // }, 0);
+  const cartBooksCount = cartBooks.length;
 
   const router = useRouter();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCurrentUser());
+  }, [dispatch]);
 
   return (
     <>

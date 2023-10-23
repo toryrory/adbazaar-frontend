@@ -12,6 +12,8 @@ import {
   refreshAccessToken,
   addFavorites,
   deleteFavorites,
+  addCart,
+  deleteCart,
 } from './operations';
 
 const handlePending = (state) => {
@@ -169,7 +171,24 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.error = null;
       })
-      .addCase(deleteFavorites.rejected, handleRejected);
+      .addCase(deleteFavorites.rejected, handleRejected)
+      .addCase(addCart.pending, handlePending)
+      .addCase(addCart.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.user.orders.push({ id: action.payload.book_id });
+      })
+      .addCase(addCart.rejected, handleRejected)
+      .addCase(deleteCart.pending, handlePending)
+      .addCase(deleteCart.fulfilled, (state, action) => {
+        const index = state.user.orders.findIndex(
+          (book) => book.id === action.payload.book_id
+        );
+        state.user.orders.splice(index, 1);
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(deleteCart.rejected, handleRejected);
   },
 });
 

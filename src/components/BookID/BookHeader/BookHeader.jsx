@@ -3,8 +3,12 @@ import { Rating } from '@mui/material';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useState } from 'react';
-import { addCart, deleteCart } from '@/redux/accountSlice';
-import { addFavorites, deleteFavorites } from '@/redux/auth/operations';
+import {
+  addFavorites,
+  deleteFavorites,
+  addCart,
+  deleteCart,
+} from '@/redux/auth/operations';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectCart,
@@ -68,17 +72,17 @@ export default function BookHeader({ book }) {
     }
   }, [favoriteBooks, book]);
 
-  // useEffect(() => {
-  //   // eslint-disable-line
-  //   const isCurrentInCart = cartBooks.find(
-  //     (cartBook) => cartBook.id === book.id
-  //   );
-  //   if (isCurrentInCart) {
-  //     setIsInCart(true);
-  //   } else {
-  //     setIsInCart(false);
-  //   }
-  // });
+  useEffect(() => {
+    // eslint-disable-line
+    const isCurrentInCart = cartBooks.find(
+      (cartBook) => cartBook.id === book.id
+    );
+    if (isCurrentInCart) {
+      setIsInCart(true);
+    } else {
+      setIsInCart(false);
+    }
+  }, [cartBooks, book]);
 
   const toggleSeller = () => {
     setShowSeller(!showSeller);
@@ -99,7 +103,7 @@ export default function BookHeader({ book }) {
   };
 
   const addToCart = () => {
-    dispatch(addCart(book));
+    dispatch(addCart(book.id));
   };
 
   const removeFromCart = () => {
