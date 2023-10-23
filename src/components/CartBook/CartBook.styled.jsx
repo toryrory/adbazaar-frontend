@@ -101,6 +101,10 @@ export const ButtonMinus = styled.button`
   line-height: 0.8;
   color: #ffffff;
   font-stretch: condensed;
+
+  &:disabled {
+    color: rgba(255, 255, 255, 0.3);
+  }
 `;
 
 export const ButtonDelete = styled.button`

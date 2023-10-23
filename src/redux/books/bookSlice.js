@@ -78,6 +78,7 @@ const booksSlice = createSlice({
             grades: [],
             rating: book.rate,
             genre: book.genre,
+            quantity: book.quantity,
           };
         });
         state.isLoading = false;

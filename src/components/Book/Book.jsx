@@ -1,5 +1,9 @@
-import { addCart, deleteCart } from '@/redux/accountSlice';
-import { addFavorites, deleteFavorites } from '@/redux/auth/operations';
+import {
+  addFavorites,
+  deleteFavorites,
+  addCart,
+  deleteCart,
+} from '@/redux/auth/operations';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectFavorites,
@@ -58,17 +62,17 @@ export default function Book({ book, variant }) {
     }
   }, [favoriteBooks, book]);
 
-  // useEffect(() => {
-  //   // eslint-disable-line
-  //   const isCurrentInCart = cartBooks.find(
-  //     (cartBook) => cartBook.id === book.id
-  //   );
-  //   if (isCurrentInCart) {
-  //     setIsInCart(true);
-  //   } else {
-  //     setIsInCart(false);
-  //   }
-  // });
+  useEffect(() => {
+    // eslint-disable-line
+    const isCurrentInCart = cartBooks.find(
+      (cartBook) => cartBook.id === book.id
+    );
+    if (isCurrentInCart) {
+      setIsInCart(true);
+    } else {
+      setIsInCart(false);
+    }
+  }, [cartBooks, book]);
 
   const addToFavorites = () => {
     if (!isLoggedIn) {
@@ -89,7 +93,7 @@ export default function Book({ book, variant }) {
   };
 
   const addToCart = () => {
-    dispatch(addCart(book));
+    dispatch(addCart(book.id));
   };
 
   const removeFromCart = () => {

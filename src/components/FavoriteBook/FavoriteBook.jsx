@@ -13,7 +13,7 @@ import {
   StyledImg,
   InfoContainer,
   RatingBox,
-  Reviews,
+  // Reviews,
   Title,
   Author,
   Price,

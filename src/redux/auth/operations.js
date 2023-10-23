@@ -220,3 +220,39 @@ export const deleteFavorites = createAsyncThunk(
     }
   }
 );
+
+export const addCart = createAsyncThunk(
+  'auth/addCart',
+  async (bookId, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const currentUserId = state.auth.user.id;
+
+    try {
+      const response = await axios.post(
+        `/users/${currentUserId}/orders?bookId=${bookId}`
+      );
+      console.log(`addCart:`, response.data);
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
+export const deleteCart = createAsyncThunk(
+  'auth/deleteCart',
+  async (bookId, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const currentUserId = state.auth.user.id;
+
+    try {
+      const response = await axios.delete(
+        `/users/${currentUserId}/orders?bookId=${bookId}`
+      );
+      console.log(`deleteCart:`, response.data);
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);

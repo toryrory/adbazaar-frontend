@@ -33,9 +33,9 @@ export default function Header() {
   const [showMenu, setShowMenu] = useState(false);
   const favorites = useSelector(selectFavorites);
   const cartBooks = useSelector(selectCart);
-  const cartBooksCount = cartBooks.reduce((total, book) => {
-    return total + book.count;
-  }, 0);
+  // const cartBooksCount = cartBooks.reduce((total, book) => {
+  //   return total + book.count;
+  // }, 0);
 
   const onOpenMenu = () => {
     setShowMenu(true);
@@ -75,7 +75,8 @@ export default function Header() {
           </CounterButton>
           <CounterButton
             onClick={() => router.push('/cart')}
-            count={cartBooksCount}
+            // count={cartBooksCount}
+            count={cartBooks.length}
           >
             <ShoppingCart style={{ width: 24, height: 24 }} />
           </CounterButton>
@@ -90,7 +91,8 @@ export default function Header() {
           </Button>
           <CounterButton
             onClick={() => router.push('/cart')}
-            count={cartBooksCount}
+            // count={cartBooksCount}
+            count={cartBooks.length}
           >
             <ShoppingCart style={{ width: 24, height: 24 }} />
           </CounterButton>

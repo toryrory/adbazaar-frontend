@@ -14,13 +14,14 @@ export const selectRefreshToken = (state) => state.auth.refreshToken;
 export const selectUserData = (state) => state.auth.user;
 export const selectUserComments = (state) => state.auth.user.comments;
 export const selectFavorites = (state) => state.auth.user.favorites;
+export const selectCart = (state) => state.auth.user.orders;
 
 //account selectors
 export const selectSettings = (state) => state.account.settings;
 export const selectAvatarImg = (state) => state.account.settings.avatar;
 // export const selectFavorites = (state) => state.account.favorites;
 // export const selectUserComments = (state) => state.account.comments;
-export const selectCart = (state) => state.account.cart;
+// export const selectCart = (state) => state.account.cart;
 export const selectNotifications = (state) => state.account.notifications;
 
 //main selectors
