@@ -10,7 +10,7 @@ export default function Comments() {
     <Container>
       <ul>
         {comments.map((comment) => {
-          return <Comment key={comment.bookId} comment={comment} />;
+          return <Comment key={comment.id} comment={comment} />;
         })}
       </ul>
     </Container>

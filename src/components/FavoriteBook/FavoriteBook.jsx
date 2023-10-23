@@ -1,6 +1,7 @@
 import { Rating } from '@mui/material';
 import Link from 'next/link';
-import { deleteFavorites, addCart, deleteCart } from '@/redux/accountSlice';
+import { addCart, deleteCart } from '@/redux/accountSlice';
+import { deleteFavorites } from '@/redux/auth/operations';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCart } from '@/redux/selectors';
 import { useState, useEffect } from 'react';
@@ -27,16 +28,17 @@ export default function FavoriteBook({ book }) {
   const cartBooks = useSelector(selectCart);
   const dispatch = useDispatch();
 
-  useEffect(() => { // eslint-disable-line
-    const isCurrentInCart = cartBooks.find(
-      (cartBook) => cartBook.id === book.id
-    );
-    if (isCurrentInCart) {
-      setIsInCart(true);
-    } else {
-      setIsInCart(false);
-    }
-  });
+  // useEffect(() => {
+  //   // eslint-disable-line
+  //   const isCurrentInCart = cartBooks.find(
+  //     (cartBook) => cartBook.id === book.id
+  //   );
+  //   if (isCurrentInCart) {
+  //     setIsInCart(true);
+  //   } else {
+  //     setIsInCart(false);
+  //   }
+  // });
 
   const removeFromFavorites = () => {
     dispatch(deleteFavorites(book.id));
@@ -55,8 +57,8 @@ export default function FavoriteBook({ book }) {
     <Item>
       <Link href={`/books/${book.id}`}>
         <StyledImg
-          src={book.photo}
-          alt={book.name}
+          src={book.image_path}
+          alt={book.title}
           priority={true}
           width={60}
           height={80}
@@ -68,17 +70,17 @@ export default function FavoriteBook({ book }) {
           <Rating
             readOnly
             precision={0.5}
-            defaultValue={book.rating}
+            defaultValue={book.rate}
             sx={{
               color: 'var(--rose-color)',
             }}
             size="small"
             emptyIcon={<EmptyStar />}
           />
-          <Reviews>({book.comments.length})</Reviews>
+          {/* <Reviews>({book.comments.length})</Reviews> */}
         </RatingBox>
         <Link href={`/books/${book.id}`}>
-          <Title>{book.name}</Title>
+          <Title>{book.title}</Title>
           <Author>{book.author}</Author>
         </Link>
       </InfoContainer>

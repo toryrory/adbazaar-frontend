@@ -23,10 +23,10 @@ export default function Comment({ comment }) {
 
   return (
     <Item key={comment.id}>
-      <Link href={`/books/${comment.bookId}`}>
+      <Link href={`/books/${comment.book.id}`}>
         <BookImage
-          src={comment.bookPhoto}
-          alt={comment.bookName}
+          src={comment.book.image_path}
+          alt={comment.book.title}
           priority={true}
           width={32}
           height={48}
@@ -35,14 +35,14 @@ export default function Comment({ comment }) {
 
       <InfoContainer>
         <InfoHeaderContainer>
-          <Title>{comment.bookName}</Title>
-          <Date>{comment.date.slice(0, 17)}</Date>
+          <Title>{comment.book.title}</Title>
+          <Date>{comment.creation_date.slice(0, 16)}</Date>
         </InfoHeaderContainer>
-        <Author>{comment.bookAuthor}</Author>
+        <Author>{comment.book.author}</Author>
         {showFullComment ? (
-          <FullText>{comment.text}</FullText>
+          <FullText>{comment.message}</FullText>
         ) : (
-          <Text>{comment.text}</Text>
+          <Text>{comment.message}</Text>
         )}
       </InfoContainer>
       <MoreBtn type="button" onClick={onShowFullComment}>

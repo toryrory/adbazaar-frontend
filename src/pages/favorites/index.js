@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router';
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { selectFavorites } from '@/redux/selectors';
+import { fetchCurrentUser } from '@/redux/auth/operations';
 import Header from '@/components/Layout/Header/Header';
 import SearchBar from '@/components/SearchBar/SearchBar';
 import FavoriteBook from '@/components/FavoriteBook/FavoriteBook';
@@ -19,6 +21,11 @@ import {
 export default function FavoritesPage() {
   const favoriteBooks = useSelector(selectFavorites);
   const router = useRouter();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCurrentUser());
+  }, [dispatch]);
 
   return (
     <>

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { googleLogout } from '@react-oauth/google';
 
-axios.defaults.baseURL = 'https://adbazaar-spring-backend.onrender.com';
+axios.defaults.baseURL = 'http://localhost:8080';
 // const renderURL = 'https://adbazaar-spring-backend.onrender.com';
 // const localhostURL = 'http://localhost:8080';
 
@@ -187,16 +187,33 @@ export const refreshAccessToken = createAsyncThunk(
 
 export const addFavorites = createAsyncThunk(
   'auth/addFavorites',
-  async (credentials, thunkAPI) => {
+  async (bookId, thunkAPI) => {
     const state = thunkAPI.getState();
     const currentUserId = state.auth.user.id;
 
     try {
       const response = await axios.post(
-        `/users/${currentUserId}/favorites`,
-        credentials
+        `/users/${currentUserId}/favorites?bookId=${bookId}`
       );
       console.log(`addFavorites:`, response.data);
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
+export const deleteFavorites = createAsyncThunk(
+  'auth/deleteFavorites',
+  async (bookId, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const currentUserId = state.auth.user.id;
+
+    try {
+      const response = await axios.delete(
+        `/users/${currentUserId}/favorites?bookId=${bookId}`
+      );
+      console.log(`deleteFavorites:`, response.data);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);

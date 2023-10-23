@@ -11,6 +11,7 @@ import {
   fetchCurrentUser,
   refreshAccessToken,
   addFavorites,
+  deleteFavorites,
 } from './operations';
 
 const handlePending = (state) => {
@@ -153,11 +154,22 @@ const authSlice = createSlice({
       })
       .addCase(refreshAccessToken.rejected, handleRejected)
       .addCase(addFavorites.pending, handlePending)
-      .addCase(addFavorites.fulfilled, (state) => {
+      .addCase(addFavorites.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.error = null;
+        state.user.favorites.push({ id: action.payload.book_id });
+      })
+      .addCase(addFavorites.rejected, handleRejected)
+      .addCase(deleteFavorites.pending, handlePending)
+      .addCase(deleteFavorites.fulfilled, (state, action) => {
+        const index = state.user.favorites.findIndex(
+          (book) => book.id === action.payload.book_id
+        );
+        state.user.favorites.splice(index, 1);
         state.isLoading = false;
         state.error = null;
       })
-      .addCase(addFavorites.rejected, handleRejected);
+      .addCase(deleteFavorites.rejected, handleRejected);
   },
 });
 

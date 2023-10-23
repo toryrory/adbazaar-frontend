@@ -1,5 +1,9 @@
 import { useDispatch } from 'react-redux';
-import { authLogout, googleLogOut } from '@/redux/auth/operations';
+import {
+  authLogout,
+  googleLogOut,
+  fetchCurrentUser,
+} from '@/redux/auth/operations';
 import { LogOut } from '../../../public/svg-authorization';
 import { Title, Container } from '@/styles/account.styled';
 import { useSelector } from 'react-redux';
@@ -59,8 +63,8 @@ export default function Account() {
   const isVerified = useSelector(selectIsVerified);
 
   useEffect(() => {
-    //dispatch(authGetUserInfo())
-  }, []);
+    dispatch(fetchCurrentUser());
+  }, [dispatch]);
 
   const onLogOut = () => {
     console.log(authError);
