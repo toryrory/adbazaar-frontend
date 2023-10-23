@@ -134,7 +134,7 @@ const authSlice = createSlice({
           email: action.payload.email,
           phone: action.payload.phone,
           birthday: action.payload.birt_date,
-          isVerified: action.payload.user_verified,
+          isVerified: action.payload.verified,
           orders: action.payload.orders,
           favorites: action.payload.favorites,
           comments: action.payload.comments,

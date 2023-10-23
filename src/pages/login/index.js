@@ -2,7 +2,7 @@ import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
-import { authLogin, fetchCurrentUser } from '@/redux/auth/operations';
+import { authLogin } from '@/redux/auth/operations';
 import { selectAuthError, selectIsLoggedIn } from '@/redux/selectors';
 import Modal from '@/components/modal/Modal';
 import AuthorizationContainer from '@/components/Authorization/authorizationContainer/AuthorizationContainer';
@@ -53,7 +53,6 @@ export default function LogIn() {
   const onSubmit = ({ email, password }, actions) => {
     console.log(email, password);
     dispatch(authLogin({ email, password }));
-    dispatch(fetchCurrentUser());
     actions.resetForm();
   };
 

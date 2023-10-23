@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { minusCountCart } from '@/redux/accountSlice';
+// import { minusCountCart } from '@/redux/accountSlice';
 import { addCart, deleteCart } from '@/redux/auth/operations';
 import {
   Item,
@@ -23,16 +23,16 @@ import { useEffect } from 'react';
 
 export default function CartBook({ book }) {
   const dispatch = useDispatch();
-  const count = 1;
 
   const removeFromCart = () => {
     dispatch(deleteCart(book.id));
   };
 
   const minusCount = () => {
-    // if (book.count === 1) {
-    dispatch(deleteCart(book.id));
-    // } else if (book.count > 1) {
+    if (book.quantity === 1) {
+      dispatch(deleteCart(book.id));
+    }
+    // else if (book.quantity > 1) {
     //   dispatch(minusCountCart(book.id));
     // }
   };
@@ -85,11 +85,11 @@ export default function CartBook({ book }) {
             <ButtonMinus type="button" onClick={minusCount}>
               -
             </ButtonMinus>
-            <span>{count}</span>
+            <span>{book.quantity}</span>
             <ButtonMinus
               type="button"
               onClick={plusCount}
-              disabled={count <= 1}
+              disabled={book.quantity <= 1}
             >
               +
             </ButtonMinus>

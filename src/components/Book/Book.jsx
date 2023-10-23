@@ -10,6 +10,7 @@ import {
   selectIsLoggedIn,
   selectCart,
   selectUserId,
+  selectIsVerified,
 } from '@/redux/selectors';
 import { useEffect, useState } from 'react';
 import Modal from '../modal/Modal';
@@ -43,9 +44,11 @@ export default function Book({ book, variant }) {
   const [isInCart, setIsInCart] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showVerifModal, setShowVerifModal] = useState(false);
   const favoriteBooks = useSelector(selectFavorites);
   const cartBooks = useSelector(selectCart);
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  const isVerified = useSelector(selectIsVerified);
   const userId = useSelector(selectUserId);
 
   const dispatch = useDispatch();
@@ -78,6 +81,9 @@ export default function Book({ book, variant }) {
     if (!isLoggedIn) {
       setShowModal(true);
       return;
+    } else if (isLoggedIn && !isVerified) {
+      setShowVerifModal(true);
+      return;
     }
     dispatch(addFavorites(book.id));
     setIsFavorite(true);
@@ -90,9 +96,17 @@ export default function Book({ book, variant }) {
 
   const onCloseModal = () => {
     setShowModal(false);
+    setShowVerifModal(false);
   };
 
   const addToCart = () => {
+    if (!isLoggedIn) {
+      setShowModal(true);
+      return;
+    } else if (isLoggedIn && !isVerified) {
+      setShowVerifModal(true);
+      return;
+    }
     dispatch(addCart(book.id));
   };
 
@@ -139,7 +153,7 @@ export default function Book({ book, variant }) {
           size="small"
           emptyIcon={<EmptyStar />}
         />
-        <Reviews>({book.comments.length})</Reviews>
+        {book.comments && <Reviews>({book.comments.length})</Reviews>}
       </RatingBox>
       <Link href={`/books/${book.id}`}>
         <Title $variant={variant}>{book.name}</Title>
@@ -171,6 +185,14 @@ export default function Book({ book, variant }) {
           messageStyles={{ marginTop: 40, fontSize: 16 }}
           showLoginButton={true}
           showLink={true}
+        />
+      )}
+      {showVerifModal && (
+        <Modal
+          onClose={onCloseModal}
+          message="This service is exclusively available for verified users"
+          messageStyles={{ marginTop: 40, fontSize: 16 }}
+          showButton={true}
         />
       )}
     </Item>

@@ -1,7 +1,6 @@
 import { Rating } from '@mui/material';
 import Link from 'next/link';
-import { addCart, deleteCart } from '@/redux/accountSlice';
-import { deleteFavorites } from '@/redux/auth/operations';
+import { deleteFavorites, addCart, deleteCart } from '@/redux/auth/operations';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCart } from '@/redux/selectors';
 import { useState, useEffect } from 'react';
@@ -28,24 +27,24 @@ export default function FavoriteBook({ book }) {
   const cartBooks = useSelector(selectCart);
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   // eslint-disable-line
-  //   const isCurrentInCart = cartBooks.find(
-  //     (cartBook) => cartBook.id === book.id
-  //   );
-  //   if (isCurrentInCart) {
-  //     setIsInCart(true);
-  //   } else {
-  //     setIsInCart(false);
-  //   }
-  // });
+  useEffect(() => {
+    // eslint-disable-line
+    const isCurrentInCart = cartBooks.find(
+      (cartBook) => cartBook.id === book.id
+    );
+    if (isCurrentInCart) {
+      setIsInCart(true);
+    } else {
+      setIsInCart(false);
+    }
+  }, [cartBooks, book]);
 
   const removeFromFavorites = () => {
     dispatch(deleteFavorites(book.id));
   };
 
   const addToCart = () => {
-    dispatch(addCart(book));
+    dispatch(addCart(book.id));
   };
 
   const removeFromCart = () => {
