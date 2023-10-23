@@ -14,6 +14,7 @@ import {
   selectCart,
   selectFavorites,
   selectIsLoggedIn,
+  selectIsVerified,
 } from '@/redux/selectors';
 import Seller from '../Seller/Seller';
 import AddFavoriteBtn from '../FavoriteBtn/AddFavoriteBtn';
@@ -54,10 +55,12 @@ export default function BookHeader({ book }) {
   const [isFavorite, setIsFavorite] = useState(false);
   const [isInCart, setIsInCart] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showVerifModal, setShowVerifModal] = useState(false);
   const [comments, setComments] = useState(book.comments);
   const favoriteBooks = useSelector(selectFavorites);
   const cartBooks = useSelector(selectCart);
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  const isVerified = useSelector(selectIsVerified);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -92,6 +95,9 @@ export default function BookHeader({ book }) {
     if (!isLoggedIn) {
       setShowModal(true);
       return;
+    } else if (isLoggedIn && !isVerified) {
+      setShowVerifModal(true);
+      return;
     }
     dispatch(addFavorites(book.id));
     setIsFavorite(true);
@@ -103,6 +109,13 @@ export default function BookHeader({ book }) {
   };
 
   const addToCart = () => {
+    if (!isLoggedIn) {
+      setShowModal(true);
+      return;
+    } else if (isLoggedIn && !isVerified) {
+      setShowVerifModal(true);
+      return;
+    }
     dispatch(addCart(book.id));
   };
 
@@ -113,6 +126,7 @@ export default function BookHeader({ book }) {
 
   const onCloseModal = () => {
     setShowModal(false);
+    setShowVerifModal(false);
   };
 
   return (
@@ -210,6 +224,14 @@ export default function BookHeader({ book }) {
           messageStyles={{ marginTop: 40, fontSize: 16 }}
           showLoginButton={true}
           showLink={true}
+        />
+      )}
+      {showVerifModal && (
+        <Modal
+          onClose={onCloseModal}
+          message="This service is exclusively available for verified users"
+          messageStyles={{ marginTop: 40, fontSize: 16 }}
+          showButton={true}
         />
       )}
     </>

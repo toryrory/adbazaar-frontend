@@ -24,10 +24,9 @@ import { selectCart } from '@/redux/selectors';
 export default function Cart() {
   const cartBooks = useSelector(selectCart);
 
-  // const cartBooksCount = cartBooks.reduce((total, book) => {
-  //   return total + book.count;
-  // }, 0);
-  const cartBooksCount = cartBooks.length;
+  const cartBooksCount = cartBooks.reduce((total, book) => {
+    return total + book.quantity;
+  }, 0);
 
   const router = useRouter();
   const dispatch = useDispatch();

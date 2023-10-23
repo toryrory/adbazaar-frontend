@@ -33,7 +33,7 @@ export default function CartTotal({ books, cartBooksCount }) {
 
   const totalBookPrice = books
     .reduce((total, book) => {
-      return total + book.price * book.count;
+      return total + book.price * book.quantity;
     }, 0)
     .toFixed(2);
 
