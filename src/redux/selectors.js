@@ -3,6 +3,7 @@ import { createSelector } from '@reduxjs/toolkit';
 export const selectIsLoggedIn = (state) => state.auth.isLoggedIn;
 export const selectUserName = (state) => state.auth.user.name;
 export const selectUserEmail = (state) => state.auth.user.email;
+export const selectUserId = (state) => state.auth.user.id;
 export const selectAuthIsLoading = (state) => state.auth.isLoading;
 export const selectAuthError = (state) => state.auth.error;
 export const selectAuthType = (state) => state.auth.type;
@@ -11,12 +12,14 @@ export const selectToken = (state) => state.auth.token;
 export const selectRefreshToken = (state) => state.auth.refreshToken;
 
 export const selectUserData = (state) => state.auth.user;
+export const selectUserComments = (state) => state.auth.user.comments;
+export const selectFavorites = (state) => state.auth.user.favorites;
 
 //account selectors
 export const selectSettings = (state) => state.account.settings;
 export const selectAvatarImg = (state) => state.account.settings.avatar;
-export const selectFavorites = (state) => state.account.favorites;
-export const selectUserComments = (state) => state.account.comments;
+// export const selectFavorites = (state) => state.account.favorites;
+// export const selectUserComments = (state) => state.account.comments;
 export const selectCart = (state) => state.account.cart;
 export const selectNotifications = (state) => state.account.notifications;
 

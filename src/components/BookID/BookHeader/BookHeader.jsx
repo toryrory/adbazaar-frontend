@@ -3,12 +3,8 @@ import { Rating } from '@mui/material';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useState } from 'react';
-import {
-  addFavorites,
-  deleteFavorites,
-  addCart,
-  deleteCart,
-} from '@/redux/accountSlice';
+import { addCart, deleteCart } from '@/redux/accountSlice';
+import { addFavorites, deleteFavorites } from '@/redux/auth/operations';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectCart,
@@ -60,7 +56,8 @@ export default function BookHeader({ book }) {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const dispatch = useDispatch();
 
-  useEffect(() => { // eslint-disable-line
+  useEffect(() => {
+    // eslint-disable-line
     const isCurrentFavorite = favoriteBooks.find(
       (favorite) => favorite.id === book.id
     );
@@ -69,18 +66,19 @@ export default function BookHeader({ book }) {
     } else {
       setIsFavorite(false);
     }
-  });
+  }, [favoriteBooks, book]);
 
-  useEffect(() => { // eslint-disable-line
-    const isCurrentInCart = cartBooks.find(
-      (cartBook) => cartBook.id === book.id
-    );
-    if (isCurrentInCart) {
-      setIsInCart(true);
-    } else {
-      setIsInCart(false);
-    }
-  });
+  // useEffect(() => {
+  //   // eslint-disable-line
+  //   const isCurrentInCart = cartBooks.find(
+  //     (cartBook) => cartBook.id === book.id
+  //   );
+  //   if (isCurrentInCart) {
+  //     setIsInCart(true);
+  //   } else {
+  //     setIsInCart(false);
+  //   }
+  // });
 
   const toggleSeller = () => {
     setShowSeller(!showSeller);
@@ -91,7 +89,7 @@ export default function BookHeader({ book }) {
       setShowModal(true);
       return;
     }
-    dispatch(addFavorites(book));
+    dispatch(addFavorites(book.id));
     setIsFavorite(true);
   };
 
