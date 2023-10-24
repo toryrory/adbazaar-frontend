@@ -1,5 +1,22 @@
 import Head from 'next/head';
+
 import { useRouter } from 'next/router';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { ToastContainer } from 'react-toastify';
+
+import {
+  selectShowStars,
+  selectTopBookSellers,
+  selectPopularAuthors,
+  selectRefreshToken,
+  selectAuthError,
+  selectBooks,
+  selectToken,
+} from '@/redux/selectors';
+import { fetchCurrentUser, refreshAccessToken } from '@/redux/auth/operations';
+import { fetchBooks } from '@/redux/books/operations';
+
 import Layout from '@/components/Layout/Layout';
 import SearchBar from '@/components/SearchBar/SearchBar';
 import SecondaryButton from '@/components/secondaryButton/SecondaryButton';
@@ -29,23 +46,7 @@ import BecomeSeller from '@/components/BecomeSeller/BecomeSeller';
 import Subscription from '@/components/Subscribtion/Subscription';
 import TopBookSellersSection from '@/components/TopBooksellersSection/TopBookSellersSection';
 import PopularAuthorsSection from '@/components/PopularAuthorsSection/PopularAuthorsSection';
-import { ToastContainer } from 'react-toastify';
 import { BgFull } from '../../public/backgrounds';
-import {
-  selectShowStars,
-  selectTopBookSellers,
-  selectPopularAuthors,
-  selectRefreshToken,
-  selectAuthError,
-  selectBooks,
-} from '@/redux/selectors';
-import { useSelector } from 'react-redux';
-
-import { useDispatch } from 'react-redux';
-import { fetchCurrentUser, refreshAccessToken } from '@/redux/auth/operations';
-import { selectToken } from '@/redux/selectors';
-import { useEffect } from 'react';
-import { fetchBooks } from '@/redux/books/operations';
 
 export default function Home() {
   const router = useRouter();
@@ -71,11 +72,11 @@ export default function Home() {
   }, [dispatch, currentToken]);
 
   useEffect(() => {
-    if (authError === "Request failed with status code 401") {
+    if (authError === 'Request failed with status code 401') {
       dispatch(refreshAccessToken(refreshToken));
     }
   }, [dispatch, authError, refreshToken]);
-console.log(books);
+  console.log(books);
 
   return (
     <>

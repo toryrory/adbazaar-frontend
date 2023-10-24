@@ -1,12 +1,16 @@
 import { useRouter } from 'next/navigation';
 import { useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
 import {
   selectSettings,
   selectIsLoggedIn,
   selectFavorites,
   selectCart,
+  selectCartBooksUnauthorized,
+  selectIsVerified,
 } from '@/redux/selectors';
+
 import MobileMenu from '../MobileMenu/MobileMenu';
 import CounterButton from '../CounterButton/CounterButton';
 import {
@@ -29,13 +33,27 @@ export default function Header() {
   const router = useRouter();
   const settings = useSelector(selectSettings);
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  const isVerified = useSelector(selectIsVerified);
   const [state, setState] = useState(settings);
   const [showMenu, setShowMenu] = useState(false);
   const favorites = useSelector(selectFavorites);
   const cartBooks = useSelector(selectCart);
-  // const cartBooksCount = cartBooks.reduce((total, book) => {
-  //   return total + book.count;
-  // }, 0);
+  const cartBooksUnauthorized = useSelector(selectCartBooksUnauthorized);
+  const [cartBooksCount, setCartBooksCount] = useState(null);
+
+  useEffect(() => {
+    if (isLoggedIn && isVerified) {
+      const count = cartBooks.reduce((total, book) => {
+        return total + book.quantity;
+      }, 0);
+      setCartBooksCount(count);
+    } else {
+      const count = cartBooksUnauthorized.reduce((total, book) => {
+        return total + book.quantity;
+      }, 0);
+      setCartBooksCount(count);
+    }
+  }, [isLoggedIn, isVerified, cartBooks, cartBooksUnauthorized]);
 
   const onOpenMenu = () => {
     setShowMenu(true);
@@ -75,8 +93,7 @@ export default function Header() {
           </CounterButton>
           <CounterButton
             onClick={() => router.push('/cart')}
-            // count={cartBooksCount}
-            count={cartBooks.length}
+            count={cartBooksCount}
           >
             <ShoppingCart style={{ width: 24, height: 24 }} />
           </CounterButton>
@@ -91,8 +108,7 @@ export default function Header() {
           </Button>
           <CounterButton
             onClick={() => router.push('/cart')}
-            // count={cartBooksCount}
-            count={cartBooks.length}
+            count={cartBooksCount}
           >
             <ShoppingCart style={{ width: 24, height: 24 }} />
           </CounterButton>

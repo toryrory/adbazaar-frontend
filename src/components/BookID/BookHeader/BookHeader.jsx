@@ -1,21 +1,28 @@
 import { copy } from 'simple-sharer';
 import { Rating } from '@mui/material';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useEffect, useState } from 'react';
+
 import {
   addFavorites,
   deleteFavorites,
   addCart,
   deleteCart,
 } from '@/redux/auth/operations';
-import { useDispatch, useSelector } from 'react-redux';
+import {
+  addCartUnauthorized,
+  deleteCartUnauthorized,
+} from '@/redux/books/bookSlice';
 import {
   selectCart,
   selectFavorites,
   selectIsLoggedIn,
   selectIsVerified,
+  selectCartBooksUnauthorized,
 } from '@/redux/selectors';
+
 import Seller from '../Seller/Seller';
 import AddFavoriteBtn from '../FavoriteBtn/AddFavoriteBtn';
 import DeleteFavoriteBtn from '../FavoriteBtn/DeleteFavoriteBtn';
@@ -59,6 +66,7 @@ export default function BookHeader({ book }) {
   const [comments, setComments] = useState(book.comments);
   const favoriteBooks = useSelector(selectFavorites);
   const cartBooks = useSelector(selectCart);
+  const cartBooksUnauthorized = useSelector(selectCartBooksUnauthorized);
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const isVerified = useSelector(selectIsVerified);
   const dispatch = useDispatch();
@@ -77,15 +85,26 @@ export default function BookHeader({ book }) {
 
   useEffect(() => {
     // eslint-disable-line
-    const isCurrentInCart = cartBooks.find(
-      (cartBook) => cartBook.id === book.id
-    );
-    if (isCurrentInCart) {
-      setIsInCart(true);
+    if (isLoggedIn && isVerified) {
+      const isCurrentInCart = cartBooks.find(
+        (cartBook) => cartBook.id === book.id
+      );
+      if (isCurrentInCart) {
+        setIsInCart(true);
+      } else {
+        setIsInCart(false);
+      }
     } else {
-      setIsInCart(false);
+      const isCurrentInCart = cartBooksUnauthorized.find(
+        (cartBook) => cartBook.id === book.id
+      );
+      if (isCurrentInCart) {
+        setIsInCart(true);
+      } else {
+        setIsInCart(false);
+      }
     }
-  }, [cartBooks, book]);
+  }, [cartBooks, cartBooksUnauthorized, book, isLoggedIn, isVerified]);
 
   const toggleSeller = () => {
     setShowSeller(!showSeller);
@@ -109,19 +128,21 @@ export default function BookHeader({ book }) {
   };
 
   const addToCart = () => {
-    if (!isLoggedIn) {
-      setShowModal(true);
-      return;
-    } else if (isLoggedIn && !isVerified) {
-      setShowVerifModal(true);
-      return;
+    if (isLoggedIn && isVerified) {
+      dispatch(addCart(book.id));
+    } else {
+      dispatch(addCartUnauthorized(book));
     }
-    dispatch(addCart(book.id));
   };
 
   const removeFromCart = () => {
-    dispatch(deleteCart(book.id));
-    setIsInCart(false);
+    if (isLoggedIn && isVerified) {
+      dispatch(deleteCart(book.id));
+      setIsInCart(false);
+    } else {
+      dispatch(deleteCartUnauthorized(book.id));
+      setIsInCart(false);
+    }
   };
 
   const onCloseModal = () => {

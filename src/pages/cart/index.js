@@ -1,7 +1,15 @@
 import { useRouter } from 'next/router';
-import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+
+import {
+  selectCart,
+  selectCartBooksUnauthorized,
+  selectIsLoggedIn,
+  selectIsVerified,
+} from '@/redux/selectors';
 import { fetchCurrentUser } from '@/redux/auth/operations';
+
 import {
   Container,
   BackButton,
@@ -10,7 +18,6 @@ import {
   List,
   ContinueButton,
 } from '@/styles/cart.styled';
-
 import Header from '@/components/Layout/Header/Header';
 import SearchBar from '@/components/SearchBar/SearchBar';
 import CartBook from '@/components/CartBook/CartBook';
@@ -18,22 +25,38 @@ import CartTotal from '@/components/CartTotal/CartTotal';
 import { ArrowBack, ArrowRight } from '../../../public/svg-book';
 import { BgFull } from '../../../public/backgrounds';
 import { HeroStar } from '@/styles/index.styled';
-import { useSelector } from 'react-redux';
-import { selectCart } from '@/redux/selectors';
 
 export default function Cart() {
-  const cartBooks = useSelector(selectCart);
-
-  const cartBooksCount = cartBooks.reduce((total, book) => {
-    return total + book.quantity;
-  }, 0);
-
   const router = useRouter();
   const dispatch = useDispatch();
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const isVerified = useSelector(selectIsVerified);
+  const cartBooks = useSelector(selectCart);
+  const cartBooksUnauthorized = useSelector(selectCartBooksUnauthorized);
+  const [cartBooksCount, setCartBooksCount] = useState(null);
+  const [books, setBooks] = useState([]);
 
   useEffect(() => {
-    dispatch(fetchCurrentUser());
-  }, [dispatch]);
+    if (isLoggedIn) {
+      dispatch(fetchCurrentUser());
+    }
+  }, [dispatch, isLoggedIn]);
+
+  useEffect(() => {
+    if (isLoggedIn && isVerified) {
+      const count = cartBooks.reduce((total, book) => {
+        return total + book.quantity;
+      }, 0);
+      setCartBooksCount(count);
+      setBooks(cartBooks);
+    } else {
+      const count = cartBooksUnauthorized.reduce((total, book) => {
+        return total + book.quantity;
+      }, 0);
+      setCartBooksCount(count);
+      setBooks(cartBooksUnauthorized);
+    }
+  }, [isLoggedIn, isVerified, cartBooks, cartBooksUnauthorized]);
 
   return (
     <>
@@ -52,12 +75,12 @@ export default function Cart() {
           <Subtitle>{cartBooksCount} items in the cart</Subtitle>
         )}
         <List>
-          {cartBooks.map((book) => {
+          {books.map((book) => {
             return <CartBook book={book} key={book.id} />;
           })}
         </List>
-        {cartBooks.length > 0 && (
-          <CartTotal books={cartBooks} cartBooksCount={cartBooksCount} />
+        {books.length > 0 && (
+          <CartTotal books={books} cartBooksCount={cartBooksCount} />
         )}
 
         <ContinueButton type="button" onClick={() => router.push('/')}>
