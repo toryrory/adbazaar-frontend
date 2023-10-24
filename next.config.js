@@ -14,6 +14,9 @@ const nextConfig = {
     });
     return config;
   },
+  devIndicators: {
+    buildActivity: false,
+  },
 };
 
 // const withImages = require('next-images');
