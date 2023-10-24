@@ -1,5 +1,4 @@
-import { createSlice, nanoid } from '@reduxjs/toolkit';
-// import { books } from '@/data/books';
+import { createSlice } from '@reduxjs/toolkit';
 import { Img32Girl } from '../../../public/png';
 
 import { fetchBooks, fetchBookById, addComment } from './operations';
@@ -15,13 +14,40 @@ const handleRejected = (state, action) => {
 
 const booksSlice = createSlice({
   name: 'books',
-  // initialState: books,
   initialState: {
     items: [],
     isLoading: false,
     error: null,
+    cartBooks: [],
   },
-  reducers: {},
+  reducers: {
+    addCartUnauthorized: {
+      reducer(state, action) {
+        state.cartBooks.push(action.payload);
+        console.log(action.payload);
+      },
+      prepare(book) {
+        return {
+          payload: {
+            id: book.id,
+            title: book.name,
+            rate: book.rating,
+            author: book.author,
+            price: book.price,
+            quantity: 1,
+            type: book.type,
+            image_path: book.photo,
+          },
+        };
+      },
+    },
+    deleteCartUnauthorized(state, action) {
+      const index = state.cartBooks.findIndex(
+        (book) => book.id === action.payload
+      );
+      state.cartBooks.splice(index, 1);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchBooks.pending, handlePending)
@@ -79,5 +105,6 @@ const booksSlice = createSlice({
   },
 });
 
-// export const { addComment, updateRating } = booksSlice.actions;
+export const { addCartUnauthorized, deleteCartUnauthorized } =
+  booksSlice.actions;
 export const booksReducer = booksSlice.reducer;

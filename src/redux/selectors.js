@@ -30,3 +30,4 @@ export const selectPopularAuthors = (state) => state.main.popularAuthors;
 //books selectors
 export const selectBooks = (state) => state.books.items;
 export const selectIsBookLoading = (state) => state.books.isLoading;
+export const selectCartBooksUnauthorized = (state) => state.books.cartBooks;

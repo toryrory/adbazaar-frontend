@@ -176,7 +176,7 @@ const authSlice = createSlice({
       .addCase(addCart.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.user.orders.push({ id: action.payload.book_id });
+        state.user.orders.push({ id: action.payload.book_id, quantity: 1 });
       })
       .addCase(addCart.rejected, handleRejected)
       .addCase(deleteCart.pending, handlePending)

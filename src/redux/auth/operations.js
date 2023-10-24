@@ -171,11 +171,12 @@ export const fetchCurrentUser = createAsyncThunk(
 
 export const refreshAccessToken = createAsyncThunk(
   'auth/refreshToken',
-  async (refreshToken, thunkAPI) => {
+  async (credentials, thunkAPI) => {
+    token.unset();
     try {
       const response = await axios.post(
         `/authentication/token/refresh`,
-        refreshToken
+        credentials
       );
       console.log(`refresh access token:`, response.data);
       return response.data;

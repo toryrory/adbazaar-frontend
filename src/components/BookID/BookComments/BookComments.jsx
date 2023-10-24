@@ -5,6 +5,7 @@ import {
   selectIsLoggedIn,
   selectUserName,
   selectBookById,
+  selectIsVerified,
 } from '@/redux/selectors';
 // import { addComment, updateRating } from '@/redux/books/bookSlice';
 // import { addComments } from '@/redux/accountSlice';
@@ -47,8 +48,10 @@ import {
 export default function BookComments({ book }) {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  const isVerified = useSelector(selectIsVerified);
   const currentUser = useSelector(selectUserName);
   const [showModal, setShowModal] = useState(false);
+  const [showVerifModal, setShowVerifModal] = useState(false);
   const [showCommentField, setShowCommentField] = useState(false);
   const [commentText, setCommentText] = useState('');
   const [value, setValue] = useState(0);
@@ -72,6 +75,9 @@ export default function BookComments({ book }) {
     if (!isLoggedIn) {
       setShowModal(true);
       return;
+    } else if (isLoggedIn && !isVerified) {
+      setShowVerifModal(true);
+      return;
     }
     setShowCommentField(true);
   };
@@ -82,6 +88,7 @@ export default function BookComments({ book }) {
 
   const onCloseModal = () => {
     setShowModal(false);
+    setShowVerifModal(false);
   };
 
   const handleChange = (event) => {
@@ -219,6 +226,14 @@ export default function BookComments({ book }) {
           messageStyles={{ marginTop: 40, fontSize: 16 }}
           showLoginButton={true}
           showLink={true}
+        />
+      )}
+      {showVerifModal && (
+        <Modal
+          onClose={onCloseModal}
+          message="This service is exclusively available for verified users"
+          messageStyles={{ marginTop: 40, fontSize: 16 }}
+          showButton={true}
         />
       )}
     </Container>

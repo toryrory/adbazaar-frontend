@@ -1,6 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
 // import { minusCountCart } from '@/redux/accountSlice';
+
 import { addCart, deleteCart } from '@/redux/auth/operations';
+import {
+  addCartUnauthorized,
+  deleteCartUnauthorized,
+} from '@/redux/books/bookSlice';
+import { selectIsLoggedIn, selectIsVerified } from '@/redux/selectors';
+
 import {
   Item,
   StyledImg,
@@ -19,18 +26,29 @@ import {
 import Link from 'next/link';
 import { PaperType, EBookType, AudioType } from '../../../public/svg-book';
 import { Trash } from '../../../public/svg-account';
-import { useEffect } from 'react';
 
 export default function CartBook({ book }) {
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const isVerified = useSelector(selectIsVerified);
   const dispatch = useDispatch();
 
   const removeFromCart = () => {
-    dispatch(deleteCart(book.id));
+    if (isLoggedIn && isVerified) {
+      dispatch(deleteCart(book.id));
+    } else {
+      dispatch(deleteCartUnauthorized(book.id));
+    }
   };
 
   const minusCount = () => {
-    if (book.quantity === 1) {
-      dispatch(deleteCart(book.id));
+    if (isLoggedIn && isVerified) {
+      if (book.quantity === 1) {
+        dispatch(deleteCart(book.id));
+      }
+    } else {
+      if (book.quantity === 1) {
+        dispatch(deleteCartUnauthorized(book.id));
+      }
     }
     // else if (book.quantity > 1) {
     //   dispatch(minusCountCart(book.id));
@@ -38,7 +56,11 @@ export default function CartBook({ book }) {
   };
 
   const plusCount = () => {
-    dispatch(addCart(book.id));
+    if (isLoggedIn && isVerified) {
+      dispatch(addCart(book.id));
+    } else {
+      dispatch(addCartUnauthorized(book));
+    }
   };
 
   return (
@@ -57,24 +79,26 @@ export default function CartBook({ book }) {
         <Link href={`/books/${book.id}`}>
           <Title>{book.title}</Title>
           <Author>{book.author}</Author>
-          {/* <TypeContainer>
-            {book.type === 'e-book' && (
-              <EBookType
-                style={{ width: 16, height: 16, fill: 'var(--light-grey)' }}
-              />
-            )}
-            {book.type === 'audio' && (
-              <AudioType
-                style={{ width: 16, height: 16, fill: 'var(--light-grey)' }}
-              />
-            )}
-            {book.type === 'paper' && (
-              <PaperType
-                style={{ width: 16, height: 16, fill: 'var(--light-grey)' }}
-              />
-            )}
-            <Type>{book.type}</Type>
-          </TypeContainer> */}
+          {book.type && (
+            <TypeContainer>
+              {book.type === 'e-book' && (
+                <EBookType
+                  style={{ width: 16, height: 16, fill: 'var(--light-grey)' }}
+                />
+              )}
+              {book.type === 'audio' && (
+                <AudioType
+                  style={{ width: 16, height: 16, fill: 'var(--light-grey)' }}
+                />
+              )}
+              {book.type === 'paper' && (
+                <PaperType
+                  style={{ width: 16, height: 16, fill: 'var(--light-grey)' }}
+                />
+              )}
+              <Type>{book.type}</Type>
+            </TypeContainer>
+          )}
         </Link>
         <PriceContainer>
           <Price>
