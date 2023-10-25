@@ -14,6 +14,7 @@ import {
   deleteFavorites,
   addCart,
   deleteCart,
+  updateUser,
 } from './operations';
 
 const handlePending = (state) => {
@@ -34,7 +35,7 @@ const authSlice = createSlice({
       email: null,
       phone: '',
       birthday: '00/00/0000',
-      socials: { first: '@example', second: '@example' },
+      socials: [],
       isVerified: false,
       orders: [],
       favorites: [],
@@ -57,7 +58,7 @@ const authSlice = createSlice({
         state.isLoggedIn = false;
         state.isLoading = false;
         state.error = null;
-        state.type = 'email';
+        state.type = "email";
       })
       .addCase(authRegister.rejected, handleRejected)
       .addCase(authLogin.pending, handlePending)
@@ -72,7 +73,7 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
         state.isLoading = false;
         state.error = null;
-        state.type = 'email';
+        state.type = "email";
       })
       .addCase(authLogin.rejected, handleRejected)
       .addCase(authLogout.pending, handlePending)
@@ -92,7 +93,7 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
         state.isLoading = false;
         state.error = null;
-        state.type = 'google';
+        state.type = "google";
         state.user.isVerified = true;
         // state.token = action.payload.googleToken;
       })
@@ -134,6 +135,7 @@ const authSlice = createSlice({
           email: action.payload.email,
           phone: action.payload.phone,
           birthday: action.payload.birt_date,
+          //  socials: action.payload.socials,
           isVerified: action.payload.verified,
           orders: action.payload.orders,
           favorites: action.payload.favorites,
@@ -143,7 +145,7 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
         state.isLoading = false;
         state.error = null;
-        state.type = 'email';
+        state.type = "email";
       })
       .addCase(refreshAccessToken.pending, handlePending)
       .addCase(refreshAccessToken.fulfilled, (state, action) => {
@@ -152,7 +154,7 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
         state.isLoading = false;
         state.error = null;
-        state.type = 'email';
+        state.type = "email";
       })
       .addCase(refreshAccessToken.rejected, handleRejected)
       .addCase(addFavorites.pending, handlePending)
@@ -188,7 +190,11 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.error = null;
       })
-      .addCase(deleteCart.rejected, handleRejected);
+      .addCase(deleteCart.rejected, handleRejected)
+      .addCase(updateUser.pending, handlePending)
+      .addCase(updateUser.fulfilled, (state, action) => {
+        state.user.birthday = action.payload.birt_date;
+      });
   },
 });
 

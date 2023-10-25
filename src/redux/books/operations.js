@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-axios.defaults.baseURL = 'https://adbazaar-spring-backend.onrender.com';
+axios.defaults.baseURL = "http://localhost:8080";
 // const renderURL = 'https://adbazaar-spring-backend.onrender.com';
 // const localhostURL = 'http://localhost:8080';
 
 const token = {
-  set(token) {
+  set(tnpoken) {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
   },
   unset() {

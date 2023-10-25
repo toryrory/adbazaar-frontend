@@ -7,18 +7,18 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
-} from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-import { configureStore } from '@reduxjs/toolkit';
-import { authReducer } from './auth/authSlice';
-import { accountReducer } from './accountSlice';
-import { mainReducer } from './mainPageSlice';
-import { booksReducer } from './books/bookSlice';
+} from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import { configureStore } from "@reduxjs/toolkit";
+import { authReducer } from "./auth/authSlice";
+import { accountReducer } from "./account/accountSlice";
+import { mainReducer } from "./mainPageSlice";
+import { booksReducer } from "./books/bookSlice";
 
 const authPersistConfig = {
-  key: 'auth',
+  key: "auth",
   storage,
-  whitelist: ['token', 'refreshToken'],
+  whitelist: ["token", "refreshToken"],
 };
 
 export const store = configureStore({
