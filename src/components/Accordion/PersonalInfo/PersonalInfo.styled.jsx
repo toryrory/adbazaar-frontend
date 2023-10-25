@@ -30,6 +30,7 @@ export const InputBox = styled.div`
 
 export const InputFlexBox = styled.div`
   display: flex;
+  height: 36px;
   flex-direction: row;
   align-items: center;
   margin-bottom: 8px;
@@ -62,6 +63,14 @@ export const InputLib = styled(InputMask)`
   &:focus {
     outline: none;
   }
+  ::placeholder {
+    color: var(--white-text);
+  }
+`;
+export const PhoneDataText = styled.span`
+
+  color: var(--white-text);
+  font-size: 14px;
 `;
 
 export const HiddenBtn = styled.button`

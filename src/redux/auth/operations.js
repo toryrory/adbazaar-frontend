@@ -1,8 +1,8 @@
-import axios from 'axios';
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { googleLogout } from '@react-oauth/google';
+import axios from "axios";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { googleLogout } from "@react-oauth/google";
 
-axios.defaults.baseURL = 'https://adbazaar-spring-backend.onrender.com';
+axios.defaults.baseURL = "http://localhost:8080";
 // const renderURL = 'https://adbazaar-spring-backend.onrender.com';
 // const localhostURL = 'http://localhost:8080';
 
@@ -11,12 +11,12 @@ const token = {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
   },
   unset() {
-    axios.defaults.headers.common.Authorization = '';
+    axios.defaults.headers.common.Authorization = "";
   },
 };
 
 export const authRegister = createAsyncThunk(
-  'auth/register',
+  "auth/register",
   async (credentials, thunkAPI) => {
     try {
       const response = await axios.post(
@@ -32,7 +32,7 @@ export const authRegister = createAsyncThunk(
 );
 
 export const authLogin = createAsyncThunk(
-  'auth/login',
+  "auth/login",
   async (credentials, thunkAPI) => {
     try {
       const response = await axios.post(`/authentication/login`, credentials);
@@ -46,7 +46,7 @@ export const authLogin = createAsyncThunk(
 );
 
 export const authLogout = createAsyncThunk(
-  'auth/logout',
+  "auth/logout",
   async (refreshToken, thunkAPI) => {
     const state = thunkAPI.getState();
     const currentToken = state.auth.token;
@@ -67,7 +67,7 @@ export const authLogout = createAsyncThunk(
 );
 
 export const googleLogin = createAsyncThunk(
-  'auth/googleLogin',
+  "auth/googleLogin",
   async (googleToken, thunkAPI) => {
     try {
       const response = await axios.get(
@@ -75,7 +75,7 @@ export const googleLogin = createAsyncThunk(
         {
           headers: {
             Authorization: `Bearer ${googleToken}`,
-            Accept: 'application/json',
+            Accept: "application/json",
           },
         }
       );
@@ -88,7 +88,7 @@ export const googleLogin = createAsyncThunk(
 );
 
 export const googleLogOut = createAsyncThunk(
-  'auth/googleLogOut',
+  "auth/googleLogOut",
   async (_, thunkAPI) => {
     try {
       const response = await googleLogout();
@@ -100,7 +100,7 @@ export const googleLogOut = createAsyncThunk(
 );
 
 export const verification = createAsyncThunk(
-  'auth/verification',
+  "auth/verification",
   async (credentials, thunkAPI) => {
     try {
       const response = await axios.post(
@@ -116,7 +116,7 @@ export const verification = createAsyncThunk(
 );
 
 export const resendVerification = createAsyncThunk(
-  'auth/resendVerification',
+  "auth/resendVerification",
   async (credentials, thunkAPI) => {
     try {
       const response = await axios.post(
@@ -132,7 +132,7 @@ export const resendVerification = createAsyncThunk(
 );
 
 export const resetPassword = createAsyncThunk(
-  '/auth/password-reset',
+  "/auth/password-reset",
   async (credentials, thunkAPI) => {
     try {
       const response = await axios.post(
@@ -148,16 +148,14 @@ export const resetPassword = createAsyncThunk(
 );
 
 export const fetchCurrentUser = createAsyncThunk(
-  'auth/refresh',
+  "auth/refresh",
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
     const currentToken = state.auth.token;
-
     if (currentToken === null) {
       return;
     } else {
       token.set(currentToken);
-
       try {
         const response = await axios.get(`/users/token`);
         console.log(`fetch current user:`, response.data);
@@ -170,7 +168,7 @@ export const fetchCurrentUser = createAsyncThunk(
 );
 
 export const refreshAccessToken = createAsyncThunk(
-  'auth/refreshToken',
+  "auth/refreshToken",
   async (credentials, thunkAPI) => {
     token.unset();
     try {
@@ -187,7 +185,7 @@ export const refreshAccessToken = createAsyncThunk(
 );
 
 export const addFavorites = createAsyncThunk(
-  'auth/addFavorites',
+  "auth/addFavorites",
   async (bookId, thunkAPI) => {
     const state = thunkAPI.getState();
     const currentUserId = state.auth.user.id;
@@ -205,7 +203,7 @@ export const addFavorites = createAsyncThunk(
 );
 
 export const deleteFavorites = createAsyncThunk(
-  'auth/deleteFavorites',
+  "auth/deleteFavorites",
   async (bookId, thunkAPI) => {
     const state = thunkAPI.getState();
     const currentUserId = state.auth.user.id;
@@ -223,7 +221,7 @@ export const deleteFavorites = createAsyncThunk(
 );
 
 export const addCart = createAsyncThunk(
-  'auth/addCart',
+  "auth/addCart",
   async (bookId, thunkAPI) => {
     const state = thunkAPI.getState();
     const currentUserId = state.auth.user.id;
@@ -241,7 +239,7 @@ export const addCart = createAsyncThunk(
 );
 
 export const deleteCart = createAsyncThunk(
-  'auth/deleteCart',
+  "auth/deleteCart",
   async (bookId, thunkAPI) => {
     const state = thunkAPI.getState();
     const currentUserId = state.auth.user.id;
@@ -255,5 +253,23 @@ export const deleteCart = createAsyncThunk(
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
+  }
+);
+
+export const updateUser = createAsyncThunk(
+  "auth/updateUser",
+  async (credentials, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const userId = state.auth.user.id;
+    
+      try {
+        const response = await axios.patch(`/users/${userId}`, credentials);
+        console.log("updateUser:", state);
+        console.log(response.data);
+        return response.data;
+      } catch (e) {
+        return thunkAPI.rejectWithValue(e.message);
+      }
+    
   }
 );

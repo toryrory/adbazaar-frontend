@@ -26,7 +26,7 @@ export default function AccountAccordion({ icon, text, children }) {
         {icon}</IconBox>
           <PanelText>{text}</PanelText>
         </Summary>
-        <Details>{children}</Details>
+        <Details sx={{padding: 0}}>{children}</Details>
       </AccordionBox>
     </>
   );

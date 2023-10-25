@@ -8,8 +8,7 @@ import {
 import { BtnsGroup, BtnBox, StyledLink } from "./NotificationsBtnsGroup.styled";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
-import { markAsRead, deleteNotification } from "@/redux/accountSlice";
-
+import { markAsRead, deleteNotification } from "@/redux/account/accountSlice";
 
 export default function NotificationsBtnsGroup({ group, bookId }) {
   const dispatch = useDispatch();
@@ -26,7 +25,6 @@ export default function NotificationsBtnsGroup({ group, bookId }) {
       default:
         break;
     }
-    
   };
 
   return (

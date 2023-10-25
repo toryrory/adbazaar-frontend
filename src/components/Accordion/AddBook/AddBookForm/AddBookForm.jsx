@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addBook } from "@/redux/account/operations";
 import Image from "next/image";
 import InputAddBookForm from "./InputAddBookForm/InputAddBookForm";
 import {
@@ -63,6 +65,7 @@ const FormDataInitValues = {
   description: null,
 };
 export default function AddBookForm() {
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState(FormDataInitValues);
   const [selectedLang, setSelectedLang] = useState({
     en: true,
@@ -182,7 +185,22 @@ export default function AddBookForm() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(JSON.stringify(formData, null, 2));
+    const { title, author, language, genre, description, photos, format, publisher, price, quantity } = formData;
+    console.log(photos[0]);
+    const filteredFormData = {
+      title,
+      author,
+      description,
+      format,
+      price,
+      genre,
+      language,
+      quantity,
+      publishing_house: publisher,
+      image_path: photos[0] ? photos[0].photo1 : "",
+    };
+    alert(JSON.stringify(filteredFormData, null, 2));
+    dispatch(addBook(filteredFormData));
     // const formFile = new FormData();
     // console.log(formFile);
     // formFile.append("avatar", photo); // "avatar" это свойство картинки в БД на бекенде, нужно узнать как будет называться это поле.

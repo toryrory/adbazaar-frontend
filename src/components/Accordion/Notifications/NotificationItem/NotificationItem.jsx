@@ -24,15 +24,9 @@ import NotificationBookInfo from "../NotificationBookInfo/NotificationBookInfo";
 import NotificationCustomerInfo from "../NotificationCustomerInfo/NotificationCustomerInfo";
 import NotificationCommentInfo from "../NotificationCommentInfo/NotificationCommentInfo";
 import NotificationsBtnsGroup from "../NotificationsBtnsGroup/NotificationsBtnsGroup";
-import { changeCheckBox } from "@/redux/accountSlice";
+import { changeCheckBox } from "@/redux/account/accountSlice";
 
-export default function NotificationItem({
-  id,
-  time,
-  data,
-  checked,
-  isRead,
-}) {
+export default function NotificationItem({ id, time, data, checked, isRead }) {
   const [openMore, setOpenMore] = useState(false);
   const dispatch = useDispatch();
 
@@ -41,9 +35,7 @@ export default function NotificationItem({
 
   const handleOpenMore = () => {
     setOpenMore((prevState) => !prevState);
-  
   };
-
 
   return (
     <NotifItem id={id}>

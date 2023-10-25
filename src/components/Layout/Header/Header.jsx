@@ -9,7 +9,8 @@ import {
   selectCart,
   selectCartBooksUnauthorized,
   selectIsVerified,
-} from '@/redux/selectors';
+  selectUserAvatar,
+} from "@/redux/selectors";
 
 import MobileMenu from '../MobileMenu/MobileMenu';
 import CounterButton from '../CounterButton/CounterButton';
@@ -31,10 +32,11 @@ import {
 
 export default function Header() {
   const router = useRouter();
-  const settings = useSelector(selectSettings);
+  // const settings = useSelector(selectSettings);
+  const userAvatar = useSelector(selectUserAvatar);
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const isVerified = useSelector(selectIsVerified);
-  const [state, setState] = useState(settings);
+  // const [state, setState] = useState(settings);
   const [showMenu, setShowMenu] = useState(false);
   const favorites = useSelector(selectFavorites);
   const cartBooks = useSelector(selectCart);
@@ -66,33 +68,33 @@ export default function Header() {
   return (
     <HeaderContainer>
       <ButtonContainer>
-        <Button type="button" onClick={onOpenMenu}>
+        <Button type='button' onClick={onOpenMenu}>
           <Burger style={{ width: 20, height: 20 }} />
         </Button>
-        <Button type="button" onClick={() => router.push('/')}>
+        <Button type='button' onClick={() => router.push("/")}>
           <Logo style={{ width: 55, height: 32 }} />
         </Button>
       </ButtonContainer>
       {isLoggedIn ? (
         <ButtonContainer>
-          <Button type="button" onClick={() => router.push('/account')}>
+          <Button type='button' onClick={() => router.push("/account")}>
             <Circle>
               <StyledImg
-                src={state.avatar ? state.avatar : Img32Girl}
+                src={userAvatar ? userAvatar : Img32Girl}
                 width={40}
                 height={40}
-                alt="user avatar"
+                alt='user avatar'
               />
             </Circle>
           </Button>
           <CounterButton
-            onClick={() => router.push('/favorites')}
+            onClick={() => router.push("/favorites")}
             count={favorites.length}
           >
             <Heart style={{ width: 24, height: 24 }} />
           </CounterButton>
           <CounterButton
-            onClick={() => router.push('/cart')}
+            onClick={() => router.push("/cart")}
             count={cartBooksCount}
           >
             <ShoppingCart style={{ width: 24, height: 24 }} />
@@ -100,14 +102,14 @@ export default function Header() {
         </ButtonContainer>
       ) : (
         <ButtonContainer>
-          <Button type="button" onClick={() => router.push('/login')}>
+          <Button type='button' onClick={() => router.push("/login")}>
             <User style={{ width: 24, height: 24 }} />
           </Button>
-          <Button type="button" onClick={() => router.push('/login')}>
+          <Button type='button' onClick={() => router.push("/login")}>
             <Heart style={{ width: 24, height: 24 }} />
           </Button>
           <CounterButton
-            onClick={() => router.push('/cart')}
+            onClick={() => router.push("/cart")}
             count={cartBooksCount}
           >
             <ShoppingCart style={{ width: 24, height: 24 }} />
