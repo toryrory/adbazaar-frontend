@@ -6,7 +6,8 @@ import { Clip, Trash, Save } from '../../../../public/svg-account';
 import { EyeOpened, EyeClosed } from '../../../../public/svg-authorization';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Image from 'next/image';
+import { updateUser } from '@/redux/auth/operations';
+import { updatePassword } from '@/redux/account/operations';
 import {
   Form,
   FormPhoto,
@@ -31,43 +32,46 @@ import {
   DarkBox,
   Container,
 } from "./Settings.styled";
-import { selectSettings } from '@/redux/selectors';
+import { selectSettings, selectUserAvatar } from "@/redux/selectors";
 import { Img32Girl } from '../../../../public/png';
 
 export default function Settings() {
   const dispatch = useDispatch();
-  const settings = useSelector(selectSettings);
+  // const settings = useSelector(selectSettings);
+  const userAvatar = useSelector(selectUserAvatar); //selectUserAvatar
   const [passwordShown, setPasswordShown] = useState(false);
   const [photo, setPhoto] = useState(null);
-  const [state, setState] = useState(settings);
+  const [state, setState] = useState(userAvatar);
 
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
   };
 
   const handleChangePhoto = (event) => {
-    setState({avatar: null})
+    setState(null)
     setPhoto(window.URL.createObjectURL(event.target.files[0]));
     // console.log(event.target.files[0]);
     // console.log(window.URL.createObjectURL(event.target.files[0]));
-    
+   
   };
   const handleSubmitPhoto = (event) => {
 
     const formFile = new FormData();
-    formFile.append("avatar", photo); // "avatar" это свойство картинки в БД на бекенде, нужно узнать как будет называться это поле.
-console.log(photo);
+    formFile.append("image_url", photo); // "avatar" это свойство картинки в БД на бекенде, нужно узнать как будет называться это поле.
+
     event.preventDefault();
-    // dispatch(changePhoto(photo)); //диспачить нужно будет formFile
-    // console.log(formFile);
+    dispatch(updateUser(formFile)); //диспачить нужно будет formFile
+   
     toast.success("You updated your photo");
     setPhoto("");
   };
 
   const onSubmit = ({ password, newPassword }, actions) => {
-    // dispatch(changePassword({ password, newPassword}));
-    console.log(password, newPassword);
-    toast.success('You updated your password');
+    const passwordData = { cur_pass: password, new_pass: newPassword };
+    console.log(passwordData);
+    dispatch(updatePassword(passwordData));
+    toast.success("You updated your password");
+
     actions.resetForm();
   };
 
@@ -91,26 +95,9 @@ console.log(photo);
       <FormPhoto onSubmit={handleSubmitPhoto}>
         <Title>Change Photo</Title>
         <PhotoContainer>
-          {/* {photo ? (
-            <img
-              src={photo}
-              width={40}
-              height={40}
-              alt="user avatar"
-              style={{ marginRight: 24 }}
-            />
-          ) : (
-            <Image
-              src="/png/user-girl-png.png"
-              width={40}
-              height={40}
-              alt="user avatar"
-              style={{ marginRight: 24 }}
-            />
-          )} */}
           <PhotoBox><Circle>
           <StyledImg
-            src={state.avatar ? state.avatar : photo || Img32Girl} 
+            src={state ? state : photo || Img32Girl} 
             width={40}
             height={40}
             alt='user avatar'
@@ -141,7 +128,7 @@ console.log(photo);
               gap: 24,
             }}
           >
-            <PhotoPath>{photo}</PhotoPath>
+            {/* <PhotoPath>{photo}</PhotoPath> */}
             <SavePhotoButton type='submit'>
               Save
               <Save style={{ width: 24, height: 24 }} />

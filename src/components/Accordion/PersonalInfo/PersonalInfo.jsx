@@ -50,10 +50,12 @@ export default function PersonalInfo() {
     onSubmit: (values) => {
       toast.success("Info saved");
       setReadOnly(true);
-      values.socials = [values.socials.first, values.socials.second];
+      values.socials = [
+        values.socials.first || "",
+        values.socials.second || "",
+      ];
       alert(JSON.stringify(values, null, 2));
-      dispatch(updateUser({full_name: "Test name verif"}));
-      //диспатчить dispatch(updateUser(values))
+      dispatch(updateUser(values));
     },
   });
 
@@ -75,7 +77,7 @@ export default function PersonalInfo() {
           <Input
             name='full_name'
             type='text'
-            value={values.name || ""}
+            value={values.full_name || ""}
             onChange={handleChange}
             readOnly={readOnly}
           />
@@ -125,7 +127,7 @@ export default function PersonalInfo() {
           <InputLib
             name='birth_date'
             type='text'
-            value={values.birthday || ""}
+            value={values.birth_date || ""}
             onChange={handleChange}
             readOnly={readOnly}
             mask='99/99/9999'

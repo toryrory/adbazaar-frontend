@@ -22,8 +22,24 @@ export const addBook = createAsyncThunk(
     const userId = state.auth.user.id;
 
     try {
-      const response = await axios.patch(`/users/${userId}/books`, credentials);
-      console.log("updateUser:", state);
+      const response = await axios.post(`/users/${userId}/books`, credentials);
+      console.log("addBook:", state);
+      console.log(response.data);
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+export const updatePassword = createAsyncThunk(
+  "account/updatePassword",
+  async (credentials, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const userId = state.auth.user.id;
+
+    try {
+      const response = await axios.patch(`/users/${userId}/password`, credentials);
+      console.log("updatePassword:", state);
       console.log(response.data);
       return response.data;
     } catch (e) {

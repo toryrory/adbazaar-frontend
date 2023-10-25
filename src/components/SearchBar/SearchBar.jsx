@@ -34,12 +34,13 @@ export default function SearchBar({ queryId, style }) {
   }, [searchResult, dispatch]);
 
   const searchFilter = (inputText, books) => {
+    console.log(books);
     const filtredBooks = books.filter(
-      ({ name, author, genre, publisher }) =>
+      ({ name, author, genre, type }) =>
         name.toLowerCase().includes(inputText.toLowerCase()) ||
         author.toLowerCase().includes(inputText.toLowerCase()) ||
         genre.toLowerCase().includes(inputText.toLowerCase()) ||
-        publisher.toLowerCase().includes(inputText.toLowerCase())
+        type.toLowerCase().includes(inputText.toLowerCase())
     );
     filtredBooks.length === 0
       ? setSearchResult(null)

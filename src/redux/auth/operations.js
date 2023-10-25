@@ -156,9 +156,6 @@ export const fetchCurrentUser = createAsyncThunk(
       return;
     } else {
       token.set(currentToken);
-
-    console.log(state.auth.token);
-    console.log(state.auth.refreshToken);
       try {
         const response = await axios.get(`/users/token`);
         console.log(`fetch current user:`, response.data);
