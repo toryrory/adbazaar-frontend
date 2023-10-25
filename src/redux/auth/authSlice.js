@@ -33,6 +33,7 @@ const authSlice = createSlice({
       id: null,
       name: null,
       email: null,
+      avatar: null,
       phone: '',
       birthday: '00/00/0000',
       socials: [],
@@ -194,7 +195,14 @@ const authSlice = createSlice({
       .addCase(updateUser.pending, handlePending)
       .addCase(updateUser.fulfilled, (state, action) => {
         state.user.birthday = action.payload.birt_date;
-      });
+        state.user.name = action.payload.full_name;
+        state.user.phone = action.payload.phone;
+        state.user.email = action.payload.email;
+        state.user.socials = action.payload.socials;
+        state.user.avatar = action.payload.image_url;
+        
+      })
+      .addCase(updateUser.rejected, handleRejected);
   },
 });
 

@@ -36,23 +36,23 @@ export default function PersonalInfo() {
     //добавить подсветку курсора или фокус на формах типо того или нотификашку что можно редактировать формы
   };
 
-  const { id, name, email, phone, birthday, socials } = userData;
+  const {name, email, phone, birthday, socials } = userData;
 
   const { values, handleChange, handleSubmit } = useFormik({
     initialValues: {
-      id,
-      name,
+      full_name: name,
       email,
       phone,
-      birthday,
+      birth_date: birthday,
       socials: {first: socials[0], second: socials[1]},
     },
     enableReinitialize: true,
     onSubmit: (values) => {
       toast.success("Info saved");
-      alert(JSON.stringify(values, null, 2));
       setReadOnly(true);
-      dispatch(updateUser({birt_date: "20/10/2000"}))
+      values.socials = [values.socials.first, values.socials.second];
+      alert(JSON.stringify(values, null, 2));
+      dispatch(updateUser({full_name: "Test name verif"}));
       //диспатчить dispatch(updateUser(values))
     },
   });
@@ -73,7 +73,7 @@ export default function PersonalInfo() {
         <Label>
           Full Name
           <Input
-            name='name'
+            name='full_name'
             type='text'
             value={values.name || ""}
             onChange={handleChange}
@@ -123,7 +123,7 @@ export default function PersonalInfo() {
         <Label>
           Date of Birth
           <InputLib
-            name='birthday'
+            name='birth_date'
             type='text'
             value={values.birthday || ""}
             onChange={handleChange}
