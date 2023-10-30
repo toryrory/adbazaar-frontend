@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';
 import {
   authRegister,
   authLogin,
@@ -27,15 +27,15 @@ const handleRejected = (state, action) => {
 };
 
 const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState: {
     user: {
       id: null,
       name: null,
       email: null,
       avatar: null,
-      phone: '',
-      birthday: '00/00/0000',
+      phone: "",
+      birthday: "00/00/0000",
       socials: [],
       isVerified: false,
       orders: [],
@@ -50,7 +50,15 @@ const authSlice = createSlice({
     error: null,
     type: null,
   },
-  reducers: {},
+  reducers: {
+    changeBookCheckBox(state, action) {
+       const book = state.user.books.find(
+         (book) => book.id === action.payload //.id
+       );
+       book.checked = !book.checked;
+     
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(authRegister.pending, handlePending)
@@ -129,6 +137,13 @@ const authSlice = createSlice({
       .addCase(fetchCurrentUser.rejected, handleRejected)
       .addCase(fetchCurrentUser.pending, handlePending)
       .addCase(fetchCurrentUser.fulfilled, (state, action) => {
+       
+        if ( action.payload.books.length > 0) {
+          action.payload.books = action.payload.books.map((book) => ({
+            ...book,
+            checked: false,
+          }));
+        }
         state.user = {
           ...state.user,
           id: action.payload.id,
@@ -200,10 +215,9 @@ const authSlice = createSlice({
         state.user.email = action.payload.email;
         state.user.socials = action.payload.socials;
         state.user.avatar = action.payload.image_url;
-        
       })
       .addCase(updateUser.rejected, handleRejected);
   },
 });
-
+export const { changeBookCheckBox } = authSlice.actions;
 export const authReducer = authSlice.reducer;
