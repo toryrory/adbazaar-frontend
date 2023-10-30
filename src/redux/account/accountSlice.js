@@ -2,6 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 // import { TestAvatar } from "../../public/png";
 // import { nanoid } from "@reduxjs/toolkit";
 import { notifications } from '@/data/notifications';
+import { authReducer } from '../auth/authSlice';
+import { store } from '../store';
 
 const accountSlice = createSlice({
   name: 'account',
@@ -11,22 +13,57 @@ const accountSlice = createSlice({
     },
     // favorites: [],
     cart: [],
-
-    // addBook: {
-    //   title: '',
-    //   author: '',
-    //   language: '',
-    //   format: '',
-    //   genre: '',
-    //   publisher: '',
-    //   price: '',
-    //   photos: [],
-    //   description: '',
-    // },
-    // comments: [],
     notifications: notifications,
+   
   },
   reducers: {
+
+
+    changeCheckBox(state, action) {
+      // const { checkboxType } = action.payload;
+      // if (checkboxType === 'notif') {
+        const notification = state.notifications.find(
+        (notification) => notification.id === action.payload
+      );
+      notification.checked = !notification.checked;
+      // } else if (checkboxType === 'sellerBook') {
+        
+      // }
+      
+    },
+    markAsRead(state, action) {
+      state.notifications = state.notifications.map((notif) => ({
+        ...notif,
+        isRead: notif.checked ? true : notif.isRead,
+      }));
+    },
+    deleteNotification(state, action) {
+      state.notifications = state.notifications.filter(
+        (notif) => notif.checked === false
+      );
+    },
+    clearCart(state, action) {
+      state.cart = [];
+    },
+  },
+});
+// сделать екстраредюсер на получение данных с формы
+
+export const {
+  // addFavorites,
+  // deleteFavorites,
+  // addComments,
+  // addCart,
+  // deleteCart,
+  // minusCountCart,
+  changeCheckBox,
+  markAsRead,
+  deleteNotification,
+  clearCart,
+} = accountSlice.actions;
+export const accountReducer = accountSlice.reducer;
+
+
     // addFavorites: {
     //   reducer(state, action) {
     //     if (state.favorites.find((book) => book.id === action.payload.id)) {
@@ -105,41 +142,3 @@ const accountSlice = createSlice({
     //   const repeatBook = state.cart.find((book) => book.id === action.payload);
     //   repeatBook.count -= 1;
     // },
-
-    changeCheckBox(state, action) {
-      const notification = state.notifications.find(
-        (notification) => notification.id === action.payload
-      );
-      notification.checked = !notification.checked;
-    },
-    markAsRead(state, action) {
-      state.notifications = state.notifications.map((notif) => ({
-        ...notif,
-        isRead: notif.checked ? true : notif.isRead,
-      }));
-    },
-    deleteNotification(state, action) {
-      state.notifications = state.notifications.filter(
-        (notif) => notif.checked === false
-      );
-    },
-    clearCart(state, action) {
-      state.cart = [];
-    },
-  },
-});
-// сделать екстраредюсер на получение данных с формы
-
-export const {
-  // addFavorites,
-  // deleteFavorites,
-  // addComments,
-  // addCart,
-  // deleteCart,
-  // minusCountCart,
-  changeCheckBox,
-  markAsRead,
-  deleteNotification,
-  clearCart,
-} = accountSlice.actions;
-export const accountReducer = accountSlice.reducer;

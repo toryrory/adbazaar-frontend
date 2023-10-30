@@ -19,6 +19,7 @@
   --hero-rose: #fdacff;
   --dark-text: #23314f;
   --required-color: #e83b50;
+  --red: #F97484;
   --green: #22bc4d;
   --black: #000;
 }
@@ -72,6 +73,8 @@ img {
 }
 button {
   cursor: pointer;
+  border: none;
+
 }
 
 /* :root {

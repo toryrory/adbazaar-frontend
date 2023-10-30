@@ -5,6 +5,7 @@ export const selectUserName = (state) => state.auth.user.name;
 export const selectUserEmail = (state) => state.auth.user.email;
 export const selectUserId = (state) => state.auth.user.id;
 export const selectUserAvatar = (state) => state.auth.user.avatar;
+export const selectUserBooks = (state) => state.auth.user.books;
 export const selectAuthIsLoading = (state) => state.auth.isLoading;
 export const selectAuthError = (state) => state.auth.error;
 export const selectAuthType = (state) => state.auth.type;

@@ -1,16 +1,12 @@
 import styled from "styled-components";
-import Image from "next/image";
+
 import {
   TextBookSvg,
   EBookSvg,
   AudioBookSvg,
 } from "../../../../../public/svg-index";
 import {
-  Select,
   MenuItem,
-  FormControl,
-  ListSubheader,
-  Popover,
 } from "@mui/material";
 
 export const LanguageBox = styled.div`
