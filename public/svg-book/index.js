@@ -34,3 +34,5 @@ export { default as Promo } from './promo.svg';
 export { default as Wallet } from './wallet.svg';
 export { default as Comment } from './comment.svg';
 export { default as Rocket } from './rocket.svg';
+export { default as FilterSvg } from './filter.svg';
+export { default as SortSvg } from './sort.svg';
