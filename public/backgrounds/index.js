@@ -13,3 +13,4 @@ export { default as BgOrnamentStripe } from './bg-ornament-stripe.png';
 export { default as BgAdbazaar } from './AdBazaar.png';
 export { default as FullOrnament } from './full-ornament.png';
 export { default as FullOrnamentClipped } from './ornament-cliped-390х105.png'; //use this 
+export { default as Bg404Frame } from './bg-404-Frames.png'; //use this 

@@ -5,9 +5,7 @@ import {
   EBookSvg,
   AudioBookSvg,
 } from "../../../../../public/svg-index";
-import {
-  MenuItem,
-} from "@mui/material";
+import { MenuItem } from "@mui/material";
 
 export const LanguageBox = styled.div`
   display: flex;
@@ -160,9 +158,9 @@ export const GenreList = styled.ul`
   box-shadow: -8px 8px 8px 0px rgba(0, 0, 0, 0.15);
   padding: 0px;
 `;
-export const GenreItem = styled(MenuItem)`
+export const GenreItem = styled.li`
   padding: ${({ $menutype }) =>
-    $menutype === "submenu" ? "0px 48px" : "0px 24px"};
+    $menutype === "submenu" ? "7px 48px" : "7px 24px"};
   border-bottom: 0.3px solid var(--light-grey);
   color: var(--white-text);
   font-size: 16px;

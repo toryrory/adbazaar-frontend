@@ -9,6 +9,7 @@ export const HeaderContainer = styled.div`
   padding: 0 16px;
   align-items: center;
   justify-content: space-between;
+  box-shadow: 0px 8px 4px 0px rgba(19, 27, 44, 0.25);
 `;
 
 export const ButtonContainer = styled.div`
