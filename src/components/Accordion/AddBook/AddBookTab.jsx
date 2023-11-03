@@ -13,10 +13,10 @@ export default function AddBook() {
   const [focused, setFocused] = useState(true)
  
   const changeTabValue = (e, newValue) => {
+   
     setTabValue(newValue);
     setFocused(!focused);
   }
-  console.log(books.slice(45));
   return (
     <>
       <TabContext value={tabValue}>

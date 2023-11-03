@@ -20,7 +20,8 @@ export const Menu = styled.div`
   background-color: var(--main-background);
   padding: 24px 0 0;
   position: relative;
-  overflow: hidden;
+  /* overflow: hidden; */
+  overflow-y: scroll;
 `;
 
 export const MenuHeader = styled.div`

@@ -11,7 +11,7 @@ import {
   ActionBtnsBox,
 } from "./UserBooksList.styled";
 
-export default function UserBooksList({ books }) {
+export default function UserBooksList({ books}) {
   const sellerId = useSelector(selectUserId);
   const sellerBooks = useSelector(selectUserBooks); //sellerBooks.map
 
@@ -39,7 +39,7 @@ export default function UserBooksList({ books }) {
       </LoadMoreBtn>
       <Text>Select book to perform changes</Text>
       <ActionBtnsBox>
-        <BtnAction>
+        <BtnAction type='button'>
           <Edit style={{ width: "24px", height: "24px" }} />
           Edit
         </BtnAction>
