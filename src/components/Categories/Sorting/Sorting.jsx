@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
+
+import Filter from '../Filter/Filter';
 import {
   ButtonContainer,
-  Button,
+  FilterButton,
   SortButton,
   SortingForm,
   SortingLabel,
@@ -9,9 +11,11 @@ import {
 } from './Sorting.styled';
 import { FilterSvg, SortSvg } from '../../../../public/svg-book';
 
-export default function Sorting({ books, onSortChange }) {
+export default function Sorting({ books, onSortChange, setBooks }) {
   const [showSorting, setShowSorting] = useState(false);
   const [sorting, setSorting] = useState('popularity');
+  const [showFilter, setShowFilter] = useState(false);
+  // const [filter, setFilter] = useState('popularity');
 
   useEffect(() => {
     if (books) {
@@ -36,14 +40,25 @@ export default function Sorting({ books, onSortChange }) {
     setShowSorting(true);
   };
 
+  const onFilterOpen = () => {
+    setShowFilter(true);
+  };
+
+  const onFilterClose = () => {
+    setShowFilter(false);
+  };
+
   return (
     <ButtonContainer>
-      <Button type="button">
-        <FilterSvg />
+      <FilterButton type="button" onClick={onFilterOpen}>
+        <FilterSvg style={{ width: 20, height: 20 }} />
         Filters
-      </Button>
+      </FilterButton>
+      {showFilter && (
+        <Filter onClose={onFilterClose} books={books} setBooks={setBooks} />
+      )}
       <SortButton type="button" onClick={onSortOpen}>
-        <SortSvg />
+        <SortSvg style={{ width: 20, height: 20 }} />
         Sorting
         {showSorting && (
           <SortingForm>

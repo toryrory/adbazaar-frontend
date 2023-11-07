@@ -6,18 +6,22 @@ export const ButtonContainer = styled.div`
   justify-content: space-between;
 `;
 
-export const Button = styled.button`
+export const FilterButton = styled.button`
   position: relative;
   display: flex;
+  margin-left: -16px;
   padding: 5px 10px;
   align-items: center;
   justify-content: center;
   gap: 4px;
-  border-radius: 10px;
-  border: 1px solid rgba(59, 120, 232, 0.2);
+  border-radius: 0 10px 10px 0;
+  border-right: 1px solid rgba(59, 120, 232, 0.2);
+  border-top: 1px solid rgba(59, 120, 232, 0.2);
+  border-bottom: 1px solid rgba(59, 120, 232, 0.2);
   background: var(--very-dark-grey);
   font-size: 12px;
   color: var(--white-text);
+  width: 150px;
 `;
 
 export const SortButton = styled.button`
