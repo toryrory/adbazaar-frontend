@@ -1,7 +1,6 @@
-import styled from "styled-components";
-import Image from "next/image";
-import { rotation } from "@/styles/index.styled";
-
+import styled from 'styled-components';
+import Image from 'next/image';
+import { rotation } from '@/styles/index.styled';
 
 export const Container = styled.div`
   background: var(--dark-gradient);
@@ -18,12 +17,13 @@ export const List = styled.div`
 
 export const OrnamentImg = styled(Image)`
   /* padding: 48px 0 80px; */
-  padding: ${props => props.distance === 'category' ? '48px 0 80px' : '19px 0 64px'};
+  padding: ${(props) =>
+    props.distance === 'category' ? '48px 0 80px' : '19px 0 64px'};
 `;
 
 export const NewestContainer = styled.div`
   padding: 40px 16px 48px;
- position: relative;
+  position: relative;
 `;
 
 export const NewestStar = styled(Image)`
@@ -77,5 +77,20 @@ export const BtnSeeMore = styled.button`
   border: none;
   margin-left: auto;
   color: var(--light-grey);
+  font-size: 13px;
+`;
+
+export const BtnLoadMore = styled.button`
+  display: flex;
+  flex-direction: column;
+  padding: 16px 0px;
+  align-items: center;
+  gap: 8px;
+  background-color: transparent;
+  border: none;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 16px;
+  color: var(--light-text);
   font-size: 13px;
 `;
