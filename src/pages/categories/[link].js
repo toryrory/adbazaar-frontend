@@ -39,6 +39,13 @@ export default function CategoriesLink() {
     }
   }, [link, dispatch]); // eslint-disable-line
 
+  useEffect(() => {
+    if (foundedBooks) {
+      const newBooksCount = foundedBooks.length;
+      setBooksCount(newBooksCount);
+    }
+  }, [foundedBooks]);
+
   const onSortChange = (newBooks, value) => {
     setSortedBooks(newBooks);
     setSorting(value);

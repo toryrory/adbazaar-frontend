@@ -37,6 +37,13 @@ export default function GenresLink() {
     setBooksCount(newBooksCount);
   }, [link]); // eslint-disable-line
 
+  useEffect(() => {
+    if (foundedBooks) {
+      const newBooksCount = foundedBooks.length;
+      setBooksCount(newBooksCount);
+    }
+  }, [foundedBooks]);
+
   const onSortChange = (newBooks, value) => {
     setSortedBooks(newBooks);
     setSorting(value);
