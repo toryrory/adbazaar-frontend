@@ -263,8 +263,8 @@ export const PhotosBox = styled.div`
   flex-wrap: wrap;
 `;
 export const PhotoItemBox = styled.div`
-  width: 78px;
-  height: 90px;
+  max-width: 78px;
+  max-height: 90px;
   flex-shrink: 0;
   border-radius: 16px;
   border: 0.5px solid var(--brand-color);

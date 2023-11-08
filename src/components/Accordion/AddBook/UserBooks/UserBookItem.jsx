@@ -31,11 +31,15 @@ export default function UserBookItem({
   price,
   author,
   photo,
-  //   checked,
+  checked,
 }) {
+
   const dispatch = useDispatch();
   const [btnActive, setBtnActive] = useState(true);
-    const handleBookStatus = () => {
+  const handleBookStatus = () => {
+    if (!checked) {
+        return
+      }
         setBtnActive(prevState => !prevState)
     }
 
@@ -47,15 +51,10 @@ export default function UserBookItem({
           <CheckboxChecked style={{ width: "24px", height: "24px" }} />
         }
         onClick={() => dispatch(changeBookCheckBox(id))}
-        //   checked={checked}
+        checked={checked}
         sx={{ marginTop: "auto", marginBottom: "auto" }}
       />
-      <StyledImg
-        src={BannerBestsellers}
-        alt='book for sell photo'
-        width={60}
-        height={80}
-      />
+      <StyledImg src={photo} alt='book for sell photo' width={60} height={80} />
       <BookInfoBox>
         <RatingBox>
           <Rating
@@ -74,10 +73,12 @@ export default function UserBookItem({
         <BookText $text='title'>{title}</BookText>
         <BookText $text='author'>{author}</BookText>
       </BookInfoBox>
-      <BookStatusBox>
-        <StatusBtn $active={btnActive} onClick={handleBookStatus}>{btnActive ? "active" : "no active"}</StatusBtn>
+      <BookStatusBox >
+        <StatusBtn $active={btnActive} onClick={handleBookStatus}>
+          {btnActive ? "active" : "no active"}
+        </StatusBtn>
         <Price>
-          <span>$</span>12.00
+          <span>$</span>{price}
         </Price>
       </BookStatusBox>
     </BookAdContainer>

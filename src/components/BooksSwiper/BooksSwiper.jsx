@@ -7,7 +7,7 @@ import { nanoid } from '@reduxjs/toolkit';
 
 export default function BooksSwiper({ id, banner }) {
   const books = useSelector(selectBooks);
-  console.log(books);
+  
   const fourBooks = books.slice(0, 4);
 
   switch (id) {

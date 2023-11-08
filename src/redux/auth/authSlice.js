@@ -15,6 +15,8 @@ import {
   addCart,
   deleteCart,
   updateUser,
+  updateUserAvatar,
+  deleteUserBook,
 } from './operations';
 
 const handlePending = (state) => {
@@ -52,6 +54,7 @@ const authSlice = createSlice({
   },
   reducers: {
     changeBookCheckBox(state, action) {
+      
        const book = state.user.books.find(
          (book) => book.id === action.payload //.id
        );
@@ -137,8 +140,7 @@ const authSlice = createSlice({
       .addCase(fetchCurrentUser.rejected, handleRejected)
       .addCase(fetchCurrentUser.pending, handlePending)
       .addCase(fetchCurrentUser.fulfilled, (state, action) => {
-       
-        if ( action.payload.books.length > 0) {
+        if (action.payload.books.length > 0) {
           action.payload.books = action.payload.books.map((book) => ({
             ...book,
             checked: false,
@@ -157,6 +159,7 @@ const authSlice = createSlice({
           favorites: action.payload.favorites,
           comments: action.payload.comments,
           books: action.payload.books,
+          avatar: action.payload.image_url,
         };
         state.isLoggedIn = true;
         state.isLoading = false;
@@ -214,9 +217,26 @@ const authSlice = createSlice({
         state.user.phone = action.payload.phone;
         state.user.email = action.payload.email;
         state.user.socials = action.payload.socials;
+        // state.user.avatar = action.payload.image_url;
+      })
+      .addCase(updateUser.rejected, handleRejected)
+      .addCase(updateUserAvatar.pending, handlePending)
+      .addCase(updateUserAvatar.fulfilled, (state, action) => {
+        console.log(action.payload);
         state.user.avatar = action.payload.image_url;
       })
-      .addCase(updateUser.rejected, handleRejected);
+      .addCase(updateUserAvatar.rejected, handleRejected)
+      .addCase(deleteUserBook.pending, handlePending)
+      .addCase(deleteUserBook.fulfilled, (state, action) => {
+        const index = state.user.books.findIndex(
+          (book) => book.checked === true
+        );
+console.log(index);
+        state.user.books.splice(index, 1);
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(deleteUserBook.rejected, handleRejected);
   },
 });
 export const { changeBookCheckBox } = authSlice.actions;
