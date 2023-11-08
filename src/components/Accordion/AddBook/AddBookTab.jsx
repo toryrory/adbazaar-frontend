@@ -11,7 +11,7 @@ export default function AddBook() {
   const userBooks = useSelector(selectUserBooks);
   const [tabValue, setTabValue] = useState('2');
   const [focused, setFocused] = useState(true)
- 
+
   const changeTabValue = (e, newValue) => {
    
     setTabValue(newValue);
@@ -29,8 +29,8 @@ export default function AddBook() {
           <TabBtn label='Add book' value='2' focused={`${focused}`} />
         </TabList>
         <TabPanel value='1' sx={{ padding: "16px 16px 48px" }}>
-          <UserBooksList books={books.slice(45)} />
-          {/* <UserBooksList books={userBooks} /> */}
+          {/* <UserBooksList books={books.slice(45)} /> */}
+          <UserBooksList books={userBooks} />
         </TabPanel>
         <TabPanel value='2' sx={{ padding: "18px 24px 47px" }}>
           <Text>Book information</Text>

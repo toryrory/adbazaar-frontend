@@ -6,7 +6,7 @@ import { Clip, Trash, Save } from '../../../../public/svg-account';
 import { EyeOpened, EyeClosed } from '../../../../public/svg-authorization';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { updateUser } from '@/redux/auth/operations';
+import { updateUser, updateUserAvatar } from '@/redux/auth/operations';
 import { updatePassword } from '@/redux/account/operations';
 import {
   Form,
@@ -41,26 +41,32 @@ export default function Settings() {
   const userAvatar = useSelector(selectUserAvatar); //selectUserAvatar
   const [passwordShown, setPasswordShown] = useState(false);
   const [photo, setPhoto] = useState(null);
-  const [state, setState] = useState(userAvatar);
+  const [photoRaw, setPhotoRaw] = useState(null);
+  // const [userAvatar, setUserAvatar] = useState(avatar);
 
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
   };
 
   const handleChangePhoto = (event) => {
-    setState(null)
+    // setState(null)
     setPhoto(window.URL.createObjectURL(event.target.files[0]));
-    // console.log(event.target.files[0]);
+    setPhotoRaw(event.target.files[0]);
+    console.log(event.target.files[0]);
     // console.log(window.URL.createObjectURL(event.target.files[0]));
    
   };
   const handleSubmitPhoto = (event) => {
+event.preventDefault();
+    let formFile = new FormData();
 
-    const formFile = new FormData();
-    formFile.append("image_url", photo); // "avatar" это свойство картинки в БД на бекенде, нужно узнать как будет называться это поле.
+    formFile.append("file", photoRaw); // file
+    // formFile.append("image_url", photo); // blob
 
-    event.preventDefault();
-    dispatch(updateUser(formFile)); //диспачить нужно будет formFile
+    // let reader = new FileReader();
+    // console.log(reader.readAsArrayBuffer(photo))
+    
+    dispatch(updateUserAvatar(formFile)); 
    
     toast.success("You updated your photo");
     setPhoto("");
@@ -75,8 +81,14 @@ export default function Settings() {
     actions.resetForm();
   };
 
-  const onCLearInput = () => {
-    setPhoto('');
+  const onCLearInput = () => { //includes png?
+    const baseAvatarFile = new File([Img32Girl.src], "Img32Girl.png", {
+      type: "image/png",
+    });
+
+    let formFile = new FormData();
+    formFile.append("file", baseAvatarFile);
+    dispatch(updateUserAvatar(formFile)); 
   };
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
@@ -95,14 +107,35 @@ export default function Settings() {
       <FormPhoto onSubmit={handleSubmitPhoto}>
         <Title>Change Photo</Title>
         <PhotoContainer>
-          <PhotoBox><Circle>
-          <StyledImg
-            src={state ? state : photo || Img32Girl} 
-            width={40}
-            height={40}
-            alt='user avatar'
-          /></Circle></PhotoBox>
-          
+          <PhotoBox>
+            <Circle>
+              {userAvatar && !photo ? (
+                <StyledImg
+                  // src={state ? state : photo || Img32Girl}
+                  src={userAvatar}
+                  width={40}
+                  height={40}
+                  alt='user avatar'
+                />
+              ) : (
+                <StyledImg
+                  // src={state ? state : photo || Img32Girl}
+                  src={photo || Img32Girl}
+                  width={40}
+                  height={40}
+                  alt='user avatar'
+                />
+              )}
+              {/* <StyledImg
+                // src={state ? state : photo || Img32Girl}
+                src={userAvatar ? userAvatar : photo || Img32Girl}
+                width={40}
+                height={40}
+                alt='user avatar'
+              /> */}
+            </Circle>
+          </PhotoBox>
+
           <PhotoLabel>
             <Clip style={{ width: 20, height: 20 }} />
             Upload a photo
@@ -128,7 +161,6 @@ export default function Settings() {
               gap: 24,
             }}
           >
-            {/* <PhotoPath>{photo}</PhotoPath> */}
             <SavePhotoButton type='submit'>
               Save
               <Save style={{ width: 24, height: 24 }} />

@@ -261,15 +261,53 @@ export const updateUser = createAsyncThunk(
   async (credentials, thunkAPI) => {
     const state = thunkAPI.getState();
     const userId = state.auth.user.id;
-    
-      try {
-        const response = await axios.patch(`/users/${userId}`, credentials);
-        console.log("updateUser:", state);
-        console.log(response.data);
-        return response.data;
-      } catch (e) {
-        return thunkAPI.rejectWithValue(e.message);
-      }
-    
+
+    try {
+      const response = await axios.patch(`/users/${userId}`, credentials);
+      console.log("updateUser:", state);
+      console.log(response.data);
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+export const updateUserAvatar = createAsyncThunk(
+  "auth/updateUserAvatar",
+  async (credentials, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const userId = state.auth.user.id;
+const headers = {
+  "Content-Type": "multipart/form-data",
+};
+    try {
+      const response = await axios.patch(
+        `/users/${userId}/avatar`,
+        credentials, {headers:headers}
+      );
+      console.log("updateUserAvatar:", state);
+      console.log(response.data);
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
+export const deleteUserBook = createAsyncThunk(
+  "auth/deleteUserBook",
+  async (bookId, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const UserId = state.auth.user.id;
+
+    try {
+      const response = await axios.delete(
+        `/users/${UserId}/books/${bookId}`
+      );
+      console.log(`deleteCart:`, response.data);
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
   }
 );

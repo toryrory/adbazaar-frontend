@@ -78,11 +78,11 @@ export default function AddBookForm() {
     audio: false,
   });
   const [anchorEl, setAnchorEl] = useState({ language: null, genre: null });
-  // const [photos, setPhotos] = useState();
+  const [photoFile, setPhotoFile] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    
+
     if (name === "language") {
       switch (value) {
         case "En":
@@ -169,25 +169,38 @@ export default function AddBookForm() {
       ...formData,
       photos: [
         ...formData.photos,
-        {id, [name]: window.URL.createObjectURL(files[0])},
+        { id, [name]: window.URL.createObjectURL(files[0]) },
       ],
     });
+    setPhotoFile(files[0]);
   };
   const removePhotos = (e) => {
     setFormData({
       ...formData,
       photos: [],
     });
-  }
+  };
 
   const resetForm = () => {
     setFormData(FormDataInitValues);
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { title, author, language, genre, description, photos, format, publisher, price, quantity } = formData;
-    console.log(photos[0]);
-    const filteredFormData = {
+    const {
+      title,
+      author,
+      language,
+      genre,
+      description,
+      photos,
+      format,
+      publisher,
+      price,
+      quantity,
+    } = formData;
+
+    const newBook = {
       title,
       author,
       description,
@@ -197,47 +210,55 @@ export default function AddBookForm() {
       language,
       quantity,
       publishing_house: publisher,
-      image_path: photos[0] ? photos[0].photo1 : "",
     };
-    alert(JSON.stringify(filteredFormData, null, 2));
-    dispatch(addBook(filteredFormData));
+
+    // const photoBlob = photos[0] ? photos[0].photo1 : "";
+
+    let formDataImg = new FormData();
+    formDataImg.append("image", photoFile);
+    formDataImg.append(
+      "book",
+      new Blob([JSON.stringify(newBook)], {
+        type: "application/json",
+      })
+    );
+
+    // console.log(formDataImg.get("newBook"));
+
+    //  const filteredFormData = {
+    //    newBook: {
+    //      title,
+    //      author,
+    //      description,
+    //      format,
+    //      price,
+    //      genre,
+    //      language,
+    //      quantity,
+    //      publishing_house: publisher,
+    //    },
+    //    file: photoFile,
+    //  };
+    // console.log(filteredFormData);
+
+    // alert(JSON.stringify(formDataImg.get("newBook"), null, 2));
+
+    dispatch(addBook(formDataImg));
+    // dispatch(
+    //   addBook({
+    //     book: JSON.stringify(newBook),
+    //     image: formDataImg.get("image"),
+    //   })); //file   image: formDataImg.get("file")
+    // dispatch(addBook({ newBook: { ...newBook }, file: photoBlob}));  //blob
+
+    // dispatch(addBook(formDataImg));
+
     // const formFile = new FormData();
     // console.log(formFile);
     // formFile.append("avatar", photo); // "avatar" это свойство картинки в БД на бекенде, нужно узнать как будет называться это поле.
 
     //dispatch(addBookData(formData)) photos:FormFile
   };
-  // const onSubmit = (values, actions) => {
-  //   alert(JSON.stringify(values, null, 2));
-  //   actions.resetForm();
-  // };
-
-  // const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-  //   useFormik({
-  //     initialValues: {
-  //       title: "",
-  //       // performed: '',
-  //       // state: '',
-  //       // confirm: '',
-  //       author: "",
-  //       language: "",
-  //       // ISBN: '',
-  //       format: "",
-  //       genre: "",
-  //       publisher: "",
-  //       // year: '',
-  //       // cover: '',
-  //       // length: '',
-  //       // weight: '',
-  //       // dimensions: '',
-  //       price: "",
-  //       isBargainAproppriate: false,
-  //       description: "",
-  //       // additional: '',
-  //     },
-  //     // validationSchema: schema,
-  //     onSubmit,
-  //   });
 
   return (
     <Formik>
@@ -492,10 +513,12 @@ export default function AddBookForm() {
                     borderRadius: "16px",
                     width: "78px",
                     minHeight: "89px",
+                    maxHeight: "90px",
                     border: "1px solid",
                   }}
                   width={78}
                   height={90}
+                  
                 />
               ) : (
                 <PhotoInputBox>
