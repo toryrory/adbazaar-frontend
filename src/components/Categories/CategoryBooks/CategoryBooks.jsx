@@ -1,3 +1,10 @@
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { selectBooks } from '@/redux/selectors';
+
+import Book from '../../Book/Book';
+import { Section } from '@/components/Subscribtion/Subscription.styled';
+
 import {
   Container,
   List,
@@ -9,28 +16,50 @@ import {
   BtnSeeMore,
   NewestStar,
   DarkBgNewest,
+  BtnLoadMore,
 } from './CategoryBooks.styled';
-import { Section } from '@/components/Subscribtion/Subscription.styled';
+
 import { FullOrnamentClipped } from '../../../../public/backgrounds';
-import Book from '../../Book/Book';
-import { ArrowRight } from '../../../../public/svg-book';
-import { useSelector } from 'react-redux';
-import { selectBooks } from '@/redux/selectors';
+import { ArrowRight, LoadMore } from '../../../../public/svg-book';
 import { BgFull } from '../../../../public/backgrounds';
 
 export default function CategoryBooks({ books, variant }) {
   const allBooks = useSelector(selectBooks);
   const fiveBooks = allBooks.slice(0, 5);
+  const countBooks = books.length;
+  const [countBooksToShow, setCountBooksToShow] = useState(8);
+  const [booksToShow, setBooksToShow] = useState(null);
+
+  useEffect(() => {
+    setCountBooksToShow(8);
+  }, [books]);
+
+  useEffect(() => {
+    setBooksToShow(books.slice(0, countBooksToShow));
+  }, [countBooksToShow, books]);
+
+  const handleLoadMore = () => {
+    setCountBooksToShow(countBooksToShow + 8);
+    setBooksToShow(books.slice(0, countBooksToShow));
+  };
 
   return (
     <Section>
       <Container>
-        <List>
-          {books.map((book) => {
-            return <Book book={book} key={book.id} variant={variant} />;
-          })}
-        </List>
+        {booksToShow && countBooksToShow && (
+          <List>
+            {booksToShow.map((book) => {
+              return <Book book={book} key={book.id} variant={variant} />;
+            })}
+          </List>
+        )}
       </Container>
+      {countBooksToShow < countBooks && (
+        <BtnLoadMore type="button" onClick={handleLoadMore}>
+          <LoadMore style={{ width: 24, height: 24 }} />
+          Load more
+        </BtnLoadMore>
+      )}
       <OrnamentImg
         src={FullOrnamentClipped}
         alt="ornament"

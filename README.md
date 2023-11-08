@@ -6,7 +6,8 @@ Backend part of our project: [Adbazaar Backend](https://github.com/MinoUni/adbaz
 
 ## 1. About the project
 
-The "AdBazaar" marketplace platform is a self-contained web application that serves as an online marketplace where users can buy and sell products, with a focus on books. The platform operates independently, providing users with the ability to create product listings, search for items, interact with sellers, and manage their profiles. While the primary focus is on paper books, the platform can be expanded to include other product categories in the future.
+The 'AdBazaar' project is dedicated to developing an MVP for a mobile app marketplace. The entry point was high-level requirements that were crystallized by the team and transferred into epics, user stories, and tasks. The project has a duration of 4 months and follows the Scrum methodology.
+The 'AdBazaar' platform is a self-contained mobile app serving as an online book marketplace where users can buy and sell products. It includes features like a search engine, sorting, user account management, favorites, pagination, book category filtering, and user profile management. While the primary focus is on paper books, the platform can be expanded to include other product categories in the future.
 
 ## 2. Technology stack
 

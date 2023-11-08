@@ -37,6 +37,13 @@ export default function GenresLink() {
     setBooksCount(newBooksCount);
   }, [link]); // eslint-disable-line
 
+  useEffect(() => {
+    if (foundedBooks) {
+      const newBooksCount = foundedBooks.length;
+      setBooksCount(newBooksCount);
+    }
+  }, [foundedBooks]);
+
   const onSortChange = (newBooks, value) => {
     setSortedBooks(newBooks);
     setSorting(value);
@@ -48,7 +55,11 @@ export default function GenresLink() {
         {currentGenre && <GenrePage currentGenre={currentGenre} />}
         {booksCount > 1 && <BooksCount>{booksCount} products</BooksCount>}
         {booksCount === 1 && <BooksCount>{booksCount} product</BooksCount>}
-        <Sorting books={foundedBooks} onSortChange={onSortChange} />
+        <Sorting
+          books={foundedBooks}
+          onSortChange={onSortChange}
+          setBooks={setFoundedBooks}
+        />
       </Container>
       {foundedBooks && !sortedBooks && sorting === 'popularity' && (
         <CategoryBooks books={foundedBooks} />
