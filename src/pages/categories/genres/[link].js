@@ -7,6 +7,7 @@ import { selectBooks } from '@/redux/selectors';
 
 import { genres } from '@/data/genres';
 import Layout from '@/components/Layout/Layout';
+import ToTopBtn from '@/components/BookSectionLayout/Buttons/ToTopBtn';
 import GenrePage from '@/components/Categories/GenrePage/GenrePage';
 import Sorting from '@/components/Categories/Sorting/Sorting';
 import CategoryBooks from '@/components/Categories/CategoryBooks/CategoryBooks';
@@ -73,6 +74,7 @@ export default function GenresLink() {
       {sortedBooks && sorting === 'rating' && (
         <CategoryBooks books={sortedBooks} />
       )}
+      <ToTopBtn style={{ marginTop: 0, marginBottom: 24, marginRight: 16 }} />
     </Layout>
   );
 }
