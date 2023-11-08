@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { fetchBooks } from '@/redux/books/operations';
 import { categories } from '@/data/categories';
 import { selectBooks } from '@/redux/selectors';
+import ToTopBtn from '@/components/BookSectionLayout/Buttons/ToTopBtn';
 
 import Layout from '@/components/Layout/Layout';
 import CategoryPage from '@/components/Categories/CategoryPage/CategoryPage';
@@ -78,6 +79,7 @@ export default function CategoriesLink() {
       {/* {foundedBooks && (
         <CategoryBooks books={foundedBooks} variant={'category'} />
       )} */}
+      <ToTopBtn style={{ marginTop: 0, marginBottom: 24, marginRight: 16 }} />
     </Layout>
   );
 }

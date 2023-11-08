@@ -14,6 +14,7 @@ import BookComments from '@/components/BookID/BookComments/BookComments';
 import SimilarBooks from '@/components/BookID/SimilarBooks/SimilarBooks';
 import GenreList from '@/components/BookID/GenreList/GenreList';
 import BookShipping from '@/components/BookID/BookShipping/BookShipping';
+import ToTopBtn from '@/components/BookSectionLayout/Buttons/ToTopBtn';
 
 import { Container, AccordionButton, BackButton } from '@/styles/bookId.styled';
 import { HeroStar } from '@/styles/index.styled';
@@ -138,6 +139,7 @@ export default function BooksId() {
           </>
         )}
         <ToastContainer theme="dark" />
+        <ToTopBtn style={{ marginTop: 0 }} />
       </Container>
     </Layout>
   );

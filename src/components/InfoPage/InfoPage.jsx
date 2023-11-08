@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import Layout from '../Layout/Layout';
 import SearchBar from '../SearchBar/SearchBar';
+import ToTopBtn from '../BookSectionLayout/Buttons/ToTopBtn';
 import {
   Container,
   BackButton,
@@ -35,6 +36,7 @@ export default function InfoPage({ children, title, subtitle }) {
           />
         </OrnamentContainer>
       </Container>
+      <ToTopBtn style={{ marginTop: 0, marginBottom: 24, marginRight: 16 }} />
     </Layout>
   );
 }

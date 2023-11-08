@@ -41,12 +41,12 @@ export default function Footer() {
             <li>
               <MenuLink href="/about">About</MenuLink>
             </li>
-            <li>
+            {/* <li>
               <MenuLink href="/">Promotions</MenuLink>
             </li>
             <li>
               <MenuLink href="/">Community</MenuLink>
-            </li>
+            </li> */}
             <li>
               <MenuLink href="/account">Personal Account</MenuLink>
             </li>
@@ -110,7 +110,7 @@ export default function Footer() {
             <Title>Support</Title>
             <List>
               <li>
-                <MenuLink href="/">Contacts</MenuLink>
+                <MenuLink href="/contacts">Contacts</MenuLink>
               </li>
               <li>
                 <MenuLink href="/payments">Payment & Shipping</MenuLink>
@@ -118,9 +118,9 @@ export default function Footer() {
               <li>
                 <MenuLink href="/terms">Terms & Conditions</MenuLink>
               </li>
-              <li>
+              {/* <li>
                 <MenuLink href="/">Order Status</MenuLink>
-              </li>
+              </li> */}
             </List>
           </div>
         </div>
