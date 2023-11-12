@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addBook } from "@/redux/account/operations";
+import { useDispatch, useSelector } from "react-redux";
+// import { addBook } from "@/redux/account/operations";
+import { addBook } from "@/redux/auth/operations";
 import Image from "next/image";
 import InputAddBookForm from "./InputAddBookForm/InputAddBookForm";
 import {
@@ -49,13 +50,15 @@ import {
 import { Formik } from "formik";
 import { InputHidden } from "../../Settings/Settings.styled";
 import { BannerBestsellers } from "../../../../../public/png/banners"; // for test
+import { toast } from "react-toastify";
+import { selectAuthError } from "@/redux/selectors";
 
 const FormDataInitValues = {
   title: null,
   author: null,
   language: "En",
   format: "Paper",
-  genre: "Fiction",
+  genre: "fiction",
   publisher: null,
   price: null,
   bargain: true,
@@ -66,6 +69,7 @@ const FormDataInitValues = {
 };
 export default function AddBookForm() {
   const dispatch = useDispatch();
+  const addBookError = useSelector(selectAuthError);
   const [formData, setFormData] = useState(FormDataInitValues);
   const [selectedLang, setSelectedLang] = useState({
     en: true,
@@ -133,20 +137,45 @@ export default function AddBookForm() {
   const openGenre = Boolean(anchorEl.genre);
   const id = openGenre || openLang ? "simple-popover" : undefined;
 
+  const convertGenreName = (value) => {
+    switch (value) {
+      case "fiction":
+        return "Fiction";
+      case "education":
+        return "Education";
+      case "body":
+        return "Body, Mind, Spirit";
+      case "children":
+        return "Children`s";
+      case "business":
+        return "Business";
+      case "arts":
+        return "Arts & Architecture";
+      case "biography":
+        return "Biography & Memoir";
+      case "computer":
+        return "Computer & Technology";
+
+      default:
+        break;
+    }
+  };
+
   const AddSelectInputText = (e) => {
     const { id } = e.currentTarget;
-    const { textContent } = e.target;
+    const { textContent } = e.target.attributes.value;
     if (id) {
       setFormData({ ...formData, language: textContent });
     } else {
       setFormData({ ...formData, genre: textContent });
+     
     }
 
     setTimeout(() => {
       closePopover();
     }, 150);
   };
-
+  
   const handlePrice = (e) => {
     const { value } = e.target;
     if (value.length > 7) {
@@ -193,7 +222,6 @@ export default function AddBookForm() {
       language,
       genre,
       description,
-      photos,
       format,
       publisher,
       price,
@@ -206,13 +234,11 @@ export default function AddBookForm() {
       description,
       format,
       price,
-      genre,
+      genre: genre.toLowerCase(),
       language,
       quantity,
       publishing_house: publisher,
     };
-
-    // const photoBlob = photos[0] ? photos[0].photo1 : "";
 
     let formDataImg = new FormData();
     formDataImg.append("image", photoFile);
@@ -223,41 +249,13 @@ export default function AddBookForm() {
       })
     );
 
-    // console.log(formDataImg.get("newBook"));
-
-    //  const filteredFormData = {
-    //    newBook: {
-    //      title,
-    //      author,
-    //      description,
-    //      format,
-    //      price,
-    //      genre,
-    //      language,
-    //      quantity,
-    //      publishing_house: publisher,
-    //    },
-    //    file: photoFile,
-    //  };
-    // console.log(filteredFormData);
-
-    // alert(JSON.stringify(formDataImg.get("newBook"), null, 2));
-
     dispatch(addBook(formDataImg));
-    // dispatch(
-    //   addBook({
-    //     book: JSON.stringify(newBook),
-    //     image: formDataImg.get("image"),
-    //   })); //file   image: formDataImg.get("file")
-    // dispatch(addBook({ newBook: { ...newBook }, file: photoBlob}));  //blob
-
-    // dispatch(addBook(formDataImg));
-
-    // const formFile = new FormData();
-    // console.log(formFile);
-    // formFile.append("avatar", photo); // "avatar" это свойство картинки в БД на бекенде, нужно узнать как будет называться это поле.
-
-    //dispatch(addBookData(formData)) photos:FormFile
+    if (addBookError) {
+      toast.error("Something went wrong, please try again")
+    } else {
+      toast.success("Your book has been added");
+    }
+    setFormData(FormDataInitValues);
   };
 
   return (
@@ -379,7 +377,7 @@ export default function AddBookForm() {
         </InputAddBookForm>
         <InputAddBookForm name={"genre"} label={"Define most suitable genre"}>
           <GenreBox>
-            <GenreInput name='genre' value={formData.genre} readOnly />
+            <GenreInput name='genre' value={convertGenreName(formData.genre) || 'Fiction'} readOnly />
             <SelectListMenu>
               <SelectGenreText>select from list</SelectGenreText>
               <SelectGenreBtn type='button' onClick={openPopover}>
@@ -399,26 +397,26 @@ export default function AddBookForm() {
               sx={{ marginTop: "5px" }}
             >
               <GenreList name='genre' onClick={AddSelectInputText}>
-                <GenreItem>Arts & Architecture</GenreItem>
-                <GenreItem>Biography & Memoir</GenreItem>
-                <GenreItem>Body, Mind, Spirit</GenreItem>
-                <GenreItem>Business</GenreItem>
-                <GenreItem>Children&#039;s</GenreItem>
-                <GenreItem>Computer & Technology</GenreItem>
-                <GenreItem>Education</GenreItem>
-                <GenreItem $menutype='submenu'>History</GenreItem>
-                <GenreItem $menutype='submenu'>Medical & Nursing</GenreItem>
-                <GenreItem $menutype='submenu'>Political Science</GenreItem>
-                <GenreItem $menutype='submenu'>Psychology &Religion</GenreItem>
-                <GenreItem $menutype='submenu'>Social Science</GenreItem>
-                <GenreItem $menutype='submenu'>Textbooks</GenreItem>
-                <GenreItem>Fiction</GenreItem>
-                <GenreItem $menutype='submenu'>Horror</GenreItem>
-                <GenreItem $menutype='submenu'>Mystery & Thrillers</GenreItem>
-                <GenreItem $menutype='submenu'>Poetry</GenreItem>
-                <GenreItem $menutype='submenu'>Romance</GenreItem>
-                <GenreItem $menutype='submenu'>Science Fiction</GenreItem>
-                <GenreItem $menutype='submenu'>True Crime</GenreItem>
+                <GenreItem value='arts'>Arts & Architecture</GenreItem>
+                <GenreItem value='biography'>Biography & Memoir</GenreItem>
+                <GenreItem value='body'>Body, Mind, Spirit</GenreItem>
+                <GenreItem value='business'>Business</GenreItem>
+                <GenreItem value='children'>Children&#039;s</GenreItem>
+                <GenreItem value='computer'>Computer & Technology</GenreItem>
+                <GenreItem value='education'>Education</GenreItem>
+                {/* <GenreItem $menutype='submenu'>History</GenreItem> */}
+                {/* <GenreItem $menutype='submenu'>Medical & Nursing</GenreItem> */}
+                {/* <GenreItem $menutype='submenu'>Political Science</GenreItem> */}
+                {/* <GenreItem $menutype='submenu'>Psychology &Religion</GenreItem> */}
+                {/* <GenreItem $menutype='submenu'>Social Science</GenreItem> */}
+                {/* <GenreItem $menutype='submenu'>Textbooks</GenreItem> */}
+                <GenreItem value='fiction'>Fiction</GenreItem>
+                {/* <GenreItem $menutype='submenu'>Horror</GenreItem> */}
+                {/* <GenreItem $menutype='submenu'>Mystery & Thrillers</GenreItem> */}
+                {/* <GenreItem $menutype='submenu'>Poetry</GenreItem> */}
+                {/* <GenreItem $menutype='submenu'>Romance</GenreItem> */}
+                {/* <GenreItem $menutype='submenu'>Science Fiction</GenreItem> */}
+                {/* <GenreItem $menutype='submenu'>True Crime</GenreItem> */}
               </GenreList>
             </Popover>
           </GenreBox>
@@ -518,7 +516,6 @@ export default function AddBookForm() {
                   }}
                   width={78}
                   height={90}
-                  
                 />
               ) : (
                 <PhotoInputBox>

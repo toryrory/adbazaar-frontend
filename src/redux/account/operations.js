@@ -15,25 +15,25 @@ const token = {
 };
 
 
-export const addBook = createAsyncThunk(
-  "account/addBook",
-  async (credentials, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const userId = state.auth.user.id;
-    const headers = {
-      "Content-Type": "multipart/form-data",
-    };
-console.log(credentials);
-    try {
-      const response = await axios.post(`/users/${userId}/books`, credentials, {headers: headers});
-      console.log("addBook:", state);
-      console.log(response.data);
-      return response.data;
-    } catch (e) {
-      return thunkAPI.rejectWithValue(e.message);
-    }
-  }
-);
+// export const addBook = createAsyncThunk(
+//   "account/addBook",
+//   async (credentials, thunkAPI) => {
+//     const state = thunkAPI.getState();
+//     const userId = state.auth.user.id;
+//     const headers = {
+//       "Content-Type": "multipart/form-data",
+//     };
+
+//     try {
+//       const response = await axios.post(`/users/${userId}/books`, credentials, {headers: headers});
+//       console.log("addBook:", state);
+//       console.log(response.data);
+//       return response.data;
+//     } catch (e) {
+//       return thunkAPI.rejectWithValue(e.message);
+//     }
+//   }
+// );
 export const updatePassword = createAsyncThunk(
   "account/updatePassword",
   async (credentials, thunkAPI) => {

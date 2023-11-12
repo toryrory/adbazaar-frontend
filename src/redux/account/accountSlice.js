@@ -11,7 +11,7 @@ const accountSlice = createSlice({
     settings: {
       avatar: null, //проверить подставив вместо null -> TestAvatar
     },
-    // favorites: [],
+   
     cart: [],
     notifications: notifications,
    
@@ -20,16 +20,10 @@ const accountSlice = createSlice({
 
 
     changeCheckBox(state, action) {
-      // const { checkboxType } = action.payload;
-      // if (checkboxType === 'notif') {
         const notification = state.notifications.find(
         (notification) => notification.id === action.payload
       );
       notification.checked = !notification.checked;
-      // } else if (checkboxType === 'sellerBook') {
-        
-      // }
-      
     },
     markAsRead(state, action) {
       state.notifications = state.notifications.map((notif) => ({

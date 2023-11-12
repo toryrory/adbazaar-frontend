@@ -18,7 +18,7 @@ export const fetchBooks = createAsyncThunk(
   'books/fetch',
   async (_, thunkAPI) => {
     try {
-      const response = await axios.get(`/books?size=50`);
+      const response = await axios.get(`/books?size=58`); //
       console.log(`fetch books:`, response.data);
       return response.data;
     } catch (e) {
