@@ -1,4 +1,4 @@
-import { createSlice, current } from '@reduxjs/toolkit';
+import { createSlice, current } from "@reduxjs/toolkit";
 import {
   authRegister,
   authLogin,
@@ -17,7 +17,8 @@ import {
   updateUser,
   updateUserAvatar,
   deleteUserBook,
-} from './operations';
+  addBook,
+} from "./operations";
 
 const handlePending = (state) => {
   state.isLoading = true;
@@ -54,12 +55,10 @@ const authSlice = createSlice({
   },
   reducers: {
     changeBookCheckBox(state, action) {
-      
-       const book = state.user.books.find(
-         (book) => book.id === action.payload //.id
-       );
-       book.checked = !book.checked;
-     
+      const book = state.user.books.find(
+        (book) => book.id === action.payload //.id
+      );
+      book.checked = !book.checked;
     },
   },
   extraReducers: (builder) => {
@@ -231,12 +230,14 @@ const authSlice = createSlice({
         const index = state.user.books.findIndex(
           (book) => book.checked === true
         );
-console.log(index);
+
         state.user.books.splice(index, 1);
         state.isLoading = false;
         state.error = null;
       })
-      .addCase(deleteUserBook.rejected, handleRejected);
+      .addCase(deleteUserBook.rejected, handleRejected)
+      .addCase(addBook.pending, handlePending)
+      .addCase(addBook.rejected, handleRejected);
   },
 });
 export const { changeBookCheckBox } = authSlice.actions;

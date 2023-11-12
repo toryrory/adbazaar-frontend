@@ -60,11 +60,7 @@ export default function Settings() {
 event.preventDefault();
     let formFile = new FormData();
 
-    formFile.append("file", photoRaw); // file
-    // formFile.append("image_url", photo); // blob
-
-    // let reader = new FileReader();
-    // console.log(reader.readAsArrayBuffer(photo))
+    formFile.append("file", photoRaw);
     
     dispatch(updateUserAvatar(formFile)); 
    
@@ -81,7 +77,7 @@ event.preventDefault();
     actions.resetForm();
   };
 
-  const onCLearInput = () => { //includes png?
+  const onCLearInput = () => { //includes png? 
     const baseAvatarFile = new File([Img32Girl.src], "Img32Girl.png", {
       type: "image/png",
     });

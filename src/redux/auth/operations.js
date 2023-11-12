@@ -316,3 +316,25 @@ export const deleteUserBook = createAsyncThunk(
     }
   }
 );
+
+export const addBook = createAsyncThunk(
+  "auth/addBook",
+  async (credentials, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const userId = state.auth.user.id;
+    const headers = {
+      "Content-Type": "multipart/form-data",
+    };
+
+    try {
+      const response = await axios.post(`/users/${userId}/books`, credentials, {
+        headers: headers,
+      });
+      console.log("addBook:", state);
+      console.log(response.data);
+      return response.data;
+    } catch (e) {
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
