@@ -2,7 +2,7 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { googleLogout } from '@react-oauth/google';
 
-axios.defaults.baseURL = 'http://localhost:8080';
+axios.defaults.baseURL = 'https://adbazaar-spring-backend.onrender.com';
 // const renderURL = 'https://adbazaar-spring-backend.onrender.com';
 // const localhostURL = 'http://localhost:8080';
 
@@ -268,29 +268,29 @@ export const updateUser = createAsyncThunk(
     try {
       const response = await axios.patch(`/users/${userId}`, credentials);
 
-      console.log("updateUser:", state);
+      console.log('updateUser:', state);
       console.log(response.data);
       return response.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
     }
-
   }
 );
 export const updateUserAvatar = createAsyncThunk(
-  "auth/updateUserAvatar",
+  'auth/updateUserAvatar',
   async (credentials, thunkAPI) => {
     const state = thunkAPI.getState();
     const userId = state.auth.user.id;
-const headers = {
-  "Content-Type": "multipart/form-data",
-};
+    const headers = {
+      'Content-Type': 'multipart/form-data',
+    };
     try {
       const response = await axios.patch(
         `/users/${userId}/avatar`,
-        credentials, {headers:headers}
+        credentials,
+        { headers: headers }
       );
-      console.log("updateUserAvatar:", state);
+      console.log('updateUserAvatar:', state);
       console.log(response.data);
       return response.data;
     } catch (e) {
@@ -300,15 +300,13 @@ const headers = {
 );
 
 export const deleteUserBook = createAsyncThunk(
-  "auth/deleteUserBook",
+  'auth/deleteUserBook',
   async (bookId, thunkAPI) => {
     const state = thunkAPI.getState();
     const UserId = state.auth.user.id;
 
     try {
-      const response = await axios.delete(
-        `/users/${UserId}/books/${bookId}`
-      );
+      const response = await axios.delete(`/users/${UserId}/books/${bookId}`);
       console.log(`deleteCart:`, response.data);
       return response.data;
     } catch (e) {
@@ -318,19 +316,19 @@ export const deleteUserBook = createAsyncThunk(
 );
 
 export const addBook = createAsyncThunk(
-  "auth/addBook",
+  'auth/addBook',
   async (credentials, thunkAPI) => {
     const state = thunkAPI.getState();
     const userId = state.auth.user.id;
     const headers = {
-      "Content-Type": "multipart/form-data",
+      'Content-Type': 'multipart/form-data',
     };
 
     try {
       const response = await axios.post(`/users/${userId}/books`, credentials, {
         headers: headers,
       });
-      console.log("addBook:", state);
+      console.log('addBook:', state);
       console.log(response.data);
       return response.data;
     } catch (e) {

@@ -1,7 +1,7 @@
-import axios from "axios";
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import axios from 'axios';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
-axios.defaults.baseURL = "http://localhost:8080";
+axios.defaults.baseURL = 'https://adbazaar-spring-backend.onrender.com';
 // const renderURL = 'https://adbazaar-spring-backend.onrender.com';
 // const localhostURL = 'http://localhost:8080';
 
@@ -10,10 +10,9 @@ const token = {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
   },
   unset() {
-    axios.defaults.headers.common.Authorization = "";
+    axios.defaults.headers.common.Authorization = '';
   },
 };
-
 
 // export const addBook = createAsyncThunk(
 //   "account/addBook",
@@ -35,14 +34,17 @@ const token = {
 //   }
 // );
 export const updatePassword = createAsyncThunk(
-  "account/updatePassword",
+  'account/updatePassword',
   async (credentials, thunkAPI) => {
     const state = thunkAPI.getState();
     const userId = state.auth.user.id;
 
     try {
-      const response = await axios.patch(`/users/${userId}/password`, credentials);
-      console.log("updatePassword:", state);
+      const response = await axios.patch(
+        `/users/${userId}/password`,
+        credentials
+      );
+      console.log('updatePassword:', state);
       console.log(response.data);
       return response.data;
     } catch (e) {
