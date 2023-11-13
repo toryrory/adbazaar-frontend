@@ -1,12 +1,12 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import {
-  selectSettings,
   selectIsLoggedIn,
   selectUserName,
   selectAuthType,
   selectAuthError,
   selectRefreshToken,
+  selectUserAvatar,
 } from '@/redux/selectors';
 import { authLogout, googleLogOut } from '@/redux/auth/operations';
 import Link from 'next/link';
@@ -46,13 +46,14 @@ import { Img32Girl } from '../../../../public/png';
 
 export default function Overlay({ onClose, style }) {
   const dispatch = useDispatch();
-  const settings = useSelector(selectSettings);
+  // const settings = useSelector(selectSettings);
   const name = useSelector(selectUserName);
   const refreshToken = useSelector(selectRefreshToken);
   const authType = useSelector(selectAuthType);
   const authError = useSelector(selectAuthError);
   const isLoggedIn = useSelector(selectIsLoggedIn);
-  const [state, setState] = useState(settings);
+  const avatar = useSelector(selectUserAvatar);
+  // const [state, setState] = useState(settings);
 
   const onLogOut = () => {
     console.log(authError);
@@ -97,7 +98,7 @@ export default function Overlay({ onClose, style }) {
             <Circle>
               {isLoggedIn ? (
                 <StyledImg
-                  src={state.avatar ? state.avatar : Img32Girl}
+                  src={avatar ? avatar : Img32Girl}
                   width={40}
                   height={40}
                   alt="user avatar"

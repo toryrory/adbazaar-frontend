@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import {
   PaperType,
   AudioType,
@@ -26,7 +25,9 @@ import {
 } from './BookDetails.styled';
 
 export default function BookDetails({ book }) {
-  const [bookType, setBookType] = useState(book.type);
+  const bookType = book.type.toLowerCase();
+  const bookLanguage = book.language.toLowerCase();
+  console.log(bookLanguage);
 
   return (
     <>
@@ -169,11 +170,44 @@ export default function BookDetails({ book }) {
         <Item>
           <Subtitle>Language</Subtitle>
           <Language style={{ width: 24, height: 24 }} />
-          <DescriptionContainer>
-            <ActiveDescription>EN</ActiveDescription>
-            <Description>UA</Description>
-            <Description>FR</Description>
-          </DescriptionContainer>
+          {bookLanguage === 'en' && (
+            <DescriptionContainer>
+              <ActiveDescription>EN</ActiveDescription>
+              <Description>UA</Description>
+              <Description>FR</Description>
+            </DescriptionContainer>
+          )}
+          {bookLanguage === 'ua' && (
+            <DescriptionContainer>
+              <Description>EN</Description>
+              <ActiveDescription>UA</ActiveDescription>
+              <Description>FR</Description>
+            </DescriptionContainer>
+          )}
+          {bookLanguage === 'fr' && (
+            <DescriptionContainer>
+              <Description>EN</Description>
+              <Description>UA</Description>
+              <ActiveDescription>FR</ActiveDescription>
+            </DescriptionContainer>
+          )}
+          {bookLanguage === 'de' && (
+            <DescriptionContainer>
+              <Description>EN</Description>
+              <ActiveDescription>DE</ActiveDescription>
+              <Description>FR</Description>
+            </DescriptionContainer>
+          )}
+          {bookLanguage !== 'ua' &&
+            bookLanguage !== 'en' &&
+            bookLanguage !== 'fr' &&
+            bookLanguage !== 'de' && (
+              <DescriptionContainer>
+                <Description>EN</Description>
+                <Description>FR</Description>
+                <ActiveDescription>Other</ActiveDescription>
+              </DescriptionContainer>
+            )}
         </Item>
         <Item>
           <Subtitle>ISBN-13</Subtitle>
