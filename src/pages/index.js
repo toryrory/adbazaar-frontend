@@ -60,10 +60,10 @@ export default function Home() {
   const books = useSelector(selectBooks);
 
   useEffect(() => {
-    if (books.length === 0) {
-      dispatch(fetchBooks());
-    }
-  }, [dispatch, books]);
+    // if (books.length === 0) {
+    dispatch(fetchBooks());
+    // }
+  }, [dispatch]);
 
   useEffect(() => {
     if (currentToken) {
