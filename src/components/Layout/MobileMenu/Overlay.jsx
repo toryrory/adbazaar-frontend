@@ -138,17 +138,17 @@ export default function Overlay({ onClose, style }) {
             <Title style={{ padding: '0 32px' }}>Help & Settings</Title>
             <List>
               <Item>
-                <Link href="/" style={{ color: 'inherit' }}>
-                  Delivery and payment
+                <Link href="/payments" style={{ color: 'inherit' }}>
+                  Payment & Shipping
                 </Link>
               </Item>
               <Item>
-                <Link href="/" style={{ color: 'inherit' }}>
-                  Support
+                <Link href="/contacts" style={{ color: 'inherit' }}>
+                  Contacts
                 </Link>
               </Item>
               <Item>
-                <Link href="/" style={{ color: 'inherit' }}>
+                <Link href="/about" style={{ color: 'inherit' }}>
                   About us
                 </Link>
               </Item>
