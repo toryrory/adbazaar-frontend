@@ -53,7 +53,6 @@ export default function Confirmation() {
     } else {
       toast.success('code has been sent to your email');
     }
-    console.log(email);
   };
 
   useEffect(() => {
@@ -68,7 +67,9 @@ export default function Confirmation() {
   const onSubmit = (e) => {
     e.preventDefault();
     dispatch(verification({ verification_code: value, email }));
-    setIsCodeRight(false);
+    if (!isVerified) {
+      setIsCodeRight(false);
+    }
   };
 
   return (

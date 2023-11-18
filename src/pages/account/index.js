@@ -3,6 +3,7 @@ import {
   authLogout,
   googleLogOut,
   fetchCurrentUser,
+  resendVerification,
 } from '@/redux/auth/operations';
 import { LogOut } from '../../../public/svg-authorization';
 import { Title, Container } from '@/styles/account.styled';
@@ -85,8 +86,7 @@ export default function Account() {
   };
 
   const onSendCode = () => {
-    console.log('resend code');
-    //dispatch(sendVerificationCode)
+    dispatch(resendVerification({ email: userName.email }));
     router.push('/register/confirmation');
   };
 
@@ -159,7 +159,7 @@ export default function Account() {
           <Notifications />
         </AccountAccordion>
         <AccountAccordion
-          text="Setting"
+          text="Settings"
           icon={
             <SettingsSvg style={{ width: 24, height: 24, marginRight: 16 }} />
           }

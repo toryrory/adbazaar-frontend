@@ -24,7 +24,6 @@ const booksSlice = createSlice({
     addCartUnauthorized: {
       reducer(state, action) {
         state.cartBooks.push(action.payload);
-        console.log(action.payload);
       },
       prepare(book) {
         return {

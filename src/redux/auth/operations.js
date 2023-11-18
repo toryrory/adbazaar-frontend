@@ -121,10 +121,10 @@ export const verification = createAsyncThunk(
 export const resendVerification = createAsyncThunk(
   'auth/resendVerification',
   async (credentials, thunkAPI) => {
+    console.log(credentials);
     try {
       const response = await axios.post(
-        `/authentication/verification/resend`,
-        credentials
+        `/authentication/verification/resend?email=${credentials.email}`
       );
       console.log(`verification resend:`, response.data);
       return response.data;

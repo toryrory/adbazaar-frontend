@@ -1,11 +1,12 @@
-import { Formik, Field } from "formik";
-import { nanoid } from "@reduxjs/toolkit";
+import { Formik, Field } from 'formik';
+import { nanoid } from '@reduxjs/toolkit';
 
-import { useDispatch } from "react-redux";
-import { useRouter } from "next/router";
-import { clearCart } from "@/redux/account/accountSlice";
+import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/router';
+import { deleteCart } from '@/redux/auth/operations';
+import { deleteCartUnauthorized } from '@/redux/books/bookSlice';
 
-import SecondaryButton from "@/components/secondaryButton/SecondaryButton";
+import SecondaryButton from '@/components/secondaryButton/SecondaryButton';
 import {
   TitleContainer,
   Title,
@@ -20,21 +21,32 @@ import {
   RadioLabel,
   PromoButton,
   CommentInput,
-} from "./CheckoutForm.styled";
-import { PersonSvg, FlagUa, ArrowDown } from "../../../../public/svg-account";
+} from './CheckoutForm.styled';
+import { PersonSvg, FlagUa, ArrowDown } from '../../../../public/svg-account';
 import {
   Truck,
   Promo,
   ArrowRight,
   Wallet,
   Comment,
-} from "../../../../public/svg-book";
+} from '../../../../public/svg-book';
 import {
   CheckboxChecked,
   CheckboxEmpty,
-} from "../../../../public/svg-authorization";
+} from '../../../../public/svg-authorization';
+import {
+  selectCart,
+  selectIsLoggedIn,
+  selectIsVerified,
+  selectCartBooksUnauthorized,
+} from '@/redux/selectors';
+import { useSelector } from 'react-redux';
 
 export default function CheckoutForm({ style, initialValues }) {
+  const cartBooks = useSelector(selectCart);
+  const cartBooksUnauthorized = useSelector(selectCartBooksUnauthorized);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const isVerified = useSelector(selectIsVerified);
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -61,7 +73,15 @@ export default function CheckoutForm({ style, initialValues }) {
       Promo: ${promo},
       Comment: ${comment}`
     );
-    dispatch(clearCart());
+    if (isLoggedIn && isVerified) {
+      cartBooks.forEach((book) => {
+        dispatch(deleteCart(book.id));
+      });
+    } else {
+      cartBooksUnauthorized.forEach((book) => {
+        dispatch(deleteCartUnauthorized(book.id));
+      });
+    }
     router.push(`/checkout/${orderId}`);
   };
 
@@ -69,7 +89,7 @@ export default function CheckoutForm({ style, initialValues }) {
     <>
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
         {({ values }) => (
-          <StyledForm autoComplete='off' style={style}>
+          <StyledForm autoComplete="off" style={style}>
             <BlockContainer>
               <TitleContainer>
                 <PersonSvg style={{ width: 24, height: 24 }} />
@@ -78,9 +98,9 @@ export default function CheckoutForm({ style, initialValues }) {
               <Label>
                 Full Name
                 <Input
-                  type='text'
-                  name='fullName'
-                  placeholder='Enter your name'
+                  type="text"
+                  name="fullName"
+                  placeholder="Enter your name"
                   required
                 />
               </Label>
@@ -88,15 +108,15 @@ export default function CheckoutForm({ style, initialValues }) {
                 Phone
                 <PhoneContainer>
                   <FlagUa style={{ width: 31, height: 19 }} />
-                  <HiddenBtn type='button'>
+                  <HiddenBtn type="button">
                     <ArrowDown style={{ width: 16, height: 16 }} />
                   </HiddenBtn>
                   <CountryCode>+380</CountryCode>
                   <Input
                     style={{ fontSize: 18 }}
-                    type='number'
-                    name='phone'
-                    placeholder='__ __ __ ___'
+                    type="number"
+                    name="phone"
+                    placeholder="__ __ __ ___"
                     required
                   />
                 </PhoneContainer>
@@ -104,9 +124,9 @@ export default function CheckoutForm({ style, initialValues }) {
               <Label>
                 Email
                 <Input
-                  type='email'
-                  name='email'
-                  placeholder='Enter your email'
+                  type="email"
+                  name="email"
+                  placeholder="Enter your email"
                   required
                 />
               </Label>
@@ -114,25 +134,25 @@ export default function CheckoutForm({ style, initialValues }) {
             <BlockContainer>
               <TitleContainer>
                 <Truck
-                  style={{ width: 22, height: 22, fill: "var(--brand-color)" }}
+                  style={{ width: 22, height: 22, fill: 'var(--brand-color)' }}
                 />
                 <Title>Shipping Information</Title>
               </TitleContainer>
               <Label>
                 Country @ City
                 <Input
-                  type='text'
-                  name='country'
-                  placeholder='Enter your country and city'
+                  type="text"
+                  name="country"
+                  placeholder="Enter your country and city"
                   required
                 />
               </Label>
               <Label>
                 Street name, house and apartment number
                 <Input
-                  type='text'
-                  name='address'
-                  placeholder='Enter your address'
+                  type="text"
+                  name="address"
+                  placeholder="Enter your address"
                   required
                 />
               </Label>
@@ -143,24 +163,24 @@ export default function CheckoutForm({ style, initialValues }) {
                 <Title>Payment</Title>
               </TitleContainer>
               <RadioLabel>
-                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                  {values.payment === "receipt" ? (
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  {values.payment === 'receipt' ? (
                     <CheckboxChecked style={{ width: 24, height: 24 }} />
                   ) : (
                     <CheckboxEmpty style={{ width: 24, height: 24 }} />
                   )}
-                  <RadioInput type='radio' name='payment' value='receipt' />
+                  <RadioInput type="radio" name="payment" value="receipt" />
                   Payment upon receipt
                 </div>
               </RadioLabel>
               <RadioLabel>
-                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                  {values.payment === "online" ? (
+                <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                  {values.payment === 'online' ? (
                     <CheckboxChecked style={{ width: 24, height: 24 }} />
                   ) : (
                     <CheckboxEmpty style={{ width: 24, height: 24 }} />
                   )}
-                  <RadioInput type='radio' name='payment' value='online' />
+                  <RadioInput type="radio" name="payment" value="online" />
                   Online payment by card on the site
                 </div>
               </RadioLabel>
@@ -172,24 +192,24 @@ export default function CheckoutForm({ style, initialValues }) {
               </TitleContainer>
               <div
                 style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
                 }}
               >
                 <Input
-                  type='text'
-                  name='promo'
-                  placeholder='Use promo code'
+                  type="text"
+                  name="promo"
+                  placeholder="Use promo code"
                   style={{
-                    padding: "8px 0",
-                    borderBottom: "0.5px solid var(--light-grey)",
-                    width: "100%",
+                    padding: '8px 0',
+                    borderBottom: '0.5px solid var(--light-grey)',
+                    width: '100%',
                   }}
                 />
                 <PromoButton
-                  type='button'
-                  onClick={() => console.log("apply promo code")}
+                  type="button"
+                  onClick={() => console.log('apply promo code')}
                 >
                   Apply <ArrowRight style={{ width: 14, height: 15 }} />
                 </PromoButton>
@@ -201,16 +221,16 @@ export default function CheckoutForm({ style, initialValues }) {
                 <Title>Your comments</Title>
               </TitleContainer>
               <Field
-                type='text'
-                name='comment'
-                placeholder='Leave a comment if needed'
+                type="text"
+                name="comment"
+                placeholder="Leave a comment if needed"
                 as={CommentInput}
               />
             </BlockContainer>
             <SecondaryButton
-              type='submit'
-              text='Confirm order'
-              style={{ width: "100%", marginTop: 48 }}
+              type="submit"
+              text="Confirm order"
+              style={{ width: '100%', marginTop: 48 }}
             />
           </StyledForm>
         )}

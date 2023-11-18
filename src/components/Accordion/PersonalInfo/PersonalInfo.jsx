@@ -15,7 +15,7 @@ import {
   Button,
   SocialsLabel,
   PhoneDataText,
-} from "./PersonalInfo.styled";
+} from './PersonalInfo.styled';
 import { updateUser, fetchCurrentUser } from '@/redux/auth/operations';
 import { FlagUa } from '../../../../public/svg-account';
 import { ArrowDown } from '../../../../public/svg-account';
@@ -36,7 +36,7 @@ export default function PersonalInfo() {
     //добавить подсветку курсора или фокус на формах типо того или нотификашку что можно редактировать формы
   };
 
-  const {name, email, phone, birthday, socials } = userData;
+  const { name, email, phone, birthday, socials } = userData;
 
   const { values, handleChange, handleSubmit } = useFormik({
     initialValues: {
@@ -44,15 +44,15 @@ export default function PersonalInfo() {
       email,
       phone,
       birth_date: birthday,
-      socials: {first: socials[0], second: socials[1]},
+      socials: { first: socials[0], second: socials[1] },
     },
     enableReinitialize: true,
     onSubmit: (values) => {
-      toast.success("Info saved");
+      toast.success('Info saved');
       setReadOnly(true);
       values.socials = [
-        values.socials.first || "",
-        values.socials.second || "",
+        values.socials.first || '',
+        values.socials.second || '',
       ];
       alert(JSON.stringify(values, null, 2));
       dispatch(updateUser(values));
@@ -65,28 +65,28 @@ export default function PersonalInfo() {
   //   slicedNum.splice(4, 0, ")");
   //   slicedNum.splice(5, 0, " ");
   //   slicedNum.splice(9, 0, "-");
-    
+
   //   return slicedNum.join("");
   // }
 
   return (
-    <Form autoComplete='off' onSubmit={handleSubmit}>
+    <Form autoComplete="off" onSubmit={handleSubmit}>
       <InputBox>
         <Label>
           Full Name
           <Input
-            name='full_name'
-            type='text'
-            value={values.full_name || ""}
+            name="full_name"
+            type="text"
+            value={values.full_name || ''}
             onChange={handleChange}
             readOnly={readOnly}
           />
         </Label>
       </InputBox>
-      <Label htmlFor='phone'>Phone</Label>
+      <Label htmlFor="phone">Phone</Label>
       <InputFlexBox>
         <FlagUa style={{ width: 31, height: 19 }} />
-        <HiddenBtn type='button'>
+        <HiddenBtn type="button">
           <ArrowDown style={{ width: 17, height: 9 }} />
         </HiddenBtn>
         <CountryCode>+38</CountryCode>
@@ -100,12 +100,12 @@ export default function PersonalInfo() {
           </PhoneDataText>
         ) : (
           <InputLib
-            name='phone'
-            type='tel'
+            name="phone"
+            type="tel"
             onChange={handleChange}
             readOnly={readOnly}
             placeholder={userData.phone}
-            mask='(999) 999-9999'
+            mask="(999) 999-9999"
           />
         )}
       </InputFlexBox>
@@ -113,9 +113,9 @@ export default function PersonalInfo() {
         <Label>
           Email
           <Input
-            name='email'
-            type='email'
-            value={values.email || ""}
+            name="email"
+            type="email"
+            value={values.email || ''}
             onChange={handleChange}
             readOnly={readOnly}
           />
@@ -125,54 +125,54 @@ export default function PersonalInfo() {
         <Label>
           Date of Birth
           <InputLib
-            name='birth_date'
-            type='text'
-            value={values.birth_date || ""}
+            name="birth_date"
+            type="text"
+            value={values.birth_date || ''}
             onChange={handleChange}
             readOnly={readOnly}
-            mask='99/99/9999'
-            placeholder='00/00/0000'
+            mask="99/99/9999"
+            placeholder="dd/mm/yyyy"
           />
         </Label>
       </InputBox>
-      <SocialsLabel htmlFor='socials'>Social media</SocialsLabel>
+      <SocialsLabel htmlFor="socials">Social media</SocialsLabel>
       <InputFlexBox>
         <Instagram style={{ width: 28, height: 28 }} />
-        <HiddenBtn type='button'>
+        <HiddenBtn type="button">
           <ArrowDown style={{ width: 17, height: 9 }} />
         </HiddenBtn>
         <Input
-          id='socials1'
-          name='socials.first'
-          type='text'
-          value={values.socials.first || ""}
-          placeholder='@example'
+          id="socials1"
+          name="socials.first"
+          type="text"
+          value={values.socials.first || ''}
+          placeholder="@example"
           onChange={handleChange}
           readOnly={readOnly}
         />
       </InputFlexBox>
       <InputFlexBox>
         <Facebook style={{ width: 28, height: 28 }} />
-        <HiddenBtn type='button'>
+        <HiddenBtn type="button">
           <ArrowDown style={{ width: 17, height: 9 }} />
         </HiddenBtn>
         <Input
-          id='socials2'
-          name='socials.second'
-          type='text'
-          value={values.socials.second || ""}
-          placeholder='@example'
+          id="socials2"
+          name="socials.second"
+          type="text"
+          value={values.socials.second || ''}
+          placeholder="@example"
           onChange={handleChange}
           readOnly={readOnly}
         />
       </InputFlexBox>
 
       <BtnBox>
-        <Button type='button' onClick={handleClickEdit}>
+        <Button type="button" onClick={handleClickEdit}>
           <Edit style={{ width: 24, height: 24 }} />
           Edit
         </Button>
-        <Button type='submit'>
+        <Button type="submit">
           Save
           <Save style={{ width: 24, height: 24 }} />
         </Button>
