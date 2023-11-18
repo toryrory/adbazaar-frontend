@@ -2,9 +2,12 @@ import Header from '@/components/Layout/Header/Header';
 import SearchBar from '@/components/SearchBar/SearchBar';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
 import {
   selectCart,
+  selectCartBooksUnauthorized,
   selectIsLoggedIn,
+  selectIsVerified,
   selectUserData,
 } from '@/redux/selectors';
 
@@ -27,13 +30,27 @@ import { ArrowBack } from '../../../public/svg-book';
 export default function Checkout() {
   const router = useRouter();
   const cartBooks = useSelector(selectCart);
+  const cartBooksUnauthorized = useSelector(selectCartBooksUnauthorized);
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  const isVerified = useSelector(selectIsVerified);
   const user = useSelector(selectUserData);
   const total = router.query.total;
+  const [cartBooksCount, setCartBooksCount] = useState(null);
 
-  const cartBooksCount = cartBooks.reduce((total, book) => {
-    return total + book.count;
-  }, 0);
+  useEffect(() => {
+    if (isLoggedIn && isVerified) {
+      const count = cartBooks.reduce((total, book) => {
+        return total + book.quantity;
+      }, 0);
+      setCartBooksCount(count);
+    } else {
+      const count = cartBooksUnauthorized.reduce((total, book) => {
+        return total + book.quantity;
+      }, 0);
+      setCartBooksCount(count);
+    }
+  }, [isLoggedIn, isVerified, cartBooks, cartBooksUnauthorized]);
+
   return (
     <>
       <Header />
