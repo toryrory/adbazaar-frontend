@@ -15,9 +15,12 @@ import {
   LikeBtnContainer,
 } from './Seller.styled';
 import { MailSeller, Phone, Like, Dislike } from '../../../../public/svg-book';
-import { Img32Girl } from '../../../../public/png';
+import moment from 'moment';
 
 export default function Seller({ seller, publicationDate }) {
+  
+  const dateNow = moment().format("DD/MM/yyyy");
+ 
   return (
     <Container>
       <SellerContainer>
@@ -26,7 +29,7 @@ export default function Seller({ seller, publicationDate }) {
             src={seller.avatar}
             width={72}
             height={72}
-            alt="seller avatar"
+            alt='seller avatar'
           />
         </Circle>
         <SellerInfo>
@@ -57,18 +60,19 @@ export default function Seller({ seller, publicationDate }) {
               <Subtitle>Seller rate</Subtitle>
               <LikeBtnContainer>
                 <LikeBtn
-                  type="button"
+                  type='button'
                   onClick={() => {
-                    console.log('like');
+                    console.log("like");
                   }}
                 >
                   <Like style={{ width: 20, height: 20 }} />
-                  {seller.likes}
+                  {dateNow === seller.registrationDate ? 0 : seller.likes}
+                  {/* {seller.likes} */}
                 </LikeBtn>
                 <LikeBtn
-                  type="button"
+                  type='button'
                   onClick={() => {
-                    console.log('dislike');
+                    console.log("dislike");
                   }}
                 >
                   <Dislike style={{ width: 20, height: 20 }} />
@@ -78,7 +82,10 @@ export default function Seller({ seller, publicationDate }) {
             </Item>
             <Item>
               <Subtitle>Successful sales</Subtitle>
-              <Description>{seller.sales}</Description>
+              <Description>
+                {dateNow === seller.registrationDate ? 0 : seller.sales}
+                {/* {seller.sales} */}
+              </Description>
             </Item>
             <Item>
               <Subtitle>Location</Subtitle>

@@ -54,7 +54,7 @@ export default function BooksId() {
       setCurrentBook(newBook);
     }
   }, [books, currentId, id, isLoading]);
-
+console.log(currentBook);
   const toggleDetails = () => {
     setShowDetails(!showDetails);
   };

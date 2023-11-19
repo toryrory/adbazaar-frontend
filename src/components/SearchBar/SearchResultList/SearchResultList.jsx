@@ -9,7 +9,7 @@ export default function SearchResultList({ books, searchText }) {
         <ManyBooksText>{searchText.text}</ManyBooksText>
       )}
       <Title>Books Founded</Title>
-      {books.map(({ id, name, author, type, price, photo }) => (
+      {books.map(({ id, name, author, type, price, photo, rating, reviews }) => (
         <SearchResultItem
           key={id}
           id={id}
@@ -18,6 +18,8 @@ export default function SearchResultList({ books, searchText }) {
           type={type}
           price={price}
           photo={photo}
+          rating={rating}
+          reviews={reviews}
         />
       ))}
     </SearchBox>

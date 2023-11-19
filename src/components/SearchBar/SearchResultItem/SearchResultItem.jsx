@@ -14,7 +14,7 @@ import {
   AudioBookSvg,
 } from "../../../../public/svg-index";
 
-export default function SearchResultItem({id, name, author, type, price, photo }) {
+export default function SearchResultItem({id, name, author, type, price, photo, rating, reviews }) {
 
   const editedType = type.charAt(0).toUpperCase() + type.slice(1);
 
@@ -49,11 +49,11 @@ export default function SearchResultItem({id, name, author, type, price, photo }
         <RatingBox>
           <Rating
             readOnly
-            defaultValue={5}
+            value={rating} ///////////
             sx={{ color: "var(--rose-color)", width: "78px" }}
             size='small'
           />
-          <Reviews>(15)</Reviews>
+          <Reviews>({reviews})</Reviews>
         </RatingBox>
         <Text>in stock</Text>
         <Price style={{ marginTop: "9px" }}>
