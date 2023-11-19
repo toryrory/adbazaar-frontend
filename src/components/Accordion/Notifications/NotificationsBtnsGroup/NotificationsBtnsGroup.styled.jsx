@@ -4,6 +4,7 @@ import Link from "next/link";
 export const BtnsGroup = styled.div`
     display: flex;
     justify-content: space-between;
+    margin-top: 40px;
 `
 export const BtnBox = styled.button`
   display: flex;

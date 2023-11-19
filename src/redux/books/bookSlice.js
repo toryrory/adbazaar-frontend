@@ -52,6 +52,8 @@ const booksSlice = createSlice({
       .addCase(fetchBooks.pending, handlePending)
       .addCase(fetchBooks.fulfilled, (state, action) => {
         state.items = action.payload.content.map((book) => {
+          const randomRate = Math.floor(Math.random() * 6);
+          const randomReviews = Math.floor(Math.random() * 101); 
           return {
             id: book.id,
             name: book.title,
@@ -60,7 +62,8 @@ const booksSlice = createSlice({
             type: book.format,
             language: 'en',
             photo: book.image_path,
-            rating: book.rate,
+            rating: randomRate,
+            reviews: randomReviews,
             genre: book.genre,
             quantity: book.quantity,
           };
@@ -79,7 +82,7 @@ const booksSlice = createSlice({
         state.items[index].description = action.payload.description;
         state.items[index].publicationDate = action.payload.creation_date;
         state.items[index].comments = action.payload.comments;
-        state.items[index].rating = action.payload.rate;
+        // state.items[index].rating = action.payload.rate;
         state.items[index].seller = {
           name: action.payload.seller.full_name,
           email: action.payload.seller.email,

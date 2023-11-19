@@ -129,16 +129,21 @@ export default function BookComments({ book }) {
             precision={0.5}
             defaultValue={book.rating}
             sx={{
-              color: 'var(--rose-color)',
+              color: "var(--rose-color)",
             }}
-            size="small"
+            size='small'
             emptyIcon={<EmptyStar />}
           />
-          {book.comments.length === 1 ? (
+          {book.reviews === 1 ? (
+            <Reviews>({book.reviews} comment)</Reviews>
+          ) : (
+            <Reviews>({book.reviews} comments)</Reviews>
+          )}
+          {/* {book.comments.length === 1 ? (
             <Reviews>({book.comments.length} comment)</Reviews>
           ) : (
             <Reviews>({book.comments.length} comments)</Reviews>
-          )}
+          )} */}
         </RatingBox>
       </HeadContainer>
       <List>
@@ -154,7 +159,7 @@ export default function BookComments({ book }) {
                 </CommentHeader>
                 <CommentText>{comment.message}</CommentText>
                 <AllBtnContainer>
-                  <BtnSeeMore type="button">
+                  <BtnSeeMore type='button'>
                     See more
                     <ArrowRight
                       style={{
@@ -164,11 +169,11 @@ export default function BookComments({ book }) {
                     />
                   </BtnSeeMore>
                   <LikeBtnContainer>
-                    <LikeBtn type="button">
+                    <LikeBtn type='button'>
                       {/* {comment.likes} */}
                       <Like style={{ width: 20, height: 20 }} />
                     </LikeBtn>
-                    <LikeBtn type="button">
+                    <LikeBtn type='button'>
                       {/* {comment.dislikes} */}
                       <Dislike style={{ width: 20, height: 20 }} />
                     </LikeBtn>
@@ -186,9 +191,9 @@ export default function BookComments({ book }) {
             precision={0.5}
             value={value}
             sx={{
-              color: 'var(--rose-color)',
+              color: "var(--rose-color)",
             }}
-            size="small"
+            size='small'
             emptyIcon={<EmptyStar />}
             onChange={(event, newValue) => {
               setValue(newValue);
@@ -197,12 +202,12 @@ export default function BookComments({ book }) {
           <CommentInput
             value={commentText}
             onChange={handleChange}
-            type="text"
-            name="newComment"
-            placeholder="Share your impressions or ask any question about this book"
+            type='text'
+            name='newComment'
+            placeholder='Share your impressions or ask any question about this book'
             required
           />
-          <PostCommentBtn type="submit">
+          <PostCommentBtn type='submit'>
             Post comment
             <Send
               style={{
@@ -215,14 +220,14 @@ export default function BookComments({ book }) {
       ) : (
         <SecondaryButton
           onClick={openCommentField}
-          text="Add Comment"
+          text='Add Comment'
           style={{ width: 150, fontSize: 14, marginTop: 32 }}
         />
       )}
       {showModal && (
         <Modal
           onClose={onCloseModal}
-          message="This service is exclusively available for authorized site visitors"
+          message='This service is exclusively available for authorized site visitors'
           messageStyles={{ marginTop: 40, fontSize: 16 }}
           showLoginButton={true}
           showLink={true}
@@ -231,7 +236,7 @@ export default function BookComments({ book }) {
       {showVerifModal && (
         <Modal
           onClose={onCloseModal}
-          message="This service is exclusively available for verified users"
+          message='This service is exclusively available for verified users'
           messageStyles={{ marginTop: 40, fontSize: 16 }}
           showButton={true}
         />

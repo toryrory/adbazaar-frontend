@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-axios.defaults.baseURL = 'https://adbazaar-spring-backend.onrender.com';
+axios.defaults.baseURL = "http://localhost:8080";
 // const renderURL = 'https://adbazaar-spring-backend.onrender.com';
 // const localhostURL = 'http://localhost:8080';
 
@@ -18,7 +18,7 @@ export const fetchBooks = createAsyncThunk(
   'books/fetch',
   async (_, thunkAPI) => {
     try {
-      const response = await axios.get(`/books?size=58`); //
+      const response = await axios.get(`/books?size=100`); //
       console.log(`fetch books:`, response.data);
       return response.data;
     } catch (e) {

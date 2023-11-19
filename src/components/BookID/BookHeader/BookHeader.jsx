@@ -165,23 +165,28 @@ export default function BookHeader({ book }) {
                 precision={0.5}
                 defaultValue={book.rating}
                 sx={{
-                  color: 'var(--rose-color)',
+                  color: "var(--rose-color)",
                 }}
-                size="small"
+                size='small'
                 emptyIcon={<EmptyStar />}
               />
-              {comments.length === 1 ? (
+              {book.reviews === 1 ? (
+                <Comments>({book.reviews} comment)</Comments>
+              ) : (
+                <Comments>({book.reviews} comments)</Comments>
+              )}
+              {/* {comments.length === 1 ? (
                 <Comments>({comments.length} comment)</Comments>
               ) : (
                 <Comments>({comments.length} comments)</Comments>
-              )}
+              )} */}
             </div>
 
             <ShareButton
-              type="button"
+              type='button'
               onClick={() => {
                 copy();
-                toast.success('link copied');
+                toast.success("link copied");
               }}
             >
               <Share style={{ width: 24, height: 24 }} />
@@ -209,12 +214,12 @@ export default function BookHeader({ book }) {
             {book.price}
           </Price>
           {isInCart ? (
-            <ButtonInCart type="button" onClick={removeFromCart}>
+            <ButtonInCart type='button' onClick={removeFromCart}>
               In Cart
               <ShoppingCartBlack style={{ width: 24, height: 24 }} />
             </ButtonInCart>
           ) : (
-            <ButtonShopping type="button" onClick={addToCart}>
+            <ButtonShopping type='button' onClick={addToCart}>
               Add to Cart
               <ShoppingCart style={{ width: 24, height: 24 }} />
             </ButtonShopping>
@@ -222,7 +227,7 @@ export default function BookHeader({ book }) {
         </PriceContainer>
       </BookContainer>
       <SellerContainer>
-        <ContactButton type="button" onClick={toggleSeller}>
+        <ContactButton type='button' onClick={toggleSeller}>
           <SellerBtnContainer>Seller</SellerBtnContainer>
           <ContactContainer>
             <User style={{ width: 24, height: 24 }} />
@@ -241,7 +246,7 @@ export default function BookHeader({ book }) {
       {showModal && (
         <Modal
           onClose={onCloseModal}
-          message="This service is exclusively available for authorized site visitors"
+          message='This service is exclusively available for authorized site visitors'
           messageStyles={{ marginTop: 40, fontSize: 16 }}
           showLoginButton={true}
           showLink={true}
@@ -250,7 +255,7 @@ export default function BookHeader({ book }) {
       {showVerifModal && (
         <Modal
           onClose={onCloseModal}
-          message="This service is exclusively available for verified users"
+          message='This service is exclusively available for verified users'
           messageStyles={{ marginTop: 40, fontSize: 16 }}
           showButton={true}
         />

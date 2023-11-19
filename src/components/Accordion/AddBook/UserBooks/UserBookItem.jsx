@@ -20,6 +20,7 @@ import {
   Price,
   StatusBtn,
 } from "./UserBookItem.styled";
+import { useRouter } from "next/router";
 
 //добавить на reviews привязку к кол-ву коментов, от бекенда нужно возвращать с книгой комменты по ней
 //добавить логику active/not active - добавлять/убирать свойство, если удалять то бек должен возвращать свойство нот ектив и по нему нужно убрать возможность получать эту книгу по запросу на книги
@@ -33,7 +34,7 @@ export default function UserBookItem({
   photo,
   checked,
 }) {
-
+  const router = useRouter();
   const dispatch = useDispatch();
   const [btnActive, setBtnActive] = useState(true);
   const handleBookStatus = () => {
@@ -44,7 +45,7 @@ export default function UserBookItem({
     }
 
   return (
-    <BookAdContainer $active={btnActive}>
+    <BookAdContainer $active={btnActive} onClick={() => router.push(`/books/${id}`)}>
       <Checkbox
         icon={<CheckboxEmpty style={{ width: "24px", height: "24px" }} />}
         checkedIcon={
@@ -73,12 +74,13 @@ export default function UserBookItem({
         <BookText $text='title'>{title}</BookText>
         <BookText $text='author'>{author}</BookText>
       </BookInfoBox>
-      <BookStatusBox >
+      <BookStatusBox>
         <StatusBtn $active={btnActive} onClick={handleBookStatus}>
           {btnActive ? "active" : "no active"}
         </StatusBtn>
         <Price>
-          <span>$</span>{price}
+          <span>$</span>
+          {price}
         </Price>
       </BookStatusBox>
     </BookAdContainer>

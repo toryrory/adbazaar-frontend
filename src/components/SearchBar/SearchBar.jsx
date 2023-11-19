@@ -47,7 +47,6 @@ export default function SearchBar({ queryId, style }) {
       : setSearchResult(filtredBooks);
   };
   const handleChange = (e) => {
-    //dispatch(getSearchBooks(e.target.value))
     setInputText(e.target.value);
     searchFilter(inputText, books);
   };
