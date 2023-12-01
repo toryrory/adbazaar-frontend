@@ -2,7 +2,7 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { googleLogout } from '@react-oauth/google';
 
-axios.defaults.baseURL = "http://localhost:8080";
+axios.defaults.baseURL = 'https://adbazaar-spring-backend.onrender.com';
 // const renderURL = 'https://adbazaar-spring-backend.onrender.com';
 // const localhostURL = 'http://localhost:8080';
 
