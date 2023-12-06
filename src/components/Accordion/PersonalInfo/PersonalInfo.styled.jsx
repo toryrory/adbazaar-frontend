@@ -102,7 +102,7 @@ export const Button = styled.button`
   align-items: center;
   gap: 8px;
   color: var(--brand-color);
-  font-family: Helvetica Light;
+  /* font-family: Helvetica Light; */
   font-size: 13px;
   background-color: transparent;
   border: none;

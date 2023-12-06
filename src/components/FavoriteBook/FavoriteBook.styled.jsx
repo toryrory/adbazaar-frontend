@@ -78,6 +78,7 @@ export const ButtonShopping = styled.button`
 `;
 
 export const ButtonInCart = styled.button`
+white-space: nowrap;
   display: flex;
   background-color: var(--brand-color);
   border: none;

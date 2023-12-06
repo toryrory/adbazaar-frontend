@@ -1,8 +1,11 @@
 import Image from 'next/image';
 import { Button } from './FastSearchBtn.styled';
+import Link from 'next/link';
 
-export default function FastSearchBtn({icon, text, alt}) {
+export default function FastSearchBtn({ icon, text, alt }) {
+
   return (
+    <Link href={`/categories/${alt}`}>
     <Button>
       <Image
         src={icon}
@@ -14,6 +17,7 @@ export default function FastSearchBtn({icon, text, alt}) {
         }}
       />
       {text}
-    </Button>
+      </Button>
+     </Link>
   );
 }

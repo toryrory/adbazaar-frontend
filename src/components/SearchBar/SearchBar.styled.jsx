@@ -16,7 +16,6 @@ export const Input = styled.input`
   border: none;
   background-color: transparent;
   color: var(--light-grey);
-  font-family: Helvetica Light;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
