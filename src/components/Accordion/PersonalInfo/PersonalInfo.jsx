@@ -54,7 +54,7 @@ export default function PersonalInfo() {
         values.socials.first || '',
         values.socials.second || '',
       ];
-      alert(JSON.stringify(values, null, 2));
+      // alert(JSON.stringify(values, null, 2));
       dispatch(updateUser(values));
     },
   });
