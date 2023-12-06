@@ -8,6 +8,7 @@ export const Text = styled.p`
   margin-bottom: 16px;
   color: #ffffff;
   text-indent: 40px;
+  font-weight: 300;
 `;
 
 export const SmallStar = styled(Image)`

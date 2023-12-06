@@ -6,7 +6,7 @@ export const Button = styled.button`
   background-color: transparent;
   display: flex;
   justify-content: center;
-  padding: 6px 16px;
+  padding: 12px 32px;
   align-items: center;
   gap: 6px;
   border-radius: 25px;
@@ -16,8 +16,9 @@ export const Button = styled.button`
   text-align: center;
   line-height: 1.3;
   transition: border-color 1000ms;
+  height: 36px;
+  white-space: nowrap;
   &:hover {
     border-color: var(--rose-color);
-    
   }
 `;

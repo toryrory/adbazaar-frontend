@@ -7,12 +7,11 @@ export default function SwiperBtns() {
     <SwiperWrapper>
       <FastSearchBtn text={"New"} alt={"new"} icon={NewImg} />
       <FastSearchBtn text={"Used"} alt={"used"} icon={UsedImg} />
-      <FastSearchBtn text={"Top"} alt={"top"} icon={TopImg} />
+      <FastSearchBtn text={"Top"} alt={"bestsellers"} icon={TopImg} />
       <FastSearchBtn text={"Exchange"} alt={"exchange"} icon={ExchangeImg} />
-      <FastSearchBtn text={"For Gift"} alt={"for gift"} icon={ForGiftImg} />
-      <FastSearchBtn text={"Textook"} alt={"textbook"} icon={TextbookImg} />
-      <FastSearchBtn text={"Big Sale"} alt={"big sale"} icon={BigSaleImg} />
+      <FastSearchBtn text={"For Gift"} alt={"gift"} icon={ForGiftImg} />
+      <FastSearchBtn text={"Textbook"} alt={"textbook"} icon={TextbookImg} />
+      <FastSearchBtn text={"Big Sale"} alt={"sale"} icon={BigSaleImg} />
     </SwiperWrapper>
-   
   );
 }
